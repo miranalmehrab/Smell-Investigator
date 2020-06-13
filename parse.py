@@ -2,75 +2,98 @@ import ast
 
 class Analyzer(ast.NodeVisitor):
     def __init__(self):
-        self.imports = {"import": [], "from": []}
-        self.functions = {"name":[],"args":[]}
-        self.variables = {"name":[],"valueSrc":[],"value":[],"isInput":[],"funcArgs":[]}
+        self.imports = []
+        self.functions = []
+        self.variables = []
 
 
     def visit_Import(self, node):
-        for alias in node.names:
-            self.imports["import"].append(alias.name)
         self.generic_visit(node)
 
     def visit_ImportFrom(self, node):
+        import_from = {}
+        
+        import_from["line"] = node.lineno
+        import_from["from"] = node.module
+        import_from["alias"] = []
+
         for alias in node.names:
-            self.imports["from"].append(alias.name)
+            import_from["alias"] = alias.name
+        
+        self.imports.append(import_from)
         self.generic_visit(node)
 
     def visit_FunctionDef(self,node):
-        self.functions["name"].append(node.name)
+        
+        func_def = {} 
+        
+        func_def["line"] = node.lineno
+        func_def["name"] = node.name
+        func_def["args"] = []
+
         for arg in node.args.args:
-            self.functions["args"].append(arg.arg)
-        self.generic_visit(node) 
+            func_def["args"].append(arg.arg)
+
+        self.functions.append(func_def)
+        self.generic_visit(node)
 
     def visit_Assign(self,node):
-        # print(type(node))
         
+        variable = {}
+        variable["line"] = node.lineno
+
         for target in node.targets:
-            self.variables["name"].append(target.id)
+            variable["name"] = target.id
 
         if isinstance(node.value, ast.Constant):
-            print('inner value: ',node.value.value)    
-            
-            self.variables["value"].append(node.value.value)
-            self.variables["valueSrc"].append("initialized")
-            self.variables["isInput"].append(False)
+            variable["value"] = node.value.value
+            variable["valueSrc"] = "initialized"
+            variable["isInput"] = False
 
         if isinstance(node.value, ast.Call):
-            self.variables["value"].append(None)
             funcName = node.value.func.id
-            
-            if(node.value.func.id == "input"):
-                self.variables["isInput"].append(True)
-            else:
-                self.variables["isInput"].append(False)
+            variable["value"] = None
+            variable["valueSrc"] = funcName
+            variable["funcArgs"] = []
 
-            self.variables["valueSrc"].append(node.value.func.id)
+            if(funcName == "input"):
+                variable["isInput"] = True
+            else:
+                variable["isInput"] = False
             
             for arg in node.value.args:
-                print('inner func args: ',arg.value)
-                self.variables["funcArgs"].append(arg.value)
-                
+                variable["funcArgs"].append(arg.value)
+
+        self.variables.append(variable)                
         self.generic_visit(node)
 
 
     def report(self):
-        x = 2
-        # print(self.imports)
-        # print(self.functions)
-        print(self.variables)
+        print('Imports:')
+        print('--------------------------------------------------------')
+        for import_statement in  self.imports:
+            print(import_statement)
 
+        print('Functions:')
+        print('--------------------------------------------------------')
+        for func_def_statement in self.functions:
+            print(func_def_statement)
+
+        print('Variables:')
+        print('--------------------------------------------------------')
+        for variable_assignment_statement in self.variables:
+            print(variable_assignment_statement)
 
 def main():
     srcFile = open('src.py','r')
     srcCode = srcFile.read()
     tree = ast.parse(srcCode,type_comments=True)
-
+    
     analyzer = Analyzer()
     analyzer.visit(tree)
     analyzer.report()
-
-    # print(ast.dump(tree,include_attributes=False))
+   
+    # print(ast.dump(tree,include_attributes=True))
 
 if __name__ == "__main__":
     main()
