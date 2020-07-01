@@ -1,19 +1,15 @@
-import math
-import random
-from random import randint
+# file_name = input()
+# exec('sudo mkdir {file_name}')
 
-def mul(a,b,c):
-    return a*b*c
+# os.chmod('/etc/hosts',0x777)
 
-def div(a,b,c,d):
-    return a/b/c/d
+# query = "delete from foo where id = " + user_input + user_input
+x = "abc"
+user_input = input()
+result = connection.execute(user_input)
+result = connection.execute.excute(user_input,user_input)
+result = connection.execute.excute.connection.execute(user_input,user_input)
 
 
-div(1,2,3,4)
-random.randint(0,9)
-
-username = "user"
-password = "123password"
-
-z = y =  mul(1,2,3)
-x = input('Enter a number')
+# if username == "root" and password == "123":
+#     logIn()
