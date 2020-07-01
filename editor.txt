@@ -1,5 +1,7 @@
+{"type": "variable", "line": 1, "name": "file_name", "value": null, "valueSrc": "input", "funcArgs": [], "isInput": true}
+{"type": "function_call", "line": 2, "name": "exec", "args": ["sudo mkdir {file_name}"], "hasInputs": true}
+{"type": "function_call", "line": 4, "name": "os.chmod", "args": ["/etc/hosts", 1911], "hasInputs": false}
 {"type": "variable", "line": 7, "name": "x", "value": "abc", "valueSrc": "initialized", "isInput": false}
 {"type": "variable", "line": 8, "name": "user_input", "value": null, "valueSrc": "input", "funcArgs": [], "isInput": true}
 {"type": "variable", "line": 9, "name": "result", "value": null, "valueSrc": "connection.execute", "funcArgs": ["user_input"], "isInput": false}
 {"type": "variable", "line": 10, "name": "result", "value": null, "valueSrc": "connection.execute.excute", "funcArgs": ["user_input", "user_input"], "isInput": false}
-{"type": "variable", "line": 11, "name": "result", "value": null, "valueSrc": "connection.execute.excute.connection.execute", "funcArgs": ["user_input", "user_input"], "isInput": false}

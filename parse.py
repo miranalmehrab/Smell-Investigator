@@ -39,12 +39,14 @@ class Analyzer(ast.NodeVisitor):
         self.statements.append(func_def)
         self.generic_visit(node)
 
+
+
     def visit_Assign(self, node):
 
         variable = {}
         variable["type"] = "variable"
         variable["line"] = node.lineno
-        print(ast.dump(node))
+        # print(ast.dump(node))
 
         for target in node.targets:
             variable["name"] = target.id
@@ -74,6 +76,8 @@ class Analyzer(ast.NodeVisitor):
         self.statements.append(variable)
         self.generic_visit(node)
 
+
+
     def visit_Expr(self, node):
         funcCall = {}
         funcCall["type"] = "function_call"
@@ -92,64 +96,39 @@ class Analyzer(ast.NodeVisitor):
         self.statements.append(funcCall)
         self.generic_visit(node)
 
-    def getFunctionName(self, node):
-        # print(node)
-        # print((node.value))
-        # print('')
 
-        # for fieldname, value in ast.iter_fields(node):
-        #     print(fieldname)
-        #     print(type(value))
+
+    def getFunctionName(self, node):
 
         for fieldname, value in ast.iter_fields(node.value):
-            print(fieldname)
-            print(type(value))
 
             if(fieldname == "func"):
-                # print('function: ')
-                # print(ast.dump(value))
-
-                if isinstance(value, ast.Attribute):
+                if isinstance(value, ast.Name):
+                    return value.id
+                elif isinstance(value, ast.Attribute):
                     funcName = self.functionAttr(value)
-                    funcName = funcName+'.'+value.attr
-                    print('got name back  '+funcName)
+                    if value.attr:
+                        funcName = funcName+'.'+value.attr
+
                     return funcName
 
-                elif isinstance(value, ast.Name):
-                    return value.id
-
-            # if(fieldname == "args"):
-            #     print('arguments: ')
-            #     for arg in value:
-            #         print(ast.dump(arg))
-
-            # if(fieldname == "attr"):
-            #     print(value)
-
-
-            # if isinstance(value,ast.Attribute):
-            #     print('attribute')
 
     def functionAttr(self, node):
-        attr = ""
-        name = ""
+        name = None
+        attr = None
 
         for field, value in ast.iter_fields(node):
-            # print(field)
-            # print(value)
             
             if isinstance(value, ast.Attribute):
                 attr = value.attr
-                print('attr '+attr)
                 name = self.functionAttr(value)
             
             if isinstance(value, ast.Name):
-                print(value.id)
                 name = value.id
         
         if attr:
             name = name+'.'+attr
-        print(name)
+
         return(name)
 
 
@@ -159,13 +138,14 @@ class Analyzer(ast.NodeVisitor):
             print(statement)
 
         for user_input in self.inputs:
-            print(user_input)
+            print("user input: "+user_input)
 
         f = open("editor.txt", "w")
         for statement in self.statements:
             json.dump(statement, f)
             f.write("\n")
         f.close()
+
 
     def findUserInputInFunction(self):
         for statement in self.statements:
