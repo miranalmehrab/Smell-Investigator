@@ -1,5 +1,6 @@
 import ast
 import json
+from detection.detection import detection
 
 
 class Analyzer(ast.NodeVisitor):
@@ -89,14 +90,30 @@ class Analyzer(ast.NodeVisitor):
             funcCall["name"] = node.value.func.value.id+'.'+node.value.func.attr
 
         funcCall["args"] = []
+
         for arg in node.value.args:
-            funcCall["args"].append(arg.value)
+            
+            if isinstance(arg,ast.Attribute):funcCall["args"].append(self.functionAttr(arg)+'.'+arg.attr)
+            else: funcCall["args"].append(str(arg.value))
+        
         funcCall["hasInputs"] = False
+        funcCall["keywords"] = []
+        
+        for keyword in node.value.keywords:
+            
+            karg = keyword.arg
+            kvalue = None
+            
+            if isinstance(keyword.value,ast.Constant):
+                kvalue = keyword.value.value
+            
+            if karg and kvalue:
+                funcCall["keywords"].append([karg,kvalue])
 
         self.statements.append(funcCall)
         self.generic_visit(node)
 
-
+    
 
     def getFunctionName(self, node):
 
@@ -126,9 +143,7 @@ class Analyzer(ast.NodeVisitor):
             if isinstance(value, ast.Name):
                 name = value.id
         
-        if attr:
-            name = name+'.'+attr
-
+        if attr: name = name+'.'+attr
         return(name)
 
 
@@ -137,10 +152,11 @@ class Analyzer(ast.NodeVisitor):
         for statement in self.statements:
             print(statement)
 
-        for user_input in self.inputs:
-            print("user input: "+user_input)
+        print('')
+        # for user_input in self.inputs:
+        #     print("user input: "+user_input)
 
-        f = open("editor.txt", "w")
+        f = open("tokens.txt", "w")
         for statement in self.statements:
             json.dump(statement, f)
             f.write("\n")
@@ -173,6 +189,8 @@ def main():
     analyzer.findUserInputInFunction()
     analyzer.report()
 
+    f = open("tokens.txt", "r")
+    detection(f.read())
     # print(ast.dump(tree,include_attributes=True))
 
 

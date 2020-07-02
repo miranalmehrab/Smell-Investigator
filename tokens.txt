@@ -1,0 +1,10 @@
+{"type": "function_call", "line": 5, "name": "os.chmod", "args": ["/etc/hosts", "1911"], "hasInputs": false, "keywords": []}
+{"type": "function_call", "line": 6, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IRWXO"], "hasInputs": false, "keywords": []}
+{"type": "function_call", "line": 7, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IROTH"], "hasInputs": false, "keywords": []}
+{"type": "function_call", "line": 8, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IWOTH"], "hasInputs": false, "keywords": []}
+{"type": "function_call", "line": 9, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IXOTH"], "hasInputs": false, "keywords": []}
+{"type": "variable", "line": 13, "name": "password", "value": "pass", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 14, "name": "password", "value": "", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 15, "name": "password", "value": null, "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 16, "name": "name", "value": "root", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 17, "name": "pwd", "value": "root123", "valueSrc": "initialized", "isInput": false}
