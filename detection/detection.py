@@ -7,7 +7,10 @@ from smells.emptypassword import detect as emptypasswordDetect
 from smells.hardcodedsecret import detect as hardcodedsecretDetect
 from smells.filepermission import detect as filepermissionDetect
 from smells.ipbinding import detect as ipbindingDetect
-
+from smells.httponly import detect as httponlyDetect
+from smells.sqlinjection import detect as sqlinjectionDetect
+from smells.tempdir import detect as tempdirDetect
+from smells.ignexcept import detect as ignexceptDetect
 
 def detection(tokens):
     tokens = tokens.splitlines()
@@ -22,3 +25,7 @@ def detection(tokens):
         hardcodedsecretDetect(token)
         filepermissionDetect(token)
         ipbindingDetect(token)
+        httponlyDetect(token)
+        sqlinjectionDetect(token)
+        tempdirDetect(token)
+        ignexceptDetect(token)

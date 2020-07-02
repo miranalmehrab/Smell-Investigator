@@ -1,3 +1,2 @@
-{"type": "function_call", "line": 28, "name": "connection.execute", "args": ["hello"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 29, "name": "connection.execute", "args": ["user_input"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 30, "name": "socket.socket.bind", "args": ["0.0.0.0", 3000], "keywords": [], "hasInputs": false}
+{"type": "except_statement", "line": 39, "arg": "continue"}
+{"type": "variable", "line": 39, "name": "x", "value": 2, "valueSrc": "initialized", "isInput": false}

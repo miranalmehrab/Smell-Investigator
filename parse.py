@@ -47,7 +47,7 @@ class Analyzer(ast.NodeVisitor):
         variable = {}
         variable["type"] = "variable"
         variable["line"] = node.lineno
-        # print(ast.dump(node))
+        print(ast.dump(node))
 
         for target in node.targets:
             variable["name"] = target.id
@@ -57,7 +57,7 @@ class Analyzer(ast.NodeVisitor):
             variable["valueSrc"] = "initialized"
             variable["isInput"] = False
 
-        if isinstance(node.value, ast.Call):
+        elif isinstance(node.value, ast.Call):
             funcName = self.getFunctionName(node)
             variable["value"] = None
             variable["valueSrc"] = funcName
@@ -72,15 +72,38 @@ class Analyzer(ast.NodeVisitor):
             for arg in node.value.args:
                 variable["funcArgs"].append(arg.id)
 
-        # self.getFunctionName(node)
+        elif isinstance(node.value, ast.List):
+            variable["type"] = "list"
+            variable["values"] = []
+            for value in node.value.elts:
+                if isinstance(value,ast.Constant):
+                    variable["values"].append(value.value)
 
         self.statements.append(variable)
         self.generic_visit(node)
 
 
+    def visit_Try(self, node):
+        
+        statement = {}
+        statement["type"] = "except_statement"
+        statement["line"] = node.lineno
+
+        if isinstance(node, ast.Try):
+            if isinstance(node.handlers[0].body[0],ast.Continue): 
+                print("Continue found")
+                statement["arg"] = "continue"
+
+            elif isinstance(node.handlers[0].body[0],ast.Pass): 
+                print("Pass found")
+                statement["arg"] = "pass"
+
+        self.statements.append(statement)
+        self.generic_visit(node)
+
 
     def visit_Expr(self, node):
-        print(ast.dump(node))
+        print('expression '+ast.dump(node))
         
         funcCall = {}
         funcCall["type"] = "function_call"
@@ -177,9 +200,9 @@ class Analyzer(ast.NodeVisitor):
 def main():
     srcFile = open('src.py', 'r')
     srcCode = srcFile.read()
-    # print(type(srcCode))
-
+    
     tree = ast.parse(srcCode, type_comments=True)
+    print(ast.dump(tree))
 
     analyzer = Analyzer()
     analyzer.visit(tree)
