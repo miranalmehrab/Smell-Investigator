@@ -80,53 +80,50 @@ class Analyzer(ast.NodeVisitor):
 
 
     def visit_Expr(self, node):
+        print(ast.dump(node))
+        
         funcCall = {}
         funcCall["type"] = "function_call"
         funcCall["line"] = node.lineno
-
-        if isinstance(node.value.func, ast.Name):
-            funcCall["name"] = node.value.func.id
-        elif isinstance(node.value.func,ast.Attribute):
-            funcCall["name"] = node.value.func.value.id+'.'+node.value.func.attr
+        
+        if isinstance(node.value.func, ast.Name): funcCall["name"] = node.value.func.id
+        elif isinstance(node.value.func,ast.Call): funcCall["name"] = self.getFunctionName(node)
+        elif isinstance(node.value.func,ast.Attribute): funcCall["name"] = self.getFunctionName(node)
 
         funcCall["args"] = []
-
-        for arg in node.value.args:
-            
-            if isinstance(arg,ast.Attribute):funcCall["args"].append(self.functionAttr(arg)+'.'+arg.attr)
-            else: funcCall["args"].append(str(arg.value))
         
-        funcCall["hasInputs"] = False
+        for arg in node.value.args:
+            if isinstance(arg,ast.Name): funcCall["args"].append(arg.id)
+            elif isinstance(arg,ast.Constant): funcCall["args"].append(arg.value)
+            elif isinstance(arg,ast.Attribute): funcCall["args"].append(self.functionAttr(arg)+'.'+arg.attr)
+        
         funcCall["keywords"] = []
+        funcCall["hasInputs"] = False
         
         for keyword in node.value.keywords:
-            
             karg = keyword.arg
             kvalue = None
-            
-            if isinstance(keyword.value,ast.Constant):
-                kvalue = keyword.value.value
-            
-            if karg and kvalue:
-                funcCall["keywords"].append([karg,kvalue])
+
+            if isinstance(keyword.value,ast.Constant): kvalue = keyword.value.value
+            if karg and kvalue: funcCall["keywords"].append([karg,kvalue])
+
 
         self.statements.append(funcCall)
         self.generic_visit(node)
-
     
 
     def getFunctionName(self, node):
 
         for fieldname, value in ast.iter_fields(node.value):
+            print(fieldname)
+            print(ast.dump(value))
 
             if(fieldname == "func"):
-                if isinstance(value, ast.Name):
-                    return value.id
-                elif isinstance(value, ast.Attribute):
+                if isinstance(value, ast.Name): return value.id
+                
+                elif isinstance(value, ast.Attribute):    
                     funcName = self.functionAttr(value)
-                    if value.attr:
-                        funcName = funcName+'.'+value.attr
-
+                    if value.attr: funcName = funcName +'.'+ value.attr
                     return funcName
 
 
@@ -140,8 +137,8 @@ class Analyzer(ast.NodeVisitor):
                 attr = value.attr
                 name = self.functionAttr(value)
             
-            if isinstance(value, ast.Name):
-                name = value.id
+            elif isinstance(value, ast.Name): name = value.id
+            elif isinstance(value,ast.Call): name = self.functionAttr(value)
         
         if attr: name = name+'.'+attr
         return(name)
