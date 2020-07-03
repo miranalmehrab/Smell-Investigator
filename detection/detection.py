@@ -12,7 +12,11 @@ from smells.sqlinjection import detect as sqlinjectionDetect
 from smells.tempdir import detect as tempdirDetect
 from smells.ignexcept import detect as ignexceptDetect
 
+from operations.clearwarnings import clearWarnings
+
 def detection(tokens):
+    
+    clearWarnings()
     tokens = tokens.splitlines()
     
     for token in tokens:

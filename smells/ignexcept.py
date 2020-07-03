@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
     
     if token.__contains__("line"): lineno = token["line"]
@@ -8,6 +10,6 @@ def detect(token):
         
     if tokenType == "except_statement" and arg in unwantedArgs:
             
-            warning = 'possible ignore except block at line '+ str(lineno)
-            print(warning)
-            
+            warning = 'ignore except block'
+            saveWarnings(warning,str(lineno))
+            print(warning+ ' at line '+ str(lineno))

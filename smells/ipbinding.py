@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
 
     if token.__contains__("line"): lineno = token["line"]
@@ -12,6 +14,6 @@ def detect(token):
         
         for arg in args:
             if arg in unwantedparam:
-                warning = 'possible harcoded ip address binding at line '+ str(lineno)
-                print(warning)
-            
+                warning = 'harcoded ip address binding'
+                saveWarnings(warning,str(lineno))
+                print(warning+ ' at line '+ str(lineno))

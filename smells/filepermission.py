@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
 
     if token.__contains__("line"): lineno = token["line"]
@@ -12,5 +14,6 @@ def detect(token):
         
         for arg in args:
             if arg in unwantedParams:
-                warning = 'possible bad file permission at line '+str(lineno)
-                print(warning)
+                warning = 'bad file permission'
+                saveWarnings(warning,str(lineno))
+                print(warning+ ' at line '+ str(lineno))

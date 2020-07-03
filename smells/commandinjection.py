@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
     
     if token.__contains__("line"): lineno = token["line"] 
@@ -9,5 +11,6 @@ def detect(token):
     unwanted = ['subprocess.Popen']
     
     if tokenType == "function_call" and name in unwanted and (args or containsUserInput):
-        warning = 'possible cmd injection at line ' + str(lineno)
-        print(warning)
+        warning = 'use of cmd injection'
+        saveWarnings(warning,str(lineno))
+        print(warning+ ' at line '+ str(lineno))

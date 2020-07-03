@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
 
     if token.__contains__("line"): lineno = token["line"]
@@ -10,5 +12,6 @@ def detect(token):
     if tokenType=="function_call" and name in httpLibs:
         if args and args[0].split("://")[0] != "https":
             
-            warning = 'possible use of HTTP without TLS at line ' + str(lineno)
-            print(warning)
+            warning = 'use of HTTP without TLS'
+            saveWarnings(warning,str(lineno))
+            print(warning+ ' at line '+ str(lineno))

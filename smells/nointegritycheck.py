@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
     
     if token.__contains__("line"): lineno = token["line"]
@@ -13,8 +15,9 @@ def detect(token):
         extension = urls[len(urls)-1]
 
         if extension in download:
-            warning = 'possible no integrity check at line '+ str(lineno)
-            print(warning)
-            
+            warning = 'no integrity check'
+            saveWarnings(warning,str(lineno))
+            print(warning+ ' at line '+ str(lineno))
+        
             # check exisitng imports if haslib or pygpgme not found then tell no checking!
             

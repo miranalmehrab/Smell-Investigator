@@ -24,5 +24,5 @@
 {"type": "function_call", "line": 35, "name": "connection.execute", "args": ["hello"], "keywords": [], "hasInputs": false}
 {"type": "function_call", "line": 36, "name": "connection.execute", "args": ["user_input"], "keywords": [], "hasInputs": true}
 {"type": "function_call", "line": 37, "name": "socket.socket.bind", "args": ["0.0.0.0", 3000], "keywords": [], "hasInputs": false}
-{"type": "except_statement", "line": 39, "arg": "continue"}
+{"type": "except_statement", "line": 41, "arg": "continue"}
 {"type": "variable", "line": 39, "name": "x", "value": 2, "valueSrc": "initialized", "isInput": false}

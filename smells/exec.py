@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token) :
 
     if token.__contains__("line"): lineno = token["line"]
@@ -7,5 +9,6 @@ def detect(token) :
     if token.__contains__("hasInputs"): containsUserInput =  token["hasInputs"]
 
     if (tokenType == "function_call" and methodname == "exec" and args and containsUserInput):
-        warning = 'possible exec statement at line ' + str(lineno)
-        print(warning)
+        warning = 'exec statement'
+        saveWarnings(warning,str(lineno))
+        print(warning+ ' at line '+ str(lineno))

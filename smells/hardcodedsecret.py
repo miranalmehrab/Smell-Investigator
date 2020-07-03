@@ -1,6 +1,7 @@
-def detect(token):
-    print(token)
+from operations.savewarnings import saveWarnings
 
+def detect(token):
+    
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
     if token.__contains__("name"): name = token["name"]
@@ -12,6 +13,6 @@ def detect(token):
 
     if tokenType == "variable" and valueSrc == "initialized" and (name in commonUserName or name in commonPassword) and value != None and len(value)>0 : 
             
-        warning = 'possible hardcoded secret at line '+ str(lineno)
-        print(warning)
-            
+        warning = 'hardcoded secret'
+        saveWarnings(warning,str(lineno))
+        print(warning+ ' at line '+ str(lineno))

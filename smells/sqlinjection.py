@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
 
     if token.__contains__("line"): lineno = token["line"]
@@ -9,5 +11,7 @@ def detect(token):
     unwantedMethods = ['execution.query']
     
     if tokenType == "function_call" and args and hasInputs:
-        warning = 'possible SQL injection at line ' + str(lineno)
-        print(warning)
+        warning = 'SQL injection'
+        saveWarnings(warning,str(lineno))
+        print(warning+ ' at line '+ str(lineno))
+

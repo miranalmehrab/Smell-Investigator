@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
 
     if token.__contains__("line"): lineno = token["line"]
@@ -13,8 +15,12 @@ def detect(token):
     unwantedValues = ['/tmp', '/var/tmp', '/dev/shm']
     
     if tokenType == "list" and name in unwantedDirNames:
+        
         for value in values:
             if value in unwantedValues:
-                warning = 'possible hardcoded temporary directory at line ' + str(lineno)
-                print(warning)
+
+                warning = 'hardcoded temporary directory'
+                saveWarnings(warning,str(lineno))
+                print(warning+ ' at line '+ str(lineno))
+
                 break

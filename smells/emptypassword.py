@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
     
     if token.__contains__("line"): lineno = token["line"]
@@ -8,9 +10,12 @@ def detect(token):
     commonPasswords = ['password','pass','pwd','userPassword','PASSWORD','PASS','PWD','USERPWD']
     
     if tokenType == "variable" and name in commonPasswords and value == None:
-        warning = 'possible empty password at line '+str(lineno)
-        print(warning)
+        warning = 'empty password'
+        saveWarnings(warning,str(lineno))
+        print(warning+ ' at line '+ str(lineno))
 
     elif tokenType == "variable" and name in commonPasswords and len(value) == 0: 
-        warning = 'possible empty password at line '+str(lineno)
-        print(warning)
+        warning = 'empty password'
+        saveWarnings(warning,str(lineno))
+        print(warning+ ' at line '+ str(lineno))
+

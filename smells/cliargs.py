@@ -1,3 +1,5 @@
+from operations.savewarnings import saveWarnings
+
 def detect(token):
 
     if token.__contains__("line"): lineno = token["line"] 
@@ -9,5 +11,7 @@ def detect(token):
     cliArgsFuncNames = ['sys.argv', 'ArgumentParser', 'argparse', 'subprocess.Popen']
     
     if tokenType == "function_call" and methodname in cliArgsFuncNames and containsUserInput:
-        warning = 'possible use of command line args at line ' +  str(lineno)
-        print(warning)
+        
+        warning = 'use of command line args' 
+        saveWarnings(warning,str(lineno))
+        print(warning+ ' at line '+ str(lineno))

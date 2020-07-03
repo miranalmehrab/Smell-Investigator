@@ -1,7 +1,5 @@
 import ast
 import json
-from detection.detection import detection
-
 
 class Analyzer(ast.NodeVisitor):
     def __init__(self):
@@ -47,7 +45,7 @@ class Analyzer(ast.NodeVisitor):
         variable = {}
         variable["type"] = "variable"
         variable["line"] = node.lineno
-        print(ast.dump(node))
+        # print(ast.dump(node))
 
         for target in node.targets:
             variable["name"] = target.id
@@ -87,15 +85,15 @@ class Analyzer(ast.NodeVisitor):
         
         statement = {}
         statement["type"] = "except_statement"
-        statement["line"] = node.lineno
 
         if isinstance(node, ast.Try):
-            if isinstance(node.handlers[0].body[0],ast.Continue): 
-                print("Continue found")
+            
+            if isinstance(node.handlers[0].body[0],ast.Continue):
+                statement["line"] = node.handlers[0].body[0].lineno
                 statement["arg"] = "continue"
 
             elif isinstance(node.handlers[0].body[0],ast.Pass): 
-                print("Pass found")
+                statement["line"] = node.handlers[0].body[0].lineno
                 statement["arg"] = "pass"
 
         self.statements.append(statement)
@@ -103,7 +101,7 @@ class Analyzer(ast.NodeVisitor):
 
 
     def visit_Expr(self, node):
-        print('expression '+ast.dump(node))
+        # print('expression '+ast.dump(node))
         
         funcCall = {}
         funcCall["type"] = "function_call"
@@ -138,8 +136,8 @@ class Analyzer(ast.NodeVisitor):
     def getFunctionName(self, node):
 
         for fieldname, value in ast.iter_fields(node.value):
-            print(fieldname)
-            print(ast.dump(value))
+            # print(fieldname)
+            # print(ast.dump(value))
 
             if(fieldname == "func"):
                 if isinstance(value, ast.Name): return value.id
@@ -195,24 +193,3 @@ class Analyzer(ast.NodeVisitor):
                         if user_input in str(arg):
                             statement["hasInputs"] = True
                             break
-
-
-def main():
-    srcFile = open('src.py', 'r')
-    srcCode = srcFile.read()
-    
-    tree = ast.parse(srcCode, type_comments=True)
-    print(ast.dump(tree))
-
-    analyzer = Analyzer()
-    analyzer.visit(tree)
-    analyzer.findUserInputInFunction()
-    analyzer.report()
-
-    f = open("tokens.txt", "r")
-    detection(f.read())
-    # print(ast.dump(tree,include_attributes=True))
-
-
-if __name__ == "__main__":
-    main()
