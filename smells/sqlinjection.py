@@ -10,7 +10,7 @@ def detect(token):
 
     unwantedMethods = ['execution.query']
     
-    if tokenType == "function_call" and args and hasInputs:
+    if tokenType == "function_call" and name in unwantedMethods and args and hasInputs:
         warning = 'SQL injection'
         saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
