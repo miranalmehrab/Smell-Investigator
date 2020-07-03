@@ -7,6 +7,7 @@ def detect(token):
     unwantedArgs = ['continue','pass']
         
     if tokenType == "except_statement" and arg in unwantedArgs:
+            
             warning = 'possible ignore except block at line '+ str(lineno)
             print(warning)
             

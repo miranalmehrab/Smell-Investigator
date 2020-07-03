@@ -6,6 +6,7 @@ def detect(token):
     if token.__contains__("args"): args = token["args"]
 
     httpLibs = ['httplib.urlretrieve', 'urllib', 'requests.get']
+    
     if tokenType=="function_call" and name in httpLibs:
         if args and args[0].split("://")[0] != "https":
             

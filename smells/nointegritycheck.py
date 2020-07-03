@@ -8,7 +8,7 @@ def detect(token):
     libs = ['urllib.urlretrieve','urllib2.urlopen','requests.get','wget.download']
     download = ['iso', 'tar', 'tar.gz', 'tar.bzip2', 'zip', 'rar', 'gzip', 'gzip2', 'deb', 'rpm', 'sh', 'run', 'bin', 'exe', 'zip', 'rar', '7zip', 'msi', 'bat']
 
-    if name in libs and args:
+    if tokenType == "function_call" and name in libs and args:
         urls = args[0].split(".")
         extension = urls[len(urls)-1]
 

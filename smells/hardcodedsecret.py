@@ -1,4 +1,5 @@
 def detect(token):
+    print(token)
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]

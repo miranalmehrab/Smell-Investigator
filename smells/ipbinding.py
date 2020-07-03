@@ -9,6 +9,7 @@ def detect(token):
     unwantedparam = ['0.0.0.0','192.168.0.1']
         
     if tokenType == "function_call" and name in unwantedmethod :
+        
         for arg in args:
             if arg in unwantedparam:
                 warning = 'possible harcoded ip address binding at line '+ str(lineno)
