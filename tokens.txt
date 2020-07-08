@@ -1,2 +1,5 @@
-{"type": "comparison", "line": 36, "pairs": [["username", "root"], ["password", "123"], ["port", "3000"]]}
+{"type": "comparison", "line": 36, "pairs": [["username", "root"], ["password", ""]]}
 {"type": "function_call", "line": 37, "name": "logIn", "args": [], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 49, "name": "port", "value": "3000", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 50, "name": "ip", "value": "0.0.0.0", "valueSrc": "initialized", "isInput": false}
+{"type": "function_call", "line": 52, "name": "socket.socket.bind", "args": ["0.0.0.0", "3000"], "keywords": [], "hasInputs": false}

@@ -18,4 +18,16 @@ def detect(token):
         warning = 'empty password'
         saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
+    
+    elif tokenType == "comparison":
+
+        if token.__contains__("pairs"):
+            for pair in token["pairs"]:
+                
+                if pair[0] in commonPasswords and len(pair[1]) == 0:
+
+                    warning = 'emplty password'
+                    saveWarnings(warning,str(lineno))
+                    
+                    print(warning+ ' at line '+ str(lineno))
 

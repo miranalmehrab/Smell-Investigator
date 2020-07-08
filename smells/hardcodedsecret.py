@@ -16,3 +16,15 @@ def detect(token):
         warning = 'hardcoded secret'
         saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
+
+    elif tokenType == "comparison":
+
+        if token.__contains__("pairs"):
+            for pair in token["pairs"]:
+                
+                if pair[0] in commonUserName or pair[0] in commonPassword and len(pair[1]) > 0:
+
+                    warning = 'hardcoded secret'
+                    saveWarnings(warning,str(lineno))
+                    
+                    print(warning+ ' at line '+ str(lineno))
