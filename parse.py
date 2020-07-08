@@ -2,6 +2,7 @@ import ast
 import json
 
 class Analyzer(ast.NodeVisitor):
+
     def __init__(self):
         self.inputs = []
         self.statements = []
@@ -94,7 +95,63 @@ class Analyzer(ast.NodeVisitor):
         self.generic_visit(node)
 
 
+    def visit_If(self,node):
+        # print(ast.dump(node))
+        statement = {}
+        statement["type"] = "comparison"
+        statement["line"] = node.lineno
 
+        statement["pairs"] = []
+
+        if isinstance(node.test,ast.BoolOp):
+            print(ast.dump(node.test))
+
+            for compare in node.test.values:
+
+                if isinstance(compare.left,ast.Name) and isinstance(compare.ops[0],ast.Eq) and isinstance(compare.comparators[0],ast.Constant):
+                    pair = []
+                    pair.append(compare.left.id)
+                    pair.append(compare.comparators[0].value)
+
+                    statement["pairs"].append(pair)
+                
+                elif isinstance(compare.left,ast.Name) and isinstance(compare.ops[0],ast.Eq) and isinstance(compare.comparators[0],ast.BinOp):
+                    pair = []
+                    pair.append(compare.left.id)
+                    
+                    usedVars = self.getUsedVariablesInVariableDeclaration(compare.comparators[0])
+                    value = self.buildNewVariableValueFromUsedOnes(usedVars)
+                    
+                    pair.append(value.lstrip())
+                    statement["pairs"].append(pair)
+                
+
+        elif isinstance(node.test,ast.Compare):
+            print(ast.dump(node.test))
+            pair = []
+
+            if isinstance(node.test.left,ast.Constant):
+                print(node.test.left.value)
+                pair.append(node.test.left.value)
+
+            elif isinstance(node.test.left,ast.Name):
+                print(node.test.left.id)
+                pair.append(node.test.left.id)
+
+            for comparator in node.test.comparators:
+                if isinstance(comparator,ast.Constant):
+                    print(comparator.value)
+                    pair.append(comparator.value)
+
+                elif isinstance(comparator,ast.Name):
+                    print(comparator.id)
+                    pair.append(compare.id)
+
+
+            statement["pairs"].append(pair)    
+        
+        self.statements.append(statement)
+        self.generic_visit(node)
 
     def visit_Try(self, node):
         

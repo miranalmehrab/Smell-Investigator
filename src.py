@@ -33,18 +33,22 @@
 # result = connection.execute(user_input)
 # sys.argv('sudo mkdir {user_input}')
 
-# if username == "root" and password == "123":
-#     logIn()
+if username == "root" and password == "123" and port == "300"+'0':
+    logIn()
+# if 1 == username:
+#     print('1 is equal to 1')
+# if username == 1:
+#     print('1 is equal to 1')
 
 # hardcoded_tmp_directory = ['/tmp','/var/tmp']
 # requests.get("http://abc.com")
 
 # connection.execute("hello")
 # connection.execute(user_input)
-port = '300'
-ip = '0.0.0.0'
+# port = '300'
+# ip = '0.0.0.0'
 
-socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(ip,port+'0')
+# socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(ip,port+'0')
 
 # try: x = 2
 # except: 
