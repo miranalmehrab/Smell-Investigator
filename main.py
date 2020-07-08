@@ -14,8 +14,8 @@ def main():
     analyzer.findUserInputInFunction()
     analyzer.report()
 
-    f = open("tokens.txt", "r")
-    detection(f.read())
+    # f = open("tokens.txt", "r")
+    # detection(f.read())
     # print(ast.dump(tree,include_attributes=True))
 
 

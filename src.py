@@ -1,3 +1,9 @@
+# x = input()
+# x = "users"
+# query = "select * from "
+# ask = query + x
+# ask = a + b + c + d + e + f
+
 # import os,stat
 # import socket
 # file_name = input()
@@ -30,12 +36,15 @@
 # if username == "root" and password == "123":
 #     logIn()
 
-hardcoded_tmp_directory = ['/tmp','/var/tmp']
+# hardcoded_tmp_directory = ['/tmp','/var/tmp']
 # requests.get("http://abc.com")
 
 # connection.execute("hello")
 # connection.execute(user_input)
-# socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind('0.0.0.0',3000)
+port = '300'
+ip = '0.0.0.0'
+
+socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(ip,port+'0')
 
 # try: x = 2
 # except: 
