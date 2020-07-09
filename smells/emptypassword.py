@@ -31,3 +31,9 @@ def detect(token):
                     
                     print(warning+ ' at line '+ str(lineno))
 
+                elif pair[1] in commonPasswords and len(pair[0]) == 0:
+
+                    warning = 'emplty password'
+                    saveWarnings(warning,str(lineno))
+                    
+                    print(warning+ ' at line '+ str(lineno))

@@ -30,3 +30,9 @@ def detect(token):
                     saveWarnings(warning,str(lineno))
                     
                     print(warning+ ' at line '+ str(lineno))
+                
+                elif pair[1] in commonUserName or pair[1] in commonPassword and len(pair[0]) > 0:
+                    warning = 'hardcoded secret'
+                    saveWarnings(warning,str(lineno))
+                    
+                    print(warning+ ' at line '+ str(lineno))

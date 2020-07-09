@@ -333,6 +333,7 @@ class Analyzer(ast.NodeVisitor):
                             statement["hasInputs"] = True
                             break
 
+
     def report(self):
         for statement in self.statements:
             print(statement)
