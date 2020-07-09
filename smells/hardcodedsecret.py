@@ -11,6 +11,8 @@ def detect(token):
     commonUserName = ['name','user','username','usrname','usr','role','USER','USERNAME','USR']
     commonPassword = ['password','pass','pwd','userPassword','PASSWORD','PASS','PWD','USERPWD']
 
+    # print(token)
+
     if tokenType == "variable" and valueSrc == "initialized" and (name in commonUserName or name in commonPassword) and value != None and len(value)>0 : 
             
         warning = 'hardcoded secret'

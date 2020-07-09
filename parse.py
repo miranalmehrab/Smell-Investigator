@@ -68,6 +68,10 @@ class Analyzer(ast.NodeVisitor):
                 variable["value"] = None
                 variable["valueSrc"] = "input"
                 variable["isInput"] = True
+            else:
+                variable["valueSrc"] = "initialized"
+                variable["isInput"] = False
+
 
         elif isinstance(node.value, ast.Call):
             funcName = self.getFunctionName(node)
@@ -104,7 +108,7 @@ class Analyzer(ast.NodeVisitor):
         statement["pairs"] = []
 
         if isinstance(node.test,ast.BoolOp):
-            print(ast.dump(node.test))
+            # print(ast.dump(node.test))
 
             for compare in node.test.values:
 
@@ -127,25 +131,25 @@ class Analyzer(ast.NodeVisitor):
                 
 
         elif isinstance(node.test,ast.Compare):
-            print(ast.dump(node.test))
+            # print(ast.dump(node.test))
             pair = []
 
             if isinstance(node.test.left,ast.Constant):
-                print(node.test.left.value)
+                # print(node.test.left.value)
                 pair.append(node.test.left.value)
 
             elif isinstance(node.test.left,ast.Name):
-                print(node.test.left.id)
+                # print(node.test.left.id)
                 pair.append(node.test.left.id)
 
             for comparator in node.test.comparators:
                 if isinstance(comparator,ast.Constant):
-                    print(comparator.value)
+                    # print(comparator.value)
                     pair.append(comparator.value)
 
                 elif isinstance(comparator,ast.Name):
-                    print(comparator.id)
-                    pair.append(compare.id)
+                    # print(comparator.id)
+                    pair.append(comparator.id)
 
 
             statement["pairs"].append(pair)    
@@ -204,14 +208,14 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(arg,ast.Constant): funcCall["args"].append(arg.value)
             elif isinstance(arg,ast.Attribute): funcCall["args"].append(self.functionAttr(arg)+'.'+arg.attr)
             elif isinstance(arg,ast.BinOp):
-                print(ast.dump(node.value))
+                # print(ast.dump(node.value))
                 
                 usedArgs = self.getUsedVariablesInVariableDeclaration(arg)
                 
                 actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
                 actualValue = actualValue.lstrip()
                 
-                print(actualValue)
+                # print(actualValue)
                 funcCall["args"].append(actualValue)
 
 
@@ -235,16 +239,16 @@ class Analyzer(ast.NodeVisitor):
     def getValueOrNameFromLeftOrRightOperand(self,node):
         
         if isinstance(node, ast.Name):
-            print(node.id)
+            # print(node.id)
             if node.id: return node.id
 
         if isinstance(node, ast.Constant):
-            print(node.value)
+            # print(node.value)
             if node.value: return node.value
         
         if isinstance(node,ast.BinOp):
             
-            print(ast.dump(node))
+            # print(ast.dump(node))
             return self.getValueOrNameFromLeftOrRightOperand(node.left) + self.getValueOrNameFromLeftOrRightOperand(node.right)
              
         
@@ -308,22 +312,6 @@ class Analyzer(ast.NodeVisitor):
         return(name)
 
 
-
-    def report(self):
-        for statement in self.statements:
-            print(statement)
-
-        print('')
-        # for user_input in self.inputs:
-        #     print("user input: "+user_input)
-
-        f = open("tokens.txt", "w")
-        for statement in self.statements:
-            json.dump(statement, f)
-            f.write("\n")
-        f.close()
-
-
     def checkUserInputsInVariableDeclaration(self, usedVariables):
         for variable in usedVariables:
             if variable in self.inputs:
@@ -344,3 +332,17 @@ class Analyzer(ast.NodeVisitor):
                         if user_input in str(arg):
                             statement["hasInputs"] = True
                             break
+
+    def report(self):
+        for statement in self.statements:
+            print(statement)
+
+        print('')
+        # for user_input in self.inputs:
+        #     print("user input: "+user_input)
+
+        f = open("tokens.txt", "w")
+        for statement in self.statements:
+            json.dump(statement, f)
+            f.write("\n")
+        f.close()
