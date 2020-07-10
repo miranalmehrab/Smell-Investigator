@@ -27,7 +27,7 @@ class Analyzer(ast.NodeVisitor):
 
 
     def visit_FunctionDef(self, node):
-
+        
         func_def = {}
 
         func_def["type"] = "function_def"
@@ -38,6 +38,17 @@ class Analyzer(ast.NodeVisitor):
         for arg in node.args.args:
             func_def["args"].append(arg.arg)
 
+        for item in node.body:
+            
+            if isinstance(item,ast.Return):
+                if isinstance(item.value,ast.Constant):
+                    func_def["returnValue"] = item.value.value
+                
+                elif isinstance(item.value, ast.BinOp):
+                    usedVars = self.getUsedVariablesInVariableDeclaration(item.value)
+                    hasInputs = self.checkUserInputsInVariableDeclaration(usedVars)
+                    func_def["returnValue"] = self.buildNewVariableValueFromUsedOnes(usedVars)
+            
         self.statements.append(func_def)
         self.generic_visit(node)
 
@@ -61,14 +72,15 @@ class Analyzer(ast.NodeVisitor):
         elif isinstance(node.value, ast.BinOp):
             usedVars = self.getUsedVariablesInVariableDeclaration(node.value)
             hasInputs = self.checkUserInputsInVariableDeclaration(usedVars)
-            variable["value"] = self.buildNewVariableValueFromUsedOnes(usedVars)
 
             if hasInputs:
                 self.inputs.append(variable["name"])
                 variable["value"] = None
                 variable["valueSrc"] = "input"
                 variable["isInput"] = True
+            
             else:
+                variable["value"] = self.buildNewVariableValueFromUsedOnes(usedVars)
                 variable["valueSrc"] = "initialized"
                 variable["isInput"] = False
 
@@ -82,15 +94,17 @@ class Analyzer(ast.NodeVisitor):
             if(funcName == "input"):
                 variable["isInput"] = True
                 self.inputs.append(variable["name"])
-            else:
-                variable["isInput"] = False
+            
+            else: variable["isInput"] = False
 
             for arg in node.value.args:
                 variable["funcArgs"].append(arg.id)
 
         elif isinstance(node.value, ast.List):
+            
             variable["type"] = "list"
             variable["values"] = []
+            
             for value in node.value.elts:
                 if isinstance(value,ast.Constant):
                     variable["values"].append(value.value)
@@ -100,16 +114,13 @@ class Analyzer(ast.NodeVisitor):
 
 
     def visit_If(self,node):
-        # print(ast.dump(node))
+        
         statement = {}
         statement["type"] = "comparison"
         statement["line"] = node.lineno
-
         statement["pairs"] = []
 
         if isinstance(node.test,ast.BoolOp):
-            # print(ast.dump(node.test))
-
             for compare in node.test.values:
 
                 if isinstance(compare.left,ast.Name) and isinstance(compare.ops[0],ast.Eq) and isinstance(compare.comparators[0],ast.Constant):
@@ -129,28 +140,16 @@ class Analyzer(ast.NodeVisitor):
                     pair.append(value.lstrip())
                     statement["pairs"].append(pair)
                 
-
         elif isinstance(node.test,ast.Compare):
-            # print(ast.dump(node.test))
+            
             pair = []
 
-            if isinstance(node.test.left,ast.Constant):
-                # print(node.test.left.value)
-                pair.append(node.test.left.value)
-
-            elif isinstance(node.test.left,ast.Name):
-                # print(node.test.left.id)
-                pair.append(node.test.left.id)
+            if isinstance(node.test.left,ast.Constant): pair.append(node.test.left.value)
+            elif isinstance(node.test.left,ast.Name): pair.append(node.test.left.id)
 
             for comparator in node.test.comparators:
-                if isinstance(comparator,ast.Constant):
-                    # print(comparator.value)
-                    pair.append(comparator.value)
-
-                elif isinstance(comparator,ast.Name):
-                    # print(comparator.id)
-                    pair.append(comparator.id)
-
+                if isinstance(comparator,ast.Constant): pair.append(comparator.value)
+                elif isinstance(comparator,ast.Name): pair.append(comparator.id)
 
             statement["pairs"].append(pair)    
         
@@ -199,6 +198,7 @@ class Analyzer(ast.NodeVisitor):
         funcCall["args"] = []
         
         for arg in node.value.args:
+            
             if isinstance(arg,ast.Name):
 
                 # print(ast.dump(arg))
@@ -208,18 +208,15 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(arg,ast.Constant): funcCall["args"].append(arg.value)
             elif isinstance(arg,ast.Attribute): funcCall["args"].append(self.functionAttr(arg)+'.'+arg.attr)
             elif isinstance(arg,ast.BinOp):
-                # print(ast.dump(node.value))
                 
                 usedArgs = self.getUsedVariablesInVariableDeclaration(arg)
-                
                 actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
-                actualValue = actualValue.lstrip()
-                
-                # print(actualValue)
                 funcCall["args"].append(actualValue)
 
-
-
+            elif isinstance(arg, ast.Call):
+                func = arg.func.id
+                funcCall["args"].append(self.getFunctionReturnValueFromName(func))
+                
         funcCall["keywords"] = []
         funcCall["hasInputs"] = False
         
@@ -236,48 +233,61 @@ class Analyzer(ast.NodeVisitor):
     
 
 
-    def getValueOrNameFromLeftOrRightOperand(self,node):
-        
-        if isinstance(node, ast.Name):
-            # print(node.id)
-            if node.id: return node.id
+    def getFunctionReturnValueFromName(self,funcName):
 
-        if isinstance(node, ast.Constant):
-            # print(node.value)
-            if node.value: return node.value
+        for statement in self.statements:
+            if statement["type"] == "function_def":
+                if statement["name"] == funcName:
+                    if statement.__contains__("returnValue"): return statement["returnValue"]
+                    else: return None
+        return funcName
+
+
+    def getOperandsFromBinOp(self,node,usedVars):
+        if isinstance(node, ast.Name) and node.id: usedVars.append(node.id)
+        elif isinstance(node, ast.Constant) and node.value: usedVars.append(node.value)
         
-        if isinstance(node,ast.BinOp):
-            
-            # print(ast.dump(node))
-            return self.getValueOrNameFromLeftOrRightOperand(node.left) + self.getValueOrNameFromLeftOrRightOperand(node.right)
-             
+        elif isinstance(node,ast.BinOp):  
+            usedVars = self.getOperandsFromBinOp(node.left,usedVars)  
+            usedVars = self.getOperandsFromBinOp(node.right,usedVars)
+
+        return usedVars     
         
     def getUsedVariablesInVariableDeclaration(self,node):
+        
         usedVariables = []
-
         for field, value in ast.iter_fields(node):
-            result = self.getValueOrNameFromLeftOrRightOperand(value)
-            if result: usedVariables.append(result)    
-       
+            self.getOperandsFromBinOp(value,usedVariables)
+                
         return usedVariables
 
 
     def buildNewVariableValueFromUsedOnes(self,usedVariables):
         
-        value = " "
+        value = None
+        
         for variable in usedVariables:
+            
             found = False
             for statement in self.statements:
                 
                 if statement["type"] == "variable" and statement["name"] == variable:
-                    if statement["isInput"] != True: value = value + statement["value"]
-                    else: value = str(value) + "input"
+                    
+                    if statement["isInput"] != True and value:
+                        if type(value) == str or type(statement["value"]) == str: value = str(value) + str(statement["value"])
+                        else: value = value + statement["value"]
+
+                    elif statement["isInput"] != True: value = statement["value"]
+                    elif statement["isInput"] == True: value = str(value) + "input"
 
                     found = True
                     break
-            if(found == False): value = str(value)+ variable
-        
-        return value.lstrip()
+
+            if found == False and value: value = value + variable
+            elif found == False: value = variable
+
+        return value
+
 
 
     def getFunctionName(self, node):
