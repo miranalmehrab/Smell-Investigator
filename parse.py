@@ -7,8 +7,10 @@ class Analyzer(ast.NodeVisitor):
         self.inputs = []
         self.statements = []
 
+
     def visit_Import(self, node):
         self.generic_visit(node)
+
 
     def visit_ImportFrom(self, node):
         import_from = {}
@@ -23,7 +25,6 @@ class Analyzer(ast.NodeVisitor):
 
         self.statements.append(import_from)
         self.generic_visit(node)
-
 
 
     def visit_FunctionDef(self, node):
@@ -52,6 +53,12 @@ class Analyzer(ast.NodeVisitor):
         self.statements.append(func_def)
         self.generic_visit(node)
 
+
+
+    def getVariableValueFromName(self,name):
+        for statement in self.statements:
+            if statement["type"] == "variable" and statement["name"] == name : return statement["value"]
+        return name
 
 
     def visit_Assign(self, node):
@@ -98,10 +105,23 @@ class Analyzer(ast.NodeVisitor):
             else: variable["isInput"] = False
 
             for arg in node.value.args:
-                variable["funcArgs"].append(arg.id)
+                if isinstance(arg,ast.Constant): variable["funcArgs"].append(arg.value)
+                elif isinstance(arg,ast.Name): variable["funcArgs"].append(self.getVariableValueFromName(arg.id))
+                elif isinstance(arg, ast.Attribute): 
+                    
+                    variable["funcArgs"].append(self.functionAttr(arg)+'.'+arg.attr)
+
+                    funcObj = {}
+                    funcObj["type"] = "function_obj"
+                    funcObj["line"] = node.lineno
+                    funcObj["objName"] = variable["name"]
+                    funcObj["funcName"] = variable["valueSrc"]
+                    funcObj["args"] = variable["funcArgs"]
+
+                    if(funcObj not in self.statements):self.statements.append(funcObj)
+
 
         elif isinstance(node.value, ast.List):
-            
             variable["type"] = "list"
             variable["values"] = []
             
@@ -156,6 +176,8 @@ class Analyzer(ast.NodeVisitor):
         self.statements.append(statement)
         self.generic_visit(node)
 
+
+
     def visit_Try(self, node):
         
         statement = {}
@@ -184,8 +206,17 @@ class Analyzer(ast.NodeVisitor):
         return None
 
 
+    def getFunctionNameFromObject(self,name):
+        
+        fName = name.split('.')[0]
+        lName = name.split('.')[1]
+
+        for statement in self.statements:
+            if statement["type"] == "function_obj" and fName == statement["objName"]: return statement["funcName"]+'.'+lName
+        return name
+
+
     def visit_Expr(self, node):
-        # print('expression '+ast.dump(node))
         
         funcCall = {}
         funcCall["type"] = "function_call"
@@ -193,7 +224,9 @@ class Analyzer(ast.NodeVisitor):
         
         if isinstance(node.value.func, ast.Name): funcCall["name"] = node.value.func.id
         elif isinstance(node.value.func,ast.Call): funcCall["name"] = self.getFunctionName(node)
-        elif isinstance(node.value.func,ast.Attribute): funcCall["name"] = self.getFunctionName(node)
+        elif isinstance(node.value.func,ast.Attribute): 
+            
+            funcCall["name"] = self.getFunctionNameFromObject(self.getFunctionName(node))
 
         funcCall["args"] = []
         
@@ -253,6 +286,8 @@ class Analyzer(ast.NodeVisitor):
 
         return usedVars     
         
+
+
     def getUsedVariablesInVariableDeclaration(self,node):
         
         usedVariables = []
@@ -260,6 +295,8 @@ class Analyzer(ast.NodeVisitor):
             self.getOperandsFromBinOp(value,usedVariables)
                 
         return usedVariables
+
+
 
 
     def buildNewVariableValueFromUsedOnes(self,usedVariables):
