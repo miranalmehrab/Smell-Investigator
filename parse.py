@@ -36,29 +36,36 @@ class Analyzer(ast.NodeVisitor):
         self.generic_visit(node)
 
 
+    ######################### Function Definitions Here #########################
     def visit_FunctionDef(self, node):
-        
         func_def = {}
 
         func_def["type"] = "function_def"
         func_def["line"] = node.lineno
         func_def["name"] = node.name
         func_def["args"] = []
+        func_def["defaults"] = []
 
         for arg in node.args.args:
-            func_def["args"].append(arg.arg)
+            if isinstance(arg, ast.arg): func_def["args"].append(arg.arg)
+        
+        for default in node.args.defaults:
+            if isinstance(default, ast.Constant): func_def["defaults"].append(default.value) 
+            elif isinstance(default,ast.Call): func_def["defaults"].append(default.func.id)
+            elif isinstance(default, ast.BinOp):
+                usedVars = self.getUsedVariablesInVariableDeclaration(default)
+                func_def["defaults"].append(self.buildNewVariableValueFromUsedOnes(usedVars))
 
         for item in node.body:
             
             if isinstance(item,ast.Return):
                 if isinstance(item.value,ast.Constant):
-                    func_def["returnValue"] = item.value.value
+                    func_def["return"] = item.value.value
                 
                 elif isinstance(item.value, ast.BinOp):
                     usedVars = self.getUsedVariablesInVariableDeclaration(item.value)
-                    hasInputs = self.checkUserInputsInVariableDeclaration(usedVars)
-                    func_def["returnValue"] = self.buildNewVariableValueFromUsedOnes(usedVars)
-            
+                    func_def["return"] = self.buildNewVariableValueFromUsedOnes(usedVars)
+
         self.statements.append(func_def)
         self.generic_visit(node)
 
@@ -299,7 +306,7 @@ class Analyzer(ast.NodeVisitor):
         for statement in self.statements:
             if statement["type"] == "function_def":
                 if statement["name"] == funcName:
-                    if statement.__contains__("returnValue"): return statement["returnValue"]
+                    if statement.__contains__("return"): return statement["return"]
                     else: return None
         return funcName
 

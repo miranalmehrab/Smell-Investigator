@@ -1,12 +1,14 @@
+
+
 # x = 1
 # query = 2
 # ask = y = query + x
 # ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
 
-import os as opeSys
-import socket as sockkkkit
-from math import pi,sqrt,fabs
-from os import *
+# import os
+# import socket 
+# from math import pi,sqrt,fabs
+# from os import *
 # file_name = input()
 # exec('sudo mkdir {file_name}')
 
@@ -34,11 +36,12 @@ from os import *
 # result = connection.execute(user_input)
 # sys.argv('sudo mkdir {user_input}')
 
-# def getIp():
-#     return '0.0.0'+'.0'
+def getPort():
+    return  3000+32
 
-# def getPort():
-#     return  '3000'
+def getIp(ip = 3000, port = getPort()):
+    return '0.0'+'.0'+'.0'
+
 
 # socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'4')
 
