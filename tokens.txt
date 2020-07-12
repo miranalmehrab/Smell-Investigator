@@ -1,2 +1,15 @@
-{"type": "function_def", "line": 39, "name": "getPort", "args": [], "defaults": [], "return": 3032}
-{"type": "function_def", "line": 42, "name": "getIp", "args": ["ip", "port"], "defaults": [3000, "getPort"], "return": "getPort"}
+{"type": "variable", "line": 1, "name": "x", "value": 1, "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 2, "name": "query", "value": 2, "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 3, "name": "ask", "value": 3, "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 3, "name": "y", "value": 3, "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 4, "name": "ask", "value": "abcde111", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 5, "name": "m", "value": null, "valueSrc": "socket.socket", "args": ["ip", "port"], "isInput": false}
+{"type": "variable", "line": 5, "name": "s", "value": null, "valueSrc": "socket.socket", "args": ["ip", "port"], "isInput": false}
+{"type": "variable", "line": 22, "name": "password", "value": "pass", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 23, "name": "password", "value": "", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 24, "name": "pwd", "value": "", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 25, "name": "password", "value": null, "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 26, "name": "name", "value": "root", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 27, "name": "pwd", "value": "root123", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 28, "name": "query", "value": "delete from foo where id = user_inputuser_input", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 29, "name": "x", "value": "abc", "valueSrc": "initialized", "isInput": false}

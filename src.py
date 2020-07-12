@@ -1,9 +1,8 @@
-
-
-# x = 1
-# query = 2
-# ask = y = query + x
-# ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
+x = 1
+query = 2
+ask = y = query + x
+ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
+m = s = socket.socket(ip,port)
 
 # import os
 # import socket 
@@ -20,14 +19,14 @@
 
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 # app.run(debug = True,start = True)
-# password = "pass"
-# password = ''
-# pwd = ''
-# password = None
-# name = "root"
-# pwd = "root123"
-# query = "delete from foo where id = " + user_input + user_input
-# x = "abc"
+password = "pass"
+password = ''
+pwd = ''
+password = None
+name = "root"
+pwd = "root123"
+query = "delete from foo where id = " + user_input + user_input
+x = "abc"
 # urllib.urlretrieve("192.168.10.1/example.iso")
 
 # user_input = input()
@@ -36,11 +35,11 @@
 # result = connection.execute(user_input)
 # sys.argv('sudo mkdir {user_input}')
 
-def getPort():
-    return  3000+32
+# def getPort():
+#     return  3000+32
 
-def getIp(ip = 3000, port = getPort()):
-    return getPort()
+# def getIp(ip = 3000, port = getPort()):
+#     return getPort()
 
 
 # socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'4')

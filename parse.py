@@ -72,23 +72,10 @@ class Analyzer(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-
-    def getVariableValueFromName(self,name):
-        for statement in self.statements:
-            if statement["type"] == "variable" and statement["name"] == name : return statement["value"]
-        return name
-
-
-
     ######################### Variable And List Assign Block Here #########################
 
     def visit_Assign(self, node):
-
-        variables = []
         
-        print(node.lineno)
-        print(ast.dump(node))
-
         for target in node.targets:
             
             variable = {}
@@ -118,13 +105,12 @@ class Analyzer(ast.NodeVisitor):
                     variable["valueSrc"] = "initialized"
                     variable["isInput"] = False
 
-
             elif isinstance(node.value, ast.Call):
                 
                 funcName = self.getFunctionName(node)
                 variable["value"] = None
                 variable["valueSrc"] = funcName
-                variable["funcArgs"] = []
+                variable["args"] = []
 
                 if(funcName == "input"):
                     variable["isInput"] = True
@@ -133,21 +119,20 @@ class Analyzer(ast.NodeVisitor):
                 else: variable["isInput"] = False
 
                 for arg in node.value.args:
-                    if isinstance(arg,ast.Constant): variable["funcArgs"].append(arg.value)
-                    elif isinstance(arg,ast.Name): variable["funcArgs"].append(self.getVariableValueFromName(arg.id))
+                    if isinstance(arg,ast.Constant): variable["args"].append(arg.value)
+                    elif isinstance(arg,ast.Name): variable["args"].append(self.getVariableValueFromName(arg.id))
                     elif isinstance(arg, ast.Attribute): 
                         
-                        variable["funcArgs"].append(self.functionAttr(arg)+'.'+arg.attr)
+                        variable["args"].append(self.functionAttr(arg)+'.'+arg.attr)
 
                         funcObj = {}
                         funcObj["type"] = "function_obj"
                         funcObj["line"] = node.lineno
                         funcObj["objName"] = variable["name"]
                         funcObj["funcName"] = variable["valueSrc"]
-                        funcObj["args"] = variable["funcArgs"]
+                        funcObj["args"] = variable["args"]
 
                         if(funcObj not in self.statements):self.statements.append(funcObj)
-
 
             elif isinstance(node.value, ast.List):
                 variable["type"] = "list"
@@ -157,9 +142,7 @@ class Analyzer(ast.NodeVisitor):
                     if isinstance(value,ast.Constant):
                         variable["values"].append(value.value)
 
-            variables.append(variable)
-
-        if len(variables) > 0: self.statements.extend(variables)
+            self.statements.append(variable)
         self.generic_visit(node)
 
 
@@ -229,6 +212,11 @@ class Analyzer(ast.NodeVisitor):
         self.statements.append(statement)
         self.generic_visit(node)
 
+
+    def getVariableValueFromName(self,name):
+        for statement in self.statements:
+            if statement["type"] == "variable" and statement["name"] == name : return statement["value"]
+        return name
 
 
 
