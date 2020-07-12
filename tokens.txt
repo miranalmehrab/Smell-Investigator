@@ -1,2 +1,2 @@
 {"type": "function_def", "line": 39, "name": "getPort", "args": [], "defaults": [], "return": 3032}
-{"type": "function_def", "line": 42, "name": "getIp", "args": ["ip", "port"], "defaults": [3000, "getPort"], "return": "0.0.0.0"}
+{"type": "function_def", "line": 42, "name": "getIp", "args": ["ip", "port"], "defaults": [3000, "getPort"], "return": "getPort"}

@@ -40,7 +40,7 @@ def getPort():
     return  3000+32
 
 def getIp(ip = 3000, port = getPort()):
-    return '0.0'+'.0'+'.0'
+    return getPort()
 
 
 # socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'4')

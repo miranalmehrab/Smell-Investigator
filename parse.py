@@ -38,6 +38,8 @@ class Analyzer(ast.NodeVisitor):
 
     ######################### Function Definitions Here #########################
     def visit_FunctionDef(self, node):
+        
+        print(ast.dump(node))
         func_def = {}
 
         func_def["type"] = "function_def"
@@ -56,6 +58,7 @@ class Analyzer(ast.NodeVisitor):
                 usedVars = self.getUsedVariablesInVariableDeclaration(default)
                 func_def["defaults"].append(self.buildNewVariableValueFromUsedOnes(usedVars))
 
+
         for item in node.body:
             
             if isinstance(item,ast.Return):
@@ -65,6 +68,8 @@ class Analyzer(ast.NodeVisitor):
                 elif isinstance(item.value, ast.BinOp):
                     usedVars = self.getUsedVariablesInVariableDeclaration(item.value)
                     func_def["return"] = self.buildNewVariableValueFromUsedOnes(usedVars)
+
+                elif isinstance(item.value,ast.Call): func_def["return"] = item.value.func.id
 
         self.statements.append(func_def)
         self.generic_visit(node)
