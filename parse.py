@@ -7,23 +7,32 @@ class Analyzer(ast.NodeVisitor):
         self.inputs = []
         self.statements = []
 
-
+    ######################### Import Modules Block Here #########################
     def visit_Import(self, node):
+        
+        for name in node.names:
+
+            module = {}
+            module["type"] = "import"
+            module["line"] = node.lineno
+            module["og"] = name.name
+            module["alias"] = name.asname if name.asname else None
+
+            self.statements.append(module)
         self.generic_visit(node)
 
 
     def visit_ImportFrom(self, node):
-        import_from = {}
+        
+        for name in node.names:
 
-        import_from["type"] = "import"
-        import_from["line"] = node.lineno
-        import_from["from"] = node.module
-        import_from["alias"] = []
+            member = {}
+            member["type"] = "import"
+            member["line"] = node.lineno
+            member["og"] = node.module +'.'+ name.name if name.name !="*" else node.module
+            member["alias"] = node.module +'.'+ name.asname if name.asname else None
 
-        for alias in node.names:
-            import_from["alias"] = alias.name
-
-        self.statements.append(import_from)
+            self.statements.append(member)
         self.generic_visit(node)
 
 
@@ -61,78 +70,93 @@ class Analyzer(ast.NodeVisitor):
         return name
 
 
+
+    ######################### Variable And List Assign Block Here #########################
+
     def visit_Assign(self, node):
 
-        variable = {}
-        variable["type"] = "variable"
-        variable["line"] = node.lineno
-        # print(ast.dump(node))
+        variables = []
+        
+        print(node.lineno)
+        print(ast.dump(node))
 
         for target in node.targets:
-            variable["name"] = target.id
-
-        if isinstance(node.value, ast.Constant):
-            variable["value"] = node.value.value
-            variable["valueSrc"] = "initialized"
-            variable["isInput"] = False
-
-        elif isinstance(node.value, ast.BinOp):
-            usedVars = self.getUsedVariablesInVariableDeclaration(node.value)
-            hasInputs = self.checkUserInputsInVariableDeclaration(usedVars)
-
-            if hasInputs:
-                self.inputs.append(variable["name"])
-                variable["value"] = None
-                variable["valueSrc"] = "input"
-                variable["isInput"] = True
             
-            else:
-                variable["value"] = self.buildNewVariableValueFromUsedOnes(usedVars)
+            variable = {}
+            variable["type"] = "variable"
+            variable["line"] = node.lineno
+        
+            if isinstance(target,ast.Name):
+                variable["name"] = target.id
+
+            if isinstance(node.value, ast.Constant):
+                variable["value"] = node.value.value
                 variable["valueSrc"] = "initialized"
                 variable["isInput"] = False
 
+            elif isinstance(node.value, ast.BinOp):
+                usedVars = self.getUsedVariablesInVariableDeclaration(node.value)
+                hasInputs = self.checkUserInputsInVariableDeclaration(usedVars)
 
-        elif isinstance(node.value, ast.Call):
-            funcName = self.getFunctionName(node)
-            variable["value"] = None
-            variable["valueSrc"] = funcName
-            variable["funcArgs"] = []
-
-            if(funcName == "input"):
-                variable["isInput"] = True
-                self.inputs.append(variable["name"])
-            
-            else: variable["isInput"] = False
-
-            for arg in node.value.args:
-                if isinstance(arg,ast.Constant): variable["funcArgs"].append(arg.value)
-                elif isinstance(arg,ast.Name): variable["funcArgs"].append(self.getVariableValueFromName(arg.id))
-                elif isinstance(arg, ast.Attribute): 
-                    
-                    variable["funcArgs"].append(self.functionAttr(arg)+'.'+arg.attr)
-
-                    funcObj = {}
-                    funcObj["type"] = "function_obj"
-                    funcObj["line"] = node.lineno
-                    funcObj["objName"] = variable["name"]
-                    funcObj["funcName"] = variable["valueSrc"]
-                    funcObj["args"] = variable["funcArgs"]
-
-                    if(funcObj not in self.statements):self.statements.append(funcObj)
+                if hasInputs:
+                    self.inputs.append(variable["name"])
+                    variable["value"] = None
+                    variable["valueSrc"] = "input"
+                    variable["isInput"] = True
+                
+                else:
+                    variable["value"] = self.buildNewVariableValueFromUsedOnes(usedVars)
+                    variable["valueSrc"] = "initialized"
+                    variable["isInput"] = False
 
 
-        elif isinstance(node.value, ast.List):
-            variable["type"] = "list"
-            variable["values"] = []
-            
-            for value in node.value.elts:
-                if isinstance(value,ast.Constant):
-                    variable["values"].append(value.value)
+            elif isinstance(node.value, ast.Call):
+                
+                funcName = self.getFunctionName(node)
+                variable["value"] = None
+                variable["valueSrc"] = funcName
+                variable["funcArgs"] = []
 
-        self.statements.append(variable)
+                if(funcName == "input"):
+                    variable["isInput"] = True
+                    self.inputs.append(variable["name"])
+                
+                else: variable["isInput"] = False
+
+                for arg in node.value.args:
+                    if isinstance(arg,ast.Constant): variable["funcArgs"].append(arg.value)
+                    elif isinstance(arg,ast.Name): variable["funcArgs"].append(self.getVariableValueFromName(arg.id))
+                    elif isinstance(arg, ast.Attribute): 
+                        
+                        variable["funcArgs"].append(self.functionAttr(arg)+'.'+arg.attr)
+
+                        funcObj = {}
+                        funcObj["type"] = "function_obj"
+                        funcObj["line"] = node.lineno
+                        funcObj["objName"] = variable["name"]
+                        funcObj["funcName"] = variable["valueSrc"]
+                        funcObj["args"] = variable["funcArgs"]
+
+                        if(funcObj not in self.statements):self.statements.append(funcObj)
+
+
+            elif isinstance(node.value, ast.List):
+                variable["type"] = "list"
+                variable["values"] = []
+                
+                for value in node.value.elts:
+                    if isinstance(value,ast.Constant):
+                        variable["values"].append(value.value)
+
+            variables.append(variable)
+
+        if len(variables) > 0: self.statements.extend(variables)
         self.generic_visit(node)
 
 
+
+
+    # If Comparasion Block Here --------------------------------------------------------------------------------------------------------------------
     def visit_If(self,node):
         
         statement = {}
@@ -222,46 +246,50 @@ class Analyzer(ast.NodeVisitor):
         funcCall["type"] = "function_call"
         funcCall["line"] = node.lineno
         
-        if isinstance(node.value.func, ast.Name): funcCall["name"] = node.value.func.id
-        elif isinstance(node.value.func,ast.Call): funcCall["name"] = self.getFunctionName(node)
-        elif isinstance(node.value.func,ast.Attribute): 
+        # print(node.lineno)
+        # print(ast.dump(node))
+
+        if isinstance(node.value, ast.Call):
+            if isinstance(node.value.func, ast.Name): funcCall["name"] = node.value.func.id
+            elif isinstance(node.value.func,ast.Call): funcCall["name"] = self.getFunctionName(node)
+            elif isinstance(node.value.func,ast.Attribute): funcCall["name"] = self.getFunctionNameFromObject(self.getFunctionName(node))
+
+
+            funcCall["args"] = []
             
-            funcCall["name"] = self.getFunctionNameFromObject(self.getFunctionName(node))
+            for arg in node.value.args:
+                
+                if isinstance(arg,ast.Name):
 
-        funcCall["args"] = []
-        
-        for arg in node.value.args:
+                    # print(ast.dump(arg))
+                    if self.valueOfFuncArguments(arg.id): funcCall["args"].append(self.valueOfFuncArguments(arg.id)) 
+                    else: funcCall["args"].append(arg.id)
+
+                elif isinstance(arg,ast.Constant): funcCall["args"].append(arg.value)
+                elif isinstance(arg,ast.Attribute): funcCall["args"].append(self.functionAttr(arg)+'.'+arg.attr)
+                elif isinstance(arg,ast.BinOp):
+                    
+                    usedArgs = self.getUsedVariablesInVariableDeclaration(arg)
+                    actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
+                    funcCall["args"].append(actualValue)
+
+                elif isinstance(arg, ast.Call):
+                    func = arg.func.id
+                    funcCall["args"].append(self.getFunctionReturnValueFromName(func))
+                    
+            funcCall["keywords"] = []
+            funcCall["hasInputs"] = False
             
-            if isinstance(arg,ast.Name):
+            for keyword in node.value.keywords:
+                karg = keyword.arg
+                kvalue = None
 
-                # print(ast.dump(arg))
-                if self.valueOfFuncArguments(arg.id): funcCall["args"].append(self.valueOfFuncArguments(arg.id)) 
-                else: funcCall["args"].append(arg.id)
+                if isinstance(keyword.value,ast.Constant): kvalue = keyword.value.value
+                if karg and kvalue: funcCall["keywords"].append([karg,kvalue])
 
-            elif isinstance(arg,ast.Constant): funcCall["args"].append(arg.value)
-            elif isinstance(arg,ast.Attribute): funcCall["args"].append(self.functionAttr(arg)+'.'+arg.attr)
-            elif isinstance(arg,ast.BinOp):
-                
-                usedArgs = self.getUsedVariablesInVariableDeclaration(arg)
-                actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
-                funcCall["args"].append(actualValue)
 
-            elif isinstance(arg, ast.Call):
-                func = arg.func.id
-                funcCall["args"].append(self.getFunctionReturnValueFromName(func))
-                
-        funcCall["keywords"] = []
-        funcCall["hasInputs"] = False
+            self.statements.append(funcCall)
         
-        for keyword in node.value.keywords:
-            karg = keyword.arg
-            kvalue = None
-
-            if isinstance(keyword.value,ast.Constant): kvalue = keyword.value.value
-            if karg and kvalue: funcCall["keywords"].append([karg,kvalue])
-
-
-        self.statements.append(funcCall)
         self.generic_visit(node)
     
 
@@ -287,7 +315,6 @@ class Analyzer(ast.NodeVisitor):
         return usedVars     
         
 
-
     def getUsedVariablesInVariableDeclaration(self,node):
         
         usedVariables = []
@@ -298,8 +325,8 @@ class Analyzer(ast.NodeVisitor):
 
 
 
-
     def buildNewVariableValueFromUsedOnes(self,usedVariables):
+        
         
         value = None
         
@@ -307,7 +334,7 @@ class Analyzer(ast.NodeVisitor):
             
             found = False
             for statement in self.statements:
-                
+                # print(statement)        
                 if statement["type"] == "variable" and statement["name"] == variable:
                     
                     if statement["isInput"] != True and value:
@@ -338,7 +365,7 @@ class Analyzer(ast.NodeVisitor):
                 
                 elif isinstance(value, ast.Attribute):    
                     funcName = self.functionAttr(value)
-                    if value.attr: funcName = funcName +'.'+ value.attr
+                    if value.attr and funcName: funcName = funcName +'.'+ value.attr
                     return funcName
 
 

@@ -1,10 +1,12 @@
 # x = 1
 # query = 2
-# ask = query + x
+# ask = y = query + x
 # ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
 
-# import os,stat
-# import socket
+import os as opeSys
+import socket as sockkkkit
+from math import pi,sqrt,fabs
+from os import *
 # file_name = input()
 # exec('sudo mkdir {file_name}')
 
@@ -54,17 +56,18 @@
 
 # connection.execute("hello")
 # connection.execute(user_input)
-port = '3000'
-ip = '0.0.0.0'
+
+# port = '3000'
+# ip = '0.0.0.0'
 
 
 # s = socket(ip,port)
 # s = socket(2000, 1223)
-m = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind('0.0.0.0','3000')
-m.bind(ip,port)
+# m = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# s.bind('0.0.0.0','3000')
+# m.bind(ip,port)
 
 # try: x = 2
 # except: 

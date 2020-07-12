@@ -1,9 +1,6 @@
-{"type": "variable", "line": 57, "name": "port", "value": "3000", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 58, "name": "ip", "value": "0.0.0.0", "valueSrc": "initialized", "isInput": false}
-{"type": "function_obj", "line": 63, "objName": "m", "funcName": "socket.socket", "args": ["socket.AF_INET", "socket.SOCK_STREAM"]}
-{"type": "variable", "line": 63, "name": "m", "value": null, "valueSrc": "socket.socket", "funcArgs": ["socket.AF_INET", "socket.SOCK_STREAM"], "isInput": false}
-{"type": "function_obj", "line": 64, "objName": "s", "funcName": "socket.socket", "args": ["socket.AF_INET", "socket.SOCK_STREAM"]}
-{"type": "variable", "line": 64, "name": "s", "value": null, "valueSrc": "socket.socket", "funcArgs": ["socket.AF_INET", "socket.SOCK_STREAM"], "isInput": false}
-{"type": "function_call", "line": 65, "name": "socket.socket", "args": ["socket.AF_INET", "socket.SOCK_STREAM"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 66, "name": "socket.socket.bind", "args": ["0.0.0.0", "3000"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 67, "name": "socket.socket.bind", "args": ["0.0.0.0", "3000"], "keywords": [], "hasInputs": false}
+{"type": "import", "line": 6, "og": "os", "alias": "opeSys"}
+{"type": "import", "line": 7, "og": "socket", "alias": "sockkkkit"}
+{"type": "import", "line": 8, "og": "math.pi", "alias": null}
+{"type": "import", "line": 8, "og": "math.sqrt", "alias": null}
+{"type": "import", "line": 8, "og": "math.fabs", "alias": null}
+{"type": "import", "line": 9, "og": "os", "alias": null}

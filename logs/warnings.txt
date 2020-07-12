@@ -1,2 +1,0 @@
-{"line": "66", "message": "harcoded ip address binding"}
-{"line": "67", "message": "harcoded ip address binding"}
