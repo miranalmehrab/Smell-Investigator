@@ -1,0 +1,24 @@
+{"line": "12", "message": "exec statement"}
+{"line": "15", "message": "bad file permission"}
+{"line": "16", "message": "bad file permission"}
+{"line": "17", "message": "bad file permission"}
+{"line": "18", "message": "bad file permission"}
+{"line": "20", "message": "debug set true"}
+{"line": "21", "message": "debug set true"}
+{"line": "22", "message": "hardcoded secret"}
+{"line": "23", "message": "empty password"}
+{"line": "24", "message": "empty password"}
+{"line": "25", "message": "empty password"}
+{"line": "26", "message": "hardcoded secret"}
+{"line": "27", "message": "hardcoded secret"}
+{"line": "33", "message": "SQL injection"}
+{"line": "34", "message": "use of command line args"}
+{"line": "36", "message": "use of command line args"}
+{"line": "48", "message": "emplty password"}
+{"line": "48", "message": "hardcoded secret"}
+{"line": "51", "message": "hardcoded secret"}
+{"line": "53", "message": "hardcoded secret"}
+{"line": "56", "message": "hardcoded temporary directory"}
+{"line": "57", "message": "use of HTTP without TLS"}
+{"line": "71", "message": "harcoded ip address binding"}
+{"line": "72", "message": "harcoded ip address binding"}

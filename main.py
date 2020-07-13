@@ -7,16 +7,16 @@ def main():
     srcCode = srcFile.read()
     
     tree = ast.parse(srcCode, type_comments=True)
+    # print(ast.dump(tree,include_attributes=True))
     # print(ast.dump(tree))
 
     analyzer = Analyzer()
     analyzer.visit(tree)
     analyzer.findUserInputInFunction()
-    analyzer.report()
+    analyzer.printStatements()
 
     f = open("tokens.txt", "r")
     detection(f.read())
-    # print(ast.dump(tree,include_attributes=True))
 
 
 if __name__ == "__main__":

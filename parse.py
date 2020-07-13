@@ -120,7 +120,7 @@ class Analyzer(ast.NodeVisitor):
 
                 for arg in node.value.args:
                     if isinstance(arg,ast.Constant): variable["args"].append(arg.value)
-                    elif isinstance(arg,ast.Name): variable["args"].append(self.getVariableValueFromName(arg.id))
+                    elif isinstance(arg,ast.Name): variable["args"].append(self.getValueFromVariableName(arg.id))
                     elif isinstance(arg, ast.Attribute): 
                         
                         variable["args"].append(self.functionAttr(arg)+'.'+arg.attr)
@@ -218,31 +218,7 @@ class Analyzer(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-    ######################### Utility Function Here #########################
-
-    def getVariableValueFromName(self,name):
-        for statement in self.statements:
-            if statement["type"] == "variable" and statement["name"] == name : return statement["value"]
-        return name
-
-
-
-    def valueOfFuncArguments(self,arg):
-        for statement in self.statements:
-            if statement["type"] == "variable" and statement["name"] == arg:
-                return statement["value"]
-        return None
-
-
-    def getFunctionNameFromObject(self,name):
-        
-        fName = name.split('.')[0]
-        lName = name.split('.')[1]
-
-        for statement in self.statements:
-            if statement["type"] == "function_obj" and fName == statement["objName"]: return statement["funcName"]+'.'+lName
-        return name
-
+    ######################### Expressions Block Here #########################
 
     def visit_Expr(self, node):
         
@@ -264,8 +240,6 @@ class Analyzer(ast.NodeVisitor):
             for arg in node.value.args:
                 
                 if isinstance(arg,ast.Name):
-
-                    # print(ast.dump(arg))
                     if self.valueOfFuncArguments(arg.id): funcCall["args"].append(self.valueOfFuncArguments(arg.id)) 
                     else: funcCall["args"].append(arg.id)
 
@@ -291,11 +265,35 @@ class Analyzer(ast.NodeVisitor):
                 if isinstance(keyword.value,ast.Constant): kvalue = keyword.value.value
                 if karg and kvalue: funcCall["keywords"].append([karg,kvalue])
 
-
             self.statements.append(funcCall)
-        
         self.generic_visit(node)
     
+
+
+    ######################### Utility Function Here #########################
+
+    def getValueFromVariableName(self,name):
+        for statement in self.statements:
+            if statement["type"] == "variable" and statement["name"] == name : return statement["value"]
+        return name
+
+
+
+    def valueOfFuncArguments(self,arg):
+        for statement in self.statements:
+            if statement["type"] == "variable" and statement["name"] == arg:
+                return statement["value"]
+        return None
+
+
+    def getFunctionNameFromObject(self,name):
+        
+        fName = name.split('.')[0]
+        lName = name.split('.')[1]
+
+        for statement in self.statements:
+            if statement["type"] == "function_obj" and fName == statement["objName"]: return statement["funcName"]+'.'+lName
+        return name
 
 
     def getFunctionReturnValueFromName(self,funcName):
@@ -331,9 +329,7 @@ class Analyzer(ast.NodeVisitor):
 
     def buildNewVariableValueFromUsedOnes(self,usedVariables):
         
-        
         value = None
-        
         for variable in usedVariables:
             
             found = False
@@ -412,16 +408,25 @@ class Analyzer(ast.NodeVisitor):
                             break
 
 
-    def report(self):
+    def printStatements(self):
         for statement in self.statements:
             print(statement)
+        
+        self.writeToFile()
 
-        print('')
-        # for user_input in self.inputs:
-        #     print("user input: "+user_input)
 
+    def printUserInputs(self):
+        for user_input in self.inputs:
+            print("user input: "+user_input)
+
+
+    def writeToFile(self):
         f = open("tokens.txt", "w")
+        
         for statement in self.statements:
             json.dump(statement, f)
             f.write("\n")
+        
         f.close()
+
+    
