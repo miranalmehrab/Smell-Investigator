@@ -1,6 +1,0 @@
-{"line": "22", "message": "hardcoded secret"}
-{"line": "23", "message": "empty password"}
-{"line": "24", "message": "empty password"}
-{"line": "25", "message": "empty password"}
-{"line": "26", "message": "hardcoded secret"}
-{"line": "27", "message": "hardcoded secret"}

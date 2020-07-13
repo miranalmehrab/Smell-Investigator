@@ -1,8 +1,8 @@
-x = 1
-query = 2
-ask = y = query + x
-ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
-m = s = socket.socket(ip,port)
+# x = 1
+# query = 2
+# ask = y = query + x
+# ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
+# m = s = socket.socket(ip,port)
 
 # import os
 # import socket 
@@ -19,14 +19,14 @@ m = s = socket.socket(ip,port)
 
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 # app.run(debug = True,start = True)
-password = "pass"
-password = ''
-pwd = ''
-password = None
-name = "root"
-pwd = "root123"
-query = "delete from foo where id = " + user_input + user_input
-x = "abc"
+# password = "pass"
+# password = ''
+# pwd = ''
+# password = None
+# name = "root"
+# pwd = "root123"
+# query = "delete from foo where id = " + user_input + user_input
+# x = "abc"
 # urllib.urlretrieve("192.168.10.1/example.iso")
 
 # user_input = input()
@@ -71,6 +71,7 @@ x = "abc"
 # s.bind('0.0.0.0','3000')
 # m.bind(ip,port)
 
-# try: x = 2
-# except: 
-#     continue
+try: x = 2
+except: 
+    doSomething()
+    pass

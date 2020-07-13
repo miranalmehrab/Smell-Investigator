@@ -147,8 +147,7 @@ class Analyzer(ast.NodeVisitor):
 
 
 
-
-    # If Comparasion Block Here --------------------------------------------------------------------------------------------------------------------
+    ######################### If Comparasion Block Here #########################
     def visit_If(self,node):
         
         statement = {}
@@ -193,25 +192,33 @@ class Analyzer(ast.NodeVisitor):
         self.generic_visit(node)
 
 
+    ######################### Try Block Here #########################
 
     def visit_Try(self, node):
         
         statement = {}
         statement["type"] = "except_statement"
+        print(ast.dump(node))
 
         if isinstance(node, ast.Try):
             
             if isinstance(node.handlers[0].body[0],ast.Continue):
                 statement["line"] = node.handlers[0].body[0].lineno
-                statement["arg"] = "continue"
+                statement["firstBlock"] = "continue"
 
             elif isinstance(node.handlers[0].body[0],ast.Pass): 
                 statement["line"] = node.handlers[0].body[0].lineno
-                statement["arg"] = "pass"
+                statement["firstBlock"] = "pass"
+
+            elif isinstance(node.handlers[0].body[0], ast.Expr):
+                statement["line"] = node.handlers[0].body[0].lineno
+                statement["firstBlock"] = "expression"
 
         self.statements.append(statement)
         self.generic_visit(node)
 
+
+    ######################### Utility Function Here #########################
 
     def getVariableValueFromName(self,name):
         for statement in self.statements:
