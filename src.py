@@ -1,114 +1,116 @@
-# x = 1
-# query = 2
-# ask = y = query + x
-# ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
-# m = s = socket.socket(ip,port)
+x = 1
+query = 2
+ask = y = query + x
+ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
+m = s = socket.socket(ip,port)
 
-# import os
-# import socket 
-# from math import pi,sqrt,fabs
-# from os import *
-# file_name = input()
-# exec('sudo mkdir {file_name}')
+header[authorization] = token
+header[0] = token
 
-# os.chmod('/etc/hosts',0x777)
-# os.chmod('/etc/hosts',stat.S_IRWXO)
-# os.chmod('/etc/hosts',stat.S_IROTH)
-# os.chmod('/etc/hosts',stat.S_IWOTH)
-# os.chmod('/etc/hosts',stat.S_IXOTH)
+import os
+import socket 
+from math import pi,sqrt,fabs
+from os import *
+file_name = input()
+exec('sudo mkdir {file_name}')
 
-# DEBUG_PROPAGATE_EXCEPTIONS = True
-# app.run(debug = True,start = True)
-# password = "pass"
-# password = ''
-# pwd = ''
-# password = None
-# name = "root"
-# pwd = "root123"
-# query = "delete from foo where id = " + user_input + user_input
-# x = "abc"
-# urllib.urlretrieve("192.168.10.1/example.iso")
+os.chmod('/etc/hosts',0x777)
+os.chmod('/etc/hosts',stat.S_IRWXO)
+os.chmod('/etc/hosts',stat.S_IROTH)
+os.chmod('/etc/hosts',stat.S_IWOTH)
+os.chmod('/etc/hosts',stat.S_IXOTH)
 
-# user_input = input()
-# execution.query(user_input)
-# subprocess.Popen(user_input)
-# result = connection.execute(user_input)
-# sys.argv('sudo mkdir {user_input}')
+DEBUG_PROPAGATE_EXCEPTIONS = True
+app.run(debug = True,start = True)
+password = "pass"
+password = ''
+pwd = ''
+password = None
+name = "root"
+pwd = "root123"
+query = "delete from foo where id = " + user_input + user_input
+x = "abc"
+urllib.urlretrieve("192.168.10.1/example.iso")
 
-# def getPort(ip,port,socket = ['socket','port']):
-#     return 3000+32
+user_input = input()
+execution.query(user_input)
+subprocess.Popen(user_input)
+result = connection.execute(user_input)
+sys.argv('sudo mkdir {user_input}')
 
-# def getIp(ip = 3000, port = getPort()):
-#     return getPort(ip,port,'12'+'00',12+23,socket(12),sock.socket(12))
+def getPort(ip,port,socket = ['socket','port']):
+    return 3000+32
 
-
-# socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'4')
-
-
-# if username == "root" and password == "":
-#     logIn()
-
-# if 1 == username:
-#     print('1 is equal to 1')
-# if username == 1:
-#     print('1 is equal to 1')
-
-# hardcoded_tmp_directory = ['/tmp','/var/tmp','/var/usr/tmp', 12+12]
-# requests.get("http://abc.com")
-
-# connection.execute("hello")
-# connection.execute(user_input)
-
-# port = '3000'
-# ip = '0.0.0.0'
+def getIp(ip = 3000, port = getPort()):
+    return getPort(ip,port,'12'+'00',12+23,socket(12),sock.socket(12))
 
 
-# s = socket(ip,port)
-# s = socket(2000, 1223)
-# m = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# s.bind('0.0.0.0','3000')
-# m.bind(ip,port)
+socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'4')
 
-# try: x = 2
-# except:
-#     doSomething() 
-#     pass
 
-# """ This is a convenient way to monkeypatch a method or attribute of a Python
-#     object. This is great for situations where you want to modify a global
-#     object within a limited scope, i.e., your typical class or module when
-#     testing. This was tested and works with Python 2.7 and 3.4. """
+if username == "root" and password == "":
+    logIn()
 
-# import contextlib
+if 1 == username:
+    print('1 is equal to 1')
+if username == 1:
+    print('1 is equal to 1')
 
-# @contextlib.contextmanager
-# def monkeypatched(object, name, patch):
-#     """ Temporarily monkeypatches an object. """
+hardcoded_tmp_directory = ['/tmp','/var/tmp','/var/usr/tmp', 12+12]
+requests.get("http://abc.com")
 
-#     pre_patched_value = getattr(object, name)
-#     setattr(object, name, patch)
-#     yield object
-#     setattr(object, name, pre_patched_value)
+connection.execute("hello")
+connection.execute(user_input)
 
-# if __name__ == '__main__':
+port = '3000'
+ip = '0.0.0.0'
 
-#     class Foo:
-#         bar = False
 
-#     with monkeypatched(Foo, 'bar', True):
-#         assert Foo.bar
+s = socket(ip,port)
+s = socket(2000, 1223)
+m = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind('0.0.0.0','3000')
+m.bind(ip,port)
 
-#     assert not Foo.bar
+try: x = 2
+except:
+    doSomething() 
+    pass
+
+""" This is a convenient way to monkeypatch a method or attribute of a Python
+    object. This is great for situations where you want to modify a global
+    object within a limited scope, i.e., your typical class or module when
+    testing. This was tested and works with Python 2.7 and 3.4. """
+
+import contextlib
+
+@contextlib.contextmanager
+def monkeypatched(object, name, patch):
+    """ Temporarily monkeypatches an object. """
+
+    pre_patched_value = getattr(object, name)
+    setattr(object, name, patch)
+    yield object
+    setattr(object, name, pre_patched_value)
+
+if __name__ == '__main__':
+
+    class Foo:
+        bar = False
+
+    with monkeypatched(Foo, 'bar', True):
+        assert Foo.bar
+
+    assert not Foo.bar
     
-# plot weight of oit
 
-# import matplotlib.pyplot as plt
-# import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
 
-# N = 1000
-# z = np.linspace(1, 500, N)
+N = 1000
+z = np.linspace(1, 500, N)
 
 
 def clamp(a, amin, amax):
@@ -132,8 +134,8 @@ def equation9(z):
     return clamp(val, 1e-2, 3e3)
 
 
-# zw = np.array([[equation7(zi), equation8(zi), equation9(zi)] for zi in z])
+zw = np.array([[equation7(zi), equation8(zi), equation9(zi)] for zi in z])
 
-# plt.loglog(zw)
-# plt.xlim([1, 1000])
+plt.loglog(zw)
+plt.xlim([1, 1000])
 

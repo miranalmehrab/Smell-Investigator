@@ -72,6 +72,7 @@ class Analyzer(ast.NodeVisitor):
 
     def visit_Assign(self, node):
         
+        # print(ast.dump(node))
         for target in node.targets:
             
             variable = {}
@@ -81,11 +82,26 @@ class Analyzer(ast.NodeVisitor):
             if isinstance(target,ast.Name):
                 variable["name"] = target.id
 
+            if isinstance(target, ast.Subscript):
+                var = self.addVariablesToList(target.value, [])
+                variable["name"] = var[0] if len(var) > 0 else None
+                
+                varSlice = self.addVariablesToList(target.slice.value, [])
+                varSlice = varSlice[0] if len(varSlice) > 0 else None
+
+                if varSlice != None: variable["name"] = variable["name"]+'['+str(varSlice)+']'
+               
             if isinstance(node.value, ast.Constant):
                 variable["value"] = node.value.value
                 variable["valueSrc"] = "initialized"
                 variable["isInput"] = False
 
+            if isinstance(node.value, ast.Name):
+                variable["value"] = node.value.id
+                variable["valueSrc"] = "initialized"
+                variable["isInput"] = False
+
+            
             elif isinstance(node.value, ast.BinOp):
                 usedVars = self.getUsedVariablesInVariableDeclaration(node.value)
                 hasInputs = self.checkUserInputsInVariableDeclaration(usedVars)
@@ -192,7 +208,7 @@ class Analyzer(ast.NodeVisitor):
         
         statement = {}
         statement["type"] = "except_statement"
-        print(ast.dump(node))
+        # print(ast.dump(node))
 
         if isinstance(node, ast.Try):
             
