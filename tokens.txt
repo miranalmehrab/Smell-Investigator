@@ -1,0 +1,9 @@
+{"type": "function_def", "line": 114, "name": "clamp", "args": ["a", "amin", "amax"], "defaults": [], "return": "np.max", "returnArgs": ["amin", "np.min"]}
+{"type": "function_def", "line": 118, "name": "equation7", "args": ["z"], "defaults": [], "return": "np.max", "returnArgs": ["val", 0.01, 3000.0]}
+{"type": "variable", "line": 119, "name": "zabs", "value": null, "valueSrc": "np.abs", "args": ["z"], "isInput": false}
+{"type": "variable", "line": 120, "name": "val", "value": 10.00001, "valueSrc": "initialized", "isInput": false}
+{"type": "function_def", "line": 124, "name": "equation8", "args": ["z"], "defaults": [], "return": "np.max", "returnArgs": [10.00001, 0.01, 3000.0]}
+{"type": "variable", "line": 125, "name": "zabs", "value": null, "valueSrc": "np.abs", "args": ["z"], "isInput": false}
+{"type": "variable", "line": 126, "name": "val", "value": 10.00001, "valueSrc": "initialized", "isInput": false}
+{"type": "function_def", "line": 130, "name": "equation9", "args": ["z"], "defaults": [], "return": "np.max", "returnArgs": [10.00001, 0.01, 3000.0]}
+{"type": "variable", "line": 131, "name": "val", "value": 0.00101, "valueSrc": "initialized", "isInput": false}
