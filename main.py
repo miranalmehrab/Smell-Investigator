@@ -1,11 +1,10 @@
 import ast
+import glob
 from parse import Analyzer
 from detection.detection import detection
 
-def main():
-    srcFile = open('src.py', 'r')
-    srcCode = srcFile.read()
-    
+def runAnalyzer(srcCode):
+        
     tree = ast.parse(srcCode, type_comments=True)
     # print(ast.dump(tree,include_attributes=True))
     # print(ast.dump(tree))
@@ -15,9 +14,34 @@ def main():
     analyzer.findUserInputInFunction()
     analyzer.printStatements()
 
-    f = open("tokens.txt", "r")
-    detection(f.read())
+    # f = open("tokens.txt", "r")
+    # detection(f.read())
 
+
+
+def main():
+    folderNumber = 0
+    srcFiles =  glob.glob("src-codes/srcs-"+str(folderNumber)+"/*.py")
+
+    fileCounter = 0
+    for srcFile in srcFiles:
+        fileCounter = fileCounter + 1
+        srcFile = open(srcFile, 'r')
+        srcCode = srcFile.read()
+
+        while True:
+
+            print('File number - '+str(fileCounter)+': '+srcFile.name)    
+            runAnalyzer(srcCode)
+    
+            print('Loop?')
+            loop = input('Y/N:')
+            if loop == 'N' or loop == 'n': break
+
+        print('Analyze Next File?')
+        next = input('Y/N: ')
+        if next == 'N' or next == 'n': break
+        
 
 if __name__ == "__main__":
     main()

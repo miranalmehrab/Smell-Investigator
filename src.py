@@ -3,8 +3,8 @@ query = 2
 ask = y = query + x
 ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
 m = s = socket.socket(ip,port)
-
-header[authorization] = token
+token = "abcdea"
+header[authorization] = "bearer:"+token
 header[0] = token
 
 import os
