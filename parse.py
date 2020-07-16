@@ -72,7 +72,7 @@ class Analyzer(ast.NodeVisitor):
 
     def visit_Assign(self, node):
         
-        print(ast.dump(node))
+        # print(ast.dump(node))
         for target in node.targets:
             
             variable = {}
@@ -186,7 +186,7 @@ class Analyzer(ast.NodeVisitor):
                 for element in node.value.elts:
                     values = self.addVariablesToList(element, [])
                     if len(values)>0: variable["values"].append(values[0])
-                print(variable["values"])
+                # print(variable["values"])
 
             elif isinstance(node.value, ast.BoolOp):
                 variable["values"] = []
@@ -201,7 +201,10 @@ class Analyzer(ast.NodeVisitor):
 
     ######################### If Comparasion Block Here #########################
     def visit_If(self,node):
+        
+        print('')
         print(ast.dump(node))
+        
         statement = {}
         statement["type"] = "comparison"
         statement["line"] = node.lineno
@@ -209,41 +212,54 @@ class Analyzer(ast.NodeVisitor):
         statement["test"] = []
 
         if isinstance(node.test,ast.BoolOp):
-            for compare in node.test.values:
-
-                if isinstance(compare.left,ast.Name) and isinstance(compare.ops[0],ast.Eq) and isinstance(compare.comparators[0],ast.Constant):
-                    pair = []
-                    pair.append(compare.left.id)
-                    pair.append(compare.comparators[0].value)
-
-                    statement["pairs"].append(pair)
+            for value in node.test.values:
                 
-                elif isinstance(compare.left,ast.Name) and isinstance(compare.ops[0],ast.Eq) and isinstance(compare.comparators[0],ast.BinOp):
-                    pair = []
-                    pair.append(compare.left.id)
+                if isinstance(value,ast.Compare):
+                    if isinstance(value.left,ast.Name) and isinstance(value.ops[0],ast.Eq) and isinstance(value.comparators[0],ast.Constant):
+                        pair = []
+                        pair.append(value.left.id)
+                        pair.append(value.comparators[0].value)
+
+                        statement["pairs"].append(pair)
                     
-                    usedVars = self.getUsedVariablesInVariableDeclaration(compare.comparators[0])
-                    value = self.buildNewVariableValueFromUsedOnes(usedVars)
-                    
-                    pair.append(value.lstrip())
-                    statement["pairs"].append(pair)
-                
-        elif isinstance(node.test,ast.Compare):
+                    elif isinstance(value.left,ast.Name) and isinstance(value.ops[0],ast.Eq) and isinstance(value.comparators[0],ast.BinOp):
+                        pair = []
+                        pair.append(value.left.id)
+                        
+                        usedVars = self.getUsedVariablesInVariableDeclaration(value.comparators[0])
+                        value = self.buildNewVariableValueFromUsedOnes(usedVars)
+                        
+                        pair.append(value.lstrip())
+                        statement["pairs"].append(pair)
             
+                elif isinstance(value, ast.Name):
+                    statement["test"].append(value.id)
+                
+                elif isinstance(value, ast.Constant):
+                    statement["test"].append(value.value)
+
+        elif isinstance(node.test, ast.Compare):
             pair = []
+            
+            leftComparatorList = self.addVariablesToList(node.test.left, [])
+            if len(leftComparatorList)>0: pair.append(leftComparatorList[0])
 
-            if isinstance(node.test.left,ast.Constant): pair.append(node.test.left.value)
-            elif isinstance(node.test.left,ast.Name): pair.append(node.test.left.id)
+            comparatorList = self.addVariablesToList(node.test.comparators[0],[])
+            print(comparatorList)
+            if len(comparatorList) > 0: pair.append(comparatorList[0])
+            statement["pairs"].append(pair)
 
-            for comparator in node.test.comparators:
-                if isinstance(comparator,ast.Constant): pair.append(comparator.value)
-                elif isinstance(comparator,ast.Name): pair.append(comparator.id)
-
-            statement["pairs"].append(pair)    
-        
-        elif isinstance(node.test, ast.Name):
+            
+        elif isinstance(node.test,ast.Name):
             statement["test"].append(node.test.id)
 
+        elif isinstance(node.test, ast.Constant):
+            statement["test"].append(node.test.value)
+
+        elif isinstance(node.test, ast.Call):
+            statement["test"].append(node.test.func.id)
+
+        
         self.statements.append(statement)
         self.generic_visit(node)
 
@@ -318,6 +334,7 @@ class Analyzer(ast.NodeVisitor):
         
         elif isinstance(node,ast.BinOp):    
             usedArgs = self.getUsedVariablesInVariableDeclaration(node)
+            print(usedArgs)
             actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
             itemList.append(actualValue)
         
@@ -350,7 +367,7 @@ class Analyzer(ast.NodeVisitor):
     def valueOfFuncArguments(self,arg):
         for statement in self.statements:
             if statement["type"] == "variable" and statement["name"] == arg:
-                print(statement)
+                # print(statement)
                 if statement.__contains__("value"): return statement["value"]
                 elif statement.__contains__("values"): return statement["values"][0]
                 # else: return None
@@ -380,6 +397,7 @@ class Analyzer(ast.NodeVisitor):
     def getOperandsFromBinOp(self,node,usedVars):
         if isinstance(node, ast.Name) and node.id: usedVars.append(node.id)
         elif isinstance(node, ast.Constant) and node.value: usedVars.append(node.value)
+        elif isinstance(node, ast.Call): usedVars.append(node.func.id)
         
         elif isinstance(node,ast.BinOp):  
             usedVars = self.getOperandsFromBinOp(node.left,usedVars)  
@@ -401,11 +419,11 @@ class Analyzer(ast.NodeVisitor):
     def buildNewVariableValueFromUsedOnes(self,usedVariables):
         
         value = None
-        for variable in usedVariables:
-            
+        for variable in usedVariables:    
             found = False
+
             for statement in self.statements:
-                print(statement)        
+                # print(statement)        
                 if statement["type"] == "variable" and statement["name"] == variable:
                     
                     if statement["isInput"] != True and value:
@@ -417,7 +435,16 @@ class Analyzer(ast.NodeVisitor):
 
                     found = True
                     break
+                
+                elif statement["type"] == "function_def" and statement["name"] == variable:
+                    if statement.__contains__("return"): 
+                        if value == None: value = statement["return"]
+                        elif type(value) == str or type(statement["return"]) == str: value = str(value) + str(statement["return"])
+                        else : value = value + statement["return"]
 
+                        found = True
+                        break 
+                    
             if found == False and value: value = value + variable
             elif found == False: value = variable
 
@@ -480,7 +507,7 @@ class Analyzer(ast.NodeVisitor):
 
     def printStatements(self):
         for statement in self.statements:
-            print(statement)
+            if statement["type"] == "comparison":print(statement)
         print('------------------------------------ End ------------------------------------')
         
         self.writeToFile()

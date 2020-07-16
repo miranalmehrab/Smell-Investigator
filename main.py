@@ -21,7 +21,8 @@ def runAnalyzer(srcCode):
 
 def main():
     folderNumber = 0
-    srcFiles =  glob.glob("src-codes/srcs-"+str(folderNumber)+"/*.py")
+    # srcFiles =  glob.glob("src-codes/srcs-"+str(folderNumber)+"/*.py")
+    srcFiles =  glob.glob("test-codes/*.py")
 
     fileCounter = 0
     for srcFile in srcFiles:
@@ -34,13 +35,13 @@ def main():
             print('File number - '+str(fileCounter)+': '+srcFile.name)    
             runAnalyzer(srcCode)
     
-            print('Loop?')
-            loop = input('Y/N:')
-            if loop == 'N' or loop == 'n': break
-
-        print('Analyze Next File?')
-        next = input('Y/N: ')
-        if next == 'N' or next == 'n': break
+            # print('Loop?')
+            # loop = input('Y/N:')
+            # if loop == 'N' or loop == 'n': break
+            break
+        # print('Analyze Next File?')
+        # next = input('Y/N: ')
+        # if next == 'N' or next == 'n': break
         
 
 if __name__ == "__main__":
