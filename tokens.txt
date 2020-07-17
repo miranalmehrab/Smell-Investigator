@@ -1,41 +1,4 @@
-{"type": "variable", "line": 1, "name": "username", "value": "root", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 2, "name": "password", "value": "root", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 3, "name": "x", "value": 20, "valueSrc": "initialized", "isInput": false}
-{"type": "function_def", "line": 5, "name": "getX", "args": [], "defaults": [], "return": 20}
-{"type": "comparison", "line": 8, "pairs": [[1, 42]], "test": []}
-{"type": "function_call", "line": 9, "name": "print", "args": [1], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 11, "pairs": [[20, 1]], "test": []}
-{"type": "function_call", "line": 12, "name": "print", "args": [1], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 15, "pairs": [], "test": [true, true]}
-{"type": "function_call", "line": 16, "name": "print", "args": [true], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 19, "pairs": [], "test": ["getX"]}
-{"type": "function_call", "line": 20, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 22, "pairs": [], "test": ["x"]}
-{"type": "function_call", "line": 23, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 25, "pairs": [[20, 20]], "test": []}
-{"type": "function_call", "line": 26, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 28, "pairs": [[20, 20]], "test": []}
-{"type": "function_call", "line": 29, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 31, "pairs": [[20, 20]], "test": []}
-{"type": "function_call", "line": 32, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 34, "pairs": [[20, 20]], "test": []}
-{"type": "function_call", "line": 35, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 37, "pairs": [[20, 20]], "test": []}
-{"type": "function_call", "line": 38, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 40, "pairs": [[20, 20]], "test": []}
-{"type": "function_call", "line": 41, "name": "print", "args": [20], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 43, "pairs": [["username", "root"], ["password", "root"]], "test": []}
-{"type": "function_call", "line": 44, "name": "logIn", "args": [], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 46, "pairs": [["username", "root"], ["password", "root"]], "test": []}
-{"type": "function_call", "line": 47, "name": "logIn", "args": [], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 49, "pairs": [], "test": ["username"]}
-{"type": "function_call", "line": 50, "name": "logIn", "args": [], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 52, "pairs": [], "test": ["username", "password"]}
-{"type": "function_call", "line": 53, "name": "logIn", "args": [], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 55, "pairs": [], "test": ["username", "password"]}
-{"type": "function_call", "line": 56, "name": "logIn", "args": [], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 58, "pairs": [["root", "root"]], "test": []}
-{"type": "function_call", "line": 59, "name": "print", "args": ["root"], "keywords": [], "hasInputs": false}
-{"type": "list", "line": 61, "name": "names", "values": ["root", "root1"]}
-{"type": "comparison", "line": 62, "pairs": [["root", "names"]], "test": []}
-{"type": "function_call", "line": 63, "name": "print", "args": ["root"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 10, "name": "x", "value": 20, "valueSrc": "initialized", "isInput": false}
+{"type": "comparison", "line": 13, "pairs": [[20, 10]], "test": []}
+{"type": "variable", "line": 14, "name": "x", "value": 15, "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 15, "name": "abc", "values": [15, 15]}

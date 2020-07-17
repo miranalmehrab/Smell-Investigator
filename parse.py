@@ -72,7 +72,7 @@ class Analyzer(ast.NodeVisitor):
 
     def visit_Assign(self, node):
         
-        # print(ast.dump(node))
+        print(ast.dump(node))
         for target in node.targets:
             
             variable = {}
@@ -112,7 +112,7 @@ class Analyzer(ast.NodeVisitor):
                 variable["isInput"] = False
 
             if isinstance(node.value, ast.Name):
-                variable["value"] = node.value.id
+                variable["value"] = self.getValueFromVariableName(node.value.id)
                 variable["valueSrc"] = "initialized"
                 variable["isInput"] = False
 
@@ -135,7 +135,8 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(node.value, ast.Call):
                 
                 funcName = self.getFunctionName(node)
-                variable["value"] = None
+                returnFromFunction = self.getFunctionReturnValueFromName(funcName) 
+                variable["value"] =  returnFromFunction if returnFromFunction != funcName else None 
                 variable["valueSrc"] = funcName
                 variable["args"] = []
 
@@ -183,10 +184,29 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(node.value,ast.Tuple):
                 variable["type"] = "tuple"
                 variable["values"] = []
+                
                 for element in node.value.elts:
                     values = self.addVariablesToList(element, [])
                     if len(values)>0: variable["values"].append(values[0])
-                # print(variable["values"])
+                
+
+            elif isinstance(node.value,ast.Set):
+                variable["type"] = "set"
+                variable["values"] = []
+                
+                for element in node.value.elts:    
+                    values = self.addVariablesToList(element, [])
+                    if len(values)>0: variable["values"].append(values[0])
+                
+            elif isinstance(node.value, ast.IfExp):
+                variable["type"] = "variable"
+                variable["values"] = []
+
+                bodyList = self.addVariablesToList(node.value.body,[])
+                if len(bodyList) > 0: variable["values"].append(bodyList[0])
+
+                comparatorList = self.addVariablesToList(node.value.orelse, [])
+                if len(comparatorList) > 0: variable["values"].append(comparatorList[0])
 
             elif isinstance(node.value, ast.BoolOp):
                 variable["values"] = []
@@ -269,22 +289,24 @@ class Analyzer(ast.NodeVisitor):
     def visit_Try(self, node):
         
         statement = {}
-        statement["type"] = "except_statement"
+        statement["type"] = "exception_handle"
         # print(ast.dump(node))
 
         if isinstance(node, ast.Try):
+            print(ast.dump(node.handlers[0].body[0]))
+            print(type(node.handlers[0].body[0]))
             
             if isinstance(node.handlers[0].body[0],ast.Continue):
                 statement["line"] = node.handlers[0].body[0].lineno
-                statement["firstBlock"] = "continue"
+                statement["exceptionHandler"] = "continue"
 
             elif isinstance(node.handlers[0].body[0],ast.Pass): 
                 statement["line"] = node.handlers[0].body[0].lineno
-                statement["firstBlock"] = "pass"
+                statement["exceptionHandler"] = "pass"
 
             else:
                 statement["line"] = node.handlers[0].body[0].lineno
-                statement["firstBlock"] = "expression"
+                statement["exceptionHandler"] = "expression"
 
         self.statements.append(statement)
         self.generic_visit(node)
@@ -358,14 +380,14 @@ class Analyzer(ast.NodeVisitor):
 
 
     def getValueFromVariableName(self,name):
-        for statement in self.statements:
+        for statement in reversed(self.statements):
             if statement["type"] == "variable" and statement["name"] == name : return statement["value"]
         return name
 
 
 
     def valueOfFuncArguments(self,arg):
-        for statement in self.statements:
+        for statement in reversed(self.statements):
             if statement["type"] == "variable" and statement["name"] == arg:
                 # print(statement)
                 if statement.__contains__("value"): return statement["value"]
@@ -505,11 +527,22 @@ class Analyzer(ast.NodeVisitor):
                             break
 
 
-    def printStatements(self):
+    def printFilteredStatement(filter):
         for statement in self.statements:
-            if statement["type"] == "comparison":print(statement)
+            if statement['type'] == filter:print(statement)
+
         print('------------------------------------ End ------------------------------------')
         
+
+    def printStatements(self):
+        print('')
+        print('------------------------------------ Start ------------------------------------')
+        print('')
+
+        for statement in self.statements:
+            print(statement)
+
+        print('------------------------------------ End ------------------------------------')
         self.writeToFile()
 
 
