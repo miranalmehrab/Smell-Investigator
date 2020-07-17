@@ -12,15 +12,17 @@ def runAnalyzer(srcCode):
     analyzer = Analyzer()
     analyzer.visit(tree)
     analyzer.findUserInputInFunction()
-    analyzer.printStatements()
-    # printFilteredStatement("variable")
+    # analyzer.printStatements()
+    analyzer.printFilteredStatement("function_call")
     # f = open("tokens.txt", "r")
     # detection(f.read())
 
 
 
 def main():
-    srcFile = open('test-codes/var-assign.py', 'r')
+    srcFile = open('test-codes/expression.py', 'r')
+    # srcFile = open('test-codes/var-assign.py', 'r')
+    
     srcCode = srcFile.read()
     runAnalyzer(srcCode)
 

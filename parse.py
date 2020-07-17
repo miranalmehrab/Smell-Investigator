@@ -39,6 +39,8 @@ class Analyzer(ast.NodeVisitor):
     ######################### Function Definitions Here #########################
     def visit_FunctionDef(self, node):
         
+        # print(ast.dump(node))
+
         func_def = {}
         func_def["type"] = "function_def"
         func_def["line"] = node.lineno
@@ -49,6 +51,9 @@ class Analyzer(ast.NodeVisitor):
 
         for arg in node.args.args:
             if isinstance(arg, ast.arg): func_def["args"].append(arg.arg)
+        
+        if isinstance(node.args.vararg, ast.arg): func_def["args"].append(node.args.vararg.arg)
+        elif isinstance(node.args.kwarg, ast.arg): func_def["args"].append(node.args.kwarg.arg)
         
         for default in node.args.defaults:
             self.addVariablesToList(default,func_def["defaults"])
@@ -527,9 +532,9 @@ class Analyzer(ast.NodeVisitor):
                             break
 
 
-    def printFilteredStatement(filter):
+    def printFilteredStatement(self,tokenType):
         for statement in self.statements:
-            if statement['type'] == filter:print(statement)
+            if statement['type'] == tokenType:print(statement)
 
         print('------------------------------------ End ------------------------------------')
         

@@ -1,4 +1,8 @@
-{"type": "variable", "line": 10, "name": "x", "value": 20, "valueSrc": "initialized", "isInput": false}
-{"type": "comparison", "line": 13, "pairs": [[20, 10]], "test": []}
-{"type": "variable", "line": 14, "name": "x", "value": 15, "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 15, "name": "abc", "values": [15, 15]}
+{"type": "function_def", "line": 1, "name": "getX", "args": [], "defaults": [], "return": "x"}
+{"type": "variable", "line": 2, "name": "x", "value": 20, "valueSrc": "initialized", "isInput": false}
+{"type": "function_def", "line": 5, "name": "getNothing", "args": [], "defaults": [], "return": null}
+{"type": "function_def", "line": 8, "name": "getFullName", "args": ["firstName", "lastName"], "defaults": [], "return": "firstNamelastName"}
+{"type": "function_def", "line": 11, "name": "getUserName", "args": ["name", "id"], "defaults": ["user", "xyz123"], "return": "nameid"}
+{"type": "function_def", "line": 14, "name": "my_function", "args": ["kids"], "defaults": [], "return": null}
+{"type": "function_def", "line": 17, "name": "my_function", "args": ["kid"], "defaults": [], "return": null}
+{"type": "function_call", "line": 20, "name": "getX", "args": [], "keywords": [], "hasInputs": false}
