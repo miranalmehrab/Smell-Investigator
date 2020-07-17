@@ -7,7 +7,7 @@
 # roll = getRoll('Miran')
 # abc = input()
 
-# x = 20
+x = 20
 # x = x
 
 # if x > 10:
@@ -18,6 +18,7 @@
 
 
 # x = y = z = "Orange"
-# x, y, z = "Orange", "Banana", "Cherry"
+x, y, z = "Orange", "Banana", "Cherry"
+
 # x = ['apple','oneplus','pinephone']
 # x = {'apple','oneplus','pinephone'}

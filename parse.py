@@ -383,6 +383,30 @@ class Analyzer(ast.NodeVisitor):
         return itemList
 
 
+    def refineTokens(self):
+        for statement in self.statements:
+            if statement["type"] == "tuple":
+                if statement.__contains__("names"):
+                    for name in statement["names"]:
+
+                        variable = {}
+                        variable["type"] = "variable"
+                        variable["line"] = statement["line"]
+                        variable["name"] = name
+                        variable["value"] = statement["values"][(statement["names"].index(name))]
+                        variable["valueSrc"] = statement["valueSrc"] if statement.__contains__("valueSrc") else "initialized"
+                        variable["isInput"] = statement["isInput"] if statement.__contains__("isInput") else False
+                        
+                        self.statements.append(variable)
+                        print(variable)
+
+                self.statements.remove(statement)
+
+            elif statement["type"] == "function_def":
+                if statement.__contains__("return") == False:
+                    self.statements.remove(statement)
+                
+
 
     def getValueFromVariableName(self,name):
         for statement in reversed(self.statements):

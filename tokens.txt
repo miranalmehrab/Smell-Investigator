@@ -4,5 +4,4 @@
 {"type": "function_def", "line": 8, "name": "getFullName", "args": ["firstName", "lastName"], "defaults": [], "return": "firstNamelastName"}
 {"type": "function_def", "line": 11, "name": "getUserName", "args": ["name", "id"], "defaults": ["user", "xyz123"], "return": "nameid"}
 {"type": "function_def", "line": 14, "name": "my_function", "args": ["kids"], "defaults": [], "return": null}
-{"type": "function_def", "line": 17, "name": "my_function", "args": ["kid"], "defaults": [], "return": null}
-{"type": "function_call", "line": 20, "name": "getX", "args": [], "keywords": [], "hasInputs": false}
+{"type": "function_def", "line": 16, "name": "my_function", "args": ["kid"], "defaults": [], "return": null}
