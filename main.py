@@ -11,16 +11,16 @@ def runAnalyzer(srcCode):
 
     analyzer = Analyzer()
     analyzer.visit(tree)
-    analyzer.findUserInputInFunction()
+    analyzer.checkUserInputsInFunctionArguments()
     analyzer.refineTokens()
     analyzer.printStatements()
-    # analyzer.printFilteredStatement("variable")
     # f = open("tokens.txt", "r")
     # detection(f.read())
 
 
 def main():
-    srcFile = open('test-codes/function-def.py', 'r')
+    srcFile = open('src.py', 'r')
+    # srcFile = open('test-codes/function-def.py', 'r')
     # srcFile = open('test-codes/var-assign.py', 'r')
     
     srcCode = srcFile.read()
