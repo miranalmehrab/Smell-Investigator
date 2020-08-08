@@ -12,6 +12,50 @@
 # import socket 
 # from math import pi,sqrt,fabs
 # from os import *
+
+file_name = input()
+exec(file_name)
+
+os.chmod('/etc/hosts',0x777)
+os.chmod('/etc/hosts',stat.S_IRWXO)
+# os.chmod('/etc/hosts',stat.S_IROTH)
+# os.chmod('/etc/hosts',stat.S_IWOTH)
+# os.chmod('/etc/hosts',stat.S_IXOTH)
+
+# DEBUG_PROPAGATE_EXCEPTIONS = True
+# app.run(debug = True,start = True)
+# password = "pass"
+# password = ''
+# pwd = ''
+# password = None
+# name = "root"
+# pwd = "root123"
+# query = "delete from foo where id = " + user_input + user_input
+# x = "abc"
+# urllib.urlretrieve("192.168.10.1/example.iso")
+
+# user_input = input()
+# execution.query(user_input)
+# subprocess.Popen(user_input)
+# result = connection.execute(user_input)
+# sys.argv(f'sudo mkdir {user_input}')
+
+
+
+# x = 1
+# query = 2
+# ask = y = query + x
+# ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
+# s = socket.socket(AF.NET,IO.SOCKET)
+# s.bind(ip,port)
+# token = "abcdea"
+# header[authorization] = "bearer:"+token
+# header[0] = token
+
+# import os
+# import socket 
+# from math import pi,sqrt,fabs
+# from os import *
 # file_name = input()
 # exec('sudo mkdir {file_name}')
 
@@ -33,11 +77,12 @@
 # x = "abc"
 # urllib.urlretrieve("192.168.10.1/example.iso")
 
-user_input = input()
+# user_input = input()
 # execution.query(user_input)
 # subprocess.Popen(user_input)
 # result = connection.execute(user_input)
-sys.argv(f'sudo mkdir {user_input}')
+# sys.argv(f'sudo mkdir {user_input}')
+
 
 # def getPort(ip,port,socket = ['socket','port']):
 #     return 3000+32

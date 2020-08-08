@@ -94,8 +94,9 @@ class Analyzer(ast.NodeVisitor):
                 varSlice = self.addVariablesToList(target.slice.value, [])
                 varSlice = varSlice[0] if len(varSlice) > 0 else None
 
-                if varSlice != None: variable["name"] = variable["name"]+'['+str(varSlice)+']'
-
+                if varSlice != None and variable["name"]!= None: variable["name"] = variable["name"]+'['+str(varSlice)+']'
+                else: variable["name"] = '['+str(varSlice)+']'
+            
             elif isinstance(target,ast.Tuple):
                 variable["type"] = "tuple"
                 variable["names"] = []
@@ -268,7 +269,8 @@ class Analyzer(ast.NodeVisitor):
             if len(leftComparatorList)>0: pair.append(leftComparatorList[0])
 
             comparatorList = self.addVariablesToList(node.test.comparators[0],[])
-            print(comparatorList)
+            # print(comparatorList)
+            
             if len(comparatorList) > 0: pair.append(comparatorList[0])
             statement["pairs"].append(pair)
 
@@ -280,7 +282,8 @@ class Analyzer(ast.NodeVisitor):
             statement["test"].append(node.test.value)
 
         elif isinstance(node.test, ast.Call):
-            statement["test"].append(node.test.func.id)
+            if isinstance(node.test.func, ast.Name): statement["test"].append(node.test.func.id)
+            elif isinstance(node.test.func, ast.Attribute): statement["test"].append(self.getFunctionName(node.test.func))
 
         
         self.statements.append(statement)
@@ -296,8 +299,8 @@ class Analyzer(ast.NodeVisitor):
         # print(ast.dump(node))
 
         if isinstance(node, ast.Try):
-            print(ast.dump(node.handlers[0].body[0]))
-            print(type(node.handlers[0].body[0]))
+            # print(ast.dump(node.handlers[0].body[0]))
+            # print(type(node.handlers[0].body[0]))
             
             if isinstance(node.handlers[0].body[0],ast.Continue):
                 statement["line"] = node.handlers[0].body[0].lineno
@@ -333,7 +336,7 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(node.value.func,ast.Attribute): expression["name"] = self.getFunctionNameFromObject(self.getFunctionName(node))
             
             for arg in node.value.args:
-                print(ast.dump(arg))
+                # print(ast.dump(arg))
                 arguments = self.addVariablesToList(arg,expression["args"]) 
                 expression["args"] = arguments             
             
@@ -394,23 +397,23 @@ class Analyzer(ast.NodeVisitor):
 
     def refineTokens(self):
         for statement in self.statements:
-
-            if statement["type"] == "tuple" and statement.__contains__("names"):
+             
+            if statement["type"] == "tuple" and statement.__contains__("names") and (statement.__contains__("values") or statement.__contains__("value")) :
                 for name in statement["names"]:
 
                     variable = {}
                     variable["type"] = "variable"
                     variable["line"] = statement["line"]
                     variable["name"] = name
-                    variable["value"] = statement["values"][(statement["names"].index(name))]
+                    variable["value"] = statement["values"][(statement["names"].index(name))] if statement.__contains__("values") else statement["value"] 
                     variable["valueSrc"] = statement["valueSrc"] if statement.__contains__("valueSrc") else "initialized"
                     variable["isInput"] = statement["isInput"] if statement.__contains__("isInput") else False
                     
                     self.statements.append(variable)
-                    print(variable)
+                    # print(variable)
 
                 self.statements.remove(statement)
-
+            
             elif statement["type"] == "function_def" and statement.__contains__("return") == False: self.statements.remove(statement)
                 
 
@@ -444,7 +447,9 @@ class Analyzer(ast.NodeVisitor):
     def getOperandsFromBinOperation(self,node,usedVars):
         if isinstance(node, ast.Name) and node.id: usedVars.append(node.id)
         elif isinstance(node, ast.Constant) and node.value: usedVars.append(node.value)
-        elif isinstance(node, ast.Call): usedVars.append(self.getFunctionName(node.func))
+        elif isinstance(node, ast.Call): 
+            if isinstance(node.func, ast.Name): usedVars.append(node.func.id)
+            elif isinstance(node.func, ast.Attribute): usedVars.append(self.getFunctionName(node.func))
         
         elif isinstance(node,ast.BinOp):  
             usedVars = self.getOperandsFromBinOperation(node.left,usedVars)  
@@ -471,7 +476,7 @@ class Analyzer(ast.NodeVisitor):
 
             for statement in self.statements:
                 # print(statement)        
-                if statement["type"] == "variable" and statement["name"] == variable:
+                if statement["type"] == "variable" and statement["name"] == variable and statement.__contains__("isInput"):
                     
                     if statement["isInput"] != True and value:
                         if type(value) == str or type(statement["value"]) == str: value = str(value) + str(statement["value"])
@@ -492,7 +497,8 @@ class Analyzer(ast.NodeVisitor):
                         found = True
                         break 
                     
-            if found == False and value and variable: value = value + variable
+            if found == False and value and variable and (type(value) != str and type(variable) != str): value = value + variable
+            elif found == False and value and variable and (type(value) == str or type(variable) == str): value = str(value) + str(variable)
             elif found == False and variable: value = variable
 
         return value
@@ -500,6 +506,7 @@ class Analyzer(ast.NodeVisitor):
 
 
     def getFunctionName(self, node):
+        print('getFunctionName:  ', ast.dump(node))
         for fieldname, value in ast.iter_fields(node.value):
             
             if(fieldname == "func" and isinstance(value, ast.Name)): return value.id
@@ -535,11 +542,6 @@ class Analyzer(ast.NodeVisitor):
         return False
 
 
-
-    def processArgs(self,arg):
-        
-        pass
-
     def checkUserInputsInFunctionArguments(self):
         for statement in self.statements:
             if statement["type"] == "function_call":
@@ -550,15 +552,16 @@ class Analyzer(ast.NodeVisitor):
                 
                 for arg in statement["args"]:
                     for idx in range(index-1,-1, -1):
-                        
-                        if self.statements[idx]["type"] == "variable" and self.statements[idx]["name"] == arg and self.statements[idx]["isInput"]:
-                            statement["hasInputs"] = True
-                            foundInputs = True
-                            break
+                        # print(self.statements[idx])
+
+                        if self.statements[idx].__contains__("isInput"): 
+                            if self.statements[idx]["type"] == "variable" and self.statements[idx]["name"] == arg and self.statements[idx]["isInput"]:
+                                statement["hasInputs"] = True
+                                foundInputs = True
+                                break
 
                     if foundInputs: break
-                    else: self.processArgs(arg)
-
+                    
     
     def printStatements(self, *types):
         for statement in self.statements:

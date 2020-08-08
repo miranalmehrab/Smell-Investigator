@@ -1,2 +1,35 @@
-{"type": "variable", "line": 36, "name": "user_input", "value": null, "valueSrc": "input", "args": [], "isInput": true}
-{"type": "function_call", "line": 40, "name": "sys.argv", "args": ["sudo mkdir ", "user_input"], "keywords": [], "hasInputs": true}
+{"type": "import", "line": 3, "og": "__future__.print_function", "alias": null}
+{"type": "import", "line": 4, "og": "json.dumps", "alias": "json.to_json"}
+{"type": "import", "line": 5, "og": "datetime.datetime", "alias": null}
+{"type": "import", "line": 5, "og": "datetime.timedelta", "alias": null}
+{"type": "import", "line": 6, "og": "requests", "alias": null}
+{"type": "variable", "line": 8, "name": "URL_BASE", "value": "https://i.doit.im/tasks/%s", "valueSrc": "initialized", "isInput": false}
+{"type": "tuple", "line": 9, "name": "DOIT_BOXES", "values": ["inbox", "today", "next", "tomorrow", "scheduled", "someday", "waiting"]}
+{"type": "dict", "line": 10, "name": "COOKIES", "keys": ["autologin"], "values": ["Your Autologin Cookie Here"]}
+{"type": "dict", "line": 12, "name": "PROJECT_TRANS", "keys": ["Project Name With Space"], "values": ["ProjectNameWithoutSpace"]}
+{"type": "dict", "line": 13, "name": "TAG_TRANS", "keys": ["TagBefore"], "values": ["TagAfter"]}
+{"type": "tuple", "line": 14, "name": "PRIORITY_TRANS", "values": ["", "L", "M", "H"]}
+{"type": "variable", "line": 15, "name": "TIME_OFFSET", "value": null, "valueSrc": "timedelta", "args": [], "isInput": false}
+{"type": "function_def", "line": 17, "name": "fetch_doit_items", "args": [], "defaults": [], "return": "sum", "returnArgs": ["map"]}
+{"type": "function_def", "line": 18, "name": "fetch_doit_box", "args": ["path"], "defaults": [], "return": null}
+{"type": "function_def", "line": 20, "name": "doit2task", "args": ["item"], "defaults": [], "return": "task"}
+{"type": "variable", "line": 21, "name": "created_at", "value": null, "valueSrc": "trans_time", "args": [], "isInput": false}
+{"type": "dict", "line": 23, "name": "task", "keys": ["description", "status", "uuid", "entry"], "values": ["pending", "created_at"]}
+{"type": "comparison", "line": 30, "pairs": [[0]], "test": []}
+{"type": "variable", "line": 31, "name": "task[due]", "value": null, "valueSrc": "trans_time", "args": [], "isInput": false}
+{"type": "comparison", "line": 33, "pairs": [[0]], "test": []}
+{"type": "variable", "line": 34, "name": "task[priority]"}
+{"type": "comparison", "line": 36, "pairs": [], "test": []}
+{"type": "variable", "line": 37, "name": "task[project]", "value": null, "valueSrc": "trans_project_name", "args": [], "isInput": false}
+{"type": "comparison", "line": 39, "pairs": [], "test": []}
+{"type": "variable", "line": 40, "name": "task[tags]", "value": null, "valueSrc": "trans_tags", "args": [], "isInput": false}
+{"type": "comparison", "line": 42, "pairs": [], "test": []}
+{"type": "list", "line": 43, "name": "task[annotations]", "values": []}
+{"type": "function_def", "line": 47, "name": "trans_project_name", "args": ["name"], "defaults": [], "return": null}
+{"type": "function_def", "line": 48, "name": "trans_tags", "args": ["tags"], "defaults": [], "return": "map", "returnArgs": ["tags"]}
+{"type": "function_def", "line": 50, "name": "trans_time", "args": ["value"], "defaults": [], "return": "%sZtime.isoformat.replace"}
+{"type": "variable", "line": 51, "name": "time", "value": null, "valueSrc": "initialized", "isInput": false}
+{"type": "comparison", "line": 54, "pairs": [["__name__", "__main__"]], "test": []}
+{"type": "variable", "line": 55, "name": "items", "value": "sum", "valueSrc": "fetch_doit_items", "args": [], "isInput": false}
+{"type": "variable", "line": 58, "name": "task", "value": "task", "valueSrc": "doit2task", "args": ["item"], "isInput": false}
+{"type": "function_call", "line": 59, "name": "print", "args": ["to_json.encode", "\n"], "keywords": [], "hasInputs": false}
