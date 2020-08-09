@@ -1,5 +1,6 @@
 import ast
 import glob
+from os import system, name 
 from parse import Analyzer
 from detection.detection import detection
 
@@ -26,9 +27,10 @@ def main():
     # srcCode = srcFile.read()
     # runAnalyzer(srcCode)
 
-    folderNumber = 0
-    srcFiles =  glob.glob("src-codes/srcs-"+str(folderNumber)+"/*.py")
     # srcFiles =  glob.glob("test-codes/*.py")
+    
+    folderNumber = 220
+    srcFiles =  glob.glob("src-codes/srcs-"+str(folderNumber)+"/*.py")
 
     fileCounter = 0
     for srcFile in srcFiles:
@@ -45,6 +47,7 @@ def main():
             # print('Loop?')
             # loop = input('Y/N:')
             # if loop == 'N' or loop == 'n': break
+            # if name == 'posix': system('clear') 
             break
         # print('Analyze Next File?')
         # next = input('Y/N: ')

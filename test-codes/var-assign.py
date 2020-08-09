@@ -25,3 +25,15 @@
 
 # header[authorization] = "bearer:"+token
 # header[0] = token
+
+# token = 'saldhiu322uh2i3278siabcxhabxgsua'
+tokens = ['sahzslkdjl3434sdasd','dsdlsahkljah746548','sdlshkqj2232324','2323dsafnsdfjkn']
+
+# header = tokens
+# header = []
+# header[3] = token
+header[0 : 3] = tokens[0: 3]
+header[i : ] = tokens
+
+
+

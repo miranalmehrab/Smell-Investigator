@@ -91,10 +91,32 @@ class Analyzer(ast.NodeVisitor):
                 var = self.addVariablesToList(target.value, [])
                 variable["name"] = var[0] if len(var) > 0 else None
                 
-                varSlice = self.addVariablesToList(target.slice.value, [])
-                varSlice = varSlice[0] if len(varSlice) > 0 else None
+                print(node.lineno)
+                print(ast.dump(node))
+                print('')
 
+                varSlice = None
+                if isinstance(target.slice, ast.Index): 
+                    varSlice = self.addVariablesToList(target.slice.value, [])
+                    varSlice = varSlice[0] if len(varSlice) > 0 else None
+
+                elif isinstance(target.slice, ast.ExtSlice):
+                    varSlice = self.addVariablesToList(target.slice.dims, [])
+                    print(varSlice)
+                    varSlice = varSlice[0] if len(varSlice) > 0 else None
+
+                    
+                elif isinstance(target.slice, ast.Slice):
+                    lowerSlice = self.addVariablesToList(target.slice.lower, []) if target.slice.lower!= None else 'min'
+                    upperSlice = self.addVariablesToList(target.slice.upper, []) if target.slice.upper!= None else 'max'
+                    
+                    if lowerSlice != 'min' and len(lowerSlice)>0: lowerSlice = lowerSlice[0]
+                    if upperSlice != 'max' and len(upperSlice)>0: upperSlice = upperSlice[0]
+
+                    varSlice = str(lowerSlice)+':'+str(upperSlice)
+                    
                 if varSlice != None and variable["name"]!= None: variable["name"] = variable["name"]+'['+str(varSlice)+']'
+                elif varSlice == None and variable["name"] != None: pass 
                 else: variable["name"] = '['+str(varSlice)+']'
             
             elif isinstance(target,ast.Tuple):
@@ -118,7 +140,10 @@ class Analyzer(ast.NodeVisitor):
                 variable["isInput"] = False
 
             if isinstance(node.value, ast.Name):
-                variable["value"] = self.valueFromName(node.value.id)
+                valueFromName = self.valueFromName(node.value.id)
+                if type(valueFromName) == list: variable["type"] = "list"
+                
+                variable["value"] = valueFromName
                 variable["valueSrc"] = "initialized"
                 variable["isInput"] = False
 
@@ -171,6 +196,9 @@ class Analyzer(ast.NodeVisitor):
                 variable["type"] = "list"
                 variable["values"] = []
                 
+                variable["valueSrc"] = 'initialized'
+                variable["isInput"] = False
+                
                 for value in node.value.elts:
                     variable["values"] = self.addVariablesToList(value,variable["values"])
 
@@ -190,7 +218,7 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(node.value,ast.Tuple):
                 variable["type"] = "tuple"
                 variable["values"] = []
-                
+
                 for element in node.value.elts:
                     values = self.addVariablesToList(element, [])
                     if len(values)>0: variable["values"].append(values[0])
@@ -219,10 +247,32 @@ class Analyzer(ast.NodeVisitor):
                 for value in node.value.values:
                     valueList = self.addVariablesToList(value,[])
                     if len(valueList) > 0: variable["values"].append(valueList[0])
+            
+            elif isinstance(node.value, ast.Subscript):
+                value = self.addVariablesToList(node.value.value, [])
+                variable["value"] = value[0] if len(value) > 0 else None
+
+                if isinstance(node.value.slice, ast.Slice):
+                    lowerSlice = self.addVariablesToList(node.value.slice.lower, []) if node.value.slice.lower!= None else 'min'
+                    upperSlice = self.addVariablesToList(node.value.slice.upper, []) if node.value.slice.upper!= None else 'max'
+                    
+                    if lowerSlice != 'min' and len(lowerSlice)>0: lowerSlice = lowerSlice[0]
+                    if upperSlice != 'max' and len(upperSlice)>0: upperSlice = upperSlice[0]
+
+                    varSlice = str(lowerSlice)+':'+str(upperSlice)
+                
+                    if type(value) == list and type(lowerSlice) == int and type(upperSlice) == int:variable["value"] = variable["value"][lowerSlice:upperSlice]
+                    elif type(value) == list and type(lowerSlice) == int and type(upperSlice) == str:variable["value"] = variable["value"][lowerSlice:]
+                    elif type(value) == list and type(lowerSlice) == str and type(upperSlice) == int:variable["value"] = variable["value"][:upperSlice]
+                    elif type(value) == list and type(lowerSlice) == str and type(upperSlice) == str:variable["value"] = variable["value"]
+                    elif varSlice != None and variable["value"]!= None: variable["value"] = variable["value"]+'['+str(varSlice)+']'
+                    else: variable["value"] = '['+str(varSlice)+']'
+
+                
 
             self.statements.append(variable)
-        self.generic_visit(node)
 
+        self.generic_visit(node)
 
 
     ######################### If Comparasion Block Here #########################
@@ -368,7 +418,7 @@ class Analyzer(ast.NodeVisitor):
         
         elif isinstance(node,ast.BinOp):    
             usedArgs = self.getUsedVariablesInVariableDeclaration(node)
-            print(usedArgs)
+            # print(usedArgs)
             actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
             itemList.append(actualValue)
         
@@ -384,12 +434,19 @@ class Analyzer(ast.NodeVisitor):
                 itemList.append(func)
         
         elif isinstance(node, ast.List):
+            if len(node.elts) == 0: itemList.append(None)
             for element in node.elts:
                 itemList = self.addVariablesToList(element,itemList)
+
         
+
         elif isinstance(node, ast.JoinedStr):
             for value in node.values:
                 itemList = self.addVariablesToList(value, itemList)
+
+        elif isinstance(node, ast.Lambda):
+            itemList = self.addVariablesToList(node.body, itemList)
+            
 
         
         return itemList
@@ -399,6 +456,10 @@ class Analyzer(ast.NodeVisitor):
         for statement in self.statements:
              
             if statement["type"] == "tuple" and statement.__contains__("names") and (statement.__contains__("values") or statement.__contains__("value")) :
+                print('')
+                print('debug ---------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>')
+                print(statement)
+                print('')
                 for name in statement["names"]:
 
                     variable = {}
@@ -420,7 +481,9 @@ class Analyzer(ast.NodeVisitor):
 
     def valueFromName(self,name):
         for statement in reversed(self.statements):
-            if statement["type"] == "variable" and statement["name"] == name : return statement["value"] if statement.__contains__("value") else None 
+            if statement["type"] == "variable" and statement["name"] == name : return statement["value"] if statement.__contains__("value") else None
+            elif statement["type"] == "list" and statement["name"] == name: return statement["values"] if statement.__contains__("values") else None
+        
         return name
 
 
@@ -506,7 +569,7 @@ class Analyzer(ast.NodeVisitor):
 
 
     def getFunctionName(self, node):
-        print('getFunctionName:  ', ast.dump(node))
+        # print('getFunctionName:  ', ast.dump(node))
         for fieldname, value in ast.iter_fields(node.value):
             
             if(fieldname == "func" and isinstance(value, ast.Name)): return value.id
@@ -520,12 +583,21 @@ class Analyzer(ast.NodeVisitor):
     def getFunctionAttribute(self, node):
         name = None
         attr = None
+        
+        # print('')
+        # print('debug ----------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>')
+        # print(ast.dump(node))
+        # print('')
 
+        
         for field, value in ast.iter_fields(node):
             if isinstance(value, ast.Attribute):
                 attr = value.attr
                 name = self.getFunctionAttribute(value)
             
+            elif isinstance(value, ast.Subscript):
+                name = self.getFunctionAttribute(value)
+
             elif isinstance(value,ast.Name): name = value.id
             elif isinstance(value,ast.Call): name = self.getFunctionAttribute(value)
 
