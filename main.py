@@ -15,8 +15,8 @@ def runAnalyzer(srcCode):
     analyzer.checkUserInputsInFunctionArguments()
     analyzer.refineTokens()
     analyzer.printStatements()
-    # f = open("tokens.txt", "r")
-    # detection(f.read())
+    f = open("tokens.txt", "r")
+    detection(f.read())
 
 
 

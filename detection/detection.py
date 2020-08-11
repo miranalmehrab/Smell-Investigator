@@ -11,6 +11,7 @@ from smells.httponly import detect as httponlyDetect
 from smells.sqlinjection import detect as sqlinjectionDetect
 from smells.tempdir import detect as tempdirDetect
 from smells.ignexcept import detect as ignexceptDetect
+from smells.assertstat import detect as assertDetect 
 
 from operations.clearwarnings import clearWarnings
 
@@ -33,3 +34,4 @@ def detection(tokens):
         sqlinjectionDetect(token)
         tempdirDetect(token)
         ignexceptDetect(token)
+        assertDetect(token)
