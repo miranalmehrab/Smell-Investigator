@@ -1,8 +1,4 @@
-{"type": "import", "line": 1, "og": "pickle", "alias": null}
-{"type": "list", "line": 3, "name": "mylist", "values": ["a", "b", "c", "d"], "valueSrc": "initialized", "isInput": false}
-{"type": "function_call", "line": 5, "name": "pickle.dump", "args": [["a", "b", "c", "d"], "fh"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 7, "name": "pickle_off", "value": null, "valueSrc": "open", "args": ["datafile.txt", "rb"], "isInput": false}
-{"type": "variable", "line": 8, "name": "emp", "value": null, "valueSrc": "pickle.load", "args": ["pickle_off"], "isInput": false}
-{"type": "function_call", "line": 9, "name": "pickle.load", "args": ["pickle_off"], "keywords": [], "hasInputs": false}
-{"type": "function_def", "line": 11, "name": "getFile", "args": [], "defaults": [], "return": "pickle.load", "returnArgs": ["pickle_off"]}
-{"type": "variable", "line": 12, "name": "pickle_off", "value": null, "valueSrc": "open", "args": ["datafile.txt", "rb"], "isInput": false}
+{"type": "import", "line": 1, "og": "marshal", "alias": null}
+{"type": "set", "line": 3, "name": "data", "values": ["twelve", "feep"]}
+{"type": "variable", "line": 5, "name": "bytesData", "value": null, "valueSrc": "marshal.dumps", "args": ["data"], "isInput": false}
+{"type": "variable", "line": 6, "name": "readdata", "value": null, "valueSrc": "marshal.loads", "args": ["bytesData"], "isInput": false}

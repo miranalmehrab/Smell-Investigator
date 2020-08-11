@@ -50,7 +50,7 @@ def testSingleSrcCodeFile():
     # srcFile = open('src.py', 'r')
     # srcFile = open('test-codes/function-def.py', 'r')
     # srcFile = open('test-codes/var-assign.py', 'r')
-    srcFile = open('test-codes/pickle.py', 'r')
+    srcFile = open('test-codes/marshal.py', 'r')
 
     srcCode = srcFile.read()
     runAnalyzer(srcCode)

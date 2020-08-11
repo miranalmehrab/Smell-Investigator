@@ -1,3 +1,1 @@
-{"line": "8", "message": "Pickle used"}
-{"line": "9", "message": "Pickle used"}
-{"line": "11", "message": "Pickle used"}
+{"line": "6", "message": "Marshal used"}

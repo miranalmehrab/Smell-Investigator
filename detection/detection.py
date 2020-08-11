@@ -13,6 +13,7 @@ from smells.tempdir import detect as tempdirDetect
 from smells.ignexcept import detect as ignexceptDetect
 from smells.assertstat import detect as assertDetect 
 from smells.pickle import detect as pickleDetect
+from smells.marshal import detect as marshalDetect
 
 from operations.clearwarnings import clearWarnings
 
@@ -37,3 +38,4 @@ def detection(tokens):
         ignexceptDetect(token)
         assertDetect(token)
         pickleDetect(token)
+        marshalDetect(token)
