@@ -1,4 +1,4 @@
-{"type": "import", "line": 1, "og": "marshal", "alias": null}
-{"type": "set", "line": 3, "name": "data", "values": ["twelve", "feep"]}
-{"type": "variable", "line": 5, "name": "bytesData", "value": null, "valueSrc": "marshal.dumps", "args": ["data"], "isInput": false}
-{"type": "variable", "line": 6, "name": "readdata", "value": null, "valueSrc": "marshal.loads", "args": ["bytesData"], "isInput": false}
+{"type": "exception_handle", "line": 8, "exceptionHandler": "expression"}
+{"type": "function_call", "line": 4, "name": "yaml.load", "args": ["stream"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 5, "name": "print", "args": ["yaml.load"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 8, "name": "print", "args": ["exc"], "keywords": [], "hasInputs": false}

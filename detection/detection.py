@@ -14,6 +14,8 @@ from smells.ignexcept import detect as ignexceptDetect
 from smells.assertstat import detect as assertDetect 
 from smells.pickle import detect as pickleDetect
 from smells.marshal import detect as marshalDetect
+from smells.eval import detect as evalDetect
+from smells.yamlload import detect as yamlloadDetect
 
 from operations.clearwarnings import clearWarnings
 
@@ -39,3 +41,5 @@ def detection(tokens):
         assertDetect(token)
         pickleDetect(token)
         marshalDetect(token)
+        evalDetect(token)
+        yamlloadDetect(token)
