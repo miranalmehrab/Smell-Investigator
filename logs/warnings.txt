@@ -1,5 +1,3 @@
-{"line": "9", "message": "assert statement"}
-{"line": "10", "message": "assert statement"}
-{"line": "11", "message": "assert statement"}
-{"line": "12", "message": "assert statement"}
-{"line": "14", "message": "assert statement"}
+{"line": "8", "message": "Pickle used"}
+{"line": "9", "message": "Pickle used"}
+{"line": "11", "message": "Pickle used"}

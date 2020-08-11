@@ -8,7 +8,7 @@ def runAnalyzer(srcCode):
         
     tree = ast.parse(srcCode, type_comments=True)
     # print(ast.dump(tree,include_attributes=True))
-    # print(ast.dump(tree))
+    print(ast.dump(tree))
 
     analyzer = Analyzer()
     analyzer.visit(tree)
@@ -50,7 +50,7 @@ def testSingleSrcCodeFile():
     # srcFile = open('src.py', 'r')
     # srcFile = open('test-codes/function-def.py', 'r')
     # srcFile = open('test-codes/var-assign.py', 'r')
-    srcFile = open('test-codes/assert.py', 'r')
+    srcFile = open('test-codes/pickle.py', 'r')
 
     srcCode = srcFile.read()
     runAnalyzer(srcCode)
