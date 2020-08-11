@@ -1,78 +1,9 @@
-{"type": "import", "line": 3, "og": "sys", "alias": null}
-{"type": "import", "line": 3, "og": "os", "alias": null}
-{"type": "import", "line": 3, "og": "time", "alias": null}
-{"type": "import", "line": 4, "og": "random", "alias": null}
-{"type": "variable", "line": 8, "name": "ttl", "value": 30, "valueSrc": "initialized", "isInput": false}
-{"type": "function_def", "line": 11, "name": "__init__", "args": ["self", "query"], "defaults": [], "return": null}
-{"type": "variable", "line": 18, "name": "self.has_result", "value": false, "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 19, "name": "qname_lower", "value": null, "valueSrc": "qname.lower", "args": [], "isInput": false}
-{"type": "list", "line": 22, "name": "servers", "values": ["192.168.1.201", "192.168.1.202"], "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 23, "name": "server", "value": null, "valueSrc": "random.choice", "args": [["192.168.1.201", "192.168.1.202"]], "isInput": false}
-{"type": "list", "line": 25, "name": "self.results", "values": [], "valueSrc": "initialized", "isInput": false}
-{"type": "comparison", "line": 27, "pairs": [["qname_lower", "test.domain.org"]], "test": []}
-{"type": "function_call", "line": 28, "name": "self.results.append", "args": ["DATA\t%s\t%s\tA\t%d\t-1\t%s"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 29, "name": "self.has_result", "value": true, "valueSrc": "initialized", "isInput": false}
-{"type": "comparison", "line": 30, "pairs": [["qtype", "SOA"], ["qname_lower", "test.domain.org"]], "test": []}
-{"type": "function_call", "line": 31, "name": "self.results.append", "args": ["DATA\t%s\t%s\t%s\t3600\t-1\tns1.test.soa\tadmin.test.soa\t2014032110\t10800\t3600\t604800\t3600"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 33, "name": "self.has_result", "value": true, "valueSrc": "initialized", "isInput": false}
-{"type": "function_def", "line": 35, "name": "str_result", "args": ["self"], "defaults": [], "return": null}
-{"type": "comparison", "line": 37, "pairs": [], "test": []}
-{"type": "function_def", "line": 43, "name": "__init__", "args": ["self"], "defaults": [], "return": null}
-{"type": "variable", "line": 44, "name": "pid", "value": null, "valueSrc": "os.getpid", "args": [], "isInput": false}
-{"type": "variable", "line": 45, "name": "self.logfile", "value": "/tmp/backend.log", "valueSrc": "initialized", "isInput": false}
-{"type": "function_def", "line": 48, "name": "write", "args": ["self", "msg"], "defaults": [], "return": null}
-{"type": "variable", "line": 49, "name": "logline", "value": "%s|%s\n", "valueSrc": "initialized", "isInput": false}
-{"type": "function_obj", "line": 50, "objName": "f", "funcName": "file", "args": ["self.logfile", "a"]}
-{"type": "variable", "line": 50, "name": "f", "value": null, "valueSrc": "file", "args": ["self.logfile", "a"], "isInput": false}
-{"type": "function_call", "line": 51, "name": "file.write", "args": ["%s|%s\n"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 52, "name": "file.close", "args": [], "keywords": [], "hasInputs": false}
-{"type": "function_def", "line": 54, "name": "debug_log", "args": ["msg"], "defaults": [], "return": null}
-{"type": "function_call", "line": 55, "name": "logger.write", "args": ["msg"], "keywords": [], "hasInputs": false}
-{"type": "function_def", "line": 60, "name": "__init__", "args": ["self", "filein", "fileout"], "defaults": [], "return": null}
-{"type": "variable", "line": 62, "name": "self.filein", "value": "filein", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 63, "name": "self.fileout", "value": "fileout", "valueSrc": "initialized", "isInput": false}
-{"type": "function_call", "line": 65, "name": "self._process_requests", "args": [], "keywords": [], "hasInputs": false}
-{"type": "function_def", "line": 67, "name": "_process_requests", "args": ["self"], "defaults": [], "return": null}
-{"type": "variable", "line": 69, "name": "first_time", "value": true, "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 71, "name": "rawline", "value": null, "valueSrc": "self.filein.readline", "args": [], "isInput": false}
-{"type": "comparison", "line": 72, "pairs": [["rawline", ""]], "test": []}
-{"type": "function_call", "line": 73, "name": "debug_log", "args": ["EOF"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 75, "name": "line", "value": null, "valueSrc": "rawline.rstrip", "args": [], "isInput": false}
-{"type": "function_call", "line": 77, "name": "debug_log", "args": ["received from pdns:%sNone"], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 79, "pairs": [], "test": ["first_time"]}
-{"type": "comparison", "line": 80, "pairs": [["line", "HELO\t1"]], "test": []}
-{"type": "function_call", "line": 81, "name": "self._fprint", "args": ["OK\tPython backend firing up"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 83, "name": "self._fprint", "args": ["FAIL"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 84, "name": "debug_log", "args": ["HELO input not received - execution aborted"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 85, "name": "rawline", "value": null, "valueSrc": "self.filein.readline", "args": [], "isInput": false}
-{"type": "function_call", "line": 86, "name": "debug_log", "args": ["calling sys.exit()"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 87, "name": "sys.exit", "args": [1], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 88, "name": "first_time", "value": false, "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 90, "name": "query", "value": null, "valueSrc": "line.split", "args": ["\t"], "isInput": false}
-{"type": "comparison", "line": 91, "pairs": [["len", 6]], "test": []}
-{"type": "function_call", "line": 92, "name": "self._fprint", "args": ["LOG\tPowerDNS sent unparseable line"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 93, "name": "self._fprint", "args": ["FAIL"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 95, "name": "debug_log", "args": ["Performing DNSLookup(%s)repr"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 96, "name": "lookup", "value": null, "valueSrc": "DNSLookup", "args": ["query"], "isInput": false}
-{"type": "comparison", "line": 97, "pairs": [], "test": []}
-{"type": "variable", "line": 98, "name": "pdns_result", "value": null, "valueSrc": "lookup.str_result", "args": [], "isInput": false}
-{"type": "function_call", "line": 99, "name": "self._fprint", "args": ["pdns_result"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 100, "name": "debug_log", "args": ["DNSLookup result(%s)None"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 101, "name": "self._fprint", "args": ["END"], "keywords": [], "hasInputs": false}
-{"type": "function_def", "line": 103, "name": "_fprint", "args": ["self", "message"], "defaults": [], "return": null}
-{"type": "function_call", "line": 105, "name": "self.fileout.write", "args": ["message\n"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 106, "name": "self.fileout.flush", "args": [], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 107, "name": "debug_log", "args": ["sent to pdns:%smessage"], "keywords": [], "hasInputs": false}
-{"type": "comparison", "line": 109, "pairs": [["__name__", "__main__"]], "test": []}
-{"type": "variable", "line": 110, "name": "logger", "value": null, "valueSrc": "Logger", "args": [], "isInput": false}
-{"type": "variable", "line": 111, "name": "infile"}
-{"type": "variable", "line": 114, "name": "outfile"}
-{"type": "exception_handle", "line": 118, "exceptionHandler": "expression"}
-{"type": "function_call", "line": 116, "name": "PowerDNSbackend", "args": ["infile", "outfile"], "keywords": [], "hasInputs": false}
-{"type": "function_call", "line": 118, "name": "debug_log", "args": ["execution failure:str"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 17, "name": "_type", "value": "query", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 17, "name": "qname", "value": "query", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 17, "name": "qclass", "value": "query", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 17, "name": "qtype", "value": "query", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 17, "name": "_id", "value": "query", "valueSrc": "initialized", "isInput": false}
-{"type": "variable", "line": 17, "name": "ip", "value": "query", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 1, "name": "x", "value": "hello", "valueSrc": "initialized", "isInput": false}
+{"type": "variable", "line": 2, "name": "y", "value": "hello", "valueSrc": "initialized", "isInput": false}
+{"type": "function_def", "line": 4, "name": "getHello", "args": [], "defaults": [], "return": "hello"}
+{"type": "variable", "line": 7, "name": "z", "value": "hello", "valueSrc": "getHello", "args": [], "isInput": false}
+{"type": "assert", "line": 9, "left": "hello", "comparators": ["hello"]}
+{"type": "assert", "line": 10, "left": "hello", "comparators": ["goodbye"]}
+{"type": "assert", "line": 11, "left": "hello", "comparators": ["hello"]}
+{"type": "assert", "line": 12, "left": "hello", "comparators": ["hello"]}
+{"type": "assert", "line": 14, "left": "hello", "comparators": ["hello"]}

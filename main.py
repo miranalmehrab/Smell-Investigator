@@ -19,39 +19,47 @@ def runAnalyzer(srcCode):
     # detection(f.read())
 
 
-def main():
-    # srcFile = open('src.py', 'r')
-    # srcFile = open('test-codes/function-def.py', 'r')
-    # srcFile = open('test-codes/var-assign.py', 'r')
-    
-    # srcCode = srcFile.read()
-    # runAnalyzer(srcCode)
 
-    # srcFiles =  glob.glob("test-codes/*.py")
-    
-    folderNumber = 220
-    srcFiles =  glob.glob("src-codes/srcs-"+str(folderNumber)+"/*.py")
-
-    fileCounter = 0
+def testFromTestCodeFolder():
+    srcFiles =  glob.glob("test-codes/*.py")
     for srcFile in srcFiles:
+
+        print('File number - '+str(fileCounter)+': '+srcFile.name)    
         fileCounter = fileCounter + 1
         srcFile = open(srcFile, 'r')
         srcCode = srcFile.read()
+        runAnalyzer(srcCode)
 
-        while True:
-            print('')
-            print('File number - '+str(fileCounter)+': '+srcFile.name)    
-            print('')
-            runAnalyzer(srcCode)
+
+def testFromSrcCodesFolder():
     
-            # print('Loop?')
-            # loop = input('Y/N:')
-            # if loop == 'N' or loop == 'n': break
-            # if name == 'posix': system('clear') 
-            break
-        # print('Analyze Next File?')
-        # next = input('Y/N: ')
-        # if next == 'N' or next == 'n': break
+    folderNum = 220
+    srcFiles =  glob.glob("src-codes/srcs-"+str(folderNum)+"/*.py")
+    fileCounter = 0
+
+    for srcFile in srcFiles:
+        
+        print('File number - '+str(fileCounter)+': '+srcFile.name)    
+        fileCounter = fileCounter + 1
+        srcFile = open(srcFile, 'r')
+        srcCode = srcFile.read()
+        runAnalyzer(srcCode)
+
+
+def testSingleSrcCodeFile():
+    # srcFile = open('src.py', 'r')
+    # srcFile = open('test-codes/function-def.py', 'r')
+    # srcFile = open('test-codes/var-assign.py', 'r')
+    srcFile = open('test-codes/assert.py', 'r')
+
+    srcCode = srcFile.read()
+    runAnalyzer(srcCode)
+    
+
+def main():
+    # testFromSrcCodesFolder()
+    # testFromTestCodeFolder()
+    testSingleSrcCodeFile()
         
 
 if __name__ == "__main__":

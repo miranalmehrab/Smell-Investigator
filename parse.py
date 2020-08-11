@@ -401,7 +401,33 @@ class Analyzer(ast.NodeVisitor):
         self.generic_visit(node)
     
 
+    ######################### Assert Here #########################
 
+    def visit_Assert(self, node):
+        print(ast.dump(node))
+
+        if isinstance(node.test, ast.Compare):
+            left = self.addVariablesToList(node.test.left, [])
+            left = left[0] if len(left) > 0 else None
+
+            comparators = []
+            for comparator in node.test.comparators:
+                name = self.addVariablesToList(comparator, [])
+                name = name[0] if len(name)>0 else None
+                
+                if name: comparators.append(name)
+            
+            assertStatement = {}
+            assertStatement["type"] = "assert"
+            assertStatement["line"] = node.lineno
+            assertStatement["left"] = left
+            assertStatement["comparators"] = comparators
+
+            self.statements.append(assertStatement)
+        
+        self.generic_visit(node) 
+
+            
     ######################### Utility Function Here #########################
 
 
