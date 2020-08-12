@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
     
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -11,13 +12,17 @@ def detect(token):
     
     if tokenType == "variable" and name in commonPasswords and value == None:
         warning = 'empty password'
-        saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
+        
+        saveAsCSV('empty_password', srcFile)
+        saveWarnings(warning,str(lineno))
 
     elif tokenType == "variable" and name in commonPasswords and len(value) == 0: 
         warning = 'empty password'
-        saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
+        
+        saveAsCSV('empty_password', srcFile)
+        saveWarnings(warning,str(lineno))
     
     elif tokenType == "comparison":
 
@@ -25,15 +30,17 @@ def detect(token):
             for pair in token["pairs"]:
                 
                 if pair[0] in commonPasswords and len(pair[1]) == 0:
-
                     warning = 'emplty password'
+                    print(warning+ ' at line '+ str(lineno))
+                    
+                    saveAsCSV('empty_password', srcFile)
                     saveWarnings(warning,str(lineno))
                     
-                    print(warning+ ' at line '+ str(lineno))
 
                 elif pair[1] in commonPasswords and len(pair[0]) == 0:
-
                     warning = 'emplty password'
+                    print(warning+ ' at line '+ str(lineno))
+
+                    saveAsCSV('empty_password', srcFile)
                     saveWarnings(warning,str(lineno))
                     
-                    print(warning+ ' at line '+ str(lineno))

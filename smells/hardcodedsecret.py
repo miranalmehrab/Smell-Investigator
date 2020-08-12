@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
     
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -14,10 +15,11 @@ def detect(token):
     # print(token)
 
     if tokenType == "variable" and valueSrc == "initialized" and (name in commonUserName or name in commonPassword) and value != None and len(value)>0 : 
-            
         warning = 'hardcoded secret'
-        saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
+        
+        saveAsCSV('hardcoded_secret', srcFile)
+        saveWarnings(warning,str(lineno))
 
     elif tokenType == "comparison":
 
@@ -25,14 +27,17 @@ def detect(token):
             for pair in token["pairs"]:
                 
                 if pair[0] in commonUserName or pair[0] in commonPassword and len(pair[1]) > 0:
-
                     warning = 'hardcoded secret'
+                    print(warning+ ' at line '+ str(lineno))
+                    
+                    saveAsCSV('hardcoded_secret', srcFile)
                     saveWarnings(warning,str(lineno))
                     
-                    print(warning+ ' at line '+ str(lineno))
                 
                 elif pair[1] in commonUserName or pair[1] in commonPassword and len(pair[0]) > 0:
                     warning = 'hardcoded secret'
+                    print(warning+ ' at line '+ str(lineno))
+                    
+                    saveAsCSV('hardcoded_secret', srcFile)
                     saveWarnings(warning,str(lineno))
                     
-                    print(warning+ ' at line '+ str(lineno))

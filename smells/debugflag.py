@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -11,8 +12,10 @@ def detect(token):
     
     if tokenType == "variable" and name in restrictedNames and value:
         warning = 'debug set true'
-        saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
+        
+        saveAsCSV('debug_true', srcFile)
+        saveWarnings(warning,str(lineno))
 
     elif tokenType == "function_call":
         if token.__contains__("keywords"): keywords = token["keywords"]
@@ -20,5 +23,7 @@ def detect(token):
         for keyword in keywords:
             if(keyword[0] in restrictedNames and keyword[1]):
                 warning = 'debug set true'
-                saveWarnings(warning,str(lineno))
                 print(warning+ ' at line '+ str(lineno))
+                
+                saveAsCSV('debug_true', srcFile)
+                saveWarnings(warning,str(lineno))

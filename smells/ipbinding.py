@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -15,5 +16,7 @@ def detect(token):
         for arg in args:
             if arg in unwantedparam:
                 warning = 'harcoded ip address binding'
-                saveWarnings(warning,str(lineno))
                 print(warning+ ' at line '+ str(lineno))
+                
+                saveAsCSV('hardcoded_interface', srcFile)
+                saveWarnings(warning,str(lineno))

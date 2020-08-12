@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
     
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -16,8 +17,10 @@ def detect(token):
 
         if extension in download:
             warning = 'no integrity check'
-            saveWarnings(warning,str(lineno))
             print(warning+ ' at line '+ str(lineno))
+            
+            saveAsCSV('no_integrity_check', srcFile)
+            saveWarnings(warning,str(lineno))
         
             # check exisitng imports if haslib or pygpgme not found then tell no checking!
             

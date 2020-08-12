@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
     
     if token.__contains__("line"): lineno = token["line"] 
     if token.__contains__("name"): name = token["name"]
@@ -12,5 +13,7 @@ def detect(token):
     
     if tokenType == "function_call" and name in unwanted and (args or containsUserInput):
         warning = 'use of cmd injection'
-        saveWarnings(warning,str(lineno))
         print(warning+ ' at line '+ str(lineno))
+        
+        saveAsCSV('shell_injection', srcFile)
+        saveWarnings(warning,str(lineno))

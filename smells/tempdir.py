@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -20,7 +21,9 @@ def detect(token):
             if value in unwantedValues:
 
                 warning = 'hardcoded temporary directory'
-                saveWarnings(warning,str(lineno))
                 print(warning+ ' at line '+ str(lineno))
+                
+                saveAsCSV('harcoded_tmp', srcFile)
+                saveWarnings(warning,str(lineno))
 
                 break

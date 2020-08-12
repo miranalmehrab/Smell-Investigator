@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -23,5 +24,7 @@ def detect(token):
 
 def printWarning(lineno):
     warning = 'Marshal used'
-    saveWarnings(warning,str(lineno))
     print(warning+ ' at line '+ str(lineno))
+
+    saveAsCSV('marhshal_used', srcFile)
+    saveWarnings(warning,str(lineno))

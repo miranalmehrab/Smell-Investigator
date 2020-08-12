@@ -18,28 +18,31 @@ from smells.eval import detect as evalDetect
 from smells.yamlload import detect as yamlloadDetect
 
 from operations.clearwarnings import clearWarnings
+from operations.clearcsv import clearCSV
 
-def detection(tokens):
+def detection(tokens, srcFile):
     
     clearWarnings()
+    clearCSV()
+    
     tokens = tokens.splitlines()
     
     for token in tokens:
         token = json.loads(token)
 
-        cliargsDetect(token)
-        execDetect(token)
-        debugflagDetect(token)
-        emptypasswordDetect(token)
-        hardcodedsecretDetect(token)
-        filepermissionDetect(token)
-        ipbindingDetect(token)
-        httponlyDetect(token)
-        sqlinjectionDetect(token)
-        tempdirDetect(token)
-        ignexceptDetect(token)
-        assertDetect(token)
-        pickleDetect(token)
-        marshalDetect(token)
-        evalDetect(token)
-        yamlloadDetect(token)
+        cliargsDetect(token, srcFile)
+        execDetect(token, srcFile)
+        debugflagDetect(token, srcFile)
+        emptypasswordDetect(token, srcFile)
+        hardcodedsecretDetect(token, srcFile)
+        filepermissionDetect(token, srcFile)
+        ipbindingDetect(token, srcFile)
+        httponlyDetect(token, srcFile)
+        sqlinjectionDetect(token, srcFile)
+        tempdirDetect(token, srcFile)
+        ignexceptDetect(token, srcFile)
+        assertDetect(token, srcFile)
+        pickleDetect(token, srcFile)
+        marshalDetect(token, srcFile)
+        evalDetect(token, srcFile)
+        yamlloadDetect(token, srcFile)

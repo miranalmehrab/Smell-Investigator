@@ -1,6 +1,7 @@
 from operations.savewarnings import saveWarnings
+from operations.saveascsv import saveAsCSV
 
-def detect(token):
+def detect(token, srcFile):
     
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"] 
@@ -9,7 +10,8 @@ def detect(token):
     unwantedArgs = ['continue','pass']
         
     if tokenType == "except_statement" and firstBlock in unwantedArgs:
-            
             warning = 'ignore except block'
-            saveWarnings(warning,str(lineno))
             print(warning+ ' at line '+ str(lineno))
+
+            saveAsCSV('ignore_except_block', srcFile)
+            saveWarnings(warning,str(lineno))
