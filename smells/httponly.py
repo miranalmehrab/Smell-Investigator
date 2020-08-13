@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -13,8 +12,4 @@ def detect(token, srcFile):
     if tokenType=="function_call" and name in httpLibs:
         
         if args and args[0].split("://")[0] != "https":
-            warning = 'use of HTTP without TLS'
-            print(warning+ ' at line '+ str(lineno))
-            
-            saveAsCSV('use_of_http', srcFile)
-            saveWarnings(warning,str(lineno))
+            actionUponDetection(srcFile, lineno, 'use_of_http', 'use of HTTP without TLS')

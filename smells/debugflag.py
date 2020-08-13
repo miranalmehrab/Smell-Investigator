@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -10,20 +9,11 @@ def detect(token, srcFile):
     
     restrictedNames = ['debug', 'DEBUG', 'DEBUG_PROPAGATE_EXCEPTIONS']
     
-    if tokenType == "variable" and name in restrictedNames and value:
-        warning = 'debug set true'
-        print(warning+ ' at line '+ str(lineno))
-        
-        saveAsCSV('debug_true', srcFile)
-        saveWarnings(warning,str(lineno))
+    if tokenType == "variable" and name in restrictedNames and value: actionUponDetection(srcFile, lineno, 'debug_true', 'debug set true')
 
     elif tokenType == "function_call":
         if token.__contains__("keywords"): keywords = token["keywords"]
         
         for keyword in keywords:
-            if(keyword[0] in restrictedNames and keyword[1]):
-                warning = 'debug set true'
-                print(warning+ ' at line '+ str(lineno))
+            if(keyword[0] in restrictedNames and keyword[1]): actionUponDetection(srcFile, lineno, 'debug_true', 'debug set true')
                 
-                saveAsCSV('debug_true', srcFile)
-                saveWarnings(warning,str(lineno))

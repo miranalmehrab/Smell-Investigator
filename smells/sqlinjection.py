@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -12,9 +11,5 @@ def detect(token, srcFile):
     unwantedMethods = ['execution.query']
     
     if tokenType == "function_call" and name in unwantedMethods and args and hasInputs:
-        warning = 'SQL injection'
-        print(warning+ ' at line '+ str(lineno))
+        actionUponDetection(srcFile, lineno, 'sql_injection', 'sql injection')
         
-        saveAsCSV('sql_injection', srcFile)
-        saveWarnings(warning,str(lineno))
-

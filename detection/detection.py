@@ -17,14 +17,12 @@ from smells.marshal import detect as marshalDetect
 from smells.eval import detect as evalDetect
 from smells.yamlload import detect as yamlloadDetect
 
-from operations.clearwarnings import clearWarnings
-from operations.clearcsv import clearCSV
+from operations.clearFileContent import clearFileContent
+from operations.compareDetectionAccuracy import compareDetectionAccuracy
 
 def detection(tokens, srcFile):
     
-    clearWarnings()
-    clearCSV()
-    
+    clearFileContent('detected_smells.csv')
     tokens = tokens.splitlines()
     
     for token in tokens:
@@ -46,3 +44,5 @@ def detection(tokens, srcFile):
         marshalDetect(token, srcFile)
         evalDetect(token, srcFile)
         yamlloadDetect(token, srcFile)
+    
+    compareDetectionAccuracy()

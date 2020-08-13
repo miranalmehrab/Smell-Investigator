@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -11,9 +10,5 @@ def detect(token, srcFile):
 
     cliArgsFuncNames = ['sys.argv', 'ArgumentParser', 'argparse', 'subprocess.Popen']
     
-    if tokenType == "function_call" and methodname in cliArgsFuncNames and containsUserInput:
-        warning = 'use of command line args' 
-        print(warning+ ' at line '+ str(lineno))
-        
-        saveAsCSV('shell_injection', srcFile)
-        saveWarnings(warning,str(lineno))
+    if tokenType == "function_call" and methodname in cliArgsFuncNames and containsUserInput: actionUponDetection(srcFile, lineno, 'shell_injection', 'use of command line args')
+       

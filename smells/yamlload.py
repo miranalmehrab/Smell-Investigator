@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -9,25 +8,17 @@ def detect(token, srcFile):
     if tokenType == "variable":
         if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
         if token.__contains__("args"): args = token["args"]
-        if valueSrc == "yaml.load": printWarning(lineno)
+        if valueSrc == "yaml.load": actionUponDetection(srcFile, lineno, 'yaml_load_used', 'yaml.load used')
 
     elif tokenType == "function_call":
         if token.__contains__("name"): name = token["name"]
         if token.__contains__("args"): args = token["args"]
         
-        if name == "yaml.load": printWarning(lineno)
-        elif "yaml.load" in args: printWarning(lineno)
+        if name == "yaml.load": actionUponDetection(srcFile, lineno, 'yaml_load_used', 'yaml.load used')
+        elif "yaml.load" in args: actionUponDetection(srcFile, lineno, 'yaml_load_used', 'yaml.load used')
 
     elif tokenType == "function_def":
         if token.__contains__("return"): funcReturn  = token["return"]
         if token.__contains__("returnArgs"): returnArgs = token["returnArgs"]
-        if funcReturn == "yaml.load" and returnArgs!= None: printWarning(lineno)
+        if funcReturn == "yaml.load" and returnArgs!= None: actionUponDetection(srcFile, lineno, 'yaml_load_used', 'yaml.load used')
     
-
-def printWarning(lineno):
-    
-    warning = 'yaml.load used'
-    print(warning+ ' at line '+ str(lineno))
-    
-    saveAsCSV('yaml_load_used', srcFile)
-    saveWarnings(warning,str(lineno))

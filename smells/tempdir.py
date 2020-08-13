@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -12,18 +11,12 @@ def detect(token, srcFile):
                         'hardcoded_directory', 'save_dir', 'temp_dir', 'hardcoded_dir',
                         'temporary_directory', 'temporary_dir', 'temp_directory', 'dir'
                         ]
-
+                        
     unwantedValues = ['/tmp', '/var/tmp', '/dev/shm']
     
     if tokenType == "list" and name in unwantedDirNames:
-        
+
         for value in values:
             if value in unwantedValues:
-
-                warning = 'hardcoded temporary directory'
-                print(warning+ ' at line '+ str(lineno))
-                
-                saveAsCSV('harcoded_tmp', srcFile)
-                saveWarnings(warning,str(lineno))
-
+                actionUponDetection(srcFile, lineno, 'harcoded_tmp', 'hardcoded temporary directory')
                 break

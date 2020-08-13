@@ -1,5 +1,5 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV 
+from operations.actionUponDetection import actionUponDetection
+ 
 
 def detect(token, srcFile) :
 
@@ -8,9 +8,4 @@ def detect(token, srcFile) :
     if token.__contains__("left"): left = token["left"]
     if token.__contains__("comparators"): comparators = token["comparators"]
 
-    if (tokenType == "assert" and left!= None and comparators!=None):
-        warning = 'assert statement'
-        print(warning+ ' at line '+ str(lineno))
-        
-        saveAsCSV('assert_used', srcFile)
-        saveWarnings(warning,str(lineno))
+    if (tokenType == "assert" and left!= None and comparators!=None): actionUponDetection(srcFile, lineno, 'assert_used', 'assert statement')

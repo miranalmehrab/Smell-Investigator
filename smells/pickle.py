@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -9,22 +8,15 @@ def detect(token, srcFile):
     if tokenType == "variable":
         if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
         if token.__contains__("args"): args = token["args"]
-        if valueSrc == "pickle.load" and args != None: printWarning(lineno)
+        if valueSrc == "pickle.load" and args != None: actionUponDetection(srcFile, lineno, 'pickle_used', 'pickle used')
 
     elif tokenType == "function_call":
         if token.__contains__("name"): name = token["name"]
         if token.__contains__("args"): args = token["args"]
-        if name == "pickle.load" and args != None: printWarning(lineno)
+        if name == "pickle.load" and args != None: actionUponDetection(srcFile, lineno, 'pickle_used', 'pickle used')
     
     elif tokenType == "function_def":
         if token.__contains__("return"): funcReturn  = token["return"]
         if token.__contains__("returnArgs"): returnArgs = token["returnArgs"]
-        if funcReturn == "pickle.load" and returnArgs!= None: printWarning(lineno)
+        if funcReturn == "pickle.load" and returnArgs!= None: actionUponDetection(srcFile, lineno, 'pickle_used', 'pickle used')
     
-
-def printWarning(lineno):
-    warning = 'Pickle used'
-    print(warning+ ' at line '+ str(lineno))
-
-    saveAsCSV('pickle_used', srcFile)
-    saveWarnings(warning,str(lineno))

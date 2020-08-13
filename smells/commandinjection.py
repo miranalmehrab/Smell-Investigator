@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
     
@@ -11,9 +10,5 @@ def detect(token, srcFile):
 
     unwanted = ['subprocess.Popen']
     
-    if tokenType == "function_call" and name in unwanted and (args or containsUserInput):
-        warning = 'use of cmd injection'
-        print(warning+ ' at line '+ str(lineno))
+    if tokenType == "function_call" and name in unwanted and (args or containsUserInput): actionUponDetection(srcFile, lineno, 'shell_injection', 'use of cmd injection')
         
-        saveAsCSV('shell_injection', srcFile)
-        saveWarnings(warning,str(lineno))

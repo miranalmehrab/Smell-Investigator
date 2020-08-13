@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
     
@@ -15,12 +14,6 @@ def detect(token, srcFile):
         urls = args[0].split(".")
         extension = urls[len(urls)-1]
 
-        if extension in download:
-            warning = 'no integrity check'
-            print(warning+ ' at line '+ str(lineno))
+        if extension in download: actionUponDetection(srcFile, lineno, 'no_integrity_check', 'no integrity checked')
             
-            saveAsCSV('no_integrity_check', srcFile)
-            saveWarnings(warning,str(lineno))
-        
-            # check exisitng imports if haslib or pygpgme not found then tell no checking!
-            
+        # check exisitng imports if haslib or pygpgme not found then tell no checking!

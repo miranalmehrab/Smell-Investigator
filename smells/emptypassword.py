@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
     
@@ -10,37 +9,13 @@ def detect(token, srcFile):
     
     commonPasswords = ['password','pass','pwd','userPassword','PASSWORD','PASS','PWD','USERPWD']
     
-    if tokenType == "variable" and name in commonPasswords and value == None:
-        warning = 'empty password'
-        print(warning+ ' at line '+ str(lineno))
-        
-        saveAsCSV('empty_password', srcFile)
-        saveWarnings(warning,str(lineno))
-
-    elif tokenType == "variable" and name in commonPasswords and len(value) == 0: 
-        warning = 'empty password'
-        print(warning+ ' at line '+ str(lineno))
-        
-        saveAsCSV('empty_password', srcFile)
-        saveWarnings(warning,str(lineno))
+    if tokenType == "variable" and name in commonPasswords and value == None: actionUponDetection(srcFile, lineno, 'empty_password', 'emplty password')
     
-    elif tokenType == "comparison":
+    elif tokenType == "variable" and name in commonPasswords and len(value) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'emplty password')
 
-        if token.__contains__("pairs"):
-            for pair in token["pairs"]:
+    elif tokenType == "comparison" and token.__contains__("pairs"):
+
+        for pair in token["pairs"]:
+            if pair[0] in commonPasswords and len(pair[1]) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'emplty password')
+            elif pair[1] in commonPasswords and len(pair[0]) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'emplty password')
                 
-                if pair[0] in commonPasswords and len(pair[1]) == 0:
-                    warning = 'emplty password'
-                    print(warning+ ' at line '+ str(lineno))
-                    
-                    saveAsCSV('empty_password', srcFile)
-                    saveWarnings(warning,str(lineno))
-                    
-
-                elif pair[1] in commonPasswords and len(pair[0]) == 0:
-                    warning = 'emplty password'
-                    print(warning+ ' at line '+ str(lineno))
-
-                    saveAsCSV('empty_password', srcFile)
-                    saveWarnings(warning,str(lineno))
-                    

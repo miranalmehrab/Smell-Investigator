@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
     
@@ -12,32 +11,12 @@ def detect(token, srcFile):
     commonUserName = ['name','user','username','usrname','usr','role','USER','USERNAME','USR']
     commonPassword = ['password','pass','pwd','userPassword','PASSWORD','PASS','PWD','USERPWD']
 
-    # print(token)
-
     if tokenType == "variable" and valueSrc == "initialized" and (name in commonUserName or name in commonPassword) and value != None and len(value)>0 : 
-        warning = 'hardcoded secret'
-        print(warning+ ' at line '+ str(lineno))
+        actionUponDetection(srcFile, lineno, 'hardcoded_secret', 'hardcoded secret')
         
-        saveAsCSV('hardcoded_secret', srcFile)
-        saveWarnings(warning,str(lineno))
+    elif tokenType == "comparison" and token.__contains__("pairs"):
 
-    elif tokenType == "comparison":
-
-        if token.__contains__("pairs"):
-            for pair in token["pairs"]:
+        for pair in token["pairs"]:        
+            if pair[0] in commonUserName or pair[0] in commonPassword and len(pair[1]) > 0: actionUponDetection(srcFile, lineno, 'hardcoded_secret', 'hardcoded secret')
+            elif pair[1] in commonUserName or pair[1] in commonPassword and len(pair[0]) > 0: actionUponDetection(srcFile, lineno, 'hardcoded_secret', 'hardcoded secret')
                 
-                if pair[0] in commonUserName or pair[0] in commonPassword and len(pair[1]) > 0:
-                    warning = 'hardcoded secret'
-                    print(warning+ ' at line '+ str(lineno))
-                    
-                    saveAsCSV('hardcoded_secret', srcFile)
-                    saveWarnings(warning,str(lineno))
-                    
-                
-                elif pair[1] in commonUserName or pair[1] in commonPassword and len(pair[0]) > 0:
-                    warning = 'hardcoded secret'
-                    print(warning+ ' at line '+ str(lineno))
-                    
-                    saveAsCSV('hardcoded_secret', srcFile)
-                    saveWarnings(warning,str(lineno))
-                    

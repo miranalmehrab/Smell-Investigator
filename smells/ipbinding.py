@@ -1,5 +1,4 @@
-from operations.savewarnings import saveWarnings
-from operations.saveascsv import saveAsCSV
+from operations.actionUponDetection import actionUponDetection
 
 def detect(token, srcFile):
 
@@ -14,9 +13,5 @@ def detect(token, srcFile):
     if tokenType == "function_call" and name in unwantedmethod :
         
         for arg in args:
-            if arg in unwantedparam:
-                warning = 'harcoded ip address binding'
-                print(warning+ ' at line '+ str(lineno))
+            if arg in unwantedparam: actionUponDetection(srcFile, lineno, 'hardcoded_interface', 'Harcoded ip address binding used')
                 
-                saveAsCSV('hardcoded_interface', srcFile)
-                saveWarnings(warning,str(lineno))
