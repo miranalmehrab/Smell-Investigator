@@ -77,12 +77,21 @@ class Analyzer(ast.NodeVisitor):
 
     def visit_Assign(self, node):
         
+        # print('')
+        # print(node.lineno)
         # print(ast.dump(node))
+        # print('')
+
+
         for target in node.targets:
             
             variable = {}
             variable["type"] = "variable"
             variable["line"] = node.lineno
+            variable['name'] = None
+            variable['value'] = None
+            variable['valueSrc'] = 'initialization'
+            variable['isInput'] = False 
         
             if isinstance(target,ast.Name):
                 variable["name"] = target.id
@@ -91,9 +100,9 @@ class Analyzer(ast.NodeVisitor):
                 var = self.addVariablesToList(target.value, [])
                 variable["name"] = var[0] if len(var) > 0 else None
                 
-                print(node.lineno)
-                print(ast.dump(node))
-                print('')
+                # print(node.lineno)
+                # print(ast.dump(node))
+                # print('')
 
                 varSlice = None
                 if isinstance(target.slice, ast.Index): 
@@ -136,7 +145,7 @@ class Analyzer(ast.NodeVisitor):
                 
             if isinstance(node.value, ast.Constant):
                 variable["value"] = node.value.value
-                variable["valueSrc"] = "initialized"
+                variable["valueSrc"] = "initialization"
                 variable["isInput"] = False
 
             if isinstance(node.value, ast.Name):
@@ -144,7 +153,7 @@ class Analyzer(ast.NodeVisitor):
                 if type(valueFromName) == list: variable["type"] = "list"
                 
                 variable["value"] = valueFromName
-                variable["valueSrc"] = "initialized"
+                variable["valueSrc"] = "initialization"
                 variable["isInput"] = False
 
             
@@ -160,7 +169,7 @@ class Analyzer(ast.NodeVisitor):
                 
                 else:
                     variable["value"] = self.buildNewVariableValueFromUsedOnes(usedVars)
-                    variable["valueSrc"] = "initialized"
+                    variable["valueSrc"] = "initialization"
                     variable["isInput"] = False
 
             elif isinstance(node.value, ast.Call):
@@ -196,7 +205,7 @@ class Analyzer(ast.NodeVisitor):
                 variable["type"] = "list"
                 variable["values"] = []
                 
-                variable["valueSrc"] = 'initialized'
+                variable["valueSrc"] = 'initialization'
                 variable["isInput"] = False
                 
                 for value in node.value.elts:
@@ -268,7 +277,10 @@ class Analyzer(ast.NodeVisitor):
                     elif varSlice != None and variable["value"]!= None: variable["value"] = variable["value"]+'['+str(varSlice)+']'
                     else: variable["value"] = '['+str(varSlice)+']'
 
+            elif isinstance(node.value, ast.Attribute):
+                variable["valueSrc"] = self.getFunctionAttribute(node.value)+'.'+node.value.attr if node.value.attr else self.getFunctionAttribute(node.value) 
                 
+                 
 
             self.statements.append(variable)
 
@@ -277,8 +289,12 @@ class Analyzer(ast.NodeVisitor):
 
     ######################### If Comparasion Block Here #########################
     def visit_If(self,node):
-
+        
+        # print('')
+        # print(node.lineno)
         # print(ast.dump(node)) 
+        # print('')
+
         statement = {}
         statement["type"] = "comparison"
         statement["line"] = node.lineno
@@ -318,7 +334,11 @@ class Analyzer(ast.NodeVisitor):
             leftComparatorList = self.addVariablesToList(node.test.left, [])
             if len(leftComparatorList)>0: pair.append(leftComparatorList[0])
 
-            comparatorList = self.addVariablesToList(node.test.comparators[0],[])
+            comparatorList = []
+            if isinstance(node.test.comparators[0], ast.UnaryOp):
+                comparatorList = self.addVariablesToList(node.test.comparators[0].operand,[])
+
+            else: comparatorList = self.addVariablesToList(node.test.comparators[0],[])
             # print(comparatorList)
             
             if len(comparatorList) > 0: pair.append(comparatorList[0])
@@ -433,8 +453,9 @@ class Analyzer(ast.NodeVisitor):
 
     def addVariablesToList(self,node,itemList):
         if isinstance(node,ast.Name):
-            if self.valueFromName(node.id): itemList.append(self.valueFromName(node.id)) 
-            else: itemList.append(node.id)
+            itemList.append(node.id)
+            # if self.valueFromName(node.id): itemList.append(self.valueFromName(node.id)) 
+            # else: itemList.append(node.id)
 
         elif isinstance(node,ast.Constant): itemList.append(node.value)
         elif isinstance(node,ast.Attribute): itemList.append(self.getFunctionAttribute(node)+'.'+node.attr)
@@ -465,15 +486,33 @@ class Analyzer(ast.NodeVisitor):
                 itemList = self.addVariablesToList(element,itemList)
 
         
-
         elif isinstance(node, ast.JoinedStr):
             for value in node.values:
                 itemList = self.addVariablesToList(value, itemList)
 
         elif isinstance(node, ast.Lambda):
             itemList = self.addVariablesToList(node.body, itemList)
-            
+        
+        elif isinstance(node, ast.Subscript):
 
+                varSlice = None
+                itemList = self.addVariablesToList(node.value, itemList)
+                
+                # print(ast.dump(node))
+
+                if isinstance(node.slice, ast.Index): 
+                    varSlice = self.addVariablesToList(node.slice.value, [])
+                    varSlice = varSlice[0] if len(varSlice) > 0 else None
+
+                elif isinstance(node.slice, ast.ExtSlice):
+                    varSlice = self.addVariablesToList(node.slice.dims, [])
+                    varSlice = varSlice[0] if len(varSlice) > 0 else None
+
+                # print(itemList)
+                
+                if varSlice != None and len(itemList) > 0: itemList[0] = itemList[0]+'['+str(varSlice)+']'
+                elif varSlice == None and len(itemList) > 0: pass 
+                
         
         return itemList
 
@@ -482,10 +521,10 @@ class Analyzer(ast.NodeVisitor):
         for statement in self.statements:
              
             if statement["type"] == "tuple" and statement.__contains__("names") and (statement.__contains__("values") or statement.__contains__("value")) :
-                print('')
-                print('debug ---------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>')
-                print(statement)
-                print('')
+                # print('')
+                # print('debug ---------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>')
+                # print(statement)
+                # print('')
                 for name in statement["names"]:
 
                     variable = {}
@@ -493,7 +532,7 @@ class Analyzer(ast.NodeVisitor):
                     variable["line"] = statement["line"]
                     variable["name"] = name
                     variable["value"] = statement["values"][(statement["names"].index(name))] if statement.__contains__("values") else statement["value"] 
-                    variable["valueSrc"] = statement["valueSrc"] if statement.__contains__("valueSrc") else "initialized"
+                    variable["valueSrc"] = statement["valueSrc"] if statement.__contains__("valueSrc") else "initialization"
                     variable["isInput"] = statement["isInput"] if statement.__contains__("isInput") else False
                     
                     self.statements.append(variable)
@@ -665,8 +704,6 @@ class Analyzer(ast.NodeVisitor):
         for statement in self.statements:
             if len(types) == 0: print(statement)
             elif statement["type"] in types: print(statement)
-
-        self.writeToFile()
 
 
     def printUserInputs(self):

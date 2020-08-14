@@ -1,20 +1,30 @@
 import ast
 import glob
 from os import system, name 
+
 from parse import Analyzer
 from detection.detection import detection
 
-def runAnalyzer(srcCode, srcFile):
-        
+from operations.clearFileContent import clearFileContent
+from operations.compareDetectionAccuracy import compareDetectionAccuracy
+
+def analyzeSrcCode(srcCode, srcFile):
+    
+
     tree = ast.parse(srcCode, type_comments=True)
     # print(ast.dump(tree,include_attributes=True))
-    print(ast.dump(tree))
+    # print(ast.dump(tree))
 
     analyzer = Analyzer()
     analyzer.visit(tree)
+
     analyzer.checkUserInputsInFunctionArguments()
     analyzer.refineTokens()
-    analyzer.printStatements()
+    analyzer.writeToFile()
+    # analyzer.printStatements('variable', 'list', 'tuple', 'dict')
+    # analyzer.printStatements('function_def')
+    # analyzer.printStatements('comparison')
+    
     f = open("tokens.txt", "r")
     detection(f.read(), srcFile)
 
@@ -28,27 +38,39 @@ def testFromTestCodeFolder():
         fileCounter = fileCounter + 1
         srcFile = open(srcFile, 'r')
         srcCode = srcFile.read()
-        runAnalyzer(srcCode, srcFile)
+        analyzeSrcCode(srcCode, srcFile)
 
 
 def testFromSrcCodesFolder():
     
-    folderNum = 2
-    srcFiles =  glob.glob("src-codes/srcs-"+str(folderNum)+"/*.py")
-    fileCounter = 0
+    clearFileContent('detected_smells.csv')
 
-    for srcFile in srcFiles:
-        
-        print('File number - '+str(fileCounter)+': '+srcFile)    
-        fileCounter = fileCounter + 1
-        srcFile = open(srcFile, 'r')
-        srcCode = srcFile.read()
-        runAnalyzer(srcCode, srcFile)
+    numberOfParsingError = 0
+    for srcCodeFolder in range(0, 588):
+        srcFiles = glob.glob("src-codes/srcs-"+str(srcCodeFolder)+"/*.py")
+        fileCounter = 1
 
+        for srcFile in srcFiles:
+            print('File number -'+str(fileCounter)+': '+srcFile)    
+            
+            srcFile = open(srcFile, 'r')
+            srcCode = srcFile.read()
+            
+            try:
+                analyzeSrcCode(srcCode, srcFile)
+            except:
+                numberOfParsingError += 1
+                print('parsing error count : ' + str(numberOfParsingError))
+
+            fileCounter += 1
+
+    compareDetectionAccuracy()
 
 def testSingleSrcCodeFile():
-    fileName = 'src.py'
-    srcFile = open('src.py', 'r')
+    fileName = 'test-codes/if-test.py'
+    srcFile = open(fileName, 'r')
+
+    # srcFile = open('src.py', 'r')
     # srcFile = open('test-codes/function-def.py', 'r')
     # srcFile = open('test-codes/var-assign.py', 'r')
     # srcFile = open('test-codes/marshal.py', 'r')
@@ -56,13 +78,13 @@ def testSingleSrcCodeFile():
     # srcFile = open('test-codes/yaml.py', 'r')
 
     srcCode = srcFile.read()
-    runAnalyzer(srcCode,fileName)
+    analyzeSrcCode(srcCode,fileName)
     
 
 def main():
-    # testFromSrcCodesFolder()
+    testFromSrcCodesFolder()
     # testFromTestCodeFolder()
-    testSingleSrcCodeFile()
+    # testSingleSrcCodeFile()
         
 
 if __name__ == "__main__":
