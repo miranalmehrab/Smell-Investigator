@@ -17,30 +17,38 @@ from smells.marshal import detect as marshalDetect
 from smells.eval import detect as evalDetect
 from smells.yamlload import detect as yamlloadDetect
 
+from operations.saveDetectionExceptions import saveDetectionExceptions
+from operations.tokenLoadingExceptions import tokenLoadingExceptions
+
 
 def detection(tokens, srcFile):
     
     tokens = tokens.splitlines()
     
     for token in tokens:
-        token = json.loads(token)
-        
         try:
-            cliargsDetect(token, srcFile)
-            execDetect(token, srcFile)
-            debugflagDetect(token, srcFile)
-            emptypasswordDetect(token, srcFile)
-            hardcodedsecretDetect(token, srcFile)
-            filepermissionDetect(token, srcFile)
-            ipbindingDetect(token, srcFile)
-            httponlyDetect(token, srcFile)
-            sqlinjectionDetect(token, srcFile)
-            tempdirDetect(token, srcFile)
-            ignexceptDetect(token, srcFile)
-            assertDetect(token, srcFile)
-            pickleDetect(token, srcFile)
-            marshalDetect(token, srcFile)
-            evalDetect(token, srcFile)
-            yamlloadDetect(token, srcFile)
-        except:
-            print('detection error')
+            token = json.loads(token)
+
+            try:
+                cliargsDetect(token, srcFile)
+                execDetect(token, srcFile)
+                debugflagDetect(token, srcFile)
+                emptypasswordDetect(token, srcFile)
+                hardcodedsecretDetect(token, srcFile)
+                filepermissionDetect(token, srcFile)
+                ipbindingDetect(token, srcFile)
+                httponlyDetect(token, srcFile)
+                sqlinjectionDetect(token, srcFile)
+                tempdirDetect(token, srcFile)
+                ignexceptDetect(token, srcFile)
+                assertDetect(token, srcFile)
+                pickleDetect(token, srcFile)
+                marshalDetect(token, srcFile)
+                evalDetect(token, srcFile)
+                yamlloadDetect(token, srcFile)
+
+            except Exception as error: saveDetectionExceptions(str(error)+' - '+ str(token), srcFile)
+            
+        except Exception as error: tokenLoadingExceptions(token+' - '+str(error),srcFile)
+        
+        

@@ -6,11 +6,16 @@ from parse import Analyzer
 from detection.detection import detection
 
 from operations.clearFileContent import clearFileContent
+from operations.saveParsingExceptions import saveParsingExceptions
 from operations.compareDetectionAccuracy import compareDetectionAccuracy
+
+def detectSmellsFromTokens(srcFile):
+    f = open("tokens.txt", "r")
+    detection(f.read(), srcFile)
+
 
 def analyzeSrcCode(srcCode, srcFile):
     
-
     tree = ast.parse(srcCode, type_comments=True)
     # print(ast.dump(tree,include_attributes=True))
     # print(ast.dump(tree))
@@ -24,9 +29,6 @@ def analyzeSrcCode(srcCode, srcFile):
     # analyzer.printStatements('variable', 'list', 'tuple', 'dict')
     # analyzer.printStatements('function_def')
     # analyzer.printStatements('comparison')
-    
-    f = open("tokens.txt", "r")
-    detection(f.read(), srcFile)
 
 
 
@@ -41,9 +43,13 @@ def testFromTestCodeFolder():
         analyzeSrcCode(srcCode, srcFile)
 
 
+
+
 def testFromSrcCodesFolder():
     
     clearFileContent('detected_smells.csv')
+    clearFileContent('logs/parsingExceptions.csv')
+    clearFileContent('logs/detectionExceptions.csv')
 
     numberOfParsingError = 0
     for srcCodeFolder in range(0, 588):
@@ -58,13 +64,16 @@ def testFromSrcCodesFolder():
             
             try:
                 analyzeSrcCode(srcCode, srcFile)
-            except:
+            except Exception as error:
                 numberOfParsingError += 1
-                print('parsing error count : ' + str(numberOfParsingError))
+                saveParsingExceptions(str(error) +str(numberOfParsingError), srcFile)
 
+            detectSmellsFromTokens(srcFile)
             fileCounter += 1
 
-    compareDetectionAccuracy()
+    # compareDetectionAccuracy()
+
+
 
 def testSingleSrcCodeFile():
     fileName = 'test-codes/if-test.py'
