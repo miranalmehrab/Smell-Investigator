@@ -8,8 +8,8 @@ def detect(token, srcFile):
     if token.__contains__("args"): args = token["args"]
     if token.__contains__("hasInputs"): hasInputs = token["hasInputs"]
 
-    unwantedMethods = ['execution.query']
+    unwantedMethods = ['execution.query', 'connection.cursor.execute']
     
-    if tokenType == "function_call" and name in unwantedMethods and args and hasInputs:
+    if tokenType == "function_call" and name in unwantedMethods and len(args) > 0 and hasInputs:
         actionUponDetection(srcFile, lineno, 'sql_injection', 'sql injection')
         

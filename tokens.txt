@@ -1,0 +1,99 @@
+{"type": "variable", "line": 1, "name": "x", "value": 1, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 2, "name": "query", "value": 2, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 3, "name": "ask", "value": 3, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 3, "name": "y", "value": 3, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 4, "name": "ask", "value": "abcde111", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 5, "name": "ip", "value": "0.0.0.0", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 6, "name": "port", "value": "3030", "valueSrc": "initialization", "isInput": false}
+{"type": "function_obj", "line": 8, "objName": "s", "funcName": "socket.socket", "args": ["AF.NET", "IO.SOCKET"]}
+{"type": "variable", "line": 8, "name": "s", "value": null, "valueSrc": "socket.socket", "isInput": false, "args": ["AF.NET", "IO.SOCKET"]}
+{"type": "function_call", "line": 9, "name": "socket.socket.bind", "args": ["ip", "port"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 10, "name": "socket.socket.bind", "args": ["0.0.0.0", "3030"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 11, "name": "token", "value": "abcdea", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 12, "name": "header[authorization]", "value": "bearer:abcdea", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 13, "name": "header[0]", "value": "abcdea", "valueSrc": "initialization", "isInput": false}
+{"type": "function_call", "line": 14, "name": "subprocess.call", "args": ["chmod", "0444", "path"], "keywords": [], "hasInputs": false}
+{"type": "function_def", "line": 16, "name": "logIn", "args": ["username", "password"], "defaults": ["sdnsjnd", "whwdgwgdb"], "return": "logged in"}
+{"type": "function_call", "line": 19, "name": "logIn", "args": [], "keywords": [["password", "12123"], ["username", "asasd"]], "hasInputs": false}
+{"type": "list", "line": 21, "name": "passwords", "value": null, "valueSrc": "initialization", "isInput": false, "values": ["abc123", "xyz321"]}
+{"type": "dict", "line": 22, "name": "myDict", "value": null, "valueSrc": "initialization", "isInput": false, "keys": ["password", "token", "debug"], "values": ["12234", "12i1gjhwbejsqdguayg2367t276", true]}
+{"type": "set", "line": 23, "name": "username", "value": null, "valueSrc": "initialization", "isInput": false, "values": ["apple", "banana", "cherry"]}
+{"type": "import", "line": 25, "og": "os", "alias": null}
+{"type": "import", "line": 26, "og": "socket", "alias": null}
+{"type": "import", "line": 27, "og": "math.pi", "alias": null}
+{"type": "import", "line": 27, "og": "math.sqrt", "alias": null}
+{"type": "import", "line": 27, "og": "math.fabs", "alias": null}
+{"type": "import", "line": 28, "og": "os", "alias": null}
+{"type": "import", "line": 29, "og": "hashlib", "alias": null}
+{"type": "variable", "line": 31, "name": "file_name", "value": null, "valueSrc": "input", "isInput": true, "args": []}
+{"type": "function_call", "line": 32, "name": "exec", "args": ["file_name"], "keywords": [], "hasInputs": true}
+{"type": "function_call", "line": 34, "name": "os.chmod", "args": ["/etc/hosts", 1911], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 35, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IRWXO"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 36, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IROTH"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 37, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IWOTH"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 38, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IXOTH"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 40, "name": "DEBUG_PROPAGATE_EXCEPTIONS", "value": true, "valueSrc": "initialization", "isInput": false}
+{"type": "function_call", "line": 41, "name": "app.run", "args": [], "keywords": [["debug", true], ["start", true]], "hasInputs": false}
+{"type": "variable", "line": 42, "name": "password", "value": "pass", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 43, "name": "password", "value": "", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 44, "name": "pwd", "value": "", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 45, "name": "password", "value": null, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 46, "name": "name", "value": "root", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 47, "name": "pwd", "value": "root123", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 48, "name": "query", "value": "delete from foo where id = user_inputuser_input", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 49, "name": "x", "value": "abc", "valueSrc": "initialization", "isInput": false}
+{"type": "function_call", "line": 50, "name": "urllib.urlretrieve", "args": ["192.168.10.1/example.iso"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 52, "name": "user_input", "value": null, "valueSrc": "input", "isInput": true, "args": []}
+{"type": "function_call", "line": 53, "name": "execution.query", "args": ["user_input"], "keywords": [], "hasInputs": true}
+{"type": "function_call", "line": 54, "name": "subprocess.Popen", "args": ["user_input"], "keywords": [], "hasInputs": true}
+{"type": "variable", "line": 55, "name": "result", "value": null, "valueSrc": "connection.execute", "isInput": false, "args": ["user_input"]}
+{"type": "function_call", "line": 56, "name": "sys.argv", "args": ["sudo mkdir ", "user_input"], "keywords": [], "hasInputs": true}
+{"type": "variable", "line": 60, "name": "x", "value": 1, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 61, "name": "query", "value": 2, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 62, "name": "ask", "value": 3, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 62, "name": "y", "value": 3, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 63, "name": "ask", "value": "abcde111", "valueSrc": "initialization", "isInput": false}
+{"type": "function_obj", "line": 64, "objName": "s", "funcName": "socket.socket", "args": ["AF.NET", "IO.SOCKET"]}
+{"type": "variable", "line": 64, "name": "s", "value": null, "valueSrc": "socket.socket", "isInput": false, "args": ["AF.NET", "IO.SOCKET"]}
+{"type": "function_call", "line": 65, "name": "socket.socket.bind", "args": ["ip", "port"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 66, "name": "token", "value": "abcdea", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 67, "name": "header[authorization]", "value": "bearer:abcdea", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 68, "name": "header[0]", "value": "abcdea", "valueSrc": "initialization", "isInput": false}
+{"type": "import", "line": 70, "og": "os", "alias": null}
+{"type": "import", "line": 71, "og": "socket", "alias": null}
+{"type": "import", "line": 72, "og": "math.pi", "alias": null}
+{"type": "import", "line": 72, "og": "math.sqrt", "alias": null}
+{"type": "import", "line": 72, "og": "math.fabs", "alias": null}
+{"type": "import", "line": 73, "og": "os", "alias": null}
+{"type": "variable", "line": 74, "name": "file_name", "value": null, "valueSrc": "input", "isInput": true, "args": []}
+{"type": "function_call", "line": 75, "name": "exec", "args": ["sudo mkdir {file_name}"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 77, "name": "os.chmod", "args": ["/etc/hosts", 1911], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 78, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IRWXO"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 79, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IROTH"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 80, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IWOTH"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 81, "name": "os.chmod", "args": ["/etc/hosts", "stat.S_IXOTH"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 83, "name": "DEBUG_PROPAGATE_EXCEPTIONS", "value": true, "valueSrc": "initialization", "isInput": false}
+{"type": "function_call", "line": 84, "name": "app.run", "args": [], "keywords": [["debug", true], ["start", true]], "hasInputs": false}
+{"type": "variable", "line": 85, "name": "password", "value": "pass", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 86, "name": "password", "value": "", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 87, "name": "pwd", "value": "", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 88, "name": "password", "value": null, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 89, "name": "name", "value": "root", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 90, "name": "pwd", "value": "root123", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 91, "name": "query", "value": null, "valueSrc": "input", "isInput": true}
+{"type": "variable", "line": 92, "name": "x", "value": "abc", "valueSrc": "initialization", "isInput": false}
+{"type": "function_call", "line": 93, "name": "urllib.urlretrieve", "args": ["192.168.10.1/example.iso"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 95, "name": "user_input", "value": null, "valueSrc": "input", "isInput": true, "args": []}
+{"type": "function_call", "line": 96, "name": "execution.query", "args": ["user_input"], "keywords": [], "hasInputs": true}
+{"type": "function_call", "line": 97, "name": "subprocess.Popen", "args": ["user_input"], "keywords": [], "hasInputs": true}
+{"type": "variable", "line": 98, "name": "result", "value": null, "valueSrc": "connection.execute", "isInput": false, "args": ["user_input"]}
+{"type": "variable", "line": 99, "name": "r", "value": null, "valueSrc": "sys.argv", "isInput": false, "args": ["sudo mkdir ", "user_input"]}
+{"type": "function_def", "line": 102, "name": "getPort", "args": ["ip", "port", "socket"], "defaults": ["socket", "port"], "return": 3032}
+{"type": "function_def", "line": 105, "name": "getIp", "args": ["ip", "port"], "defaults": [3000, 3032], "return": 3032, "returnArgs": ["ip", "port", "1200", 35, "socket", "sock.socket"]}
+{"type": "variable", "line": 108, "name": "r", "value": null, "valueSrc": "requests.get", "isInput": false, "args": ["http://abc.com"]}
+{"type": "function_call", "line": 109, "name": "requests.get", "args": ["http://abc.com"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 110, "name": "requests.get", "args": ["www.abc.com"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 112, "name": "socket.socket.bind", "args": [3032, 3032, "1234"], "keywords": [], "hasInputs": false}
+{"type": "exception_handle", "line": 141, "exceptionHandler": "pass"}
+{"type": "variable", "line": 140, "name": "x", "value": 2, "valueSrc": "initialization", "isInput": false}
+{"type": "function_call", "line": 143, "name": "doSomething", "args": [], "keywords": [], "hasInputs": false}

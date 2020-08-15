@@ -26,8 +26,10 @@ def analyzeSrcCode(srcCode, srcFile):
     analyzer.checkUserInputsInFunctionArguments()
     analyzer.refineTokens()
     analyzer.writeToFile()
+    # analyzer.printStatements('list', 'dict', 'set')
+    
     # analyzer.printStatements('variable', 'list', 'tuple', 'dict')
-    # analyzer.printStatements('function_def')
+    analyzer.printStatements()
     # analyzer.printStatements('comparison')
 
 
@@ -74,10 +76,15 @@ def testFromSrcCodesFolder():
 
 
 def testSingleSrcCodeFile():
-    fileName = 'test-codes/if-test.py'
-    srcFile = open(fileName, 'r')
 
-    # srcFile = open('src.py', 'r')
+    clearFileContent('detected_smells.csv')
+    clearFileContent('logs/parsingExceptions.csv')
+    clearFileContent('logs/detectionExceptions.csv')
+
+    fileName = 'test-codes/if-test.py'
+    # srcFile = open(fileName, 'r')
+
+    srcFile = open('src.py', 'r')
     # srcFile = open('test-codes/function-def.py', 'r')
     # srcFile = open('test-codes/var-assign.py', 'r')
     # srcFile = open('test-codes/marshal.py', 'r')
@@ -86,12 +93,14 @@ def testSingleSrcCodeFile():
 
     srcCode = srcFile.read()
     analyzeSrcCode(srcCode,fileName)
+    detectSmellsFromTokens(srcFile)
+    # compareDetectionAccuracy()
     
 
 def main():
-    testFromSrcCodesFolder()
+    # testFromSrcCodesFolder()
     # testFromTestCodeFolder()
-    # testSingleSrcCodeFile()
+    testSingleSrcCodeFile()
         
 
 if __name__ == "__main__":

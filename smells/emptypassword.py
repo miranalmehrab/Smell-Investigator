@@ -7,7 +7,7 @@ def detect(token, srcFile):
     if token.__contains__("name"): name = token["name"]
     if token.__contains__("value"): value = token["value"]
     
-    commonPasswords = ['password','pass','pwd','userPassword','PASSWORD','PASS','PWD','USERPWD']
+    commonPasswords = ['password','passwords','pass','pwd','userpassword','userpwd', 'userpass', 'pass_no', 'pass-no', 'user-pass', 'upass']
     
     if tokenType == "variable" and name in commonPasswords and value == None: actionUponDetection(srcFile, lineno, 'empty_password', 'empty password')
     
@@ -16,6 +16,9 @@ def detect(token, srcFile):
     elif tokenType == "comparison" and token.__contains__("pairs"):
 
         for pair in token["pairs"]:
-            if pair[0] in commonPasswords and len(pair[1]) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'empty password')
-            elif pair[1] in commonPasswords and len(pair[0]) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'empty password')
-                
+            if len(pair) == 2 and pair[0] in commonPasswords and len(pair[1]) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'empty password')
+            elif len(pair) == 2 and pair[1] in commonPasswords and len(pair[0]) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'empty password')
+    
+    elif tokenType == "function_call" and token.__contains__('keywords'):
+        for keyword in token['keywords']:
+            if len(keyword) == 2 and keyword[0].lower() in commonPasswords and len(keyword[1]) == 0: actionUponDetection(srcFile, lineno, 'hardcoded_secret', 'hardcoded secret')

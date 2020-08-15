@@ -20,5 +20,5 @@ def detect(token, srcFile):
     elif tokenType == "function_def":
         if token.__contains__("return"): funcReturn  = token["return"]
         if token.__contains__("returnArgs"): returnArgs = token["returnArgs"]
-        if funcReturn == "yaml.load" and returnArgs!= None: actionUponDetection(srcFile, lineno, 'yaml_load_used', 'yaml.load used')
+        if funcReturn == "yaml.load" and len(returnArgs)>0: actionUponDetection(srcFile, lineno, 'yaml_load_used', 'yaml.load used')
     

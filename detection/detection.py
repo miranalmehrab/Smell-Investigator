@@ -1,6 +1,6 @@
 import json
 
-from smells.cliargs import detect as cliargsDetect
+from smells.commandinjection import detect as commandinjectionDetecet
 from smells.exec import detect as execDetect
 from smells.debugflag import detect as debugflagDetect
 from smells.emptypassword import detect as emptypasswordDetect
@@ -14,15 +14,33 @@ from smells.ignexcept import detect as ignexceptDetect
 from smells.assertstat import detect as assertDetect 
 from smells.pickle import detect as pickleDetect
 from smells.marshal import detect as marshalDetect
+from smells.nointegritycheck import detect as nointegritycheckDetect
+from smells.nocertificate import detect as nocertificateDetect
 from smells.eval import detect as evalDetect
 from smells.yamlload import detect as yamlloadDetect
 
 from operations.saveDetectionExceptions import saveDetectionExceptions
 from operations.tokenLoadingExceptions import tokenLoadingExceptions
 
+def getImports(tokens):
+    
+    imports = []
+    tokens = tokens.splitlines()
+
+    for token in tokens:
+        try: 
+            token = json.loads(token)
+            if token['type'] == 'import': imports.append(token['og'])
+
+
+        except Exception as error:
+            print(str(error))
+    
+    return imports
 
 def detection(tokens, srcFile):
     
+    imports = getImports(tokens)
     tokens = tokens.splitlines()
     
     for token in tokens:
@@ -30,7 +48,7 @@ def detection(tokens, srcFile):
             token = json.loads(token)
 
             try:
-                cliargsDetect(token, srcFile)
+                commandinjectionDetecet(token, srcFile)
                 execDetect(token, srcFile)
                 debugflagDetect(token, srcFile)
                 emptypasswordDetect(token, srcFile)
@@ -44,6 +62,8 @@ def detection(tokens, srcFile):
                 assertDetect(token, srcFile)
                 pickleDetect(token, srcFile)
                 marshalDetect(token, srcFile)
+                nocertificateDetect(token, srcFile)
+                nointegritycheckDetect(token, imports, srcFile)
                 evalDetect(token, srcFile)
                 yamlloadDetect(token, srcFile)
 

@@ -8,10 +8,16 @@ def detect(token, srcFile):
     if token.__contains__("args"): args = token["args"]
         
     unwantedmethod = ['socket.socket.bind']
-    unwantedparam = ['0.0.0.0','192.168.0.1']
         
     if tokenType == "function_call" and name in unwantedmethod :
-        
-        for arg in args:
-            if arg in unwantedparam: actionUponDetection(srcFile, lineno, 'hardcoded_interface', 'Harcoded ip address binding used')
+        if len(args) > 0 and is_valid_ip(args[0]): actionUponDetection(srcFile, lineno, 'hardcoded_ip', 'Harcoded ip address binding used')
                 
+def is_valid_ip(ip):
+    
+    parts = ip.split('.')
+    if len(parts) != 4: return False
+    
+    for part in parts:
+        if not 0<= int(part) <=255: return False
+
+    return True    

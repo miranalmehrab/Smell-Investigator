@@ -7,9 +7,16 @@ def detect(token, srcFile):
     if token.__contains__("name"): name = token["name"]
     if token.__contains__("args"): args = token["args"]
 
-    httpLibs = ['httplib.urlretrieve', 'urllib', 'requests.get']
+    httpLibs = ['httplib.urlretrieve', 'urllib.urlopen', 'requests.get']
     
-    if tokenType=="function_call" and name in httpLibs:
+    if tokenType == "variable" and token.__contains__("valueSrc") and token.__contains__("args"):
         
-        if args and args[0].split("://")[0] != "https":
-            actionUponDetection(srcFile, lineno, 'use_of_http', 'use of HTTP without TLS')
+        args = token['args']
+        valueSrc = token['valueSrc']
+
+        if valueSrc in httpLibs:
+            if len(args)>0 and args[0].split("://")[0] != "https" : actionUponDetection(srcFile, lineno, 'use_of_http', 'use of HTTP without TLS')
+
+    if tokenType == "function_call" and name in httpLibs:
+        if len(args) > 0 and args[0].split("://")[0] != "https" : actionUponDetection(srcFile, lineno, 'use_of_http', 'use of HTTP without TLS')
+

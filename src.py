@@ -2,16 +2,31 @@ x = 1
 query = 2
 ask = y = query + x
 ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
+ip = '0.0.0.0'
+port = '3030'
+
 s = socket.socket(AF.NET,IO.SOCKET)
 s.bind(ip,port)
+s.bind('0.0.0.0','3030')
 token = "abcdea"
 header[authorization] = "bearer:"+token
 header[0] = token
+subprocess.call(['chmod', '0444', 'path'])
+
+def logIn(username = "sdnsjnd" , password = "whwdgwgdb"):
+    return 'logged in'
+
+logIn(password = '12123', username ='asasd')
+
+passwords = ['abc123', 'xyz321']
+myDict = {'password' : '12234', 'token' : '12i1gjhwbejsqdguayg2367t276', 'debug': True}
+username = {"apple", "banana", "cherry"}
 
 import os
 import socket 
 from math import pi,sqrt,fabs
 from os import *
+import hashlib
 
 file_name = input()
 exec(file_name)
@@ -81,7 +96,7 @@ user_input = input()
 execution.query(user_input)
 subprocess.Popen(user_input)
 result = connection.execute(user_input)
-sys.argv(f'sudo mkdir {user_input}')
+r = sys.argv(f'sudo mkdir {user_input}')
 
 
 def getPort(ip,port,socket = ['socket','port']):
@@ -90,6 +105,9 @@ def getPort(ip,port,socket = ['socket','port']):
 def getIp(ip = 3000, port = getPort()):
     return getPort(ip,port,'12'+'00',12+23,socket(12),sock.socket(12))
 
+r = requests.get("http://abc.com")
+requests.get("http://abc.com")
+requests.get("www.abc.com")
 
 socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'4')
 
@@ -103,7 +121,6 @@ socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'
 #     print('1 is equal to 1')
 
 # hardcoded_tmp_directory = ['/tmp','/var/tmp','/var/usr/tmp', 12+12]
-# requests.get("http://abc.com")
 
 # connection.execute("hello")
 # connection.execute(user_input)
@@ -120,10 +137,10 @@ socket.socket(socket.AF_INET, socket.SOCK_STREAM).bind(getIp(),getPort(),'123'+'
 # s.bind('0.0.0.0','3000')
 # m.bind(ip,port)
 
-# try: x = 2
-# except:
-#     doSomething() 
-#     pass
+try: x = 2
+except: pass
+
+doSomething() 
 
 # """ This is a convenient way to monkeypatch a method or attribute of a Python
 #     object. This is great for situations where you want to modify a global
