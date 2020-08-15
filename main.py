@@ -43,8 +43,6 @@ def testFromTestCodeFolder():
         analyzeSrcCode(srcCode, srcFile)
 
 
-
-
 def testFromSrcCodesFolder():
     
     clearFileContent('detected_smells.csv')
@@ -52,12 +50,12 @@ def testFromSrcCodesFolder():
     clearFileContent('logs/detectionExceptions.csv')
 
     numberOfParsingError = 0
+    
     for srcCodeFolder in range(0, 588):
+        
         srcFiles = glob.glob("src-codes/srcs-"+str(srcCodeFolder)+"/*.py")
-        fileCounter = 1
-
-        for srcFile in srcFiles:
-            print('File number -'+str(fileCounter)+': '+srcFile)    
+        
+        for srcFile in srcFiles:    
             
             srcFile = open(srcFile, 'r')
             srcCode = srcFile.read()
@@ -69,9 +67,9 @@ def testFromSrcCodesFolder():
                 saveParsingExceptions(str(error) +str(numberOfParsingError), srcFile)
 
             detectSmellsFromTokens(srcFile)
-            fileCounter += 1
 
-    # compareDetectionAccuracy()
+    compareDetectionAccuracy()
+
 
 
 

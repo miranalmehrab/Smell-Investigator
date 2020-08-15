@@ -111,7 +111,7 @@ class Analyzer(ast.NodeVisitor):
 
                 elif isinstance(target.slice, ast.ExtSlice):
                     varSlice = self.addVariablesToList(target.slice.dims, [])
-                    print(varSlice)
+                    # print(varSlice)
                     varSlice = varSlice[0] if len(varSlice) > 0 else None
 
                     
@@ -424,7 +424,7 @@ class Analyzer(ast.NodeVisitor):
     ######################### Assert Here #########################
 
     def visit_Assert(self, node):
-        print(ast.dump(node))
+        # print(ast.dump(node))
 
         if isinstance(node.test, ast.Compare):
             left = self.addVariablesToList(node.test.left, [])

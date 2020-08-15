@@ -9,8 +9,6 @@ def detect(token, srcFile):
     
     commonPasswords = ['password','pass','pwd','userPassword','PASSWORD','PASS','PWD','USERPWD']
     
-    print(token)
-
     if tokenType == "variable" and name in commonPasswords and value == None: actionUponDetection(srcFile, lineno, 'empty_password', 'empty password')
     
     elif tokenType == "variable" and name in commonPasswords and len(value) == 0: actionUponDetection(srcFile, lineno, 'empty_password', 'empty password')
