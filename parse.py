@@ -69,6 +69,9 @@ class Analyzer(ast.NodeVisitor):
                     for arg in item.value.args:
                         func_def["returnArgs"] = self.addVariablesToList(arg, func_def["returnArgs"])
                         
+                        for i in range(len(func_def["returnArgs"])):  
+                            if self.valueFromName(func_def["returnArgs"][i]): func_def["returnArgs"][i] = self.valueFromName(func_def["returnArgs"][i])
+                        
         self.statements.append(func_def)
         self.generic_visit(node)
 
@@ -93,8 +96,7 @@ class Analyzer(ast.NodeVisitor):
             variable['valueSrc'] = 'initialization'
             variable['isInput'] = False 
         
-            if isinstance(target,ast.Name):
-                variable["name"] = target.id
+            if isinstance(target,ast.Name): variable["name"] = target.id
 
             elif isinstance(target, ast.Subscript):
                 var = self.addVariablesToList(target.value, [])
@@ -405,10 +407,11 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(node.value.func,ast.Call): expression["name"] = self.getFunctionName(node)
             elif isinstance(node.value.func,ast.Attribute): expression["name"] = self.getFunctionNameFromObject(self.getFunctionName(node))
             
-            for arg in node.value.args:
-                # print(ast.dump(arg))
-                arguments = self.addVariablesToList(arg,expression["args"]) 
-                expression["args"] = arguments             
+            # separating args in function call
+            for arg in node.value.args: expression['args'] = self.addVariablesToList(arg,expression["args"])
+            
+            # getting args value from name in function call 
+            for i in range(len(expression['args'])): expression['args'][i] = self.valueFromName(expression['args'][i])
             
             for keyword in node.value.keywords:
                 karg = keyword.arg
@@ -452,29 +455,19 @@ class Analyzer(ast.NodeVisitor):
 
 
     def addVariablesToList(self,node,itemList):
-        if isinstance(node,ast.Name):
-            itemList.append(node.id)
-            # if self.valueFromName(node.id): itemList.append(self.valueFromName(node.id)) 
-            # else: itemList.append(node.id)
-
+        
+        if isinstance(node,ast.Name): itemList.append(node.id)    
         elif isinstance(node,ast.Constant): itemList.append(node.value)
         elif isinstance(node,ast.Attribute): itemList.append(self.getFunctionAttribute(node)+'.'+node.attr)
-
-        elif isinstance(node,ast.FormattedValue):
-            itemList = self.addVariablesToList(node.value, itemList)
+        elif isinstance(node,ast.FormattedValue): itemList = self.addVariablesToList(node.value, itemList)
         
         elif isinstance(node,ast.BinOp):    
             usedArgs = self.getUsedVariablesInVariableDeclaration(node)
-            # print(usedArgs)
             actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
             itemList.append(actualValue)
         
         elif isinstance(node, ast.Call):
-
-            if isinstance(node.func, ast.Name):
-                func = node.func.id
-                itemList.append(self.functionReturnValue(func) if self.functionReturnValue(func) else func)
-            
+            if isinstance(node.func, ast.Name): itemList.append(node.func.id)
             elif isinstance(node.func, ast.Attribute):
                 func = self.getFunctionAttribute(node.func)
                 if node.func.attr and func: func = func +'.'+ node.func.attr
@@ -490,8 +483,7 @@ class Analyzer(ast.NodeVisitor):
             for value in node.values:
                 itemList = self.addVariablesToList(value, itemList)
 
-        elif isinstance(node, ast.Lambda):
-            itemList = self.addVariablesToList(node.body, itemList)
+        elif isinstance(node, ast.Lambda): itemList = self.addVariablesToList(node.body, itemList)
         
         elif isinstance(node, ast.Subscript):
 
@@ -513,8 +505,9 @@ class Analyzer(ast.NodeVisitor):
                 if varSlice != None and len(itemList) > 0: itemList[0] = itemList[0]+'['+str(varSlice)+']'
                 elif varSlice == None and len(itemList) > 0: pass 
                 
-        
         return itemList
+
+
 
 
     def refineTokens(self):

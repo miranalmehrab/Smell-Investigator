@@ -8,7 +8,5 @@ def detect(token, srcFile):
     
     unwantedArgs = ['continue','pass']
     
-    if tokenType == "exception_handle" and exceptionHandler in unwantedArgs: 
-        print(token)
-        actionUponDetection(srcFile, lineno, 'ignore_except_block', 'ignore except block')
+    if tokenType == "exception_handle" and exceptionHandler in unwantedArgs: actionUponDetection(srcFile, lineno, 'ignore_except_block', 'ignore except block')
             

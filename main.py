@@ -26,11 +26,11 @@ def analyzeSrcCode(srcCode, srcFile):
     analyzer.checkUserInputsInFunctionArguments()
     analyzer.refineTokens()
     analyzer.writeToFile()
-    # analyzer.printStatements('list', 'dict', 'set')
     
-    # analyzer.printStatements('variable', 'list', 'tuple', 'dict')
-    analyzer.printStatements()
+    # analyzer.printStatements()
     # analyzer.printStatements('comparison')
+    # analyzer.printStatements('list', 'dict', 'set')
+    # analyzer.printStatements('variable', 'list', 'tuple', 'dict')
 
 
 
@@ -81,26 +81,25 @@ def testSingleSrcCodeFile():
     clearFileContent('logs/parsingExceptions.csv')
     clearFileContent('logs/detectionExceptions.csv')
 
-    fileName = 'test-codes/if-test.py'
-    # srcFile = open(fileName, 'r')
+    fileName = 'src.py'
+    # fileName = 'test-codes/function-def.py'
+    # fileName = 'test-codes/var-assign.py'
+    # fileName = 'test-codes/marshal.py'
+    # fileName = 'test-codes/eval.py'
+    # fileName = 'test-codes/yaml.py'
 
-    srcFile = open('src.py', 'r')
-    # srcFile = open('test-codes/function-def.py', 'r')
-    # srcFile = open('test-codes/var-assign.py', 'r')
-    # srcFile = open('test-codes/marshal.py', 'r')
-    # srcFile = open('test-codes/eval.py', 'r')
-    # srcFile = open('test-codes/yaml.py', 'r')
-
+    srcFile = open(fileName,'r')
     srcCode = srcFile.read()
+    
     analyzeSrcCode(srcCode,fileName)
     detectSmellsFromTokens(srcFile)
-    # compareDetectionAccuracy()
+    compareDetectionAccuracy()
     
 
 def main():
-    # testFromSrcCodesFolder()
+    testFromSrcCodesFolder()
     # testFromTestCodeFolder()
-    testSingleSrcCodeFile()
+    # testSingleSrcCodeFile()
         
 
 if __name__ == "__main__":
