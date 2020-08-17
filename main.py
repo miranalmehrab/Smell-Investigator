@@ -1,12 +1,10 @@
 import ast
 import glob
-from os import system, name 
 
 from parse import Analyzer
 from detection.detection import detection
 
 from operations.clearFileContent import clearFileContent
-from operations.saveParsingExceptions import saveParsingExceptions
 from operations.compareDetectionAccuracy import compareDetectionAccuracy
 
 def detectSmellsFromTokens(srcFile):
@@ -25,6 +23,7 @@ def analyzeSrcCode(srcCode, srcFile):
 
     analyzer.checkUserInputsInFunctionArguments()
     analyzer.refineTokens()
+    # analyzer.makeTokensByteFree()
     analyzer.writeToFile()
     
     # analyzer.printStatements()
@@ -45,42 +44,11 @@ def testFromTestCodeFolder():
         analyzeSrcCode(srcCode, srcFile)
 
 
-def testFromSrcCodesFolder():
-    
-    clearFileContent('detected_smells.csv')
-    clearFileContent('logs/parsingExceptions.csv')
-    clearFileContent('logs/detectionExceptions.csv')
-
-    numberOfParsingError = 0
-    
-    for srcCodeFolder in range(0, 588):
-        
-        srcFiles = glob.glob("src-codes/srcs-"+str(srcCodeFolder)+"/*.py")
-        
-        for srcFile in srcFiles:    
-            
-            srcFile = open(srcFile, 'r')
-            srcCode = srcFile.read()
-            
-            try:
-                analyzeSrcCode(srcCode, srcFile)
-            except Exception as error:
-                numberOfParsingError += 1
-                saveParsingExceptions(str(error) +str(numberOfParsingError), srcFile)
-
-            detectSmellsFromTokens(srcFile)
-
-    compareDetectionAccuracy()
 
 
 
 
 def testSingleSrcCodeFile():
-
-    clearFileContent('detected_smells.csv')
-    clearFileContent('logs/parsingExceptions.csv')
-    clearFileContent('logs/detectionExceptions.csv')
-
     fileName = 'src.py'
     # fileName = 'test-codes/function-def.py'
     # fileName = 'test-codes/var-assign.py'
@@ -96,7 +64,28 @@ def testSingleSrcCodeFile():
     compareDetectionAccuracy()
     
 
+def testFromSrcCodesFolder():
+    for srcCodeFolder in range(0, 588):
+        srcFiles = glob.glob("src-codes/srcs-"+str(srcCodeFolder)+"/*.py") 
+        for srcFile in srcFiles:    
+            
+            srcFile = open(srcFile, 'r')
+            srcCode = srcFile.read()
+            
+            analyzeSrcCode(srcCode, srcFile)
+            detectSmellsFromTokens(srcFile)
+
+    compareDetectionAccuracy()
+
+
+
 def main():
+    clearFileContent('logs/bugFix.csv')
+    clearFileContent('detected_smells.csv')
+    clearFileContent('logs/parsingExceptions.csv')
+    clearFileContent('logs/detectionExceptions.csv')
+    clearFileContent('logs/tokenLoadingExceptions.csv')
+
     testFromSrcCodesFolder()
     # testFromTestCodeFolder()
     # testSingleSrcCodeFile()
