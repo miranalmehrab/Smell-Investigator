@@ -90,15 +90,16 @@ def analyze_single_code():
 # each project -> smells -> count -> problems
 
 def main():
-    clearFileContent('logs/bugFix.csv')
-    clearFileContent('detected_smells.csv')
-    clearFileContent('logs/projectSmells.csv')
-    clearFileContent('logs/parsingExceptions.csv')
-    clearFileContent('logs/detectionExceptions.csv')
-    clearFileContent('logs/tokenLoadingExceptions.csv')
+    save_project_smells()
+    # clearFileContent('logs/bugFix.csv')
+    # clearFileContent('detected_smells.csv')
+    # clearFileContent('logs/projectSmells.csv')
+    # clearFileContent('logs/parsingExceptions.csv')
+    # clearFileContent('logs/detectionExceptions.csv')
+    # clearFileContent('logs/tokenLoadingExceptions.csv')
 
     # analyze_single_code()
-    analyze_code_folder()
+    # analyze_code_folder()
         
 
 if __name__ == "__main__":
