@@ -1,22 +1,4 @@
-{"type": "import", "line": 1, "og": "datetime.datetime", "alias": null}
-{"type": "import", "line": 3, "og": "string", "alias": null}
-{"type": "import", "line": 5, "og": "nltk.stem.lancaster.LancasterStemmer", "alias": null}
-{"type": "import", "line": 6, "og": "nltk.corpus.stopwords", "alias": null}
-{"type": "function_def", "line": 9, "name": "get_time", "args": ["tweet"], "defaults": [], "return": "datetime.strptime", "returnArgs": ["tweet[created_at]", "%a %b %d %H:%M:%S +0000 %Y"]}
-{"type": "function_def", "line": 13, "name": "get_hashtags", "args": ["tweet"], "defaults": [], "return": null}
-{"type": "function_def", "line": 17, "name": "get_user_mentions", "args": ["tweet"], "defaults": [], "return": null}
-{"type": "function_def", "line": 21, "name": "get_text_cleaned", "args": ["tweet"], "defaults": [], "return": "text"}
-{"type": "variable", "line": 22, "name": "text", "value": "tweet", "valueSrc": "initialization", "isInput": false}
-{"type": "list", "line": 24, "name": "slices", "value": null, "valueSrc": "initialization", "isInput": false, "values": []}
-{"type": "comparison", "line": 26, "pairs": [["urls", "tweet[entities]"]], "test": []}
-{"type": "comparison", "line": 31, "pairs": [["hashtags", "tweet[entities]"]], "test": []}
-{"type": "comparison", "line": 36, "pairs": [["user_mentions", "tweet[entities]"]], "test": []}
-{"type": "comparison", "line": 41, "pairs": [["media", "tweet[entities]"]], "test": []}
-{"type": "comparison", "line": 46, "pairs": [["symbols", "tweet[entities]"]], "test": []}
-{"type": "variable", "line": 51, "name": "slices", "value": null, "valueSrc": "sorted", "isInput": false, "args": ["slices"]}
-{"type": "variable", "line": 55, "name": "text", "value": null, "valueSrc": "initialization", "isInput": false}
-{"type": "function_def", "line": 61, "name": "get_text_sanitized", "args": ["tweet"], "defaults": [], "return": "None.join", "returnArgs": []}
-{"type": "function_def", "line": 69, "name": "get_text_normalized", "args": ["tweet"], "defaults": [], "return": null}
-{"type": "variable", "line": 71, "name": "text", "value": null, "valueSrc": "get_text_sanitized.split", "isInput": false, "args": []}
-{"type": "variable", "line": 74, "name": "text", "value": null, "valueSrc": "initialization", "isInput": false}
-{"type": "variable", "line": 77, "name": "stemmer", "value": null, "valueSrc": "LancasterStemmer", "isInput": false, "args": []}
+{"type": "import", "line": 5, "og": "os", "alias": null}
+{"type": "import", "line": 7, "og": "django.core.wsgi.get_wsgi_application", "alias": null}
+{"type": "function_call", "line": 9, "name": "os.environ.setdefault", "args": ["DJANGO_SETTINGS_MODULE", "django-jquery-file-upload.settings"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 11, "name": "application", "value": null, "valueSrc": "get_wsgi_application", "isInput": false, "args": []}

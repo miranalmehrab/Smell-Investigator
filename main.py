@@ -60,7 +60,7 @@ def analyze_code(root, src_file):
 def analyze_code_folder():
     
     file_counter = 0
-    for root, dirs, files in os.walk('./src-codes'):
+    for root, dirs, files in os.walk('./../unzips'):
         for src_file in files:
             if os.path.splitext(src_file)[-1] == '.py':   
                 analyze_code(root, src_file)
