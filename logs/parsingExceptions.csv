@@ -1,13 +1,105 @@
-Error on line 450,unsupported operand type(s) for +: 'NoneType' and 'str'1
-Error on line 714,'utf-8' codec can't decode byte 0xf0 in position 0: unexpected end of data 1
-Error on line 714,'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte 1
-Error on line 714,'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte 2
-Error on line 714,'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte 3
-Error on line 714,'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte 4
-Error on line 714,'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte 5
-Error on line 714,'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte 6
-Error on line 714,'utf-8' codec can't decode byte 0xb2 in position 0: invalid start byte 1
-Error on line 717,'utf-8' codec can't decode byte 0xc0 in position 1: invalid start byte 1
-Error on line 717,'utf-8' codec can't decode byte 0xa0 in position 2: invalid start byte 2
-Error on line 717,'utf-8' codec can't decode byte 0xc0 in position 1: invalid start byte 3
-Error on line 717,'utf-8' codec can't decode byte 0xa0 in position 2: invalid start byte 4
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+'utf-8' codec can't decode byte 0xc0 in position 1: invalid start byte,Error on line 762
+'utf-8' codec can't decode byte 0xa0 in position 2: invalid start byte,Error on line 762
+'utf-8' codec can't decode byte 0xc0 in position 1: invalid start byte,Error on line 762
+'utf-8' codec can't decode byte 0xa0 in position 2: invalid start byte,Error on line 762
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type complex is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+'utf-8' codec can't decode byte 0xb2 in position 0: invalid start byte,Error on line 759
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+'utf-8' codec can't decode byte 0xf0 in position 0: unexpected end of data,Error on line 759
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte,Error on line 759
+'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte,Error on line 759
+'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte,Error on line 759
+'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte,Error on line 759
+'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte,Error on line 759
+'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte,Error on line 759
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type complex is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+unsupported operand type(s) for +: 'NoneType' and 'str',Error on line 453
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type complex is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type complex is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable
+Error on line 855 ,Object of type ellipsis is not JSON serializable
+Error on line 855 ,Object of type bytes is not JSON serializable

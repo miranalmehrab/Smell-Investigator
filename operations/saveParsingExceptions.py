@@ -1,6 +1,6 @@
 import csv
 
-def saveParsingExceptions(error,lineno):
+def saveParsingExceptions(lineno, error):
 
     with open('logs/parsingExceptions.csv', 'a') as fp: 
         

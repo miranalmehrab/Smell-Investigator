@@ -1,17 +1,17 @@
-import sys   
 import ast
+import sys   
 import json
 import time
 
-from operations.saveParsingExceptions import saveParsingExceptions
 from operations.saveBugFix import saveBugFix
+from operations.saveParsingExceptions import saveParsingExceptions
 
 class Analyzer(ast.NodeVisitor):
 
     def __init__(self):
         self.inputs = []
         self.statements = []
-        self.numberOfParsingError = 0
+        
 
     ######################### Import Modules Block Here #########################
     def visit_Import(self, node):
@@ -23,12 +23,11 @@ class Analyzer(ast.NodeVisitor):
                 module["line"] = node.lineno
                 module["og"] = name.name
                 module["alias"] = name.asname if name.asname else None
-
                 self.statements.append(module)
         
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -40,14 +39,18 @@ class Analyzer(ast.NodeVisitor):
                 member = {}
                 member["type"] = "import"
                 member["line"] = node.lineno
-                member["og"] = node.module +'.'+ name.name if name.name !="*" else node.module
-                member["alias"] = node.module +'.'+ name.asname if name.asname else None
 
+                if node.module is not None: member["og"] = node.module +'.'+ name.name if name.name !="*" else node.module
+                else: member["og"] = name.name
+                
+                if node.module is not None: member["alias"] = node.module +'.'+ name.asname if name.asname else None
+                else: member["alias"] = name.asname
+                
                 self.statements.append(member)
         
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -55,7 +58,6 @@ class Analyzer(ast.NodeVisitor):
     ######################### Function Definitions Here #########################
     def visit_FunctionDef(self, node):
         try:
-
             # print(ast.dump(node))
 
             func_def = {}
@@ -66,11 +68,14 @@ class Analyzer(ast.NodeVisitor):
             func_def["defaults"] = []
             func_def["return"] = None
 
-            for arg in node.args.args:
+            for arg in node.args.args: 
                 if isinstance(arg, ast.arg): func_def["args"].append(arg.arg)
             
-            if isinstance(node.args.vararg, ast.arg): func_def["args"].append(node.args.vararg.arg)
-            elif isinstance(node.args.kwarg, ast.arg): func_def["args"].append(node.args.kwarg.arg)
+            if isinstance(node.args.vararg, ast.arg): 
+                func_def["args"].append(node.args.vararg.arg)
+            
+            elif isinstance(node.args.kwarg, ast.arg): 
+                func_def["args"].append(node.args.kwarg.arg)
             
             for default in node.args.defaults:
                 self.addVariablesToList(default,func_def["defaults"])
@@ -92,9 +97,9 @@ class Analyzer(ast.NodeVisitor):
             self.statements.append(func_def)
      
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
-        
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
+
         self.generic_visit(node)
 
 
@@ -307,8 +312,8 @@ class Analyzer(ast.NodeVisitor):
                 self.statements.append(variable)
  
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -387,9 +392,9 @@ class Analyzer(ast.NodeVisitor):
             self.statements.append(statement)
         
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
-        
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
+
         self.generic_visit(node)
 
 
@@ -424,10 +429,8 @@ class Analyzer(ast.NodeVisitor):
             self.statements.append(statement)
 
         except Exception as error:
-            # time.sleep(5)
-            # print(ast.dump(node))
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -465,9 +468,9 @@ class Analyzer(ast.NodeVisitor):
                 self.statements.append(expression)
 
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
-        
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
+
         self.generic_visit(node)
     
 
@@ -497,8 +500,8 @@ class Analyzer(ast.NodeVisitor):
                 self.statements.append(assertStatement)
 
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
 
         self.generic_visit(node) 
 
@@ -559,8 +562,53 @@ class Analyzer(ast.NodeVisitor):
             return itemList
 
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
+
+
+    def delete_incomplete_tokens(self):
+        for statement in self.statements:
+            
+            if statement['type'] == 'variable':
+                keys = ['line', 'name', 'value', 'valueSrc', 'isInput']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
+
+            if statement['type'] == 'list' or statement['type'] == 'set':
+                keys = ['line', 'name', 'value', 'valueSrc', 'isInput', 'values']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
+
+            
+            elif statement['type'] == 'import':
+                keys = ['line', 'og', 'alias']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
+
+            elif statement['type'] == 'function_def':
+                keys = ['line', 'name', 'args', 'defaults', 'return']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
+
+            elif statement['type'] == 'function_call':
+                keys = ['line', 'name', 'args', 'keywords', 'hasInputs']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
+
+            elif statement['type'] == 'comparison':
+                keys = ['line', 'pairs', 'test']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
+
+            elif statement['type'] == 'exception_handle':
+                keys = ['line', 'exceptionHandler']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
+
+            elif statement['type'] == 'assert':
+                keys = ['line', 'left', 'comparators']
+                for key in keys:
+                    if key not in statement: self.statements.remove(statement)
 
 
 
@@ -610,10 +658,9 @@ class Analyzer(ast.NodeVisitor):
                 elif statement["type"] == "function_def" and statement.__contains__("return") == False: self.statements.remove(statement)
 
         except Exception as error:
-            self.numberOfParsingError += 1
-            saveBugFix('tuple error', statement)
-            saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
-    
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
+
 
     def makeTokensByteFree(self):
         for statement in self.statements:
@@ -665,13 +712,11 @@ class Analyzer(ast.NodeVisitor):
         
 
     def getUsedVariablesInVariableDeclaration(self,node):
-        
         usedVariables = []
         for field, value in ast.iter_fields(node):
             self.getOperandsFromBinOperation(value,usedVariables)
                 
         return usedVariables
-
 
 
     def buildNewVariableValueFromUsedOnes(self,usedVariables):
@@ -723,8 +768,8 @@ class Analyzer(ast.NodeVisitor):
             return value
 
         except Exception as error:
-                    self.numberOfParsingError += 1
-                    saveParsingExceptions(str(error) +' '+str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(str(error), line_number)
 
 
 
@@ -746,12 +791,6 @@ class Analyzer(ast.NodeVisitor):
     def getFunctionAttribute(self, node):
         name = None
         attr = None
-        
-        # print('')
-        # print('debug ----------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>')
-        # print(ast.dump(node))
-        # print('')
-
         
         for field, value in ast.iter_fields(node):
             if isinstance(value, ast.Attribute):
@@ -819,6 +858,5 @@ class Analyzer(ast.NodeVisitor):
             f.close()
 
         except Exception as error:
-            self.numberOfParsingError += 1
-            # saveBugFix('file writing error', self.statements[counter])
-            # saveParsingExceptions(str(error) +str(self.numberOfParsingError), "Error on line {}".format(sys.exc_info()[-1].tb_lineno))
+            line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
+            saveParsingExceptions(line_number, str(error))

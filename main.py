@@ -1,3 +1,4 @@
+import os
 import ast
 import glob
 
@@ -7,76 +8,73 @@ from detection.detection import detection
 from operations.clearFileContent import clearFileContent
 from operations.compareDetectionAccuracy import compareDetectionAccuracy
 
-def detectSmellsFromTokens(srcFile):
+
+def detect_smells_in_tokens(src_file):
     f = open("tokens.txt", "r")
-    detection(f.read(), srcFile)
+    detection(f.read(), src_file)
 
 
-def analyzeSrcCode(srcCode, srcFile):
-    
-    tree = ast.parse(srcCode, type_comments=True)
-    # print(ast.dump(tree,include_attributes=True))
-    # print(ast.dump(tree))
+def parse_code(code, src_file):
+    try:
+        tree = ast.parse(code, type_comments=True)
+        # print(ast.dump(tree,include_attributes=True))
+        # print(ast.dump(tree))
 
-    analyzer = Analyzer()
-    analyzer.visit(tree)
+        analyzer = Analyzer()
+        analyzer.visit(tree)
 
-    analyzer.checkUserInputsInFunctionArguments()
-    analyzer.refineTokens()
-    # analyzer.makeTokensByteFree()
-    analyzer.writeToFile()
-    
-    # analyzer.printStatements()
-    # analyzer.printStatements('comparison')
-    # analyzer.printStatements('list', 'dict', 'set')
-    # analyzer.printStatements('variable', 'list', 'tuple', 'dict')
-
-
-
-def testFromTestCodeFolder():
-    srcFiles =  glob.glob("test-codes/*.py")
-    for srcFile in srcFiles:
-
-        print('File number - '+str(fileCounter)+': '+srcFile)    
-        fileCounter = fileCounter + 1
-        srcFile = open(srcFile, 'r')
-        srcCode = srcFile.read()
-        analyzeSrcCode(srcCode, srcFile)
+        analyzer.checkUserInputsInFunctionArguments()
+        analyzer.refineTokens()
+        analyzer.delete_incomplete_tokens()
+        # analyzer.makeTokensByteFree()
+        analyzer.writeToFile()
+        
+        analyzer.printStatements()
+        # analyzer.printStatements('comparison')
+        
+    except Exception as error:
+        print(str(error)) 
 
 
-
-
-
-
-def testSingleSrcCodeFile():
-    fileName = 'src.py'
-    # fileName = 'test-codes/function-def.py'
-    # fileName = 'test-codes/var-assign.py'
-    # fileName = 'test-codes/marshal.py'
-    # fileName = 'test-codes/eval.py'
-    # fileName = 'test-codes/yaml.py'
-
-    srcFile = open(fileName,'r')
-    srcCode = srcFile.read()
-    
-    analyzeSrcCode(srcCode,fileName)
-    detectSmellsFromTokens(srcFile)
-    compareDetectionAccuracy()
-    
-
-def testFromSrcCodesFolder():
-    for srcCodeFolder in range(0, 588):
-        srcFiles = glob.glob("src-codes/srcs-"+str(srcCodeFolder)+"/*.py") 
-        for srcFile in srcFiles:    
+def analyze_code(root, src_file):
+    try: 
+        with open(os.path.join(root, src_file), "r") as src_file:     
+            code = None
             
-            srcFile = open(srcFile, 'r')
-            srcCode = srcFile.read()
-            
-            analyzeSrcCode(srcCode, srcFile)
-            detectSmellsFromTokens(srcFile)
+            try: 
+                src_file = open(src_file.name, 'r')
+                code = src_file.read()
 
+            except Exception as error:  
+                print(str(error))
+                
+            if code is not None: 
+                parse_code(code, src_file)
+                detect_smells_in_tokens(src_file)
+    
+    except Exception as error: 
+        print(str(error))
+        
+
+
+def analyze_code_folder():
+    
+    file_counter = 0
+    for root, dirs, files in os.walk('./src-codes'):
+        for src_file in files:
+            if os.path.splitext(src_file)[-1] == '.py':   
+                analyze_code(root, src_file)
+                file_counter += 1
+
+    print('total file counted : '+str(file_counter))
     compareDetectionAccuracy()
 
+
+def analyze_single_code():
+
+    file_name = './src.py'
+    analyze_code('', file_name)
+    compareDetectionAccuracy()
 
 
 def main():
@@ -86,9 +84,8 @@ def main():
     clearFileContent('logs/detectionExceptions.csv')
     clearFileContent('logs/tokenLoadingExceptions.csv')
 
-    testFromSrcCodesFolder()
-    # testFromTestCodeFolder()
-    # testSingleSrcCodeFile()
+    # analyze_single_code()
+    analyze_code_folder()
         
 
 if __name__ == "__main__":

@@ -1,12 +1,24 @@
-bytes,b'\x08\x00'
-bytes,b'\x00\x00'
-bytes,b'%s\n'
-bytes,"b'%s: Already running (or at least pidfile ""%s"" already exists).\n'"
 bytes,b'\n'
-bytes,b'--%s'
-bytes,b'--%s'
+bytes,b'\x11\xc0 '
+bytes,b'\x14@\xa0'
+bytes,b'\x15\xc0\xa0'
+bytes,b'\x17@\xa0'
+bytes,b'\n'
+bytes,b'\x00'
+bytes,b'\x00'
 bytes,b'\x00\x00\x00\x00'
 bytes,b'\x00'
+bytes,b'\x01'
+bytes,"b'a: :{s:10:""session_i'"
+bytes,"b'd"";s:32:""           '"
+bytes,"b'a:  :{s:10:""session_'"
+bytes,"b'id"";s:32:""          '"
+bytes,"b'a:   :{s:10:""session'"
+bytes,"b'_id"";s:32:""         '"
+bytes,b'\n'
+bytes,b' '
+bytes,b'\xb2\x02\x00\x00'
+bytes,"b'((?:[%s]\x00){%d,})'"
 bytes,b'\n'
 bytes,"b'l=""'"
 bytes,"b'""'"
@@ -21,11 +33,11 @@ bytes,"b'""'"
 bytes,b'A'
 bytes,b'A'
 bytes,b'A'
+bytes,b'  '
 bytes,b'\n'
+bytes,b'\n'
+bytes,b'\xf0'
 bytes,b'mozLz40\x00'
-bytes,b'\x00'
-bytes,b'\x00'
-bytes,b'\n'
 bytes,b'\n'
 bytes,b'-'
 bytes,b'\n\n'
@@ -34,13 +46,10 @@ bytes,b': '
 bytes,b'\n'
 bytes,b'\n'
 bytes,b'\n'
-bytes,b'\xf0'
-bytes,"b'((?:[%s]\x00){%d,})'"
-bytes,b'OK...'
-bytes,b' '
 bytes,b''
-bytes,b'\n'
-bytes,b'\x01'
+bytes,b' '
+bytes,b'\x08\x00'
+bytes,b'\x00\x00'
 bytes,b'\x80'
 bytes,b'\x80'
 bytes,b'\x80'
@@ -48,19 +57,10 @@ bytes,b'\x80'
 bytes,b'\x80'
 bytes,b'\x80'
 bytes,b'@'
-bytes,"b'a: :{s:10:""session_i'"
-bytes,"b'd"";s:32:""           '"
-bytes,"b'a:  :{s:10:""session_'"
-bytes,"b'id"";s:32:""          '"
-bytes,"b'a:   :{s:10:""session'"
-bytes,"b'_id"";s:32:""         '"
-bytes,b'\xb2\x02\x00\x00'
-bytes,b' '
-bytes,b'  '
-bytes,b'\x11\xc0 '
-bytes,b'\x14@\xa0'
-bytes,b'\x15\xc0\xa0'
-bytes,b'\x17@\xa0'
+bytes,b'%s\n'
+bytes,"b'%s: Already running (or at least pidfile ""%s"" already exists).\n'"
+bytes,b'--%s'
+bytes,b'--%s'
 bytes,b'\n'
 bytes,b'\n'
-bytes,b'\n'
+bytes,b'OK...'
