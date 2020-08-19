@@ -6,7 +6,7 @@ from parse import Analyzer
 from detection.detection import detection
 
 from operations.clearFileContent import clearFileContent
-from operations.compareDetectionAccuracy import compareDetectionAccuracy
+from operations.showResult import show_results
 
 
 def detect_smells_in_tokens(src_file):
@@ -17,7 +17,7 @@ def detect_smells_in_tokens(src_file):
 def parse_code(code, src_file):
     try:
         tree = ast.parse(code, type_comments=True)
-        # print(ast.dump(tree,include_attributes=True))
+        # print(ast.dump(tree, include_attributes = True))
         # print(ast.dump(tree))
 
         analyzer = Analyzer()
@@ -29,7 +29,7 @@ def parse_code(code, src_file):
         # analyzer.makeTokensByteFree()
         analyzer.writeToFile()
         
-        analyzer.printStatements()
+        # analyzer.printStatements()
         # analyzer.printStatements('comparison')
         
     except Exception as error:
@@ -56,25 +56,27 @@ def analyze_code(root, src_file):
         print(str(error))
         
 
-
 def analyze_code_folder():
     
     file_counter = 0
-    for root, dirs, files in os.walk('./../unzips'):
+    for root, dirs, files in os.walk('./../unzips/'):
         for src_file in files:
             if os.path.splitext(src_file)[-1] == '.py':   
                 analyze_code(root, src_file)
                 file_counter += 1
-
+    
+    print('')
+    print('------------------------------ Result ------------------------------ ')
     print('total file counted : '+str(file_counter))
-    compareDetectionAccuracy()
+    
+    show_results()
 
 
 def analyze_single_code():
 
     file_name = './src.py'
     analyze_code('', file_name)
-    compareDetectionAccuracy()
+    show_results()
 
 
 def main():

@@ -14,7 +14,9 @@ def detect(token, srcFile):
                         
     unwantedValues = ['/tmp', '/var/tmp', '/dev/shm']
     
-    if tokenType == "variable" and name.lower() in unwantedDirNames and token['value'] != None: actionUponDetection(srcFile, lineno, 'harcoded_tmp', 'hardcoded temporary directory')
+    if tokenType == "variable" and name.lower() in unwantedDirNames and token['value'] is not None: 
+        actionUponDetection(srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
 
-    elif tokenType == "list" and name.lower() in unwantedDirNames and len(values)>0: actionUponDetection(srcFile, lineno, 'harcoded_tmp', 'hardcoded temporary directory')
+    elif tokenType == "list" and name.lower() in unwantedDirNames and len(values) > 0: 
+        actionUponDetection(srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
     

@@ -11,7 +11,10 @@ def detect(token, srcFile):
     cmdFuncs = ['sys.argv', 'ArgumentParser', 'argparse', 'subprocess.Popen', 'os.system']
     
     if tokenType == "variable" and token.__contains__("valueSrc"):
-        if token["valueSrc"] in cmdFuncs: actionUponDetection(srcFile, lineno, 'shell_injection', 'command injection')
+        if token["valueSrc"] in cmdFuncs: 
+            actionUponDetection(srcFile, lineno, 'shell_injection', 'command injection')
     
-    elif tokenType == "function_call" and name in cmdFuncs and containsUserInput: actionUponDetection(srcFile, lineno, 'shell_injection', 'command injection')
+    
+    elif tokenType == "function_call" and name in cmdFuncs and (len(args) > 0 or containsUserInput is True): 
+        actionUponDetection(srcFile, lineno, 'shell_injection', 'command injection')
        

@@ -6,7 +6,8 @@ def detect(token, srcFile):
     if token.__contains__("type"): tokenType = token["type"] 
     if token.__contains__("exceptionHandler"): exceptionHandler = token["exceptionHandler"]
     
-    unwantedArgs = ['continue','pass']
+    unwantedHandlers = ['continue','pass']
     
-    if tokenType == "exception_handle" and exceptionHandler in unwantedArgs: actionUponDetection(srcFile, lineno, 'ignore_except_block', 'ignore except block')
+    if tokenType == "exception_handle" and exceptionHandler in unwantedHandlers: 
+        actionUponDetection(srcFile, lineno, 'ignore_except_block', 'ignore except block')
             

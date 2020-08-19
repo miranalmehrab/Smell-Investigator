@@ -489,7 +489,7 @@ class Analyzer(ast.NodeVisitor):
                     name = self.addVariablesToList(comparator, [])
                     name = name[0] if len(name)>0 else None
                     
-                    if name: comparators.append(name)
+                    if name is not None: comparators.append(name)
                 
                 assertStatement = {}
                 assertStatement["type"] = "assert"
