@@ -1,6 +1,6 @@
 from operations.actionUponDetection import actionUponDetection
 
-def detect(token, srcFile):
+def detect(token, project_name, srcFile):
 
     if token.__contains__("line"): lineno = token["line"] 
     if token.__contains__("type"): tokenType = token["type"]
@@ -12,9 +12,9 @@ def detect(token, srcFile):
     
     if tokenType == "variable" and token.__contains__("valueSrc"):
         if token["valueSrc"] in cmdFuncs: 
-            actionUponDetection(srcFile, lineno, 'shell_injection', 'command injection')
+            actionUponDetection(project_name, srcFile, lineno, 'shell_injection', 'command injection')
     
     
     elif tokenType == "function_call" and name in cmdFuncs and (len(args) > 0 or containsUserInput is True): 
-        actionUponDetection(srcFile, lineno, 'shell_injection', 'command injection')
+        actionUponDetection(project_name, srcFile, lineno, 'shell_injection', 'command injection')
        

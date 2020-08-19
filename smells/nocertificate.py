@@ -1,6 +1,6 @@
 from operations.actionUponDetection import actionUponDetection
 
-def detect(token, srcFile):
+def detect(token, project_name, srcFile):
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -13,5 +13,5 @@ def detect(token, srcFile):
 
         for keyword in keywords:
             if keyword[0] == 'verify' and keyword[1] is False: 
-                actionUponDetection(srcFile, lineno, 'no_certification_validation', 'TLS is not verified')
+                actionUponDetection(project_name, srcFile, lineno, 'no_certification_validation', 'TLS is not verified')
 

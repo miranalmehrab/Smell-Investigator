@@ -38,7 +38,7 @@ def getImports(tokens):
     
     return imports
 
-def detection(tokens, srcFile):
+def detection(tokens, project_name, srcFile):
     
     imports = getImports(tokens)
     tokens = tokens.splitlines()
@@ -48,24 +48,24 @@ def detection(tokens, srcFile):
             token = json.loads(token)
 
             try:
-                commandinjectionDetecet(token, srcFile)
-                execDetect(token, srcFile)
-                debugflagDetect(token, srcFile)
-                emptypasswordDetect(token, srcFile)
-                hardcodedsecretDetect(token, srcFile)
-                filepermissionDetect(token, srcFile)
-                ipbindingDetect(token, srcFile)
-                httponlyDetect(token, srcFile)
-                sqlinjectionDetect(token, srcFile)
-                tempdirDetect(token, srcFile)
-                ignexceptDetect(token, srcFile)
-                assertDetect(token, srcFile)
-                pickleDetect(token, srcFile)
-                marshalDetect(token, srcFile)
-                nocertificateDetect(token, srcFile)
-                nointegritycheckDetect(token, imports, srcFile)
-                evalDetect(token, srcFile)
-                yamlloadDetect(token, srcFile)
+                commandinjectionDetecet(token, project_name, srcFile)
+                execDetect(token, project_name, srcFile)
+                debugflagDetect(token, project_name, srcFile)
+                emptypasswordDetect(token, project_name, srcFile)
+                hardcodedsecretDetect(token, project_name, srcFile)
+                filepermissionDetect(token, project_name, srcFile)
+                ipbindingDetect(token, project_name, srcFile)
+                httponlyDetect(token, project_name, srcFile)
+                sqlinjectionDetect(token, project_name, srcFile)
+                tempdirDetect(token, project_name, srcFile)
+                ignexceptDetect(token, project_name, srcFile)
+                assertDetect(token, project_name, srcFile)
+                pickleDetect(token, project_name, srcFile)
+                marshalDetect(token, project_name, srcFile)
+                nocertificateDetect(token, project_name, srcFile)
+                nointegritycheckDetect(token, imports, project_name, srcFile)
+                evalDetect(token, project_name, srcFile)
+                yamlloadDetect(token, project_name, srcFile)
 
             except Exception as error: saveDetectionExceptions(str(error)+' - '+ str(token), srcFile)
             

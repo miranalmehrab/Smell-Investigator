@@ -1,6 +1,6 @@
 from operations.actionUponDetection import actionUponDetection
 
-def detect(token, srcFile):
+def detect(token, project_name, srcFile):
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -15,8 +15,8 @@ def detect(token, srcFile):
     unwantedValues = ['/tmp', '/var/tmp', '/dev/shm']
     
     if tokenType == "variable" and name.lower() in unwantedDirNames and token['value'] is not None: 
-        actionUponDetection(srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
+        actionUponDetection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
 
     elif tokenType == "list" and name.lower() in unwantedDirNames and len(values) > 0: 
-        actionUponDetection(srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
+        actionUponDetection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
     

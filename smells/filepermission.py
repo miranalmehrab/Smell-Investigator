@@ -1,6 +1,6 @@
 from operations.actionUponDetection import actionUponDetection
 
-def detect(token, srcFile):
+def detect(token, project_name, srcFile):
 
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -13,9 +13,9 @@ def detect(token, srcFile):
     if tokenType == "function_call" and name in unwantedMethods:
         for arg in args:
             if arg in unwantedParams: 
-                actionUponDetection(srcFile, lineno, 'bad_file_permissions', 'bad file permission')
+                actionUponDetection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission')
     
     elif tokenType == 'function_call' and name == 'subprocess.call':
         for arg in args:
             if arg in unwantedMethods: 
-                actionUponDetection(srcFile, lineno, 'bad_file_permissions', 'bad file permission')
+                actionUponDetection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission')

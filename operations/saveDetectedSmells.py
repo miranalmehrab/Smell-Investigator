@@ -1,10 +1,10 @@
 import csv
 
-def saveDetectedSmells(smell,filename):
+def saveDetectedSmells(smell, project_name, filename, line):
 
     with open('detected_smells.csv', 'a') as fp:    
         name = filename.name
         name = name.split('/')[-1]
 
         fw = csv.writer(fp)
-        if smell and filename: fw.writerow([name,smell])
+        if smell and filename: fw.writerow([project_name,name,smell, str(line)])

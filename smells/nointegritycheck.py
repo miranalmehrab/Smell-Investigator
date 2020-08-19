@@ -1,6 +1,6 @@
 from operations.actionUponDetection import actionUponDetection
 
-def detect(token, imports, srcFile):
+def detect(token, imports,project_name, srcFile):
     
     if token.__contains__("line"): lineno = token["line"]
     if token.__contains__("type"): tokenType = token["type"]
@@ -13,4 +13,4 @@ def detect(token, imports, srcFile):
     if tokenType == "function_call" and name in libs and len(args) > 0:
         extension = args[0].split(".")[-1]
         if extension in download and 'hashlib' not in imports: 
-            actionUponDetection(srcFile, lineno, 'no_integrity_check', 'no integrity checked')
+            actionUponDetection(project_name, srcFile, lineno, 'no_integrity_check', 'no integrity checked')
