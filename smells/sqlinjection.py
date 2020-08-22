@@ -11,11 +11,12 @@ def detect(token, project_name, srcFile):
     unwantedMethods = ['execution.query', 'connection.cursor.execute']
     
     if tokenType == "variable" and token.__contains__('valueSrc') and token.__contains__('args'):
+        
         args = token['args']
         valueSrc = token['valueSrc']
         if valueSrc in unwantedMethods and len(args) > 0:
             actionUponDetection(project_name, srcFile, lineno, 'sql_injection', 'sql injection')
                 
-    elif tokenType == "function_call" and name in unwantedMethods and (len(args) > 0 or hasInputs):
+    elif tokenType == "function_call" and name in unwantedMethods and (len(args) > 0 or hasInputs is True):
         actionUponDetection(project_name, srcFile, lineno, 'sql_injection', 'sql injection')
         

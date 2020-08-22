@@ -4,7 +4,8 @@ def csvFileContents(filename):
     rows = []
     with open(filename, 'r') as csvfile:
         csvreader = csv.reader(csvfile)
-        for row in csvreader: rows.append(row)
+        for row in csvreader: 
+            rows.append(row)
 
     return rows
 
@@ -30,11 +31,12 @@ def smellOccurenceCount(smells, header):
         if found is False:
             uniqueCounts.append([smell[1], 0])
 
-    print('')
-    print('---------------------- '+header+' --------------------')
-    uniqueCounts.sort(key = lambda x: x[1], reverse = True)
-    for smell_count in uniqueCounts:
-        print(smell_count)
+    # print('')
+    # print('---------------------- '+header+' --------------------')
+    
+    # uniqueCounts.sort(key = lambda x: x[1], reverse = True)
+    # for smell_count in uniqueCounts:
+    #     print(smell_count)
 
 
 def show_results():

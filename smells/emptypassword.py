@@ -9,7 +9,7 @@ def detect(token, project_name, srcFile):
     
     commonPasswords = ['password','passwords','pass','pwd','userpassword','userpwd', 'userpass', 'pass_no', 'pass-no', 'user-pass', 'upass']
     
-    if tokenType == "variable" and name in commonPasswords and value is not None: 
+    if tokenType == "variable" and name in commonPasswords and value is None: 
         actionUponDetection(project_name, srcFile, lineno, 'empty_password', 'empty password')
 
 

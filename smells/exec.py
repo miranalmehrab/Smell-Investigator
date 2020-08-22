@@ -8,8 +8,6 @@ def detect(token, project_name, srcFile) :
     if token.__contains__("args"): args = token["args"]
     if token.__contains__("hasInputs"): containsUserInput =  token["hasInputs"]
 
-    if tokenType == "function_call" and name == "exec" and (len(args) > 0 or containsUserInput is True): 
-        actionUponDetection(project_name, srcFile, lineno, 'exec_used', 'exec statement')
     
     if tokenType == "variable":
         if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]

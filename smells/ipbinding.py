@@ -12,10 +12,12 @@ def detect(token, project_name, srcFile):
     if tokenType == "variable" and token.__contains__('valueSrc') and token.__contains__('args'):
         args = token['args']
         valueSrc = token['valueSrc']
+        
         if valueSrc in bindingMethods and len(args) > 0 and is_valid_ip(args[0]):
             actionUponDetection(project_name, srcFile, lineno, 'hardcoded_ip_binding', 'Harcoded ip address binding used') 
 
     elif tokenType == "function_call" and name in bindingMethods:
+        
         if len(args) > 0 and is_valid_ip(args[0]): 
             actionUponDetection(project_name, srcFile, lineno, 'hardcoded_ip_binding', 'Harcoded ip address binding used')
                 

@@ -17,6 +17,6 @@ def detect(token, project_name, srcFile):
     if tokenType == "variable" and name.lower() in unwantedDirNames and token['value'] is not None: 
         actionUponDetection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
 
-    elif tokenType == "list" and name.lower() in unwantedDirNames and len(values) > 0: 
+    elif (tokenType == "list" or tokenType == "set") and name.lower() in unwantedDirNames and len(values) > 0: 
         actionUponDetection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
     

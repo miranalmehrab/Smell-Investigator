@@ -52,10 +52,10 @@ def save_project_smells():
     counter = 0
     for x in projectSmells: 
         counter += int(x[2])
-        print(x)
+        # print(x)
 
-    print(len(projectSmells))
-    print('total smell count '+str(counter))
+    # print(len(projectSmells))
+    # print('total smell count '+str(counter))
     write_smells(projectSmells)
     
     

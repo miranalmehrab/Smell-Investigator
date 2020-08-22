@@ -15,22 +15,29 @@ def detect_smells_in_tokens(project_name,src_file):
     detection(f.read(), project_name, src_file)
 
 
+file_counter = 0
+
+
 def parse_code(code, src_file):
+    
     try:
         tree = ast.parse(code, type_comments=True)
         # print(ast.dump(tree, include_attributes = True))
         # print(ast.dump(tree))
+        
+        global file_counter
+        file_counter += 1
 
         analyzer = Analyzer()
         analyzer.visit(tree)
 
         analyzer.checkUserInputsInFunctionArguments()
         analyzer.refineTokens()
-        analyzer.delete_incomplete_tokens()
+        # analyzer.delete_incomplete_tokens()
         # analyzer.makeTokensByteFree()
         analyzer.writeToFile()
         
-        # analyzer.printStatements()
+        analyzer.printStatements()
         # analyzer.printStatements('comparison')
         
     except Exception as error:
@@ -59,47 +66,47 @@ def analyze_code(root, project_name, src_file):
 
 def analyze_code_folder():
     
-    file_counter = 0
-    project_counter = 0
     project_name = None
+    project_counter = 0
 
     for root, dirs, files in os.walk('./../unzips/'):
         project_name = copy.deepcopy(root)
         project_name = project_name.split('/')[3]
         
         for src_file in files:
+            # print(src_file)
             if os.path.splitext(src_file)[-1] == '.py':   
                 analyze_code(root, project_name, src_file)
-                file_counter += 1
     
     print('')
     print('------------------------------ Result ------------------------------ ')
     print('total file counted : '+str(file_counter))
     
     show_results()
-    # save_project_smells()
+    save_project_smells()
 
 
 def analyze_single_code():
 
-    file_name = './src.py'
-    analyze_code('', file_name)
+    # file_name = './src.py'
+    file_name = './test-codes/assert.py'
+    analyze_code('', '', file_name)
     show_results()
 
 
 # each project -> smells -> count -> problems
 
 def main():
-    save_project_smells()
-    # clearFileContent('logs/bugFix.csv')
-    # clearFileContent('detected_smells.csv')
-    # clearFileContent('logs/projectSmells.csv')
-    # clearFileContent('logs/parsingExceptions.csv')
-    # clearFileContent('logs/detectionExceptions.csv')
-    # clearFileContent('logs/tokenLoadingExceptions.csv')
+    # save_project_smells()
+    clearFileContent('logs/bugFix.csv')
+    clearFileContent('detected_smells.csv')
+    clearFileContent('logs/projectSmells.csv')
+    clearFileContent('logs/parsingExceptions.csv')
+    clearFileContent('logs/detectionExceptions.csv')
+    clearFileContent('logs/tokenLoadingExceptions.csv')
 
     # analyze_single_code()
-    # analyze_code_folder()
+    analyze_code_folder()
         
 
 if __name__ == "__main__":

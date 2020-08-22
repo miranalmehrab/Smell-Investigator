@@ -2,6 +2,10 @@
 15-minute-apps-master,ignore_except_block,2
 
 
+2019_Python_Web_Dev-master,debug_true,1
+2019_Python_Web_Dev-master,ignore_except_block,2
+
+
 Amazon-Flipkart-Price-Comparison-Engine-master,http_without_tls,6
 Amazon-Flipkart-Price-Comparison-Engine-master,ignore_except_block,3
 
@@ -9,14 +13,22 @@ Amazon-Flipkart-Price-Comparison-Engine-master,ignore_except_block,3
 AmazonDjangoShop-master,debug_true,1
 
 
+AndroidGCMTutorial-master,debug_true,1
+AndroidGCMTutorial-master,ignore_except_block,21
+AndroidGCMTutorial-master,hardcoded_secret,34
+AndroidGCMTutorial-master,eval_used,4
+AndroidGCMTutorial-master,shell_injection,2
+
+
 ArchiveBot-master,shell_injection,8
 ArchiveBot-master,ignore_except_block,16
-ArchiveBot-master,assert_used,10
+ArchiveBot-master,assert_used,17
 ArchiveBot-master,http_without_tls,1
 ArchiveBot-master,hardcoded_secret,3
 
 
 AsyncAWS-master,hardcoded_secret,3
+AsyncAWS-master,assert_used,5
 
 
 Automatic_tagging_of_clothing_in_E-Commerce-master,http_without_tls,1
@@ -45,6 +57,7 @@ Building-RESTful-Python-Web-Services-master,ignore_except_block,5
 Building-Serverless-Python-Web-Services-with-Zappa-master,debug_true,4
 Building-Serverless-Python-Web-Services-with-Zappa-master,http_without_tls,6
 Building-Serverless-Python-Web-Services-with-Zappa-master,ignore_except_block,2
+Building-Serverless-Python-Web-Services-with-Zappa-master,assert_used,2
 
 
 Bus-Reservation-System-master,ignore_except_block,597
@@ -53,7 +66,7 @@ Bus-Reservation-System-master,shell_injection,20
 Bus-Reservation-System-master,debug_true,1
 Bus-Reservation-System-master,harcoded_tmp_dir,1
 Bus-Reservation-System-master,hardcoded_secret,96
-Bus-Reservation-System-master,assert_used,127
+Bus-Reservation-System-master,assert_used,203
 Bus-Reservation-System-master,exec_used,32
 Bus-Reservation-System-master,empty_password,3
 Bus-Reservation-System-master,pickle_used,3
@@ -63,12 +76,12 @@ Bus-Reservation-System-master,marhshal_used,3
 CCXTSharp-master,ignore_except_block,4
 
 
-Cactus_Refactored-master,assert_used,3
+Cactus_Refactored-master,assert_used,5
 Cactus_Refactored-master,ignore_except_block,9
 Cactus_Refactored-master,shell_injection,4
 
 
-Catsup-master,assert_used,22
+Catsup-master,assert_used,27
 Catsup-master,ignore_except_block,2
 Catsup-master,hardcoded_secret,1
 Catsup-master,yaml_load_used,1
@@ -78,13 +91,13 @@ Catsup-master,exec_used,4
 
 Chaos-master,shell_injection,1
 Chaos-master,hardcoded_secret,78
-Chaos-master,assert_used,4
+Chaos-master,assert_used,19
 Chaos-master,debug_true,1
 Chaos-master,ignore_except_block,2
 
 
 CheaPlatzi-master,ignore_except_block,1
-CheaPlatzi-master,assert_used,5
+CheaPlatzi-master,assert_used,10
 
 
 CloudFlarePartner-master,empty_password,1
@@ -102,8 +115,8 @@ Django-E-Commerce-master,empty_password,3
 Django-E-Commerce-master,hardcoded_secret,113
 Django-E-Commerce-master,ignore_except_block,377
 Django-E-Commerce-master,exec_used,12
+Django-E-Commerce-master,assert_used,90
 Django-E-Commerce-master,shell_injection,4
-Django-E-Commerce-master,assert_used,61
 Django-E-Commerce-master,pickle_used,9
 Django-E-Commerce-master,eval_used,1
 
@@ -128,7 +141,7 @@ E-Commerce-API-Python-master,ignore_except_block,696
 E-Commerce-API-Python-master,exec_used,82
 E-Commerce-API-Python-master,hardcoded_secret,215
 E-Commerce-API-Python-master,shell_injection,23
-E-Commerce-API-Python-master,assert_used,206
+E-Commerce-API-Python-master,assert_used,338
 E-Commerce-API-Python-master,pickle_used,24
 E-Commerce-API-Python-master,empty_password,1
 E-Commerce-API-Python-master,eval_used,24
@@ -141,14 +154,15 @@ E-Commerce-Condiments-shop-master,debug_true,3
 E-Commerce-Condiments-shop-master,hardcoded_secret,5
 
 
-E-Commerce-Website-master,hardcoded_secret,68
-E-Commerce-Website-master,assert_used,488
-E-Commerce-Website-master,ignore_except_block,317
+E-Commerce-Website-master,hardcoded_secret,148
+E-Commerce-Website-master,assert_used,712
+E-Commerce-Website-master,ignore_except_block,672
+E-Commerce-Website-master,exec_used,38
+E-Commerce-Website-master,shell_injection,15
+E-Commerce-Website-master,pickle_used,7
+E-Commerce-Website-master,eval_used,5
 E-Commerce-Website-master,empty_password,2
-E-Commerce-Website-master,shell_injection,11
-E-Commerce-Website-master,exec_used,22
-E-Commerce-Website-master,harcoded_tmp_dir,1
-E-Commerce-Website-master,eval_used,2
+E-Commerce-Website-master,harcoded_tmp_dir,2
 E-Commerce-Website-master,marhshal_used,2
 E-Commerce-Website-master,debug_true,1
 
@@ -227,7 +241,7 @@ FreeDiscovery-master,http_without_tls,3
 FreeDiscovery-master,pickle_used,7
 FreeDiscovery-master,ignore_except_block,5
 FreeDiscovery-master,hardcoded_secret,10
-FreeDiscovery-master,assert_used,261
+FreeDiscovery-master,assert_used,267
 
 
 Frobshop-master,debug_true,1
@@ -293,7 +307,7 @@ KeenClient-Python-master,assert_used,8
 KindleEar-master,ignore_except_block,132
 KindleEar-master,exec_used,2
 KindleEar-master,hardcoded_secret,51
-KindleEar-master,assert_used,458
+KindleEar-master,assert_used,463
 KindleEar-master,pickle_used,5
 KindleEar-master,shell_injection,2
 KindleEar-master,yaml_load_used,1
@@ -305,7 +319,7 @@ KindleEar-master,empty_password,1
 LeetCode-master,hardcoded_secret,4
 
 
-Lexos-master,assert_used,440
+Lexos-master,assert_used,442
 Lexos-master,hardcoded_secret,15
 Lexos-master,pickle_used,4
 Lexos-master,ignore_except_block,10
@@ -334,7 +348,7 @@ MachineLearning-DeepLearning-NLP-LeetCode-StatisticalLearningMethod-TensorFlow-m
 
 
 MechanicalSoup-master,exec_used,2
-MechanicalSoup-master,assert_used,91
+MechanicalSoup-master,assert_used,99
 MechanicalSoup-master,ignore_except_block,3
 
 
@@ -353,7 +367,7 @@ MyAwesomeCart-master,debug_true,1
 Nuitka-develop,hardcoded_secret,71
 Nuitka-develop,ignore_except_block,343
 Nuitka-develop,shell_injection,39
-Nuitka-develop,assert_used,341
+Nuitka-develop,assert_used,381
 Nuitka-develop,eval_used,12
 Nuitka-develop,exec_used,52
 Nuitka-develop,marhshal_used,1
@@ -366,7 +380,7 @@ OCTOPUS-master,hardcoded_secret,2
 
 OWSLib-master,hardcoded_secret,12
 OWSLib-master,ignore_except_block,8
-OWSLib-master,assert_used,665
+OWSLib-master,assert_used,713
 OWSLib-master,yaml_load_used,1
 
 
@@ -377,8 +391,8 @@ Online-Retail-master,debug_true,1
 Product-Info-Crawler-master,debug_true,1
 
 
+PureBlog-master,assert_used,2
 PureBlog-master,ignore_except_block,5
-PureBlog-master,assert_used,1
 PureBlog-master,shell_injection,2
 
 
@@ -387,7 +401,7 @@ PyDSWS-master,hardcoded_secret,2
 
 
 PyExPool-master,ignore_except_block,5
-PyExPool-master,assert_used,18
+PyExPool-master,assert_used,22
 PyExPool-master,shell_injection,2
 
 
@@ -400,7 +414,7 @@ Python-Django-Complete-Real-Estate-Website-master,empty_password,5
 Python-Django-Complete-Real-Estate-Website-master,hardcoded_secret,149
 Python-Django-Complete-Real-Estate-Website-master,ignore_except_block,813
 Python-Django-Complete-Real-Estate-Website-master,exec_used,46
-Python-Django-Complete-Real-Estate-Website-master,assert_used,302
+Python-Django-Complete-Real-Estate-Website-master,assert_used,442
 Python-Django-Complete-Real-Estate-Website-master,pickle_used,17
 Python-Django-Complete-Real-Estate-Website-master,eval_used,8
 Python-Django-Complete-Real-Estate-Website-master,shell_injection,16
@@ -481,7 +495,7 @@ Web-Scrapping-E-commerce-websites-master,harcoded_tmp_dir,1
 Web2Executable-master,ignore_except_block,5
 Web2Executable-master,hardcoded_secret,1
 Web2Executable-master,shell_injection,5
-Web2Executable-master,assert_used,9
+Web2Executable-master,assert_used,10
 
 
 Webshell-Sniper-master,empty_password,1
@@ -498,15 +512,15 @@ Wooey-master,hardcoded_secret,4
 
 
 ZeroNet-py3,shell_injection,5
+ZeroNet-py3,assert_used,581
 ZeroNet-py3,ignore_except_block,53
-ZeroNet-py3,assert_used,479
 ZeroNet-py3,hardcoded_secret,52
 
 
 addons-server-master,debug_true,1
-addons-server-master,ignore_except_block,75
+addons-server-master,ignore_except_block,74
 addons-server-master,shell_injection,5
-addons-server-master,assert_used,7201
+addons-server-master,assert_used,7426
 addons-server-master,http_without_tls,14
 addons-server-master,hardcoded_secret,74
 addons-server-master,harcoded_tmp_dir,2
@@ -527,7 +541,11 @@ angular2-flask-master,debug_true,1
 ansible-django-stack-master,assert_used,2
 
 
+apodo-master,assert_used,1
+
+
 app-service-web-python-get-started-master,debug_true,1
+app-service-web-python-get-started-master,assert_used,3
 
 
 appdaemon-dev,ignore_except_block,10
@@ -542,7 +560,7 @@ appdaemon-dev,http_without_tls,3
 
 appengine-flask-skeleton-master,ignore_except_block,110
 appengine-flask-skeleton-master,hardcoded_secret,42
-appengine-flask-skeleton-master,assert_used,36
+appengine-flask-skeleton-master,assert_used,41
 appengine-flask-skeleton-master,exec_used,14
 appengine-flask-skeleton-master,eval_used,2
 appengine-flask-skeleton-master,pickle_used,4
@@ -598,13 +616,13 @@ beg-django-e-commerce-master,hardcoded_secret,8
 
 
 bioservices-master,eval_used,1
-bioservices-master,assert_used,235
+bioservices-master,assert_used,354
 bioservices-master,ignore_except_block,40
 bioservices-master,hardcoded_secret,24
 bioservices-master,pickle_used,1
 
 
-bitcurator-access-webtools-master,assert_used,1
+bitcurator-access-webtools-master,assert_used,2
 bitcurator-access-webtools-master,ignore_except_block,2
 bitcurator-access-webtools-master,hardcoded_secret,1
 bitcurator-access-webtools-master,exec_used,2
@@ -613,7 +631,7 @@ bitcurator-access-webtools-master,debug_true,1
 
 
 blogofile-plugins,yaml_load_used,2
-blogofile-plugins,assert_used,24
+blogofile-plugins,assert_used,28
 blogofile-plugins,ignore_except_block,14
 blogofile-plugins,exec_used,4
 blogofile-plugins,eval_used,3
@@ -621,7 +639,7 @@ blogofile-plugins,shell_injection,1
 
 
 boto-develop,ignore_except_block,64
-boto-develop,assert_used,230
+boto-develop,assert_used,242
 boto-develop,pickle_used,3
 boto-develop,hardcoded_secret,172
 boto-develop,http_without_tls,2
@@ -629,7 +647,7 @@ boto-develop,shell_injection,3
 boto-develop,exec_used,2
 
 
-braspag-master,assert_used,60
+braspag-master,assert_used,62
 
 
 brother_ql_web-master,debug_true,1
@@ -642,7 +660,7 @@ buyandsell-master,debug_true,1
 calllog211-master,ignore_except_block,80
 calllog211-master,exec_used,8
 calllog211-master,hardcoded_secret,25
-calllog211-master,assert_used,178
+calllog211-master,assert_used,210
 calllog211-master,eval_used,2
 calllog211-master,pickle_used,2
 calllog211-master,debug_true,1
@@ -662,19 +680,19 @@ cartridge-mezzanine-django-heroku-master,hardcoded_secret,1
 cassiopeia-master,ignore_except_block,41
 cassiopeia-master,http_without_tls,3
 cassiopeia-master,hardcoded_secret,36
-cassiopeia-master,assert_used,28
+cassiopeia-master,assert_used,46
 
 
 ccxt-master,ignore_except_block,8
 ccxt-master,hardcoded_secret,543
-ccxt-master,assert_used,300
+ccxt-master,assert_used,326
 ccxt-master,shell_injection,1
 ccxt-master,empty_password,1
 
 
 certidude-master,shell_injection,28
 certidude-master,ignore_except_block,13
-certidude-master,assert_used,14
+certidude-master,assert_used,20
 certidude-master,hardcoded_secret,5
 certidude-master,http_without_tls,2
 
@@ -693,12 +711,12 @@ chipy.org-master,http_without_tls,2
 chipy.org-master,ignore_except_block,1
 
 
-city-scrapers-main,assert_used,1244
+city-scrapers-main,assert_used,1245
 city-scrapers-main,hardcoded_secret,4
 city-scrapers-main,ignore_except_block,6
 
 
-cntk-python-web-service-on-azure-master,assert_used,35
+cntk-python-web-service-on-azure-master,assert_used,47
 cntk-python-web-service-on-azure-master,yaml_load_used,6
 
 
@@ -722,8 +740,14 @@ crypto-whale-watching-app-master,assert_used,2
 crypto-whale-watching-app-master,ignore_except_block,2
 
 
+d6tflow-master,assert_used,51
+d6tflow-master,yaml_load_used,1
+d6tflow-master,harcoded_tmp_dir,1
+d6tflow-master,pickle_used,1
+
+
 dash-dev,exec_used,4
-dash-dev,assert_used,262
+dash-dev,assert_used,271
 dash-dev,hardcoded_secret,14
 dash-dev,ignore_except_block,9
 dash-dev,shell_injection,6
@@ -731,14 +755,14 @@ dash-dev,http_without_tls,5
 dash-dev,debug_true,15
 
 
-datastore-ndb-python-master,assert_used,19
+datastore-ndb-python-master,assert_used,35
 datastore-ndb-python-master,ignore_except_block,13
 datastore-ndb-python-master,hardcoded_secret,4
 datastore-ndb-python-master,pickle_used,2
 datastore-ndb-python-master,debug_true,1
 
 
-detectem-master,assert_used,48
+detectem-master,assert_used,49
 detectem-master,http_without_tls,3
 detectem-master,ignore_except_block,2
 
@@ -747,8 +771,8 @@ django-admin-bootstrapped-master,debug_true,1
 django-admin-bootstrapped-master,ignore_except_block,3
 
 
+django-auditlog-master,assert_used,11
 django-auditlog-master,ignore_except_block,5
-django-auditlog-master,assert_used,9
 
 
 django-avatar-master,debug_true,1
@@ -764,6 +788,7 @@ django-blast-master,hardcoded_secret,17
 django-blast-master,http_without_tls,1
 django-blast-master,shell_injection,3
 django-blast-master,debug_true,2
+django-blast-master,assert_used,3
 
 
 django-calaccess-raw-data-master,ignore_except_block,2
@@ -782,12 +807,12 @@ django-chartit-master,hardcoded_secret,1
 
 
 django-cors-headers-master,ignore_except_block,2
-django-cors-headers-master,assert_used,72
+django-cors-headers-master,assert_used,73
 
 
 django-crispy-forms-master,shell_injection,2
 django-crispy-forms-master,hardcoded_secret,3
-django-crispy-forms-master,assert_used,445
+django-crispy-forms-master,assert_used,498
 django-crispy-forms-master,ignore_except_block,3
 
 
@@ -817,8 +842,8 @@ django-friendship-master,debug_true,1
 
 django-hvad-master,hardcoded_secret,9
 django-hvad-master,ignore_except_block,13
+django-hvad-master,assert_used,6
 django-hvad-master,pickle_used,7
-django-hvad-master,assert_used,5
 
 
 django-jquery-file-upload-master,debug_true,1
@@ -827,8 +852,16 @@ django-jquery-file-upload-master,debug_true,1
 django-machina-master,debug_true,1
 django-machina-master,hardcoded_secret,10
 django-machina-master,ignore_except_block,10
-django-machina-master,assert_used,443
+django-machina-master,assert_used,536
 django-machina-master,empty_password,2
+
+
+django-master,assert_used,6
+django-master,ignore_except_block,94
+django-master,hardcoded_secret,20
+django-master,pickle_used,2
+django-master,debug_true,2
+django-master,http_without_tls,1
 
 
 django-notifications-master,debug_true,1
@@ -840,12 +873,13 @@ django-oscar-demo-master,debug_true,4
 
 django-oscar-master,empty_password,11
 django-oscar-master,hardcoded_secret,44
-django-oscar-master,assert_used,233
+django-oscar-master,assert_used,266
 django-oscar-master,ignore_except_block,33
 django-oscar-master,exec_used,2
 
 
 django-post_office-master,ignore_except_block,5
+django-post_office-master,assert_used,3
 
 
 django-react-ecommerce-master,debug_true,2
@@ -860,6 +894,7 @@ django-registration-master,hardcoded_secret,1
 
 
 django-rest-auth-master,ignore_except_block,2
+django-rest-auth-master,assert_used,1
 django-rest-auth-master,hardcoded_secret,54
 django-rest-auth-master,debug_true,1
 
@@ -870,7 +905,7 @@ django-rq-master,hardcoded_secret,2
 
 
 django-salesman-master,debug_true,1
-django-salesman-master,assert_used,224
+django-salesman-master,assert_used,232
 django-salesman-master,hardcoded_secret,4
 django-salesman-master,ignore_except_block,1
 
@@ -895,7 +930,7 @@ django-tables2-master,shell_injection,7
 django-tables2-master,debug_true,1
 django-tables2-master,ignore_except_block,6
 django-tables2-master,hardcoded_secret,1
-django-tables2-master,assert_used,28
+django-tables2-master,assert_used,29
 django-tables2-master,yaml_load_used,1
 
 
@@ -903,6 +938,14 @@ django-tastypie-master,ignore_except_block,16
 django-tastypie-master,debug_true,2
 django-tastypie-master,hardcoded_secret,12
 django-tastypie-master,yaml_load_used,1
+
+
+django-tutorial-master,assert_used,1
+django-tutorial-master,debug_true,1
+
+
+django-tutorial-v2-master,assert_used,1
+django-tutorial-v2-master,debug_true,1
 
 
 django_e_commerce-master,debug_true,1
@@ -916,7 +959,7 @@ djangocon_2015_talk-master,debug_true,1
 
 djangogirls-master,http_without_tls,3
 djangogirls-master,ignore_except_block,2
-djangogirls-master,assert_used,329
+djangogirls-master,assert_used,334
 djangogirls-master,hardcoded_secret,5
 djangogirls-master,shell_injection,2
 
@@ -955,7 +998,7 @@ e-commerce-web-scraper-master,ignore_except_block,1
 eCommerce-Database-main,ignore_except_block,138
 eCommerce-Database-main,empty_password,3
 eCommerce-Database-main,debug_true,1
-eCommerce-Database-main,assert_used,65
+eCommerce-Database-main,assert_used,99
 eCommerce-Database-main,hardcoded_secret,42
 eCommerce-Database-main,shell_injection,3
 eCommerce-Database-main,harcoded_tmp_dir,1
@@ -967,6 +1010,10 @@ eCommerce-master,http_without_tls,1
 eCommerce-master,debug_true,2
 eCommerce-master,ignore_except_block,3
 eCommerce-master,hardcoded_secret,2
+
+
+easy-scraping-tutorial-master,http_without_tls,5
+easy-scraping-tutorial-master,hardcoded_secret,4
 
 
 ebook-viewer-master,shell_injection,2
@@ -1005,7 +1052,7 @@ enlighten-master,harcoded_tmp_dir,1
 
 esky-master,ignore_except_block,29
 esky-master,exec_used,2
-esky-master,assert_used,37
+esky-master,assert_used,89
 esky-master,shell_injection,1
 esky-master,pickle_used,7
 
@@ -1014,7 +1061,7 @@ eventbrite-master,debug_true,2
 eventbrite-master,hardcoded_secret,452
 eventbrite-master,ignore_except_block,1383
 eventbrite-master,exec_used,68
-eventbrite-master,assert_used,9290
+eventbrite-master,assert_used,11358
 eventbrite-master,empty_password,7
 eventbrite-master,pickle_used,32
 eventbrite-master,shell_injection,45
@@ -1053,17 +1100,25 @@ ezpadova-master,assert_used,2
 ezpadova-master,ignore_except_block,1
 
 
+face_merge_master-master,http_without_tls,1
+face_merge_master-master,hardcoded_secret,1
+
+
 face_recognition-master,hardcoded_secret,1
 
 
 falcon-master,ignore_except_block,25
-falcon-master,assert_used,1304
+falcon-master,assert_used,1393
 falcon-master,exec_used,2
 falcon-master,eval_used,2
 falcon-master,debug_true,2
 falcon-master,hardcoded_secret,2
 falcon-master,http_without_tls,6
 falcon-master,shell_injection,1
+
+
+fapws2-master,debug_true,1
+fapws2-master,shell_injection,1
 
 
 featureserver-master,assert_used,10
@@ -1087,7 +1142,7 @@ flask-website-master,ignore_except_block,4
 
 flexx-master,ignore_except_block,17
 flexx-master,exec_used,14
-flexx-master,assert_used,363
+flexx-master,assert_used,402
 flexx-master,shell_injection,1
 flexx-master,hardcoded_secret,18
 flexx-master,eval_used,5
@@ -1099,7 +1154,7 @@ fosswebsite-master,ignore_except_block,2
 
 
 gae-secure-scaffold-python3-master,shell_injection,1
-gae-secure-scaffold-python3-master,assert_used,30
+gae-secure-scaffold-python3-master,assert_used,31
 
 
 genderize-master,assert_used,14
@@ -1125,7 +1180,7 @@ hendrix-master,pickle_used,1
 hendrix-master,yaml_load_used,1
 
 
-heroku-buildpack-python-main,assert_used,2
+heroku-buildpack-python-main,assert_used,3
 heroku-buildpack-python-main,hardcoded_secret,2
 heroku-buildpack-python-main,shell_injection,1
 heroku-buildpack-python-main,debug_true,1
@@ -1135,10 +1190,10 @@ httplib2-master,ignore_except_block,27
 httplib2-master,hardcoded_secret,8
 httplib2-master,empty_password,2
 httplib2-master,pickle_used,5
-httplib2-master,assert_used,132
+httplib2-master,assert_used,143
 
 
-hyde-master,assert_used,303
+hyde-master,assert_used,335
 hyde-master,yaml_load_used,6
 hyde-master,ignore_except_block,25
 hyde-master,exec_used,4
@@ -1146,10 +1201,10 @@ hyde-master,hardcoded_secret,2
 
 
 hydroshare-develop,hardcoded_secret,168
+hydroshare-develop,assert_used,278
 hydroshare-develop,ignore_except_block,42
 hydroshare-develop,shell_injection,5
 hydroshare-develop,http_without_tls,6
-hydroshare-develop,assert_used,75
 hydroshare-develop,empty_password,10
 hydroshare-develop,harcoded_tmp_dir,2
 
@@ -1171,7 +1226,7 @@ inscriptis-master,ignore_except_block,1
 
 
 ipython-master,exec_used,36
-ipython-master,assert_used,92
+ipython-master,assert_used,136
 ipython-master,shell_injection,22
 ipython-master,ignore_except_block,200
 ipython-master,hardcoded_secret,26
@@ -1194,9 +1249,15 @@ joeahand-master,ignore_except_block,1
 joeahand-master,assert_used,1
 
 
+k8s-tutorial-python-master,debug_true,1
+
+
+key-presser-via-python-server-master,ignore_except_block,1
+
+
 lbry-sdk-master,ignore_except_block,82
 lbry-sdk-master,hardcoded_secret,18
-lbry-sdk-master,assert_used,43
+lbry-sdk-master,assert_used,66
 lbry-sdk-master,sql_injection,1
 lbry-sdk-master,shell_injection,2
 lbry-sdk-master,empty_password,1
@@ -1216,7 +1277,7 @@ learn_python3_spider-master,http_without_tls,5
 learn_python3_spider-master,hardcoded_secret,112
 learn_python3_spider-master,ignore_except_block,471
 learn_python3_spider-master,exec_used,86
-learn_python3_spider-master,assert_used,269
+learn_python3_spider-master,assert_used,354
 learn_python3_spider-master,harcoded_tmp_dir,3
 learn_python3_spider-master,shell_injection,10
 learn_python3_spider-master,eval_used,13
@@ -1242,12 +1303,19 @@ loggers-master,ignore_except_block,4
 
 m.css-master,pickle_used,5
 m.css-master,hardcoded_secret,15
-m.css-master,assert_used,80
+m.css-master,assert_used,92
 m.css-master,ignore_except_block,2
 m.css-master,harcoded_tmp_dir,1
 
 
 major-scrapy-spiders-master,empty_password,1
+
+
+mep-django-master,exec_used,2
+mep-django-master,ignore_except_block,10
+mep-django-master,assert_used,1397
+mep-django-master,http_without_tls,2
+mep-django-master,hardcoded_secret,4
 
 
 merchant-master,shell_injection,1
@@ -1257,9 +1325,14 @@ merchant-master,hardcoded_secret,6
 merchant-master,assert_used,3
 
 
+microblog-master,http_without_tls,1
+microblog-master,hardcoded_secret,5
+microblog-master,ignore_except_block,1
+
+
 mindboggle-master,exec_used,4
 mindboggle-master,pickle_used,4
-mindboggle-master,assert_used,9
+mindboggle-master,assert_used,11
 mindboggle-master,ignore_except_block,5
 mindboggle-master,hardcoded_secret,1
 mindboggle-master,shell_injection,1
@@ -1303,7 +1376,7 @@ news-fetch-master,ignore_except_block,1
 
 
 nikola-master,ignore_except_block,39
-nikola-master,assert_used,209
+nikola-master,assert_used,246
 nikola-master,hardcoded_secret,12
 nikola-master,yaml_load_used,2
 nikola-master,shell_injection,2
@@ -1322,7 +1395,7 @@ nycpython.com-master,assert_used,1
 onlineShop-master,debug_true,1
 
 
-opensale-master,assert_used,2224
+opensale-master,assert_used,2295
 opensale-master,hardcoded_secret,171
 opensale-master,empty_password,3
 opensale-master,ignore_except_block,6
@@ -1339,12 +1412,13 @@ oscar-wagtail-demo-master,debug_true,3
 
 pacu-master,http_without_tls,2
 pacu-master,ignore_except_block,7
+pacu-master,assert_used,1
 pacu-master,hardcoded_secret,3
 
 
 panel-master,ignore_except_block,41
 panel-master,hardcoded_secret,5
-panel-master,assert_used,1279
+panel-master,assert_used,1640
 panel-master,http_without_tls,2
 panel-master,debug_true,2
 
@@ -1359,12 +1433,12 @@ pdf-miner-master,ignore_except_block,1
 pdf-miner-master,shell_injection,2
 
 
-pepy-master,assert_used,31
+pepy-master,assert_used,32
 pepy-master,http_without_tls,3
 pepy-master,debug_true,1
 
 
-personfinder-master,assert_used,1034
+personfinder-master,assert_used,1087
 personfinder-master,ignore_except_block,10
 personfinder-master,hardcoded_secret,16
 personfinder-master,shell_injection,4
@@ -1401,6 +1475,13 @@ price-of-chair-new-master,empty_password,20
 prices-master,assert_used,117
 
 
+project-dream-team-three-master,debug_true,1
+project-dream-team-three-master,ignore_except_block,1
+
+
+project-dream-team-two-master,debug_true,1
+
+
 prosopopee-master,hardcoded_secret,2
 
 
@@ -1418,7 +1499,7 @@ pyFCC-master,hardcoded_secret,2
 
 
 pySphere-master,ignore_except_block,24
-pySphere-master,assert_used,22
+pySphere-master,assert_used,50
 pySphere-master,hardcoded_secret,3
 pySphere-master,http_without_tls,4
 pySphere-master,eval_used,1
@@ -1438,6 +1519,12 @@ pyanalytics-master,debug_true,1
 pyanalytics-master,hardcoded_secret,1
 
 
+pycsw-master,hardcoded_secret,11
+pycsw-master,ignore_except_block,4
+pycsw-master,eval_used,2
+pycsw-master,assert_used,25
+
+
 pycv-master,http_without_tls,4
 pycv-master,ignore_except_block,3
 pycv-master,hardcoded_secret,2
@@ -1451,18 +1538,25 @@ pyredminews-master,hardcoded_secret,2
 pyredminews-master,assert_used,38
 
 
+pyspider-master,shell_injection,10
+pyspider-master,ignore_except_block,15
+pyspider-master,assert_used,25
+pyspider-master,hardcoded_secret,19
+pyspider-master,http_without_tls,3
+
+
 pyspread-master,ignore_except_block,32
 pyspread-master,hardcoded_secret,9
 pyspread-master,shell_injection,2
 pyspread-master,exec_used,6
 pyspread-master,eval_used,1
-pyspread-master,assert_used,71
+pyspread-master,assert_used,72
 
 
 python-allrecipes-master,ignore_except_block,2
 
 
-python-amazon-mws-develop,assert_used,22
+python-amazon-mws-develop,assert_used,28
 
 
 python-atws-master,hardcoded_secret,1
@@ -1471,7 +1565,7 @@ python-atws-master,assert_used,2
 
 
 python-bulk-email-verifier-master,debug_true,2
-python-bulk-email-verifier-master,assert_used,18
+python-bulk-email-verifier-master,assert_used,19
 
 
 python-devicecloud-master,ignore_except_block,4
@@ -1522,7 +1616,7 @@ python-web-test-master,assert_used,2
 python-zhmcclient-master,exec_used,4
 python-zhmcclient-master,shell_injection,1
 python-zhmcclient-master,ignore_except_block,24
-python-zhmcclient-master,assert_used,1319
+python-zhmcclient-master,assert_used,1543
 python-zhmcclient-master,yaml_load_used,19
 python-zhmcclient-master,empty_password,15
 python-zhmcclient-master,hardcoded_secret,3
@@ -1542,6 +1636,7 @@ pywebcopy-master,ignore_except_block,3
 pywebcopy-master,shell_injection,8
 pywebcopy-master,http_without_tls,1
 pywebcopy-master,hardcoded_secret,3
+pywebcopy-master,assert_used,16
 
 
 pywebdriver-master,ignore_except_block,5
@@ -1552,7 +1647,7 @@ pywebsitechanges-master,shell_injection,2
 
 pywps-master,ignore_except_block,5
 pywps-master,http_without_tls,1
-pywps-master,assert_used,109
+pywps-master,assert_used,122
 pywps-master,hardcoded_secret,1
 pywps-master,shell_injection,1
 
@@ -1595,7 +1690,7 @@ sNeeds-master,ignore_except_block,25
 sNeeds-master,hardcoded_secret,161
 
 
-saleor-custom-master,assert_used,1260
+saleor-custom-master,assert_used,1307
 saleor-custom-master,hardcoded_secret,57
 saleor-custom-master,empty_password,1
 saleor-custom-master,ignore_except_block,10
@@ -1603,7 +1698,7 @@ saleor-custom-master,http_without_tls,3
 
 
 saleor-master,hardcoded_secret,694
-saleor-master,assert_used,4627
+saleor-master,assert_used,4763
 saleor-master,http_without_tls,4
 saleor-master,ignore_except_block,8
 saleor-master,empty_password,6
@@ -1614,7 +1709,7 @@ santricity-webapi-pythonsdk-master,eval_used,2
 santricity-webapi-pythonsdk-master,hardcoded_secret,1113
 
 
-scrapenhl2-master,assert_used,16
+scrapenhl2-master,assert_used,19
 scrapenhl2-master,ignore_except_block,11
 scrapenhl2-master,hardcoded_secret,5
 scrapenhl2-master,debug_true,2
@@ -1629,7 +1724,7 @@ security-growler-master,empty_password,3
 security-growler-master,ignore_except_block,6
 
 
-serverless-automated-ui-testing-master,assert_used,34
+serverless-automated-ui-testing-master,assert_used,35
 serverless-automated-ui-testing-master,ignore_except_block,50
 serverless-automated-ui-testing-master,hardcoded_secret,10
 serverless-automated-ui-testing-master,shell_injection,2
@@ -1642,7 +1737,7 @@ servicebook-web-master,yaml_load_used,2
 servicebook-web-master,http_without_tls,3
 
 
-shadowreader-master,assert_used,70
+shadowreader-master,assert_used,72
 shadowreader-master,ignore_except_block,1
 
 
@@ -1653,7 +1748,7 @@ shuup-master,shell_injection,1
 shuup-master,hardcoded_secret,102
 shuup-master,debug_true,2
 shuup-master,exec_used,2
-shuup-master,assert_used,5276
+shuup-master,assert_used,5870
 shuup-master,empty_password,3
 shuup-master,ignore_except_block,75
 shuup-master,http_without_tls,1
@@ -1664,6 +1759,9 @@ simple_ecommerce-master,debug_true,1
 
 simpleauth-master,ignore_except_block,6
 simpleauth-master,hardcoded_secret,2
+
+
+simpleeditions-master,ignore_except_block,1
 
 
 simplenote.py-master,shell_injection,1
@@ -1679,7 +1777,7 @@ site-master,ignore_except_block,1
 slickr-master,ignore_except_block,1
 
 
-smoketest-master,assert_used,6
+smoketest-master,assert_used,9
 smoketest-master,hardcoded_secret,1
 smoketest-master,http_without_tls,1
 
@@ -1700,7 +1798,7 @@ speed-camera-master,shell_injection,3
 
 streamlit-develop,ignore_except_block,38
 streamlit-develop,hardcoded_secret,15
-streamlit-develop,assert_used,23
+streamlit-develop,assert_used,29
 streamlit-develop,http_without_tls,2
 streamlit-develop,exec_used,4
 streamlit-develop,pickle_used,1
@@ -1721,7 +1819,7 @@ terminal-leetcode-master,http_without_tls,1
 
 
 thefuck-master,ignore_except_block,8
-thefuck-master,assert_used,290
+thefuck-master,assert_used,481
 thefuck-master,hardcoded_secret,2
 thefuck-master,shell_injection,10
 thefuck-master,harcoded_tmp_dir,1
@@ -1756,7 +1854,7 @@ vidscraper-develop,ignore_except_block,9
 vidscraper-develop,http_without_tls,3
 
 
-vision-web-service-master,assert_used,3
+vision-web-service-master,assert_used,4
 
 
 wagtail-snipcart-master,ignore_except_block,2
@@ -1777,18 +1875,23 @@ warp-master,ignore_except_block,1
 
 
 waterbutler-develop,exec_used,2
-waterbutler-develop,assert_used,951
+waterbutler-develop,assert_used,1003
 waterbutler-develop,hardcoded_secret,19
 waterbutler-develop,ignore_except_block,9
 waterbutler-develop,pickle_used,1
 
 
-watson-framework-master,assert_used,82
+watson-framework-master,assert_used,98
 
 
 weatherlink-python-master,shell_injection,2
 weatherlink-python-master,ignore_except_block,6
 weatherlink-python-master,assert_used,1
+
+
+web-app-skeleton-master,hardcoded_secret,10
+web-app-skeleton-master,assert_used,4
+web-app-skeleton-master,ignore_except_block,2
 
 
 web-scraping-master,assert_used,3
@@ -1803,7 +1906,7 @@ webkiller-master,ignore_except_block,1
 
 
 websauna-master,hardcoded_secret,39
-websauna-master,assert_used,139
+websauna-master,assert_used,296
 websauna-master,ignore_except_block,22
 websauna-master,shell_injection,4
 websauna-master,http_without_tls,2
@@ -1843,7 +1946,7 @@ white-master,debug_true,1
 white-master,ignore_except_block,4
 
 
-whitenoise-master,assert_used,63
+whitenoise-master,assert_used,70
 whitenoise-master,ignore_except_block,6
 whitenoise-master,hardcoded_secret,2
 
@@ -1853,7 +1956,7 @@ wishlists-master,pickle_used,2
 wishlists-master,assert_used,17
 
 
-wsgiservice-master,assert_used,120
+wsgiservice-master,assert_used,123
 wsgiservice-master,hardcoded_secret,12
 
 

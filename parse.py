@@ -479,7 +479,11 @@ class Analyzer(ast.NodeVisitor):
     def visit_Assert(self, node):
         try:
             # print(ast.dump(node))
-
+            
+            assertStatement = {}
+            assertStatement["type"] = "assert"
+            assertStatement["line"] = node.lineno
+                
             if isinstance(node.test, ast.Compare):
                 left = self.addVariablesToList(node.test.left, [])
                 left = left[0] if len(left) > 0 else None
@@ -491,13 +495,21 @@ class Analyzer(ast.NodeVisitor):
                     
                     if name is not None: comparators.append(name)
                 
-                assertStatement = {}
-                assertStatement["type"] = "assert"
-                assertStatement["line"] = node.lineno
                 assertStatement["left"] = left
                 assertStatement["comparators"] = comparators
 
-                self.statements.append(assertStatement)
+            elif isinstance(node.test, ast.Call):
+                funcName = self.addVariablesToList(node.test, [])
+                funcName = funcName[0] if len(funcName) > 0 else None
+                funcArgs = []
+                
+                for arg in node.test.args:
+                    funcArgs = self.addVariablesToList(arg, funcArgs)
+
+                assertStatement['func'] = funcName
+                assertStatement['args'] = funcArgs
+
+            self.statements.append(assertStatement)
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
