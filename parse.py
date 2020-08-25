@@ -860,14 +860,13 @@ class Analyzer(ast.NodeVisitor):
 
     def writeToFile(self):
         try:
-            f = open("tokens.txt", "w")
-            counter = -1 
+            fp = open("logs/tokens.txt", "w+")
+
             for statement in self.statements:
-                counter += 1
-                json.dump(statement, f)
-                f.write("\n")
+                json.dump(statement, fp)
+                fp.write("\n")
             
-            f.close()
+            fp.close()
 
         except Exception as error:
             line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)

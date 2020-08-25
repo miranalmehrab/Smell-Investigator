@@ -1,4 +1,4 @@
-from operations.actionUponDetection import actionUponDetection
+from operations.action_upon_detection import action_upon_detection
 
 def detect(token, project_name, srcFile):
 
@@ -15,8 +15,8 @@ def detect(token, project_name, srcFile):
         args = token['args']
         valueSrc = token['valueSrc']
         if valueSrc in unwantedMethods and len(args) > 0:
-            actionUponDetection(project_name, srcFile, lineno, 'sql_injection', 'sql injection')
+            action_upon_detection(project_name, srcFile, lineno, 'sql_injection', 'sql injection')
                 
     elif tokenType == "function_call" and name in unwantedMethods and (len(args) > 0 or hasInputs is True):
-        actionUponDetection(project_name, srcFile, lineno, 'sql_injection', 'sql injection')
+        action_upon_detection(project_name, srcFile, lineno, 'sql_injection', 'sql injection')
         

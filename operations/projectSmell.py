@@ -1,4 +1,5 @@
 import csv
+from operations.write_to_csv_file import write_to_csv_file
 
 def csvFileContents(filename):
     rows = []
@@ -10,27 +11,24 @@ def csvFileContents(filename):
 
 
 def write_smells(smells):
-    with open('logs/projectSmells.csv', 'w') as fp:    
-        fw = csv.writer(fp)
-        project_name = None
-        for smell in smells:
-            
-            if project_name is None:
-                project_name = smell[0]
-                fw.writerow(smell)
 
-            elif project_name is not None:
-                if project_name != smell[0]:
-                    
-                    project_name = smell[0]
-                    fw.writerow([])
-                    fw.writerow([])    
-                    fw.writerow(smell)
-                    
-                else: fw.writerow(smell)
+    project_name = None
+    for smell in smells:
+        
+        if project_name is None:
+            project_name = smell[0]
+            write_to_csv_file('logs/projectSmells.csv', smell)
+
+        elif project_name is not None and project_name != smell[0]:    
+            project_name = smell[0]
+            write_to_csv_file('logs/projectSmells.csv', smell)
+                
+        else: 
+            write_to_csv_file('logs/projectSmells.csv', smell)
+
 
 def save_project_smells():
-    smells = csvFileContents('detected_smells.csv')
+    smells = csvFileContents('logs/detected_smells.csv')
     projectSmells = []
     
     for smell in smells:

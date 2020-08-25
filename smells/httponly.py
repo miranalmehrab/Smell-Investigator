@@ -1,4 +1,4 @@
-from operations.actionUponDetection import actionUponDetection
+from operations.action_upon_detection import action_upon_detection
 
 def detect(token, project_name, srcFile):
 
@@ -15,9 +15,9 @@ def detect(token, project_name, srcFile):
 
         if valueSrc in httpLibs and len(args) > 0:
             if args[0].split("://")[0] != "https": 
-                actionUponDetection(project_name, srcFile, lineno, 'http_without_tls', 'use of HTTP without TLS')
+                action_upon_detection(project_name, srcFile, lineno, 'http_without_tls', 'use of HTTP without TLS')
 
     if tokenType == "function_call" and name in httpLibs:
         if len(args) > 0 and args[0].split("://")[0] != "https": 
-            actionUponDetection(project_name, srcFile, lineno, 'http_without_tls', 'use of HTTP without TLS')
+            action_upon_detection(project_name, srcFile, lineno, 'http_without_tls', 'use of HTTP without TLS')
 

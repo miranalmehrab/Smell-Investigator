@@ -30,8 +30,8 @@ def getImports(tokens):
     for token in tokens:
         try: 
             token = json.loads(token)
-            if token['type'] == 'import': imports.append(token['og'])
-
+            if token['type'] == 'import': 
+                imports.append(token['og'])
 
         except Exception as error:
             print(str(error))

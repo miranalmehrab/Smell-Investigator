@@ -1,4 +1,6 @@
 import csv
+from operations.list_csv_contents import list_csv_contents
+from operations.write_to_csv_file import write_to_csv_file 
 
 def csvFileContents(filename):
     rows = []
@@ -19,30 +21,29 @@ def printResultsAndErrors(detected_smells,parsing_errors,token_errors):
 def smellOccurenceCount(smells, header):
     uniqueCounts = []
     for smell in smells:
-
         found = False
+
         for row in uniqueCounts:
-            
-            if smell[1] in row:
+            if smell[2] in row:
                 row[1] = row[1]+1
                 found = True
                 break   
 
         if found is False:
-            uniqueCounts.append([smell[1], 0])
+            uniqueCounts.append([smell[2], 0])
 
-    # print('')
-    # print('---------------------- '+header+' --------------------')
+    print('')
+    print('---------------------- '+header+' --------------------')
     
-    # uniqueCounts.sort(key = lambda x: x[1], reverse = True)
-    # for smell_count in uniqueCounts:
-    #     print(smell_count)
+    uniqueCounts.sort(key = lambda x: x[1], reverse = True)
+    for smell_count in uniqueCounts:
+        write_to_csv_file('logs/uniqueSmells.csv',smell_count)    
 
 
 def show_results():
-    detected_smells = csvFileContents('detected_smells.csv')
-    parsing_errors = csvFileContents('logs/parsingExceptions.csv')
-    token_errors = csvFileContents('logs/tokenLoadingExceptions.csv')
+    detected_smells = list_csv_contents('logs/detected_smells.csv')
+    parsing_errors = list_csv_contents('logs/parsingExceptions.csv')
+    token_errors = list_csv_contents('logs/tokenLoadingExceptions.csv')
     
     printResultsAndErrors(detected_smells,parsing_errors,token_errors)
     smellOccurenceCount(detected_smells, 'detected smells')

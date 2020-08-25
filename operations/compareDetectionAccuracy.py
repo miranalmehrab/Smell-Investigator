@@ -43,5 +43,5 @@ def smellOccurenceCount(smells, header):
 
 
 def compareDetectionAccuracy():
-    reference_smells = csvFileContents('smells.csv')
+    reference_smells = csvFileContents('test-codes/smells.csv')
     smellOccurenceCount(reference_smells, 'reference smells')

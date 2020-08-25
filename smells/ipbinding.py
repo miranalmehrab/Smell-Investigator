@@ -1,4 +1,4 @@
-from operations.actionUponDetection import actionUponDetection
+from operations.action_upon_detection import action_upon_detection
 
 def detect(token, project_name, srcFile):
 
@@ -14,12 +14,12 @@ def detect(token, project_name, srcFile):
         valueSrc = token['valueSrc']
         
         if valueSrc in bindingMethods and len(args) > 0 and is_valid_ip(args[0]):
-            actionUponDetection(project_name, srcFile, lineno, 'hardcoded_ip_binding', 'Harcoded ip address binding used') 
+            action_upon_detection(project_name, srcFile, lineno, 'hardcoded_ip_binding', 'Harcoded ip address binding used') 
 
     elif tokenType == "function_call" and name in bindingMethods:
         
         if len(args) > 0 and is_valid_ip(args[0]): 
-            actionUponDetection(project_name, srcFile, lineno, 'hardcoded_ip_binding', 'Harcoded ip address binding used')
+            action_upon_detection(project_name, srcFile, lineno, 'hardcoded_ip_binding', 'Harcoded ip address binding used')
                 
 def is_valid_ip(ip):
     parts = ip.split('.')

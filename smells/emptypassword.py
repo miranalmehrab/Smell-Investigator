@@ -1,4 +1,4 @@
-from operations.actionUponDetection import actionUponDetection
+from operations.action_upon_detection import action_upon_detection
 
 def detect(token, project_name, srcFile):
     
@@ -10,11 +10,11 @@ def detect(token, project_name, srcFile):
     commonPasswords = ['password','passwords','pass','pwd','userpassword','userpwd', 'userpass', 'pass_no', 'pass-no', 'user-pass', 'upass']
     
     if tokenType == "variable" and name in commonPasswords and value is None: 
-        actionUponDetection(project_name, srcFile, lineno, 'empty_password', 'empty password')
+        action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
 
 
     elif tokenType == "variable" and name in commonPasswords and len(value) == 0: 
-        actionUponDetection(project_name, srcFile, lineno, 'empty_password', 'empty password')
+        action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
 
 
     elif tokenType == "comparison" and token.__contains__("pairs"):
@@ -22,13 +22,13 @@ def detect(token, project_name, srcFile):
 
         for pair in pairs:
             if len(pair) == 2 and pair[0] in commonPasswords and len(pair[1]) == 0: 
-                actionUponDetection(project_name, srcFile, lineno, 'empty_password', 'empty password')
+                action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
             
             elif len(pair) == 2 and pair[1] in commonPasswords and len(pair[0]) == 0: 
-                actionUponDetection(project_name, srcFile, lineno, 'empty_password', 'empty password')
+                action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
     
 
     elif tokenType == "function_call" and token.__contains__('keywords'):
         for keyword in token['keywords']:
             if len(keyword) == 2 and keyword[0].lower() in commonPasswords and len(keyword[1]) == 0: 
-                actionUponDetection(project_name, srcFile, lineno, 'empty_password', 'empty password')
+                action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')

@@ -1,4 +1,4 @@
-from operations.actionUponDetection import actionUponDetection
+from operations.action_upon_detection import action_upon_detection
 
 def detect(token, project_name, srcFile):
 
@@ -15,8 +15,8 @@ def detect(token, project_name, srcFile):
     unwantedValues = ['/tmp', '/var/tmp', '/dev/shm']
     
     if tokenType == "variable" and name.lower() in unwantedDirNames and token['value'] is not None: 
-        actionUponDetection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
+        action_upon_detection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
 
     elif (tokenType == "list" or tokenType == "set") and name.lower() in unwantedDirNames and len(values) > 0: 
-        actionUponDetection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
+        action_upon_detection(project_name, srcFile, lineno, 'harcoded_tmp_dir', 'hardcoded temporary directory')
     
