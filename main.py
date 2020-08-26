@@ -3,7 +3,7 @@ import ast
 import copy 
 import glob
 
-from parse import Analyzer
+from analyzer import Analyzer
 from detection.detection import detection
 
 from operations.show_detection_result import show_detection_result

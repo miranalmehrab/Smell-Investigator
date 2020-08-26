@@ -622,9 +622,8 @@ class Analyzer(ast.NodeVisitor):
 
 
     def refine_tokens(self):
-        try:
-            for statement in self.statements:
-                
+        for statement in self.statements:
+            try:
                 if statement["type"] == "tuple" and statement.__contains__("names") and statement.__contains__("values"):
                     for name in statement["names"]:
 
@@ -636,7 +635,7 @@ class Analyzer(ast.NodeVisitor):
                         index = statement["names"].index(name)
 
                         if len(statement['values']) != 0 and index < len(statement["values"]): variable["value"] = statement["values"][index] 
-                        elif statement.__contains__("value") == True: variable["value"] = statement["value"]
+                        elif statement.__contains__("value") is True: variable["value"] = statement["value"]
                         else: variable["value"] = None
 
                         variable["valueSrc"] = statement["valueSrc"] if statement.__contains__("valueSrc") else "initialization"
@@ -646,7 +645,9 @@ class Analyzer(ast.NodeVisitor):
                         self.statements.append(variable)
 
                     self.statements.remove(statement)
-                
+                    print('statement not deleted yet!') if statement in self.statements else print('statement is deleted!')
+                    time.sleep(2)
+
                 elif statement["type"] == "tuple" and statement.__contains__("names") and statement.__contains__("valueSrc") and statement.__contains__('args'):
                     for name in statement["names"]:
 
@@ -662,12 +663,17 @@ class Analyzer(ast.NodeVisitor):
                         self.statements.append(variable)
 
                     self.statements.remove(statement)
-                
-                elif statement["type"] == "function_def" and statement.__contains__("return") == False: self.statements.remove(statement)
+                    print('statement not deleted yet!') if statement in self.statements else print('statement is deleted!')
+                    time.sleep(2)
 
-        except Exception as error:
-            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            save_token_parsing_exception(str(error), line_number)
+                elif statement["type"] == "function_def" and statement.__contains__("return") is False: 
+                    self.statements.remove(statement)
+                    print('statement not deleted yet!') if statement in self.statements else print('statement is deleted!')
+                    time.sleep(2)
+                    
+            except Exception as error:
+                line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+                save_token_parsing_exception(str(error), line_number)
 
 
     def make_tokens_byte_free(self):

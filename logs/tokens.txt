@@ -1,4 +1,33 @@
-{"type": "import", "line": 5, "og": "os", "alias": null}
-{"type": "import", "line": 7, "og": "django.core.wsgi.get_wsgi_application", "alias": null}
-{"type": "function_call", "line": 9, "name": "os.environ.setdefault", "args": ["DJANGO_SETTINGS_MODULE", "django-jquery-file-upload.settings"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 11, "name": "application", "value": null, "valueSrc": "get_wsgi_application", "isInput": false, "args": []}
+{"type": "import", "line": 18, "og": "datetime.datetime", "alias": null}
+{"type": "import", "line": 19, "og": "csv.DictReader", "alias": null}
+{"type": "import", "line": 20, "og": "math.exp", "alias": null}
+{"type": "import", "line": 20, "og": "math.log", "alias": null}
+{"type": "import", "line": 20, "og": "math.sqrt", "alias": null}
+{"type": "variable", "line": 25, "name": "train", "value": "train.csv", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 26, "name": "test", "value": "test.csv", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 28, "name": "D", "value": 22, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 29, "name": "alpha", "value": 0.1, "valueSrc": "initialization", "isInput": false}
+{"type": "function_def", "line": 40, "name": "logloss", "args": ["p", "y"], "defaults": [], "return": null}
+{"type": "variable", "line": 41, "name": "p", "value": null, "valueSrc": "max", "isInput": false, "args": ["min", 1e-11]}
+{"type": "function_def", "line": 52, "name": "get_x", "args": ["csv_row", "D"], "defaults": [], "return": "x"}
+{"type": "list", "line": 53, "name": "x", "value": null, "valueSrc": "initialization", "isInput": false, "values": [0]}
+{"type": "variable", "line": 55, "name": "index", "value": "int22", "valueSrc": "initialization", "isInput": false}
+{"type": "function_call", "line": 56, "name": "x.append", "args": ["int22"], "keywords": [], "hasInputs": false}
+{"type": "function_def", "line": 66, "name": "get_p", "args": ["x", "w"], "defaults": [], "return": "2.0exp"}
+{"type": "variable", "line": 67, "name": "wTx", "value": 0.0, "valueSrc": "initialization", "isInput": false}
+{"type": "function_def", "line": 84, "name": "update_w", "args": ["w", "n", "x", "p", "y"], "defaults": [], "return": null}
+{"type": "variable", "line": 98, "name": "w", "value": 22, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 99, "name": "n", "value": 22, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 102, "name": "loss", "value": 0.0, "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 104, "name": "y", "value": null, "valueSrc": "initialization", "isInput": false, "values": [1.0, 0.0]}
+{"type": "variable", "line": 111, "name": "x", "value": "x", "valueSrc": "get_x", "isInput": false, "args": ["row", "D"]}
+{"type": "variable", "line": 114, "name": "p", "value": "2.0exp", "valueSrc": "get_p", "isInput": false, "args": ["x", "w"]}
+{"type": "comparison", "line": 118, "pairs": [], "test": []}
+{"type": "function_call", "line": 119, "name": "print", "args": ["%s\tencountered: %d\tcurrent logloss: %f"], "keywords": [], "hasInputs": false}
+{"type": "function_call", "line": 127, "name": "submission.write", "args": ["Id,Predicted\n"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 129, "name": "Id", "value": "row", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 131, "name": "x", "value": "x", "valueSrc": "get_x", "isInput": false, "args": ["row", "D"]}
+{"type": "variable", "line": 132, "name": "p", "value": "2.0exp", "valueSrc": "get_p", "isInput": false, "args": ["x", "w"]}
+{"type": "function_call", "line": 133, "name": "submission.write", "args": ["%s,%f\n"], "keywords": [], "hasInputs": false}
+{"type": "variable", "line": 123, "name": "w", "value": null, "valueSrc": "update_w", "args": ["w", "n", "x", "p", "y"], "isInput": false}
+{"type": "variable", "line": 123, "name": "n", "value": null, "valueSrc": "update_w", "args": ["w", "n", "x", "p", "y"], "isInput": false}
