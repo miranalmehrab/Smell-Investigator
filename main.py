@@ -21,8 +21,8 @@ def show_total_file_count():
 
 def analyze_single_code():
     file_name = './test-codes/'+'src.py'
-    analyze_code('', '', file_name)
-    show_detection_result()
+    read_src_code('', '', file_name)
+    # show_detection_result()
 
 
 def clear_log_files():
@@ -44,7 +44,7 @@ def detect_smells_in_tokens(project_name,src_file):
         print(str(error))
 
 
-def parse_code(code, src_file):
+def analyze_ast_tree(code, src_file):
     try:
         tree = ast.parse(code, type_comments=True)
         # print(ast.dump(tree, include_attributes = True))
@@ -78,7 +78,7 @@ def read_src_code(root, project_name, src_file):
                 print(str(error))
                 
             if code is not None: 
-                parse_code(code, src_file)
+                analyze_ast_tree(code, src_file)
                 detect_smells_in_tokens(project_name, src_file)
     
     except Exception as error: 

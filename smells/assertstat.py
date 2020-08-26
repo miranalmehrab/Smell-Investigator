@@ -13,8 +13,5 @@ def detect(token, project_name, srcFile) :
             action_upon_detection(project_name, srcFile, lineno, 'assert_used', 'assert statement')
 
     elif tokenType == "assert" and token.__contains__('func'):
-        func = token['func']
-        args = token['args']
-        
-        if func is not None:
+        if token['func'] is not None:
             action_upon_detection(project_name, srcFile, lineno, 'assert_used', 'assert statement')

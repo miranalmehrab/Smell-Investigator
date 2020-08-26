@@ -9,7 +9,7 @@ def detect(token, project_name, srcFile):
     
     restrictedNames = ['debug','debug_propagate_exceptions']
     
-    if tokenType == "variable" and name.lower() in restrictedNames and value is True: 
+    if tokenType == "variable" and name is not None and name.lower() in restrictedNames and value is True: 
         action_upon_detection(project_name, srcFile, lineno, 'debug_true', 'debug set true')
 
 

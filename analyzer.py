@@ -271,7 +271,7 @@ class Analyzer(ast.NodeVisitor):
                         if len(values)>0: variable["values"].append(values[0])
                     
                 elif isinstance(node.value, ast.IfExp):
-                    variable["type"] = "variable"
+                    # variable["type"] = "variable" overriding previous type (var , tuple , set etc)
                     variable["values"] = []
 
                     bodyList = self.separate_variables(node.value.body,[])
@@ -307,8 +307,9 @@ class Analyzer(ast.NodeVisitor):
                         else: variable["value"] = '['+str(varSlice)+']'
 
                 elif isinstance(node.value, ast.Attribute):
-                    variable["valueSrc"] = self.get_function_attribute(node.value)+'.'+node.value.attr if node.value.attr else self.get_function_attribute(node.value) 
+                    variable["value"] = self.get_function_attribute(node.value)+'.'+node.value.attr if node.value.attr else self.get_function_attribute(node.value) 
                     
+
                 self.statements.append(variable)
  
         except Exception as error:
@@ -588,7 +589,6 @@ class Analyzer(ast.NodeVisitor):
                 keys = ['line', 'name', 'value', 'valueSrc', 'isInput', 'values']
                 for key in keys:
                     if key not in statement: self.statements.remove(statement)
-
             
             elif statement['type'] == 'import':
                 keys = ['line', 'og', 'alias']
@@ -624,7 +624,7 @@ class Analyzer(ast.NodeVisitor):
     def refine_tokens(self):
         for statement in self.statements:
             try:
-                if statement["type"] == "tuple" and statement.__contains__("names") and statement.__contains__("values"):
+                if statement["type"] == "variable" and statement.__contains__("names") and statement.__contains__("values"):
                     for name in statement["names"]:
 
                         variable = {}
@@ -646,9 +646,9 @@ class Analyzer(ast.NodeVisitor):
 
                     self.statements.remove(statement)
                     print('statement not deleted yet!') if statement in self.statements else print('statement is deleted!')
-                    time.sleep(2)
+                    # time.sleep(2)
 
-                elif statement["type"] == "tuple" and statement.__contains__("names") and statement.__contains__("valueSrc") and statement.__contains__('args'):
+                elif statement["type"] == "variable" and statement.__contains__("names") and statement.__contains__("valueSrc") and statement.__contains__('args'):
                     for name in statement["names"]:
 
                         variable = {}
@@ -664,12 +664,12 @@ class Analyzer(ast.NodeVisitor):
 
                     self.statements.remove(statement)
                     print('statement not deleted yet!') if statement in self.statements else print('statement is deleted!')
-                    time.sleep(2)
+                    # time.sleep(2)
 
                 elif statement["type"] == "function_def" and statement.__contains__("return") is False: 
                     self.statements.remove(statement)
                     print('statement not deleted yet!') if statement in self.statements else print('statement is deleted!')
-                    time.sleep(2)
+                    # time.sleep(2)
                     
             except Exception as error:
                 line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
@@ -834,12 +834,13 @@ class Analyzer(ast.NodeVisitor):
     def write_tokens_to_file(self):
         try:
             fp = open("logs/tokens.txt", "w+")
-
+            
             for statement in self.statements:
                 json.dump(statement, fp)
                 fp.write("\n")
             
             fp.close()
+
         except Exception as error:
             line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
             save_token_parsing_exception(line_number, str(error))

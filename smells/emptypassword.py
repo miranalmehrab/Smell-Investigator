@@ -12,19 +12,17 @@ def detect(token, project_name, srcFile):
     if tokenType == "variable" and name in commonPasswords and value is None: 
         action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
 
-
     elif tokenType == "variable" and name in commonPasswords and len(value) == 0: 
         action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
-
 
     elif tokenType == "comparison" and token.__contains__("pairs"):
         pairs = token["pairs"]
 
         for pair in pairs:
-            if len(pair) == 2 and pair[0] in commonPasswords and len(pair[1]) == 0: 
+            if len(pair) == 2 and pair[0] in commonPasswords and (pair[1] is None or len(pair[1]) == 0): 
                 action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
             
-            elif len(pair) == 2 and pair[1] in commonPasswords and len(pair[0]) == 0: 
+            elif len(pair) == 2 and pair[1] in commonPasswords and (pair[0] is None or len(pair[0]) == 0): 
                 action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password')
     
 

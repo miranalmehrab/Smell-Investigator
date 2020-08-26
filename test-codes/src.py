@@ -1,4 +1,4 @@
-x = 1
+# x = 1
 # query = 2
 # ask = y = query + x
 # ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
@@ -30,30 +30,32 @@ x = 1
 
 # file_name = input()
 # exec(file_name)
+import marshal
+marshal_dump = marshal.dump
 
-os.chmod('/etc/hosts',0x777)
-os.chmod('/etc/hosts',stat.S_IRWXO)
-os.chmod('/etc/hosts',stat.S_IROTH)
-os.chmod('/etc/hosts',stat.S_IWOTH)
-os.chmod('/etc/hosts',stat.S_IXOTH)
+# os.chmod('/etc/hosts',0x777)
+# os.chmod('/etc/hosts',stat.S_IRWXO)
+# os.chmod('/etc/hosts',stat.S_IROTH)
+# os.chmod('/etc/hosts',stat.S_IWOTH)
+# os.chmod('/etc/hosts',stat.S_IXOTH)
 
-DEBUG_PROPAGATE_EXCEPTIONS = True
-app.run(debug = True,start = True)
-password = "pass"
-password = ''
-pwd = ''
-password = None
-name = "root"
-pwd = "root123"
-query = "delete from foo where id = " + user_input + user_input
-x = "abc"
-urllib.urlretrieve("192.168.10.1/example.iso")
+# DEBUG_PROPAGATE_EXCEPTIONS = True
+# app.run(debug = True,start = True)
+# password = "pass"
+# password = ''
+# pwd = ''
+# password = None
+# name = "root"
+# pwd = "root123"
+# query = "delete from foo where id = " + user_input + user_input
+# x = "abc"
+# urllib.urlretrieve("192.168.10.1/example.iso")
 
-user_input = input()
-execution.query(user_input)
-subprocess.Popen(user_input)
-result = connection.execute(user_input)
-sys.argv(f'sudo mkdir {user_input}')
+# user_input = input()
+# execution.query(user_input)
+# subprocess.Popen(user_input)
+# result = connection.execute(user_input)
+# sys.argv(f'sudo mkdir {user_input}')
 
 
 

@@ -66,8 +66,8 @@ def detection(tokens, project_name, srcFile):
                 evalDetect(token, project_name, srcFile)
                 yamlloadDetect(token, project_name, srcFile)
 
-            except Exception as error: save_token_detection_exception(str(error)+' - '+ str(token), srcFile)
+            except Exception as error: save_token_detection_exception(str(error)+'  '+ str(token), srcFile)
             
-        except Exception as error: save_token_loading_exception(token+' - '+str(error),srcFile)
+        except Exception as error: save_token_loading_exception(token+'  '+str(error),srcFile)
         
         
