@@ -6,13 +6,14 @@ import glob
 from parse import Analyzer
 from detection.detection import detection
 
-from operations.showResult import show_results
-from operations.projectSmell import save_project_smells
-from operations.showProjectSmell import save_individual_projects_smells
+from operations.show_detection_result import show_detection_result
+from operations.save_project_smells import save_total_count_of_detected_smells_in_projects as toatl_smells_in_project
+from operations.save_project_smells import save_detected_different_smells_frequency_in_projects as different_smells_in_project
+
 
 TOTAL_SRC_FILE_COUNT = 0
 
-def print_total_file_count():
+def show_total_file_count():
     print('')
     print('----------------- Result -----------------')
     print('total file counted : '+str(TOTAL_SRC_FILE_COUNT))
@@ -21,7 +22,7 @@ def print_total_file_count():
 def analyze_single_code():
     file_name = './test-codes/'+'src.py'
     analyze_code('', '', file_name)
-    show_results()
+    show_detection_result()
 
 
 def clear_log_files():
@@ -54,12 +55,11 @@ def parse_code(code, src_file):
 
         analyzer = Analyzer()
         analyzer.visit(tree)
-        analyzer.checkUserInputsInFunctionArguments()
-        analyzer.refineTokens()
+        analyzer.refine_tokens()
         # analyzer.delete_incomplete_tokens()
-        # analyzer.makeTokensByteFree()
-        # analyzer.printStatements()
-        analyzer.writeToFile()
+        # analyzer.make_tokens_byte_free()
+        # analyzer.print_statements()
+        analyzer.write_tokens_to_file()
 
     except Exception as error:
         print(str(error)) 
@@ -112,10 +112,11 @@ def main():
     analyze_code_folder()
     # analyze_single_code()
 
-    print_total_file_count()
-    show_results()
-    save_project_smells()
-    save_individual_projects_smells()
+    show_total_file_count()
+    show_detection_result()
+    
+    different_smells_in_project()
+    toatl_smells_in_project()
 
 
 

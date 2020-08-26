@@ -3,8 +3,8 @@ import sys
 import json
 import time
 
-from operations.saveBugFix import saveBugFix
-from operations.saveParsingExceptions import saveParsingExceptions
+from operations.save_token_exceptions import save_token_for_bug_fix
+from operations.save_token_exceptions import save_token_parsing_exception
 
 class Analyzer(ast.NodeVisitor):
 
@@ -27,7 +27,7 @@ class Analyzer(ast.NodeVisitor):
         
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -50,7 +50,7 @@ class Analyzer(ast.NodeVisitor):
         
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -78,27 +78,27 @@ class Analyzer(ast.NodeVisitor):
                 func_def["args"].append(node.args.kwarg.arg)
             
             for default in node.args.defaults:
-                self.addVariablesToList(default,func_def["defaults"])
+                self.separate_variables(default,func_def["defaults"])
 
             for item in node.body:
                 
                 if isinstance(item,ast.Return):
-                    func_def["return"] = self.addVariablesToList(item.value,[])
+                    func_def["return"] = self.separate_variables(item.value,[])
                     func_def["return"] = func_def["return"][0] if len(func_def["return"]) > 0 else None
 
                     if isinstance(item.value,ast.Call):
                         func_def["returnArgs"] = []
                         for arg in item.value.args:
-                            func_def["returnArgs"] = self.addVariablesToList(arg, func_def["returnArgs"])
+                            func_def["returnArgs"] = self.separate_variables(arg, func_def["returnArgs"])
                             
                             for i in range(len(func_def["returnArgs"])):  
-                                if self.valueFromName(func_def["returnArgs"][i]): func_def["returnArgs"][i] = self.valueFromName(func_def["returnArgs"][i])
+                                if self.value_from_variable_name(func_def["returnArgs"][i]): func_def["returnArgs"][i] = self.value_from_variable_name(func_def["returnArgs"][i])
                             
             self.statements.append(func_def)
      
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -125,7 +125,7 @@ class Analyzer(ast.NodeVisitor):
                 if isinstance(target,ast.Name): variable["name"] = target.id
 
                 elif isinstance(target, ast.Subscript):
-                    var = self.addVariablesToList(target.value, [])
+                    var = self.separate_variables(target.value, [])
                     variable["name"] = var[0] if len(var) > 0 else None
                     
                     # print(node.lineno)
@@ -134,18 +134,18 @@ class Analyzer(ast.NodeVisitor):
 
                     varSlice = None
                     if isinstance(target.slice, ast.Index): 
-                        varSlice = self.addVariablesToList(target.slice.value, [])
+                        varSlice = self.separate_variables(target.slice.value, [])
                         varSlice = varSlice[0] if len(varSlice) > 0 else None
 
                     elif isinstance(target.slice, ast.ExtSlice):
-                        varSlice = self.addVariablesToList(target.slice.dims, [])
+                        varSlice = self.separate_variables(target.slice.dims, [])
                         # print(varSlice)
                         varSlice = varSlice[0] if len(varSlice) > 0 else None
 
                         
                     elif isinstance(target.slice, ast.Slice):
-                        lowerSlice = self.addVariablesToList(target.slice.lower, []) if target.slice.lower!= None else 'min'
-                        upperSlice = self.addVariablesToList(target.slice.upper, []) if target.slice.upper!= None else 'max'
+                        lowerSlice = self.separate_variables(target.slice.lower, []) if target.slice.lower!= None else 'min'
+                        upperSlice = self.separate_variables(target.slice.upper, []) if target.slice.upper!= None else 'max'
                         
                         if lowerSlice != 'min' and len(lowerSlice)>0: lowerSlice = lowerSlice[0]
                         if upperSlice != 'max' and len(upperSlice)>0: upperSlice = upperSlice[0]
@@ -161,14 +161,14 @@ class Analyzer(ast.NodeVisitor):
                     variable["names"] = []
 
                     for element in target.elts:
-                        names = self.addVariablesToList(element, [])
+                        names = self.separate_variables(element, [])
                         if len(names) > 0: variable["names"].append(names[0])
                 
                 elif isinstance(target, ast.Attribute):
-                        # funcName = self.getFunctionAttribute(value)
+                        # funcName = self.get_function_attribute(value)
                         # if value.attr and funcName: funcName = funcName +'.'+ value.attr
                         
-                    name = self.getFunctionAttribute(target)
+                    name = self.get_function_attribute(target)
                     if target.attr: name = name +'.'+ target.attr
                     variable["name"] = name
                     
@@ -178,17 +178,17 @@ class Analyzer(ast.NodeVisitor):
                     variable["isInput"] = False
 
                 if isinstance(node.value, ast.Name):
-                    valueFromName = self.valueFromName(node.value.id)
-                    if type(valueFromName) == list: variable["type"] = "list"
+                    value_from_variable_name = self.value_from_variable_name(node.value.id)
+                    if type(value_from_variable_name) == list: variable["type"] = "list"
                     
-                    variable["value"] = valueFromName
+                    variable["value"] = value_from_variable_name
                     variable["valueSrc"] = "initialization"
                     variable["isInput"] = False
 
                 
                 elif isinstance(node.value, ast.BinOp):
-                    usedVars = self.getUsedVariablesInVariableDeclaration(node.value)
-                    hasInputs = self.checkUserInputsInVariableDeclaration(usedVars)
+                    usedVars = self.get_variables_used_in_declaration(node.value)
+                    hasInputs = self.search_input_in_declaration(usedVars)
 
                     if hasInputs:
                         self.inputs.append(variable["name"])
@@ -197,14 +197,14 @@ class Analyzer(ast.NodeVisitor):
                         variable["isInput"] = True
                     
                     else:
-                        variable["value"] = self.buildNewVariableValueFromUsedOnes(usedVars)
+                        variable["value"] = self.build_value_from_used_variables(usedVars)
                         variable["valueSrc"] = "initialization"
                         variable["isInput"] = False
 
                 elif isinstance(node.value, ast.Call):
                     
-                    funcName = self.getFunctionName(node)
-                    returnFromFunction = self.functionReturnValue(funcName) 
+                    funcName = self.get_function_name(node)
+                    returnFromFunction = self.get_function_return_value(funcName) 
                     variable["value"] =  returnFromFunction if returnFromFunction != funcName else None 
                     variable["valueSrc"] = funcName
                     variable["args"] = []
@@ -218,7 +218,7 @@ class Analyzer(ast.NodeVisitor):
                     for arg in node.value.args:
                         if isinstance(arg, ast.Attribute): 
                             
-                            variable["args"].append(self.getFunctionAttribute(arg)+'.'+arg.attr)
+                            variable["args"].append(self.get_function_attribute(arg)+'.'+arg.attr)
 
                             funcObj = {}
                             funcObj["type"] = "function_obj"
@@ -228,7 +228,7 @@ class Analyzer(ast.NodeVisitor):
                             funcObj["args"] = variable["args"]
 
                             if(funcObj not in self.statements):self.statements.append(funcObj)
-                        else: variable["args"] = (self.addVariablesToList(arg,variable["args"]))
+                        else: variable["args"] = (self.separate_variables(arg,variable["args"]))
 
                 elif isinstance(node.value, ast.List):
                     variable["type"] = "list"
@@ -238,7 +238,7 @@ class Analyzer(ast.NodeVisitor):
                     variable["isInput"] = False
                     
                     for value in node.value.elts:
-                        variable["values"] = self.addVariablesToList(value,variable["values"])
+                        variable["values"] = self.separate_variables(value,variable["values"])
 
                 elif isinstance(node.value, ast.Dict):
                     variable["type"] = "dict"
@@ -246,11 +246,11 @@ class Analyzer(ast.NodeVisitor):
                     variable["values"] = []
 
                     for key in node.value.keys:
-                        keyList = self.addVariablesToList(key,[])
+                        keyList = self.separate_variables(key,[])
                         if len(keyList) > 0: variable["keys"].append(keyList[0]) 
                     
                     for value in node.value.values:
-                        valueList = self.addVariablesToList(value, [])
+                        valueList = self.separate_variables(value, [])
                         if len(valueList) > 0: variable["values"].append(valueList[0])
                 
                 elif isinstance(node.value,ast.Tuple):
@@ -258,7 +258,7 @@ class Analyzer(ast.NodeVisitor):
                     variable["values"] = []
 
                     for element in node.value.elts:
-                        values = self.addVariablesToList(element, [])
+                        values = self.separate_variables(element, [])
                         if len(values)>0: variable["values"].append(values[0])
                     
 
@@ -267,32 +267,32 @@ class Analyzer(ast.NodeVisitor):
                     variable["values"] = []
                     
                     for element in node.value.elts:    
-                        values = self.addVariablesToList(element, [])
+                        values = self.separate_variables(element, [])
                         if len(values)>0: variable["values"].append(values[0])
                     
                 elif isinstance(node.value, ast.IfExp):
                     variable["type"] = "variable"
                     variable["values"] = []
 
-                    bodyList = self.addVariablesToList(node.value.body,[])
+                    bodyList = self.separate_variables(node.value.body,[])
                     if len(bodyList) > 0: variable["values"].append(bodyList[0])
 
-                    comparatorList = self.addVariablesToList(node.value.orelse, [])
+                    comparatorList = self.separate_variables(node.value.orelse, [])
                     if len(comparatorList) > 0: variable["values"].append(comparatorList[0])
 
                 elif isinstance(node.value, ast.BoolOp):
                     variable["values"] = []
                     for value in node.value.values:
-                        valueList = self.addVariablesToList(value,[])
+                        valueList = self.separate_variables(value,[])
                         if len(valueList) > 0: variable["values"].append(valueList[0])
                 
                 elif isinstance(node.value, ast.Subscript):
-                    value = self.addVariablesToList(node.value.value, [])
+                    value = self.separate_variables(node.value.value, [])
                     variable["value"] = value[0] if len(value) > 0 else None
 
                     if isinstance(node.value.slice, ast.Slice):
-                        lowerSlice = self.addVariablesToList(node.value.slice.lower, []) if node.value.slice.lower!= None else 'min'
-                        upperSlice = self.addVariablesToList(node.value.slice.upper, []) if node.value.slice.upper!= None else 'max'
+                        lowerSlice = self.separate_variables(node.value.slice.lower, []) if node.value.slice.lower!= None else 'min'
+                        upperSlice = self.separate_variables(node.value.slice.upper, []) if node.value.slice.upper!= None else 'max'
                         
                         if lowerSlice != 'min' and len(lowerSlice)>0: lowerSlice = lowerSlice[0]
                         if upperSlice != 'max' and len(upperSlice)>0: upperSlice = upperSlice[0]
@@ -307,13 +307,13 @@ class Analyzer(ast.NodeVisitor):
                         else: variable["value"] = '['+str(varSlice)+']'
 
                 elif isinstance(node.value, ast.Attribute):
-                    variable["valueSrc"] = self.getFunctionAttribute(node.value)+'.'+node.value.attr if node.value.attr else self.getFunctionAttribute(node.value) 
+                    variable["valueSrc"] = self.get_function_attribute(node.value)+'.'+node.value.attr if node.value.attr else self.get_function_attribute(node.value) 
                     
                 self.statements.append(variable)
  
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -347,8 +347,8 @@ class Analyzer(ast.NodeVisitor):
                             pair = []
                             pair.append(value.left.id)
                             
-                            usedVars = self.getUsedVariablesInVariableDeclaration(value.comparators[0])
-                            value = self.buildNewVariableValueFromUsedOnes(usedVars)
+                            usedVars = self.get_variables_used_in_declaration(value.comparators[0])
+                            value = self.build_value_from_used_variables(usedVars)
                             
                             if type(value) == str: pair.append(value.lstrip())
                             else: pair.append(value)
@@ -364,14 +364,14 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(node.test, ast.Compare):
                 pair = []
                 
-                leftComparatorList = self.addVariablesToList(node.test.left, [])
+                leftComparatorList = self.separate_variables(node.test.left, [])
                 if len(leftComparatorList)>0: pair.append(leftComparatorList[0])
 
                 comparatorList = []
                 if isinstance(node.test.comparators[0], ast.UnaryOp):
-                    comparatorList = self.addVariablesToList(node.test.comparators[0].operand,[])
+                    comparatorList = self.separate_variables(node.test.comparators[0].operand,[])
 
-                else: comparatorList = self.addVariablesToList(node.test.comparators[0],[])
+                else: comparatorList = self.separate_variables(node.test.comparators[0],[])
                 # print(comparatorList)
                 
                 if len(comparatorList) > 0: pair.append(comparatorList[0])
@@ -386,14 +386,14 @@ class Analyzer(ast.NodeVisitor):
 
             elif isinstance(node.test, ast.Call):
                 if isinstance(node.test.func, ast.Name): statement["test"].append(node.test.func.id)
-                elif isinstance(node.test.func, ast.Attribute): statement["test"].append(self.getFunctionName(node.test.func))
+                elif isinstance(node.test.func, ast.Attribute): statement["test"].append(self.get_function_name(node.test.func))
 
             
             self.statements.append(statement)
         
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -430,7 +430,7 @@ class Analyzer(ast.NodeVisitor):
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node)
 
@@ -449,14 +449,14 @@ class Analyzer(ast.NodeVisitor):
                 
             if isinstance(node.value, ast.Call):
                 if isinstance(node.value.func, ast.Name): expression["name"] = node.value.func.id
-                elif isinstance(node.value.func,ast.Call): expression["name"] = self.getFunctionName(node)
-                elif isinstance(node.value.func,ast.Attribute): expression["name"] = self.getFunctionNameFromObject(self.getFunctionName(node))
-                
+                elif isinstance(node.value.func,ast.Call): expression["name"] = self.get_function_name(node)
+                elif isinstance(node.value.func,ast.Attribute): expression["name"] = self.get_function_name_from_object(self.get_function_name(node))
+    
                 # separating args in function call
-                for arg in node.value.args: expression['args'] = self.addVariablesToList(arg,expression["args"])
+                for arg in node.value.args: expression['args'] = self.separate_variables(arg,expression["args"])
                 
                 # getting args value from name in function call 
-                for i in range(len(expression['args'])): expression['args'][i] = self.valueFromName(expression['args'][i])
+                for i in range(len(expression['args'])): expression['args'][i] = self.value_from_variable_name(expression['args'][i])
                 
                 for keyword in node.value.keywords:
                     karg = keyword.arg
@@ -469,7 +469,7 @@ class Analyzer(ast.NodeVisitor):
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node)
     
@@ -485,12 +485,12 @@ class Analyzer(ast.NodeVisitor):
             assertStatement["line"] = node.lineno
                 
             if isinstance(node.test, ast.Compare):
-                left = self.addVariablesToList(node.test.left, [])
+                left = self.separate_variables(node.test.left, [])
                 left = left[0] if len(left) > 0 else None
 
                 comparators = []
                 for comparator in node.test.comparators:
-                    name = self.addVariablesToList(comparator, [])
+                    name = self.separate_variables(comparator, [])
                     name = name[0] if len(name)>0 else None
                     
                     if name is not None: comparators.append(name)
@@ -499,12 +499,12 @@ class Analyzer(ast.NodeVisitor):
                 assertStatement["comparators"] = comparators
 
             elif isinstance(node.test, ast.Call):
-                funcName = self.addVariablesToList(node.test, [])
+                funcName = self.separate_variables(node.test, [])
                 funcName = funcName[0] if len(funcName) > 0 else None
                 funcArgs = []
                 
                 for arg in node.test.args:
-                    funcArgs = self.addVariablesToList(arg, funcArgs)
+                    funcArgs = self.separate_variables(arg, funcArgs)
 
                 assertStatement['func'] = funcName
                 assertStatement['args'] = funcArgs
@@ -513,58 +513,56 @@ class Analyzer(ast.NodeVisitor):
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
         self.generic_visit(node) 
 
             
     ######################### Utility Function Here #########################
-
-
-    def addVariablesToList(self,node,itemList):
+    def separate_variables(self,node,itemList):
         try:
             if isinstance(node,ast.Name): itemList.append(node.id)    
             elif isinstance(node,ast.Constant): itemList.append(node.value)
-            elif isinstance(node,ast.Attribute): itemList.append(self.getFunctionAttribute(node)+'.'+node.attr)
-            elif isinstance(node,ast.FormattedValue): itemList = self.addVariablesToList(node.value, itemList)
+            elif isinstance(node,ast.Attribute): itemList.append(self.get_function_attribute(node)+'.'+node.attr)
+            elif isinstance(node,ast.FormattedValue): itemList = self.separate_variables(node.value, itemList)
             
             elif isinstance(node,ast.BinOp):    
-                usedArgs = self.getUsedVariablesInVariableDeclaration(node)
-                actualValue = self.buildNewVariableValueFromUsedOnes(usedArgs)
+                usedArgs = self.get_variables_used_in_declaration(node)
+                actualValue = self.build_value_from_used_variables(usedArgs)
                 itemList.append(actualValue)
             
             elif isinstance(node, ast.Call):
                 if isinstance(node.func, ast.Name): itemList.append(node.func.id)
                 elif isinstance(node.func, ast.Attribute):
-                    func = self.getFunctionAttribute(node.func)
+                    func = self.get_function_attribute(node.func)
                     if node.func.attr and func: func = func +'.'+ node.func.attr
                     itemList.append(func)
             
             elif isinstance(node, ast.List):
                 if len(node.elts) == 0: itemList.append(None)
                 for element in node.elts:
-                    itemList = self.addVariablesToList(element,itemList)
+                    itemList = self.separate_variables(element,itemList)
 
             
             elif isinstance(node, ast.JoinedStr):
                 for value in node.values:
-                    itemList = self.addVariablesToList(value, itemList)
+                    itemList = self.separate_variables(value, itemList)
 
-            elif isinstance(node, ast.Lambda): itemList = self.addVariablesToList(node.body, itemList)
+            elif isinstance(node, ast.Lambda): itemList = self.separate_variables(node.body, itemList)
             
             elif isinstance(node, ast.Subscript):
 
                     varSlice = None
-                    itemList = self.addVariablesToList(node.value, itemList)
+                    itemList = self.separate_variables(node.value, itemList)
                     
                     # print(ast.dump(node))
 
                     if isinstance(node.slice, ast.Index): 
-                        varSlice = self.addVariablesToList(node.slice.value, [])
+                        varSlice = self.separate_variables(node.slice.value, [])
                         varSlice = varSlice[0] if len(varSlice) > 0 else None
 
                     elif isinstance(node.slice, ast.ExtSlice):
-                        varSlice = self.addVariablesToList(node.slice.dims, [])
+                        varSlice = self.separate_variables(node.slice.dims, [])
                         varSlice = varSlice[0] if len(varSlice) > 0 else None
 
                     if itemList == None: pass
@@ -575,7 +573,7 @@ class Analyzer(ast.NodeVisitor):
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
 
     def delete_incomplete_tokens(self):
@@ -623,9 +621,7 @@ class Analyzer(ast.NodeVisitor):
                     if key not in statement: self.statements.remove(statement)
 
 
-
-
-    def refineTokens(self):
+    def refine_tokens(self):
         try:
             for statement in self.statements:
                 
@@ -671,17 +667,17 @@ class Analyzer(ast.NodeVisitor):
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
 
-    def makeTokensByteFree(self):
+    def make_tokens_byte_free(self):
         for statement in self.statements:
             for item in statement:
                 if isinstance(item, bytes): 
                     try: statement[item] = statement[item].decode('utf-8')
                     except: pass
 
-    def valueFromName(self,name):
+    def value_from_variable_name(self,name):
         for statement in reversed(self.statements):
             if statement["type"] == "variable" and statement["name"] == name : return statement["value"] if statement.__contains__("value") else None
             elif statement["type"] == "list" and statement["name"] == name: return statement["values"] if statement.__contains__("values") else None
@@ -689,8 +685,7 @@ class Analyzer(ast.NodeVisitor):
         return name
 
 
-    def getFunctionNameFromObject(self,name):
-        
+    def get_function_name_from_object(self,name):
         fName = name.split('.')[0]
         lName = name.split('.')[1]
 
@@ -699,7 +694,7 @@ class Analyzer(ast.NodeVisitor):
         return name
 
 
-    def functionReturnValue(self,funcName):
+    def get_function_return_value(self,funcName):
 
         for statement in self.statements:
             if statement["type"] == "function_def" and statement["name"] == funcName:
@@ -709,29 +704,29 @@ class Analyzer(ast.NodeVisitor):
         return funcName
 
 
-    def getOperandsFromBinOperation(self,node,usedVars):
+    def get_operands_from_bin_operation(self,node,usedVars):
         if isinstance(node, ast.Name) and node.id: usedVars.append(node.id)
         elif isinstance(node, ast.Constant) and node.value: usedVars.append(node.value)
         elif isinstance(node, ast.Call): 
             if isinstance(node.func, ast.Name): usedVars.append(node.func.id)
-            elif isinstance(node.func, ast.Attribute): usedVars.append(self.getFunctionName(node.func))
+            elif isinstance(node.func, ast.Attribute): usedVars.append(self.get_function_name(node.func))
         
         elif isinstance(node,ast.BinOp):  
-            usedVars = self.getOperandsFromBinOperation(node.left,usedVars)  
-            usedVars = self.getOperandsFromBinOperation(node.right,usedVars)
+            usedVars = self.get_operands_from_bin_operation(node.left,usedVars)  
+            usedVars = self.get_operands_from_bin_operation(node.right,usedVars)
 
         return usedVars     
         
 
-    def getUsedVariablesInVariableDeclaration(self,node):
+    def get_variables_used_in_declaration(self,node):
         usedVariables = []
         for field, value in ast.iter_fields(node):
-            self.getOperandsFromBinOperation(value,usedVariables)
+            self.get_operands_from_bin_operation(value,usedVariables)
                 
         return usedVariables
 
 
-    def buildNewVariableValueFromUsedOnes(self,usedVariables):
+    def build_value_from_used_variables(self,usedVariables):
         try:
             value = None
             for variable in usedVariables:    
@@ -766,11 +761,10 @@ class Analyzer(ast.NodeVisitor):
                             matched = True
                             break
 
-                if isinstance(value, bytes) : 
-                    saveBugFix('bytes', value)
+                if isinstance(value, bytes): 
                     value = value.decode('utf-8')
-                elif isinstance(variable, bytes) : 
-                    saveBugFix('bytes', variable)
+
+                elif isinstance(variable, bytes):
                     variable = variable.decode('utf-8')
                 
                 if matched == False and value and variable and (type(value) != str and type(variable) != str): value = value + variable
@@ -781,17 +775,17 @@ class Analyzer(ast.NodeVisitor):
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(str(error), line_number)
+            save_token_parsing_exception(str(error), line_number)
 
 
 
-    def getFunctionName(self, node):
+    def get_function_name(self, node):
         for fieldname, value in ast.iter_fields(node.value):
             
             if(fieldname == "func" and isinstance(value, ast.Name)): return value.id
             
             elif(fieldname == "func" and isinstance(value, ast.Attribute)):    
-                functionName = self.getFunctionAttribute(value)
+                functionName = self.get_function_attribute(value)
 
                 if functionName != None and value.attr != None : return str(functionName) +'.'+ str(value.attr) 
                 elif functionName != None and value.attr == None : return str(functionName)
@@ -800,65 +794,38 @@ class Analyzer(ast.NodeVisitor):
         return None
         
 
-    def getFunctionAttribute(self, node):
+    def get_function_attribute(self, node):
         name = None
         attr = None
         
         for field, value in ast.iter_fields(node):
             if isinstance(value, ast.Attribute):
                 attr = value.attr
-                name = self.getFunctionAttribute(value)
+                name = self.get_function_attribute(value)
             
             elif isinstance(value,ast.Name): name = value.id
-            elif isinstance(value, ast.Subscript): name = self.getFunctionAttribute(value)
-            elif isinstance(value,ast.Call): name = self.getFunctionAttribute(value)
+            elif isinstance(value, ast.Subscript): name = self.get_function_attribute(value)
+            elif isinstance(value,ast.Call): name = self.get_function_attribute(value)
 
         return str(name)+'.'+str(attr) if attr else str(name)
 
 
-    def checkUserInputsInVariableDeclaration(self,usedVariables):
+    def search_input_in_declaration(self,usedVariables):
         for variable in usedVariables:
             for statement in reversed(self.statements):
-
                 if statement["type"] == "variable" and variable == statement["name"]:
-                    return True if statement["isInput"] else False
+                    return True if statement["isInput"] is True else False
                     
         return False
 
 
-    def checkUserInputsInFunctionArguments(self):
-        for statement in self.statements:
-            if statement["type"] == "function_call":
-                
-                index = self.statements.index(statement)
-                statement["hasInputs"] = False
-                foundInputs = False                
-                
-                for arg in statement["args"]:
-                    for idx in range(index-1,-1, -1):
-                        # print(self.statements[idx])
-
-                        if self.statements[idx].__contains__("isInput"): 
-                            if self.statements[idx]["type"] == "variable" and self.statements[idx]["name"] == arg and self.statements[idx]["isInput"]:
-                                statement["hasInputs"] = True
-                                foundInputs = True
-                                break
-
-                    if foundInputs: break
-                    
-    
-    def printStatements(self, *types):
+    def print_statements(self, *types):
         for statement in self.statements:
             if len(types) == 0: print(statement)
             elif statement["type"] in types: print(statement)
 
 
-    def printUserInputs(self):
-        for user_input in self.inputs:
-            print("user input: "+user_input)
-
-
-    def writeToFile(self):
+    def write_tokens_to_file(self):
         try:
             fp = open("logs/tokens.txt", "w+")
 
@@ -867,7 +834,6 @@ class Analyzer(ast.NodeVisitor):
                 fp.write("\n")
             
             fp.close()
-
         except Exception as error:
             line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
-            saveParsingExceptions(line_number, str(error))
+            save_token_parsing_exception(line_number, str(error))

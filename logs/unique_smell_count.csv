@@ -1,0 +1,14 @@
+ignore_except_block,7199
+hardcoded_secret,4398
+assert_used,4210
+empty_password,456
+http_without_tls,396
+shell_injection,388
+debug_true,296
+exec_used,254
+pickle_used,166
+eval_used,145
+yaml_load_used,46
+harcoded_tmp_dir,31
+marhshal_used,16
+sql_injection,1

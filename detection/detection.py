@@ -19,8 +19,8 @@ from smells.nocertificate import detect as nocertificateDetect
 from smells.eval import detect as evalDetect
 from smells.yamlload import detect as yamlloadDetect
 
-from operations.saveDetectionExceptions import saveDetectionExceptions
-from operations.tokenLoadingExceptions import tokenLoadingExceptions
+from operations.save_token_exceptions import save_token_detection_exception
+from operations.save_token_exceptions import save_token_loading_exception
 
 def getImports(tokens):
     
@@ -39,10 +39,9 @@ def getImports(tokens):
     return imports
 
 def detection(tokens, project_name, srcFile):
-    
+
     imports = getImports(tokens)
     tokens = tokens.splitlines()
-    
     for token in tokens:
         try:
             token = json.loads(token)
@@ -67,8 +66,8 @@ def detection(tokens, project_name, srcFile):
                 evalDetect(token, project_name, srcFile)
                 yamlloadDetect(token, project_name, srcFile)
 
-            except Exception as error: saveDetectionExceptions(str(error)+' - '+ str(token), srcFile)
+            except Exception as error: save_token_detection_exception(str(error)+' - '+ str(token), srcFile)
             
-        except Exception as error: tokenLoadingExceptions(token+' - '+str(error),srcFile)
+        except Exception as error: save_token_loading_exception(token+' - '+str(error),srcFile)
         
         

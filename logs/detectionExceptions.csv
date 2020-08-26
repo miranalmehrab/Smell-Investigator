@@ -1,1 +1,0 @@
-mailhide.py,"'NoneType' object has no attribute 'lower' - {'type': 'variable', 'line': 55, 'name': None, 'value': None, 'valueSrc': 'email.split', 'isInput': False, 'args': ['@']}"
