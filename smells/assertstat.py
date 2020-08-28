@@ -10,8 +10,8 @@ def detect(token, project_name, srcFile) :
         comparators = token["comparators"]
         
         if left is not None and len(comparators) > 0:
-            action_upon_detection(project_name, srcFile, lineno, 'assert_used', 'assert statement')
+            action_upon_detection(project_name, srcFile, lineno, 'assert_used', 'assert statement', token)
 
     elif tokenType == "assert" and token.__contains__('func'):
         if token['func'] is not None:
-            action_upon_detection(project_name, srcFile, lineno, 'assert_used', 'assert statement')
+            action_upon_detection(project_name, srcFile, lineno, 'assert_used', 'assert statement', token)

@@ -13,9 +13,9 @@ def detect(token, project_name, srcFile):
     if tokenType == "function_call" and name in unwantedMethods:
         for arg in args:
             if arg in unwantedParams: 
-                action_upon_detection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission')
+                action_upon_detection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission', token)
     
     elif tokenType == 'function_call' and name == 'subprocess.call':
         for arg in args:
             if arg in unwantedMethods: 
-                action_upon_detection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission')
+                action_upon_detection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission', token)

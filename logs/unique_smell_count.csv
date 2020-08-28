@@ -12,3 +12,17 @@ yaml_load_used,46
 harcoded_tmp_dir,34
 marhshal_used,16
 sql_injection,1
+ignore_except_block,7192
+hardcoded_secret,4397
+assert_used,4209
+empty_password,419
+http_without_tls,396
+shell_injection,374
+debug_true,296
+exec_used,254
+pickle_used,162
+eval_used,145
+yaml_load_used,46
+harcoded_tmp_dir,34
+marhshal_used,16
+sql_injection,1

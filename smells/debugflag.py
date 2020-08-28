@@ -10,7 +10,7 @@ def detect(token, project_name, srcFile):
     restrictedNames = ['debug','debug_propagate_exceptions']
     
     if tokenType == "variable" and name is not None and name.lower() in restrictedNames and value is True: 
-        action_upon_detection(project_name, srcFile, lineno, 'debug_true', 'debug set true')
+        action_upon_detection(project_name, srcFile, lineno, 'debug_true', 'debug set true', token)
 
 
     elif tokenType == "function_call" and token.__contains__("keywords"):
@@ -18,7 +18,7 @@ def detect(token, project_name, srcFile):
         
         for keyword in keywords:
             if(keyword[0] in restrictedNames and keyword[1] is True): 
-                action_upon_detection(project_name, srcFile, lineno, 'debug_true', 'debug set true')
+                action_upon_detection(project_name, srcFile, lineno, 'debug_true', 'debug set true', token)
 
 
     elif tokenType == "dict" and token.__contains__("keys") and token.__contains__("values"): 
@@ -26,4 +26,4 @@ def detect(token, project_name, srcFile):
         
         for pair in pairs: 
             if pair[0] in restrictedNames and pair[1] is True: 
-                action_upon_detection(project_name, srcFile, lineno, 'debug_true', 'debug set true')
+                action_upon_detection(project_name, srcFile, lineno, 'debug_true', 'debug set true', token)

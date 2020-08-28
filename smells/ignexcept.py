@@ -9,5 +9,5 @@ def detect(token, project_name, srcFile):
     unwantedHandlers = ['continue','pass']
     
     if tokenType == "exception_handle" and exceptionHandler in unwantedHandlers: 
-        action_upon_detection(project_name, srcFile, lineno, 'ignore_except_block', 'ignore except block')
+        action_upon_detection(project_name, srcFile, lineno, 'ignore_except_block', 'ignore except block', token)
             

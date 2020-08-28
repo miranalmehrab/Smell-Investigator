@@ -12,9 +12,9 @@ def detect(token, project_name, srcFile):
     
     if tokenType == "variable" and token.__contains__("valueSrc"):
         if token["valueSrc"] in cmdFuncs: 
-            action_upon_detection(project_name, srcFile, lineno, 'shell_injection', 'command injection')
+            action_upon_detection(project_name, srcFile, lineno, 'shell_injection', 'command injection', token)
     
     
     elif tokenType == "function_call" and name in cmdFuncs and (len(args) > 0 or containsUserInput is True): 
-        action_upon_detection(project_name, srcFile, lineno, 'shell_injection', 'command injection')
+        action_upon_detection(project_name, srcFile, lineno, 'shell_injection', 'command injection', token)
        

@@ -15,4 +15,4 @@ def detect(token, imports,project_name, srcFile):
     if tokenType == "function_call" and name in libs and len(args) > 0:
         extension = args[0].split(".")[-1] if args[0] is not None else None
         if extension in download and 'hashlib' not in imports:
-            action_upon_detection(project_name, srcFile, lineno, 'no_integrity_check', 'no integrity checked')
+            action_upon_detection(project_name, srcFile, lineno, 'no_integrity_check', 'no integrity checked', token)

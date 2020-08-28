@@ -18,40 +18,40 @@ def detect(token, project_name, src_file):
 
     if tokenType == "variable" and name is not None and valueSrc == "initialized":
         if (name.lower() in commonKeywords or name.lower() in commonPasswords) and value is not None and len(value) > 0: 
-            action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret')
+            action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token)
         
     elif (tokenType == "list" or tokenType == "set") and name is not None and token.__contains__("values"):
         if (name.lower() in commonKeywords or name.lower() in commonPasswords) and len(token['values']) > 0: 
-            action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret')
+            action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token)
     
     elif tokenType == "dict" and name is not None and token.__contains__("keys"):
         if (name.lower() in commonKeywords or name.lower() in commonPasswords) and len(token['keys']) > 0: 
-            action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret') 
+            action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token) 
         
         for key in token["keys"]:
             if key in commonKeywords or key in commonPasswords: 
-                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret')
+                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token)
 
     
     elif tokenType == "comparison" and token.__contains__("pairs"):
         for pair in token["pairs"]:          
 
             if len(pair) == 2 and pair[0] is not None and pair[1] is not None and (pair[0] in commonKeywords or pair[0] in commonPasswords): 
-                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret')
+                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token)
             
             elif len(pair) == 2 and pair[0] is not None and pair[1] is not None and (pair[1] in commonKeywords or pair[1] in commonPasswords): 
-                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret')
+                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token)
     
     
     elif tokenType == "function_call" and token.__contains__('keywords'):
         for keyword in token['keywords']:
 
             if len(keyword) == 2 and keyword[0] is not None and keyword[1] is not None and (keyword[0] in commonKeywords or keyword[0] in commonPasswords): 
-                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret')
+                action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token)
 
     elif tokenType == "function_def" and token.__contains__("args") and token.__contains__("defaults"):
         if len(token["args"]) == len(token["defaults"]):
             
             for pair in zip(token['args'], token['defaults']):
                 if pair[0] is not None and pair[1] is not None and (pair[0] in commonKeywords or pair[0] in commonPasswords): 
-                    action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret') 
+                    action_upon_detection(project_name, src_file, lineno, 'hardcoded_secret', 'hardcoded secret', token) 
