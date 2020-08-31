@@ -345,7 +345,6 @@ translate.py,"{'type': 'variable', 'line': 142, 'name': 'r', 'value': None, 'val
 gdocs.py,"{'type': 'variable', 'line': 57, 'name': 'r', 'value': None, 'valueSrc': 'requests.get', 'isInput': False, 'args': ['url']}"
 projects.py,"{'type': 'variable', 'line': 55, 'name': 'res', 'value': None, 'valueSrc': 'requests.get', 'isInput': False, 'args': ['bugzilla']}"
 projects.py,"{'type': 'variable', 'line': 82, 'name': 'res', 'value': None, 'valueSrc': 'requests.get', 'isInput': False, 'args': ['swagger']}"
-aws_sign_request_test.py,"{'type': 'variable', 'line': 22, 'name': 'response', 'value': None, 'valueSrc': 'requests.get', 'isInput': False, 'args': ['url']}"
 mashape.py,"{'type': 'variable', 'line': 6, 'name': 'response', 'value': None, 'valueSrc': 'requests.get', 'isInput': False, 'args': ['os.environ.get']}"
 mashape.py,"{'type': 'variable', 'line': 6, 'name': 'response', 'value': None, 'valueSrc': 'requests.get', 'isInput': False, 'args': ['os.environ.get']}"
 async.py,"{'type': 'variable', 'line': 6, 'name': 'response', 'value': None, 'valueSrc': 'requests.get', 'isInput': False, 'args': ['os.environ.get']}"

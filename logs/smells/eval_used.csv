@@ -80,7 +80,6 @@ crackfortran.py,"{'type': 'variable', 'line': 2486, 'name': 'params[n]', 'value'
 crackfortran.py,"{'type': 'variable', 'line': 2826, 'name': 'kindselect[kind]', 'value': None, 'valueSrc': 'eval', 'isInput': False, 'args': ['kindselect[kind]', 'params']}"
 crackfortran.py,"{'type': 'variable', 'line': 3117, 'name': 'c', 'value': None, 'valueSrc': 'eval', 'isInput': False, 'args': ['isintent_%s(var)a.strip[1:[]]']}"
 crackfortran.py,"{'type': 'variable', 'line': 3235, 'name': 'v', 'value': None, 'valueSrc': 'eval', 'isInput': False, 'args': ['v']}"
-f2py_testing.py,"{'type': 'variable', 'line': 15, 'name': 'repeat', 'value': None, 'valueSrc': 'eval', 'isInput': False, 'args': ['a']}"
 auxfuncs.py,"{'type': 'function_def', 'line': 565, 'name': 'l_and', 'args': ['f'], 'defaults': [], 'return': 'eval', 'returnArgs': ['%s:%s']}"
 auxfuncs.py,"{'type': 'function_def', 'line': 573, 'name': 'l_or', 'args': ['f'], 'defaults': [], 'return': 'eval', 'returnArgs': ['%s:%s']}"
 auxfuncs.py,"{'type': 'function_def', 'line': 581, 'name': 'l_not', 'args': ['f'], 'defaults': [], 'return': 'eval', 'returnArgs': ['lambda v,f=f:not f(v)']}"

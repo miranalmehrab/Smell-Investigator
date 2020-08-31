@@ -6,13 +6,14 @@ def detect(token, project_name, srcFile):
     if token.__contains__("type"): tokenType = token["type"]
     if token.__contains__("name"): name = token["name"]
     if token.__contains__("value"): value = token["value"]
-    
+    if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
+
     commonPasswords = ['password','passwords','pass','pwd','userpassword','userpwd', 'userpass', 'pass_no', 'pass-no', 'user-pass', 'upass']
     
-    if tokenType == "variable" and name in commonPasswords and value is None: 
+    if tokenType == "variable" and name in commonPasswords and value is None and valueSrc == "initialization": 
         action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password', token)
 
-    elif tokenType == "variable" and name in commonPasswords and len(value) == 0: 
+    elif tokenType == "variable" and name in commonPasswords and len(value) == 0 and valueSrc == "initialization": 
         action_upon_detection(project_name, srcFile, lineno, 'empty_password', 'empty password', token)
 
     elif tokenType == "comparison" and token.__contains__("pairs"):
