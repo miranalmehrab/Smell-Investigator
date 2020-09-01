@@ -1,5 +1,6 @@
 import json
 
+from smells.cipher import detect as cipherDetection
 from smells.commandinjection import detect as commandinjectionDetecet
 from smells.exec import detect as execDetect
 from smells.debugflag import detect as debugflagDetect
@@ -17,6 +18,7 @@ from smells.marshal import detect as marshalDetect
 from smells.nointegritycheck import detect as nointegritycheckDetect
 from smells.nocertificate import detect as nocertificateDetect
 from smells.eval import detect as evalDetect
+from smells.xss import detect as xssDetect
 from smells.yamlload import detect as yamlloadDetect
 
 from operations.save_token_exceptions import save_token_detection_exception
@@ -47,6 +49,7 @@ def detection(tokens, project_name, srcFile):
             token = json.loads(token)
 
             try:
+                cipherDetection(token, project_name, srcFile)
                 commandinjectionDetecet(token, project_name, srcFile)
                 execDetect(token, project_name, srcFile)
                 debugflagDetect(token, project_name, srcFile)
@@ -64,6 +67,7 @@ def detection(tokens, project_name, srcFile):
                 nocertificateDetect(token, project_name, srcFile)
                 nointegritycheckDetect(token, imports, project_name, srcFile)
                 evalDetect(token, project_name, srcFile)
+                xssDetect(token, project_name, srcFile)
                 yamlloadDetect(token, project_name, srcFile)
 
             except Exception as error: save_token_detection_exception(str(error)+'  '+ str(token), srcFile)

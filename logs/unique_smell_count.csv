@@ -1,11 +1,13 @@
 ignore_except_block,7106
 hardcoded_secret,4380
 assert_used,3545
+xss_spotted,453
 http_without_tls,395
 shell_injection,374
 debug_true,288
 exec_used,254
 pickle_used,156
+insecure_cipher_used,149
 eval_used,144
 empty_password,101
 yaml_load_used,46
