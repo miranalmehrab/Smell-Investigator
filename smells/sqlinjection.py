@@ -17,6 +17,6 @@ def detect(token, project_name, srcFile):
         if valueSrc in unwantedMethods and len(args) > 0:
             action_upon_detection(project_name, srcFile, lineno, 'sql_injection', 'sql injection', token)
                 
-    elif tokenType == "function_call" and name in unwantedMethods and (len(args) > 0 or hasInputs is True):
+    elif tokenType == "function_call" and name in unwantedMethods and len(args) > 0 :
         action_upon_detection(project_name, srcFile, lineno, 'sql_injection', 'sql injection', token)
         

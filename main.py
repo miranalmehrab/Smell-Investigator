@@ -10,7 +10,6 @@ from operations.show_detection_result import show_detection_result
 from operations.save_project_smells import save_total_count_of_detected_smells_in_projects as toatl_smells_in_project
 from operations.save_project_smells import save_detected_different_smells_frequency_in_projects as different_smells_in_project
 
-
 TOTAL_SRC_FILE_COUNT = 0
 
 def show_total_file_count():
@@ -102,21 +101,20 @@ def analyze_code_folder():
         if should_skip is False:
             for src_file in files:
                 if (src_file.lower()).find('test') == -1:
-                    if os.path.splitext(src_file)[-1] == '.py':   
+                    if os.path.splitext(src_file)[-1] == '.py':  
                         read_src_code(root, project_name, src_file)
                 
 
 def main():
     clear_log_files()    
-    analyze_code_folder()
+    # analyze_code_folder()
+    analyze_single_code()
 
     show_total_file_count()
     show_detection_result()
     
     different_smells_in_project()
     toatl_smells_in_project()
-
-    # analyze_single_code()
 
 
 if __name__ == "__main__":

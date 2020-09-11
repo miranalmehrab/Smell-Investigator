@@ -1,3 +1,13 @@
+def grant_access(username = 'guest', password = 'guest'):
+    #redirect somewhere
+    pass
+
+username = 'admin'
+password = 'admin'
+
+if username == 'admin' and password == 'admin':
+    grant_access(username, password)
+else: grant_access(username = 'admin', password= 'admin')
 # x = 1
 # query = 2
 # ask = y = query + x
@@ -30,8 +40,8 @@
 
 # file_name = input()
 # exec(file_name)
-import marshal
-marshal_dump = marshal.dump
+# import marshal
+# marshal_dump = marshal.dump
 
 # os.chmod('/etc/hosts',0x777)
 # os.chmod('/etc/hosts',stat.S_IRWXO)

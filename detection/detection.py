@@ -2,7 +2,7 @@ import json
 
 from smells.cipher import detect as cipherDetection
 from smells.commandinjection import detect as commandinjectionDetecet
-from smells.exec import detect as execDetect
+from smells.dynamicode import detect as dynamicodeDetect
 from smells.debugflag import detect as debugflagDetect
 from smells.emptypassword import detect as emptypasswordDetect
 from smells.hardcodedsecret import detect as hardcodedsecretDetect
@@ -13,11 +13,9 @@ from smells.sqlinjection import detect as sqlinjectionDetect
 from smells.tempdir import detect as tempdirDetect
 from smells.ignexcept import detect as ignexceptDetect
 from smells.assertstat import detect as assertDetect 
-from smells.pickle import detect as pickleDetect
-from smells.marshal import detect as marshalDetect
+from smells.deserialization import detect as deserializationDetect
 from smells.nointegritycheck import detect as nointegritycheckDetect
 from smells.nocertificate import detect as nocertificateDetect
-from smells.eval import detect as evalDetect
 from smells.xss import detect as xssDetect
 from smells.yamlload import detect as yamlloadDetect
 
@@ -51,8 +49,8 @@ def detection(tokens, project_name, srcFile):
             try:
                 cipherDetection(token, project_name, srcFile)
                 commandinjectionDetecet(token, project_name, srcFile)
-                execDetect(token, project_name, srcFile)
                 debugflagDetect(token, project_name, srcFile)
+                dynamicodeDetect(token, project_name, srcFile)
                 emptypasswordDetect(token, project_name, srcFile)
                 hardcodedsecretDetect(token, project_name, srcFile)
                 filepermissionDetect(token, project_name, srcFile)
@@ -62,11 +60,9 @@ def detection(tokens, project_name, srcFile):
                 tempdirDetect(token, project_name, srcFile)
                 ignexceptDetect(token, project_name, srcFile)
                 assertDetect(token, project_name, srcFile)
-                pickleDetect(token, project_name, srcFile)
-                marshalDetect(token, project_name, srcFile)
+                deserializationDetect(token, project_name, srcFile)
                 nocertificateDetect(token, project_name, srcFile)
                 nointegritycheckDetect(token, imports, project_name, srcFile)
-                evalDetect(token, project_name, srcFile)
                 xssDetect(token, project_name, srcFile)
                 yamlloadDetect(token, project_name, srcFile)
 

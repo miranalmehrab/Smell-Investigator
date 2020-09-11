@@ -6,6 +6,6 @@ def action_upon_detection(project_name, src_file, lineno, smell, msg, token):
     name = name.split('/')[-1]
 
     print(msg +' at line '+ str(lineno))
-    write_to_csv_file('logs/detected_smells.csv',[project_name,name,smell, str(lineno), token])
+    write_to_csv_file('logs/detected_smells.csv',[project_name,project_name+name,smell, str(lineno), token])
     
 
