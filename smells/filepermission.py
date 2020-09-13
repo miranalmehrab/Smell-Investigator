@@ -11,9 +11,9 @@ def detect(token, project_name, srcFile):
     unwantedParams = ['0x777', '0x757', '0x755','stat.S_IRWXO','stat.S_IROTH','stat.S_IWOTH','stat.S_IXOTH']
 
     if tokenType == "function_call" and name in unwantedMethods:
-        for arg in args:
-            if arg in unwantedParams: 
-                action_upon_detection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission', token)
+        # for arg in args:
+        #     if arg in unwantedParams: 
+        action_upon_detection(project_name, srcFile, lineno, 'bad_file_permissions', 'bad file permission', token)
     
     elif tokenType == 'function_call' and name == 'subprocess.call':
         for arg in args:

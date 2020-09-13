@@ -107,8 +107,8 @@ def analyze_code_folder():
 
 def main():
     clear_log_files()    
-    # analyze_code_folder()
-    analyze_single_code()
+    analyze_code_folder()
+    # analyze_single_code()
 
     show_total_file_count()
     show_detection_result()

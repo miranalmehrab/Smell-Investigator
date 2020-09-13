@@ -1,1 +1,15 @@
-hardcoded_secret,5
+ignore_except_block,7106
+hardcoded_secret,4383
+assert_used,3545
+xss_spotted,453
+insecure_code_execution,399
+http_without_tls,395
+shell_injection,374
+debug_true,288
+insecure_data_diserialization,248
+harcoded_tmp_dir,224
+bad_file_permissions,172
+insecure_cipher_used,149
+empty_password,101
+yaml_load_used,46
+sql_injection,1

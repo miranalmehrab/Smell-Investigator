@@ -23,14 +23,14 @@ else: grant_access(username = 'admin', password= 'admin')
 # header[0] = token
 # subprocess.call(['chmod', '0444', 'path'])
 
-# def logIn(username = "sdnsjnd" , password = "whwdgwgdb"):
-#     return 'logged in'
+def logIn(username = "sdnsjnd" , password = "whwdgwgdb"):
+    return 'logged in'
 
-# logIn(password = '12123', username ='asasd')
+logIn(password = '12123', username ='asasd')
 
-# passwords = ['abc123', 'xyz321']
-# myDict = {'password' : '12234', 'token' : '12i1gjhwbejsqdguayg2367t276', 'debug': True}
-# username = {"apple", "banana", "cherry"}
+passwords = ['abc123', 'xyz321']
+myDict = {'password' : '12234', 'token' : '12i1gjhwbejsqdguayg2367t276', 'debug': True}
+username = {"apple", "banana", "cherry"}
 
 # import os
 # import socket 
