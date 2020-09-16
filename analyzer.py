@@ -424,6 +424,10 @@ class Analyzer(ast.NodeVisitor):
                     statement["exceptionHandler"] = "pass"
 
                 else:
+                    # print('')
+                    # print(ast.dump(node))
+                    # time.sleep(10)
+
                     statement["line"] = node.handlers[0].body[0].lineno
                     statement["exceptionHandler"] = "expression"
 
@@ -553,23 +557,26 @@ class Analyzer(ast.NodeVisitor):
             
             elif isinstance(node, ast.Subscript):
 
-                    varSlice = None
-                    itemList = self.separate_variables(node.value, itemList)
-                    
-                    # print(ast.dump(node))
+                varSlice = None
+                itemList = self.separate_variables(node.value, itemList)
+                # print(ast.dump(node))
 
-                    if isinstance(node.slice, ast.Index): 
-                        varSlice = self.separate_variables(node.slice.value, [])
-                        varSlice = varSlice[0] if len(varSlice) > 0 else None
+                if isinstance(node.slice, ast.Index): 
+                    varSlice = self.separate_variables(node.slice.value, [])
+                    varSlice = varSlice[0] if len(varSlice) > 0 else None
 
-                    elif isinstance(node.slice, ast.ExtSlice):
-                        varSlice = self.separate_variables(node.slice.dims, [])
-                        varSlice = varSlice[0] if len(varSlice) > 0 else None
+                elif isinstance(node.slice, ast.ExtSlice):
+                    varSlice = self.separate_variables(node.slice.dims, [])
+                    varSlice = varSlice[0] if len(varSlice) > 0 else None
 
-                    if itemList == None: pass
-                    elif varSlice == None and len(itemList) > 0: pass 
-                    elif varSlice != None and len(itemList) > 0: itemList[0] = str(itemList[-1])+'['+str(varSlice)+']'
-                                            
+                if itemList == None: pass
+                elif varSlice == None and len(itemList) > 0: pass 
+                elif varSlice != None and len(itemList) > 0: itemList[0] = str(itemList[-1])+'['+str(varSlice)+']'
+
+            elif isinstance(node, ast.Tuple):
+                for elt in node.elts:
+                    itemList = self.separate_variables(elt, itemList)
+
             return itemList
 
         except Exception as error:

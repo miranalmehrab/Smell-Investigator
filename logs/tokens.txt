@@ -1,4 +1,8 @@
-{"type": "import", "line": 5, "og": "os", "alias": null}
-{"type": "import", "line": 7, "og": "django.core.wsgi.get_wsgi_application", "alias": null}
-{"type": "function_call", "line": 9, "name": "os.environ.setdefault", "args": ["DJANGO_SETTINGS_MODULE", "django-jquery-file-upload.settings"], "keywords": [], "hasInputs": false}
-{"type": "variable", "line": 11, "name": "application", "value": null, "valueSrc": "get_wsgi_application", "isInput": false, "args": []}
+{"type": "variable", "line": 28, "name": "message", "value": "An unknown error has occurred.", "valueSrc": "initialization", "isInput": false}
+{"type": "function_def", "line": 30, "name": "__init__", "args": ["self", "message", "args"], "defaults": [null], "return": null}
+{"type": "comparison", "line": 31, "pairs": [], "test": []}
+{"type": "variable", "line": 33, "name": "message", "value": "self.message", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 36, "name": "self.message", "value": "self.message", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 37, "name": "self.args", "value": "args", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 50, "name": "message", "value": "Only subclasses of JSONableDict can be added or removed", "valueSrc": "initialization", "isInput": false}
+{"type": "variable", "line": 61, "name": "message", "value": "Invalid arguments passed to intrinsic function", "valueSrc": "initialization", "isInput": false}

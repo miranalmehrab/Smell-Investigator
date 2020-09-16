@@ -23,7 +23,7 @@ def save_individual_smell_occurence_count(smells):
                 break   
 
         if found is False:
-            unique_smell_counts.append([smell[2], 0])
+            unique_smell_counts.append([smell[2], 1])
 
     unique_smell_counts.sort(key = lambda x: x[1], reverse = True)
     for smell_count in unique_smell_counts:

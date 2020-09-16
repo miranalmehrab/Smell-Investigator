@@ -6,6 +6,8 @@ import glob
 from analyzer import Analyzer
 from detection.detection import detection
 
+from operations.list_csv_contents import list_csv_contents
+from operations.write_to_csv_file import write_to_csv_file
 from operations.show_detection_result import show_detection_result
 from operations.save_project_smells import save_total_count_of_detected_smells_in_projects as toatl_smells_in_project
 from operations.save_project_smells import save_detected_different_smells_frequency_in_projects as different_smells_in_project
@@ -87,12 +89,16 @@ def read_src_code(root, project_name, src_file):
 
 def analyze_code_folder():
     project_name = None
-    
+    names = []
+
     for root, dirs, files in os.walk('./../unzips/'):
         root_copy = copy.deepcopy(root)
         project_name = root_copy.split('/')[3]
-        should_skip = False 
+        should_skip = False
 
+        # if project_name not in names and project_name != "":
+        #     names.append(project_name)
+        
         for part in root_copy.split('/'):
             if part.find('test') != -1:
                 should_skip = True
@@ -104,6 +110,9 @@ def analyze_code_folder():
                     if os.path.splitext(src_file)[-1] == '.py':  
                         read_src_code(root, project_name, src_file)
                 
+        #     for name in names:
+        # write_to_csv_file('logs/project_names.csv', [name.replace('-master', '')])
+
 
 def main():
     clear_log_files()    

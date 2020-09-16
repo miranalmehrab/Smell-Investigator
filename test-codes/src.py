@@ -1,13 +1,15 @@
-def grant_access(username = 'guest', password = 'guest'):
-    #redirect somewhere
-    pass
+# def grant_access(username = 'guest', password = 'guest'):
+#     #redirect somewhere
+#     pass
 
-username = 'admin'
-password = 'admin'
+# username = 'admin'
+# password = 'admin'
 
-if username == 'admin' and password == 'admin':
-    grant_access(username, password)
-else: grant_access(username = 'admin', password= 'admin')
+# sock.bind((host, 0))
+
+# if username == 'admin' and password == 'admin':
+#     grant_access(username, password)
+# else: grant_access(username = 'admin', password= 'admin')
 # x = 1
 # query = 2
 # ask = y = query + x
@@ -23,14 +25,14 @@ else: grant_access(username = 'admin', password= 'admin')
 # header[0] = token
 # subprocess.call(['chmod', '0444', 'path'])
 
-def logIn(username = "sdnsjnd" , password = "whwdgwgdb"):
-    return 'logged in'
+# def logIn(username = "sdnsjnd" , password = "whwdgwgdb"):
+#     return 'logged in'
 
-logIn(password = '12123', username ='asasd')
+# logIn(password = '12123', username ='asasd')
 
-passwords = ['abc123', 'xyz321']
-myDict = {'password' : '12234', 'token' : '12i1gjhwbejsqdguayg2367t276', 'debug': True}
-username = {"apple", "banana", "cherry"}
+# passwords = ['abc123', 'xyz321']
+# myDict = {'password' : '12234', 'token' : '12i1gjhwbejsqdguayg2367t276', 'debug': True}
+# username = {"apple", "banana", "cherry"}
 
 # import os
 # import socket 
@@ -73,8 +75,8 @@ username = {"apple", "banana", "cherry"}
 # query = 2
 # ask = y = query + x
 # ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
-# s = socket.socket(AF.NET,IO.SOCKET)
-# s.bind(ip,port)
+s = socket.socket(AF.NET,IO.SOCKET)
+s.bind('0.0.0.0',3000)
 # token = "abcdea"
 # header[authorization] = "bearer:"+token
 # header[0] = token
