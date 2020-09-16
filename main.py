@@ -9,6 +9,7 @@ from detection.detection import detection
 from operations.list_csv_contents import list_csv_contents
 from operations.write_to_csv_file import write_to_csv_file
 from operations.show_detection_result import show_detection_result
+from operations.individual_smell_in_projects import individual_smell_in_projects
 from operations.save_project_smells import save_total_count_of_detected_smells_in_projects as toatl_smells_in_project
 from operations.save_project_smells import save_detected_different_smells_frequency_in_projects as different_smells_in_project
 
@@ -115,16 +116,16 @@ def analyze_code_folder():
 
 
 def main():
-    clear_log_files()    
-    analyze_code_folder()
+    # clear_log_files()    
+    # analyze_code_folder()
     # analyze_single_code()
 
-    show_total_file_count()
-    show_detection_result()
+    # show_total_file_count()
+    # show_detection_result()
     
-    different_smells_in_project()
-    toatl_smells_in_project()
-
+    # different_smells_in_project()
+    # toatl_smells_in_project()
+    individual_smell_in_projects()
 
 if __name__ == "__main__":
     main()
