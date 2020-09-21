@@ -19,6 +19,17 @@ def find_correlation():
                 relations.append([project[0], int(project[1]), description[0], int(description[3])])
                 break
 
+    for description in project_descriptions:
+        already_included = False
+        
+        for relation in relations:
+            if relation[0] == description[0]:
+                already_included = True
+                break
+        if already_included == False:
+            relations.append([description[0], 0, description[0], int(description[3])])
+            
+
     relations.sort(key = lambda x: x[1])
     x = []
     y = []
