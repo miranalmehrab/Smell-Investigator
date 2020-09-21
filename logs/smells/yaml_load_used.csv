@@ -1,6 +1,7 @@
 OWSLib-master__init__.py,"{'type': 'variable', 'line': 99, 'name': 'content', 'value': None, 'valueSrc': 'yaml.load', 'isInput': False, 'args': ['response.text']}"
 nikola-mastermetadata_extractors.py,"{'type': 'variable', 'line': 200, 'name': 'meta', 'value': None, 'valueSrc': 'yaml.load', 'isInput': False, 'args': ['source_text']}"
 nikola-mastergalleries.py,"{'type': 'variable', 'line': 475, 'name': 'meta', 'value': None, 'valueSrc': 'yaml.load_all', 'isInput': False, 'args': ['meta_file']}"
+ecommerce-masterproduction.py,"{'type': 'variable', 'line': 58, 'name': 'config_from_yaml', 'value': None, 'valueSrc': 'yaml.load', 'isInput': False, 'args': ['f']}"
 MicroSite-masterfabfile.py,"{'type': 'variable', 'line': 17, 'name': 'data', 'value': None, 'valueSrc': 'yaml.load', 'isInput': False, 'args': ['documents_file']}"
 MicroSite-masterviews.py,"{'type': 'variable', 'line': 30, 'name': 'data', 'value': None, 'valueSrc': 'yaml.load', 'isInput': False, 'args': ['documents_file']}"
 python-zhmcclient-masterlist_cpc_and_lpar.py,"{'type': 'variable', 'line': 35, 'name': 'hmccreds', 'value': None, 'valueSrc': 'yaml.load', 'isInput': False, 'args': ['fp']}"

@@ -1,3 +1,23 @@
+# # result = 0
+# nums = [0,1,2,3,4,5]
+# for num in nums:
+#     with suppress(ZeroDivisionError):
+#         result += 1/num
+# print(result)
+
+
+# try:
+#     result = nums[0]
+# except:
+#     pass
+
+try:
+   f = open("test.txt",encoding = 'utf-8')
+   # perform file operations
+finally:
+   f.close()
+
+
 # def grant_access(username = 'guest', password = 'guest'):
 #     #redirect somewhere
 #     pass
@@ -75,8 +95,8 @@
 # query = 2
 # ask = y = query + x
 # ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
-s = socket.socket(AF.NET,IO.SOCKET)
-s.bind('0.0.0.0',3000)
+# s = socket.socket(AF.NET,IO.SOCKET)
+# s.bind('0.0.0.0',3000)
 # token = "abcdea"
 # header[authorization] = "bearer:"+token
 # header[0] = token

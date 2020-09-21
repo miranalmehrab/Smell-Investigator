@@ -5,6 +5,9 @@ import glob
 
 from analyzer import Analyzer
 from detection.detection import detection
+from operations.save_project_smells import save_smells_categorized_according_to_project_type
+from operations.save_project_smells import save_unique_smell_count_in_project
+# from operations.find_correlation import find_correlation
 
 from operations.list_csv_contents import list_csv_contents
 from operations.write_to_csv_file import write_to_csv_file
@@ -23,8 +26,9 @@ def show_total_file_count():
 
 def analyze_single_code():
     file_name = './test-codes/'+'src.py'
+    file_name = './test-codes/'+'if-test.py'
     read_src_code('', '', file_name)
-    # show_detection_result()
+    show_detection_result()
 
 
 def clear_log_files():
@@ -60,7 +64,7 @@ def analyze_ast_tree(code, src_file):
         analyzer.refine_tokens()
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
-        # analyzer.print_statements()
+        # analyzer.print_statements('comparison')
         analyzer.write_tokens_to_file()
 
     except Exception as error:
@@ -92,7 +96,7 @@ def analyze_code_folder():
     project_name = None
     names = []
 
-    for root, dirs, files in os.walk('./../unzips/'):
+    for root, dirs, files in os.walk('./../dataset unzip/'):
         root_copy = copy.deepcopy(root)
         project_name = root_copy.split('/')[3]
         should_skip = False
@@ -118,14 +122,20 @@ def analyze_code_folder():
 def main():
     # clear_log_files()    
     # analyze_code_folder()
+    
     # analyze_single_code()
+    # save_unique_smell_count_in_project()
 
     # show_total_file_count()
     # show_detection_result()
     
     # different_smells_in_project()
     # toatl_smells_in_project()
-    individual_smell_in_projects()
+    # individual_smell_in_projects()
+    save_smells_categorized_according_to_project_type()
+    # find_correlation()
+
+
 
 if __name__ == "__main__":
     main()

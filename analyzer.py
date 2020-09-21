@@ -333,20 +333,39 @@ class Analyzer(ast.NodeVisitor):
             statement["pairs"] = []
             statement["test"] = []
 
-            if isinstance(node.test,ast.BoolOp):
+            if isinstance(node.test, ast.BoolOp):
                 for value in node.test.values:
                     
-                    if isinstance(value,ast.Compare):
-                        if isinstance(value.left,ast.Name) and isinstance(value.ops[0],ast.Eq) and isinstance(value.comparators[0],ast.Constant):
+                    if isinstance(value, ast.Compare):
+                        if isinstance(value.left, ast.Name) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.Constant):
                             pair = []
                             pair.append(value.left.id)
                             pair.append(value.comparators[0].value)
 
                             statement["pairs"].append(pair)
                         
-                        elif isinstance(value.left,ast.Name) and isinstance(value.ops[0],ast.Eq) and isinstance(value.comparators[0],ast.BinOp):
+                        elif isinstance(value.left, ast.Name) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.BinOp):
                             pair = []
                             pair.append(value.left.id)
+                            
+                            usedVars = self.get_variables_used_in_declaration(value.comparators[0])
+                            value = self.build_value_from_used_variables(usedVars)
+                            
+                            if type(value) == str: pair.append(value.lstrip())
+                            else: pair.append(value)
+
+                            statement["pairs"].append(pair)
+                
+                        elif isinstance(value.left, ast.Constant) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.Name):
+                            pair = []
+                            pair.append(value.left.value)
+                            pair.append(value.comparators[0].id)
+                            
+                            statement["pairs"].append(pair)
+                        
+                        elif isinstance(value.left, ast.Constant) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.BinOp):
+                            pair = []
+                            pair.append(value.left.value)
                             
                             usedVars = self.get_variables_used_in_declaration(value.comparators[0])
                             value = self.build_value_from_used_variables(usedVars)
@@ -366,15 +385,17 @@ class Analyzer(ast.NodeVisitor):
                 pair = []
                 
                 leftComparatorList = self.separate_variables(node.test.left, [])
-                if len(leftComparatorList)>0: pair.append(leftComparatorList[0])
+                if len(leftComparatorList) > 0: 
+                    pair.append(leftComparatorList[0])
 
                 comparatorList = []
                 if isinstance(node.test.comparators[0], ast.UnaryOp):
                     comparatorList = self.separate_variables(node.test.comparators[0].operand,[])
-
-                else: comparatorList = self.separate_variables(node.test.comparators[0],[])
-                # print(comparatorList)
-                
+                    
+                else: 
+                    comparatorList = self.separate_variables(node.test.comparators[0],[])
+                    # print(comparatorList)
+                    
                 if len(comparatorList) > 0: pair.append(comparatorList[0])
                 statement["pairs"].append(pair)
 
@@ -386,10 +407,12 @@ class Analyzer(ast.NodeVisitor):
                 statement["test"].append(node.test.value)
 
             elif isinstance(node.test, ast.Call):
-                if isinstance(node.test.func, ast.Name): statement["test"].append(node.test.func.id)
-                elif isinstance(node.test.func, ast.Attribute): statement["test"].append(self.get_function_name(node.test.func))
+                if isinstance(node.test.func, ast.Name): 
+                    statement["test"].append(node.test.func.id)
+                
+                elif isinstance(node.test.func, ast.Attribute): 
+                    statement["test"].append(self.get_function_name(node.test.func))
 
-            
             self.statements.append(statement)
         
         except Exception as error:
@@ -406,32 +429,47 @@ class Analyzer(ast.NodeVisitor):
             statement = {}
             statement["type"] = "exception_handle"
             # print(ast.dump(node))
+            should_include_in_statements = False
 
             if isinstance(node, ast.Try):
                 # print(ast.dump(node.handlers[0].body[0]))
                 # print(type(node.handlers[0].body[0]))
                 
-                if len(node.handlers) == 0:
-                    statement["line"] = node.lineno
-                    statement["exceptionHandler"] = "continue"
+                if len(node.handlers) > 0:    
+                    if isinstance(node.handlers[0].body[0],ast.Continue):
+                        statement["line"] = node.handlers[0].body[0].lineno
+                        statement["exceptionHandler"] = "continue"
+                        should_include_in_statements = True
 
-                elif isinstance(node.handlers[0].body[0],ast.Continue):
-                    statement["line"] = node.handlers[0].body[0].lineno
-                    statement["exceptionHandler"] = "continue"
+                    elif isinstance(node.handlers[0].body[0],ast.Pass): 
+                        statement["line"] = node.handlers[0].body[0].lineno
+                        statement["exceptionHandler"] = "pass"
+                        should_include_in_statements = True
 
-                elif isinstance(node.handlers[0].body[0],ast.Pass): 
-                    statement["line"] = node.handlers[0].body[0].lineno
-                    statement["exceptionHandler"] = "pass"
+                    else:
+                        statement["line"] = node.handlers[0].body[0].lineno
+                        statement["exceptionHandler"] = "expression"
+                        should_include_in_statements = True
 
-                else:
-                    # print('')
-                    # print(ast.dump(node))
-                    # time.sleep(10)
+                elif len(node.finalbody) > 0:
+                    if isinstance(node.finalbody[0],ast.Continue):
+                        statement["line"] = nodenode.finalbody[0].lineno
+                        statement["exceptionHandler"] = "continue"
+                        should_include_in_statements = True
+                    
 
-                    statement["line"] = node.handlers[0].body[0].lineno
-                    statement["exceptionHandler"] = "expression"
+                    elif isinstance(node.finalbody[0],ast.Pass): 
+                        statement["line"] = node.finalbody[0].lineno
+                        statement["exceptionHandler"] = "pass"
+                        should_include_in_statements = True
 
-            self.statements.append(statement)
+                    else:
+                        statement["line"] = node.finalbody[0].lineno
+                        statement["exceptionHandler"] = "expression"
+                        should_include_in_statements = True
+
+            if should_include_in_statements is True:
+                self.statements.append(statement)
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
