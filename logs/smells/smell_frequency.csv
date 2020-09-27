@@ -1,0 +1,16 @@
+ignore_except_block,5384
+hardcoded_secret,4286
+assert_used,3656
+http_without_tls,406
+insecure_code_execution,390
+xss_spotted,383
+shell_injection,357
+debug_true,273
+insecure_data_diserialization,248
+harcoded_tmp_dir,222
+bad_file_permissions,171
+insecure_cipher_used,129
+empty_password,105
+yaml_load_used,48
+sql_injection,2
+hardcoded_ip_binding,1

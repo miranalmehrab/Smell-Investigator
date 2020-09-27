@@ -5,7 +5,7 @@ from operations.write_to_csv_file import write_to_csv_file
 
 def find_correlation():
     project_smells = list_csv_contents('logs/projects/total_smells_in_project.csv')
-    project_descriptions = list_csv_contents('projects.csv')
+    project_descriptions = list_csv_contents('project-descriptions.csv')
     
     relations = []
 
