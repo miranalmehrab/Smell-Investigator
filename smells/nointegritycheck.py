@@ -10,7 +10,7 @@ def detect(token, imports,project_name, srcFile):
             
         libs = ['urllib.urlretrieve','urllib2.urlopen','requests.get','wget.download']
         
-        extensions = ['iso', 'tar', 'tar.gz', 'tar.bzip2', 'zip', 'rar', 'gzip', 'gzip2',
+        extensions = ['iso', 'tar', 'tar.gz', 'tar.bzip2', 'zip', 'rar', 'gzip', 'gzip2', '.dat.gz',
                     'deb', 'rpm', 'sh', 'run', 'bin', 'exe', 'zip', 'rar', '7zip', 'msi', 'bat']
 
         if tokenType == "function_call" and name in libs and len(args) > 0:
@@ -19,5 +19,12 @@ def detect(token, imports,project_name, srcFile):
             #     action_upon_detection(project_name, srcFile, lineno, 'no_integrity_check', 'no integrity checked', token)
             if extension in extensions:
                 action_upon_detection(project_name, srcFile, lineno, 'no_integrity_check', 'no integrity checked', token)
+
+        # if tokenType == "function_call" and name in libs and len(args) > 0:
+            
+        #     if 'hashlib' not in imports: action_upon_detection(project_name, srcFile, lineno, 'no_integrity_check', 'hashlib imported', token)
+        #     else: action_upon_detection(project_name, srcFile, lineno, 'no_integrity_check', 'hashlib not imported', token)
     
+
+
     except Exception as error: save_token_detection_exception('no integrity detection  '+str(error)+'  '+ str(token), srcFile)

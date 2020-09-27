@@ -1,1 +1,0 @@
-learn_python3_spider-masterposixbase.py,"{'type': 'function_call', 'line': 77, 'name': 'socket.socket.bind', 'args': ['127.0.0.1', 0], 'keywords': [], 'hasInputs': False}"

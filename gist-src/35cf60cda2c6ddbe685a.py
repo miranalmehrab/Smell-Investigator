@@ -1,1 +1,0 @@
-# moved to a separate repository: https://github.com/infinite-library/weechat-ongoing

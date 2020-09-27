@@ -3,7 +3,7 @@ from operations.write_to_csv_file import write_to_csv_file
 
 def individual_smell_in_projects():
     unique_projects_count = []
-    smells_in_projects = list_csv_contents('logs/different_smells_in_project.csv')
+    smells_in_projects = list_csv_contents('logs/projects/different_smells_in_project.csv')
     
     for smells_in_project in smells_in_projects:
         already_in = False
@@ -17,4 +17,4 @@ def individual_smell_in_projects():
             unique_projects_count.append([smells_in_project[1],1])
     
     for project in unique_projects_count:
-        write_to_csv_file('logs/project_counts.csv',project)
+        write_to_csv_file('logs/projects/project_counts.csv',project)

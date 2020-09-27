@@ -344,17 +344,17 @@ class Analyzer(ast.NodeVisitor):
 
                             statement["pairs"].append(pair)
                         
-                        elif isinstance(value.left, ast.Name) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.BinOp):
-                            pair = []
-                            pair.append(value.left.id)
+                        # elif isinstance(value.left, ast.Name) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.BinOp):
+                        #     pair = []
+                        #     pair.append(value.left.id)
                             
-                            usedVars = self.get_variables_used_in_declaration(value.comparators[0])
-                            value = self.build_value_from_used_variables(usedVars)
+                        #     usedVars = self.get_variables_used_in_declaration(value.comparators[0])
+                        #     value = self.build_value_from_used_variables(usedVars)
                             
-                            if type(value) == str: pair.append(value.lstrip())
-                            else: pair.append(value)
+                        #     if type(value) == str: pair.append(value.lstrip())
+                        #     else: pair.append(value)
 
-                            statement["pairs"].append(pair)
+                        #     statement["pairs"].append(pair)
                 
                         elif isinstance(value.left, ast.Constant) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.Name):
                             pair = []
@@ -363,17 +363,17 @@ class Analyzer(ast.NodeVisitor):
                             
                             statement["pairs"].append(pair)
                         
-                        elif isinstance(value.left, ast.Constant) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.BinOp):
-                            pair = []
-                            pair.append(value.left.value)
+                        # elif isinstance(value.left, ast.Constant) and isinstance(value.ops[0], ast.Eq) and isinstance(value.comparators[0], ast.BinOp):
+                        #     pair = []
+                        #     pair.append(value.left.value)
                             
-                            usedVars = self.get_variables_used_in_declaration(value.comparators[0])
-                            value = self.build_value_from_used_variables(usedVars)
+                        #     usedVars = self.get_variables_used_in_declaration(value.comparators[0])
+                        #     value = self.build_value_from_used_variables(usedVars)
                             
-                            if type(value) == str: pair.append(value.lstrip())
-                            else: pair.append(value)
+                        #     if type(value) == str: pair.append(value.lstrip())
+                        #     else: pair.append(value)
 
-                            statement["pairs"].append(pair)
+                        #     statement["pairs"].append(pair)
                 
                     elif isinstance(value, ast.Name):
                         statement["test"].append(value.id)
@@ -400,18 +400,18 @@ class Analyzer(ast.NodeVisitor):
                 statement["pairs"].append(pair)
 
                 
-            elif isinstance(node.test,ast.Name):
-                statement["test"].append(node.test.id)
+            # elif isinstance(node.test,ast.Name):
+            #     statement["test"].append(node.test.id)
 
-            elif isinstance(node.test, ast.Constant):
-                statement["test"].append(node.test.value)
+            # elif isinstance(node.test, ast.Constant):
+            #     statement["test"].append(node.test.value)
 
-            elif isinstance(node.test, ast.Call):
-                if isinstance(node.test.func, ast.Name): 
-                    statement["test"].append(node.test.func.id)
+            # elif isinstance(node.test, ast.Call):
+            #     if isinstance(node.test.func, ast.Name): 
+            #         statement["test"].append(node.test.func.id)
                 
-                elif isinstance(node.test.func, ast.Attribute): 
-                    statement["test"].append(self.get_function_name(node.test.func))
+            #     elif isinstance(node.test.func, ast.Attribute): 
+            #         statement["test"].append(self.get_function_name(node.test.func))
 
             self.statements.append(statement)
         

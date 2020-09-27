@@ -13,7 +13,7 @@ from operations.list_csv_contents import list_csv_contents
 from operations.write_to_csv_file import write_to_csv_file
 from operations.show_detection_result import show_detection_result
 from operations.individual_smell_in_projects import individual_smell_in_projects
-from operations.save_project_smells import save_total_count_of_detected_smells_in_projects as toatl_smells_in_project
+from operations.save_project_smells import save_total_count_of_detected_smells_in_projects as total_smells_in_project
 from operations.save_project_smells import save_detected_different_smells_frequency_in_projects as different_smells_in_project
 
 TOTAL_SRC_FILE_COUNT = 0
@@ -25,8 +25,8 @@ def show_total_file_count():
     
 
 def analyze_single_code():
-    file_name = './test-codes/'+'src.py'
-    file_name = './test-codes/'+'if-test.py'
+    file_name = './../test-codes/'+'src.py'
+    file_name = './../test-codes/'+'if-test.py'
     read_src_code('', '', file_name)
     show_detection_result()
 
@@ -96,10 +96,22 @@ def analyze_code_folder():
     project_name = None
     names = []
 
-    for root, dirs, files in os.walk('./../dataset unzip/'):
+    # descriptions = list_csv_contents('./../projects1.csv')
+
+    # projects = []
+    # for description in descriptions:
+    #     projects.append([description[0], False])
+
+
+    for root, dirs, files in os.walk('./../final-unzips/'):
         root_copy = copy.deepcopy(root)
         project_name = root_copy.split('/')[3]
         should_skip = False
+
+        # for i in range(len(projects)):
+        #     if projects[i][0] == project_name: 
+        #         projects[i][1] = True
+
 
         # if project_name not in names and project_name != "":
         #     names.append(project_name)
@@ -114,27 +126,38 @@ def analyze_code_folder():
                 if (src_file.lower()).find('test') == -1:
                     if os.path.splitext(src_file)[-1] == '.py':  
                         read_src_code(root, project_name, src_file)
-                
-        #     for name in names:
+        
+    # counter = 0
+    # for project in projects:
+    #     print(projects)
+    #     if project[1] == True: 
+    #         counter+=1
+    
+    # print(counter)
+    #     #     for name in names:
         # write_to_csv_file('logs/project_names.csv', [name.replace('-master', '')])
 
 
 def main():
-    # clear_log_files()    
+    clear_log_files()    
     # analyze_code_folder()
     
-    # analyze_single_code()
-    # save_unique_smell_count_in_project()
-
-    # show_total_file_count()
-    # show_detection_result()
-    
-    # different_smells_in_project()
-    # toatl_smells_in_project()
-    # individual_smell_in_projects()
-    save_smells_categorized_according_to_project_type()
     # find_correlation()
+    # analyze_single_code()
 
+
+    show_total_file_count()
+    show_detection_result()
+    
+    
+    individual_smell_in_projects()
+    
+    different_smells_in_project()
+    total_smells_in_project()
+    
+    save_unique_smell_count_in_project()
+    
+    save_smells_categorized_according_to_project_type()
 
 
 if __name__ == "__main__":

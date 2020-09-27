@@ -8,7 +8,7 @@ def detect(token, project_name, srcFile):
         if token.__contains__("name"): name = token["name"]
         if token.__contains__("args"): args = token["args"]
 
-        httpLibs = ['httplib.urlretrieve', 'urllib.urlopen', 'requests.get']
+        httpLibs = ['httplib.urlretrieve', 'urllib.urlopen', 'urllib2.urlopen', 'requests.get']
         
         if tokenType == "variable" and token.__contains__("valueSrc") and token.__contains__("args"):
             args = token['args']
