@@ -1,0 +1,9 @@
+debug_true
+ignore_except_block
+hardcoded_secret
+insecure_code_execution
+shell_injection
+assert_used
+yaml_load_used
+insecure_cipher_used
+http_without_tls

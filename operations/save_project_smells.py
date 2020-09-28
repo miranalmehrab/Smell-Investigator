@@ -1,3 +1,4 @@
+import os
 from operations.list_csv_contents import list_csv_contents
 from operations.write_to_csv_file import write_to_csv_file
 
@@ -115,6 +116,7 @@ def save_smells_categorized_according_to_project_type():
     categorized_smell_in_projects.sort(key = lambda x: x[0])
 
     unique_smell_count = []
+    
     for category in categorized_smell_in_projects:
         already_included = False
         
@@ -129,11 +131,32 @@ def save_smells_categorized_according_to_project_type():
             unique_smell_count.append([category[0], 1])
     
     for smell in unique_smell_count:
-        write_to_csv_file('logs/projects/x.csv', [smell[0]])
-        write_to_csv_file('logs/projects/y.csv', [smell[1]])
+        # write_to_csv_file('logs/projects/x.csv', [smell[0]])
+        # write_to_csv_file('logs/projects/y.csv', [smell[1]])
         write_to_csv_file('logs/projects/proejct-type-unique-smell-counts.csv', [smell[0], smell[1]])
 
-    
+    unqiue_smell_in_project_categories = []
+    for category in categorized_smell_in_projects:
+        already_included = False
+        for unique_smell in unqiue_smell_in_project_categories:
+            
+            if unique_smell[0] == category[0]:
+                unique_smell[1].append(category[1])
+                already_included = True
+                break
+        
+        if already_included is False:
+            unqiue_smell_in_project_categories.append([category[0], [category[1]]])
+
+    for unqiue_smell_in_project_category in unqiue_smell_in_project_categories:
+        file_path = os.path.join('./logs/project-categories/{filename}.csv'.format(filename = unqiue_smell_in_project_category[0])) 
+        
+        if os.path.isfile(file_path) is False:
+            with open(file_path, 'w') as fp:
+                pass
+        
+        for smell in unqiue_smell_in_project_category[1]: 
+            write_to_csv_file(file_path, [smell])
 
 
     total_smell_count = []

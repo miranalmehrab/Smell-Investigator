@@ -1,0 +1,4 @@
+ignore_except_block
+hardcoded_secret
+shell_injection
+harcoded_tmp_dir

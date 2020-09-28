@@ -1,0 +1,6 @@
+insecure_data_diserialization
+debug_true
+assert_used
+ignore_except_block
+xss_spotted
+hardcoded_secret

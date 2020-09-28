@@ -1,0 +1,10 @@
+debug_true
+ignore_except_block
+yaml_load_used
+hardcoded_secret
+shell_injection
+assert_used
+http_without_tls
+insecure_code_execution
+xss_spotted
+insecure_data_diserialization

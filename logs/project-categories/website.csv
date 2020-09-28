@@ -1,0 +1,14 @@
+ignore_except_block
+debug_true
+xss_spotted
+hardcoded_secret
+assert_used
+insecure_code_execution
+http_without_tls
+yaml_load_used
+insecure_data_diserialization
+harcoded_tmp_dir
+empty_password
+insecure_cipher_used
+bad_file_permissions
+shell_injection

@@ -1,0 +1,9 @@
+hardcoded_secret
+ignore_except_block
+assert_used
+bad_file_permissions
+insecure_code_execution
+shell_injection
+insecure_data_diserialization
+insecure_cipher_used
+harcoded_tmp_dir

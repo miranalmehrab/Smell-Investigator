@@ -1,0 +1,13 @@
+hardcoded_secret
+ignore_except_block
+debug_true
+insecure_code_execution
+shell_injection
+http_without_tls
+harcoded_tmp_dir
+assert_used
+insecure_cipher_used
+bad_file_permissions
+empty_password
+insecure_data_diserialization
+hardcoded_ip_binding

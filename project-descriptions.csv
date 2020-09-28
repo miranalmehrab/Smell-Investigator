@@ -9,7 +9,7 @@ DataSciencePython-master,https://github.com/ujjwalkarn/DataSciencePython,algorit
 cookiecutter-aws-sam-python-master,https://github.com/aws-samples/cookiecutter-aws-sam-python,template,75,141
 personfinder-master,https://github.com/google/personfinder,web service,3517,450
 beamer-snippets-master,https://github.com/bamos/beamer-snippets,website,68,103
-pyspider-master,https://github.com/binux/pyspider,web crawler,1181,"14,600"
+pyspider-master,https://github.com/binux/pyspider,web crawler,1181,14600
 Redfin-master,https://github.com/yuanfanz/Redfin,web crawler,3,15
 Lexos-master,https://github.com/WheatonCS/Lexos,website,9294,96
 E-Commerce-Website-master,https://github.com/NirajThagunna/E-Commerce-Website,e-commerce,2,2
@@ -99,7 +99,7 @@ webkiller-master,https://github.com/ultrasecurity/webkiller,tool,36,257
 Bus-Reservation-System-master,https://github.com/AniruddhaShelar/Bus-Reservation-System,web service,9,21
 cassiopeia-master,https://github.com/meraki-analytics/cassiopeia,framework,949,303
 django-form-designer-master,https://github.com/samluescher/django-form-designer,django application,181,297
-ipython-master,https://github.com/ipython/ipython,website,"25,614",14400
+ipython-master,https://github.com/ipython/ipython,website,25,614,14400
 requests-racer-master,https://github.com/nccgroup/requests-racer,library,38,93
 wigle-master,https://github.com/viraptor/wigle,web interface,16,14
 comcast-bw-master,https://github.com/askedrelic/comcast-bw,web crawler,44,20

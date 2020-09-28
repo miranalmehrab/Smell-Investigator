@@ -1,0 +1,12 @@
+shell_injection
+http_without_tls
+ignore_except_block
+insecure_cipher_used
+insecure_code_execution
+hardcoded_secret
+insecure_data_diserialization
+debug_true
+harcoded_tmp_dir
+empty_password
+assert_used
+xss_spotted
