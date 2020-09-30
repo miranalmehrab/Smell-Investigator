@@ -28,7 +28,7 @@ def show_total_src_file_count():
     
 
 def analyze_single_code():
-    file_name = './test-codes/'+'hard_ip.py'
+    file_name = './test-codes/'+'no_cert.py'
     # file_name = './test-codes/'+'if-test.py'
     read_src_code('', '', file_name)
     show_detection_result()
@@ -57,7 +57,7 @@ def analyze_ast_tree(code, src_file):
     try:
         tree = ast.parse(code, type_comments = True)
         # print(ast.dump(tree, include_attributes = True))
-        # print(ast.dump(tree))
+        print(ast.dump(tree))
         
         global TOTAL_SRC_FILE_COUNT
         TOTAL_SRC_FILE_COUNT += 1
@@ -68,7 +68,7 @@ def analyze_ast_tree(code, src_file):
         
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
-        # analyzer.print_statements()
+        analyzer.print_statements()
         
         analyzer.write_tokens_to_file()
 
@@ -121,13 +121,13 @@ def main():
 
     clear_log_files()    
     analyze_code_folder()
+    # analyze_single_code()
     
     # find_correlation()
-    # analyze_single_code()
 
-    # show_total_src_file_count()
+    show_total_src_file_count()
     
-    # show_detection_result() #must thaka lagbe #clear
+    show_detection_result() #must thaka lagbe #clear
     # save_smell_frequency() #must thaka lagbe #clear
 
     # save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear

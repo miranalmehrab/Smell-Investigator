@@ -94,7 +94,15 @@ class Analyzer(ast.NodeVisitor):
                             for i in range(len(func_def["returnArgs"])):  
                                 if self.value_from_variable_name(func_def["returnArgs"][i]): 
                                     func_def["returnArgs"][i] = self.value_from_variable_name(func_def["returnArgs"][i])
-                            
+
+                        for keyword in item.value.keywords:
+                            func_def['returnKeywords'] = []
+                            karg = keyword.arg
+                            kvalue = None
+
+                            if isinstance(keyword.value, ast.Constant): kvalue = keyword.value.value
+                            if karg: func_def['returnKeywords'].append([karg,kvalue])
+
             self.statements.append(func_def)
      
         except Exception as error:
@@ -108,10 +116,6 @@ class Analyzer(ast.NodeVisitor):
 
     def visit_Assign(self, node):
         
-        # print('')
-        # print(node.lineno)
-        # print(ast.dump(node))
-        # print('')
         try:
             for target in node.targets:
                 
@@ -166,11 +170,14 @@ class Analyzer(ast.NodeVisitor):
                         if len(names) > 0: variable["names"].append(names[0])
                 
                 elif isinstance(target, ast.Attribute):
-                        # funcName = self.get_function_attribute(value)
-                        # if value.attr and funcName: funcName = funcName +'.'+ value.attr
                         
                     name = self.get_function_attribute(target)
+                    returns = self.get_value_src_from_variable_name(name)
+                    if returns[0] is True: name = returns[1]
+
                     if target.attr: name = name +'.'+ target.attr
+                    
+                    print('name: {name}'.format(name = name))
                     variable["name"] = name
                     
                 if isinstance(node.value, ast.Constant):
@@ -230,6 +237,15 @@ class Analyzer(ast.NodeVisitor):
 
                             if(funcObj not in self.statements):self.statements.append(funcObj)
                         else: variable["args"] = (self.separate_variables(arg,variable["args"]))
+
+                    for keyword in node.value.keywords:
+                        variable['funcKeywords'] = []
+                        karg = keyword.arg
+                        kvalue = None
+
+                        if isinstance(keyword.value, ast.Constant): kvalue = keyword.value.value
+                        if karg: variable['funcKeywords'].append([karg,kvalue])
+
 
                 elif isinstance(node.value, ast.List):
                     variable["type"] = "list"
@@ -497,17 +513,19 @@ class Analyzer(ast.NodeVisitor):
                 elif isinstance(node.value.func,ast.Attribute): expression["name"] = self.get_function_name_from_object(self.get_function_name(node))
     
                 # separating args in function call
-                for arg in node.value.args: expression['args'] = self.separate_variables(arg,expression["args"])
+                for arg in node.value.args: 
+                    expression['args'] = self.separate_variables(arg,expression["args"])
                 
                 # getting args value from name in function call 
-                for i in range(len(expression['args'])): expression['args'][i] = self.value_from_variable_name(expression['args'][i])
+                for i in range(len(expression['args'])): 
+                    expression['args'][i] = self.value_from_variable_name(expression['args'][i])
                 
                 for keyword in node.value.keywords:
                     karg = keyword.arg
                     kvalue = None
 
-                    if isinstance(keyword.value,ast.Constant): kvalue = keyword.value.value
-                    if karg and kvalue: expression["keywords"].append([karg,kvalue])
+                    if isinstance(keyword.value, ast.Constant): kvalue = keyword.value.value
+                    if karg: expression["keywords"].append([karg,kvalue])
 
                 self.statements.append(expression)
 
@@ -872,6 +890,13 @@ class Analyzer(ast.NodeVisitor):
                     return True if statement["isInput"] is True else False
                     
         return False
+
+    def get_value_src_from_variable_name(self, name):
+        for statement in reversed(self.statements):
+            if statement['type'] == 'variable' and statement['name'] == name:
+                return [True, statement['valueSrc']]
+                
+        return [False, name]
 
 
     def print_statements(self, *types):
