@@ -1,8 +1,0 @@
-assert_used
-http_without_tls
-shell_injection
-xss_spotted
-ignore_except_block
-debug_true
-hardcoded_secret
-insecure_cipher_used

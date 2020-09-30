@@ -1,6 +1,0 @@
-shell_injection
-ignore_except_block
-assert_used
-http_without_tls
-harcoded_tmp_dir
-hardcoded_secret

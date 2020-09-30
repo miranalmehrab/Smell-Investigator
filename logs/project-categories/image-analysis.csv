@@ -1,6 +1,0 @@
-insecure_code_execution
-assert_used
-harcoded_tmp_dir
-ignore_except_block
-hardcoded_secret
-shell_injection

@@ -92,7 +92,8 @@ class Analyzer(ast.NodeVisitor):
                             func_def["returnArgs"] = self.separate_variables(arg, func_def["returnArgs"])
                             
                             for i in range(len(func_def["returnArgs"])):  
-                                if self.value_from_variable_name(func_def["returnArgs"][i]): func_def["returnArgs"][i] = self.value_from_variable_name(func_def["returnArgs"][i])
+                                if self.value_from_variable_name(func_def["returnArgs"][i]): 
+                                    func_def["returnArgs"][i] = self.value_from_variable_name(func_def["returnArgs"][i])
                             
             self.statements.append(func_def)
      
@@ -737,8 +738,11 @@ class Analyzer(ast.NodeVisitor):
 
 
     def get_function_name_from_object(self,name):
-        fName = name.split('.')[0]
-        lName = name.split('.')[1]
+        fName = None
+        for part in name.split('.')[0:-1]:
+            fName = fName +'.'+ part if fName is not None else part
+            
+        lName = name.split('.')[-1]
 
         for statement in self.statements:
             if statement["type"] == "function_obj" and fName == statement["objName"]: return statement["funcName"]+'.'+lName

@@ -1,5 +1,0 @@
-ignore_except_block
-shell_injection
-xss_spotted
-hardcoded_secret
-assert_used

@@ -1,8 +1,0 @@
-hardcoded_secret
-ignore_except_block
-insecure_code_execution
-insecure_cipher_used
-harcoded_tmp_dir
-assert_used
-shell_injection
-http_without_tls

@@ -1,7 +1,0 @@
-ignore_except_block
-hardcoded_secret
-assert_used
-bad_file_permissions
-sql_injection
-shell_injection
-insecure_code_execution

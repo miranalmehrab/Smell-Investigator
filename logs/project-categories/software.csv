@@ -1,5 +1,0 @@
-http_without_tls
-ignore_except_block
-hardcoded_secret
-assert_used
-bad_file_permissions

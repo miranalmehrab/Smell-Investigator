@@ -1,8 +1,0 @@
-hardcoded_secret
-ignore_except_block
-empty_password
-assert_used
-yaml_load_used
-insecure_code_execution
-http_without_tls
-debug_true

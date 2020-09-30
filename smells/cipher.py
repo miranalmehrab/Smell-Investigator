@@ -35,6 +35,7 @@ def detect(token, project_name, srcFile):
         elif tokenType == "function_def":
             if token.__contains__("return"): funcReturn  = token["return"]
             if token.__contains__("returnArgs"): returnArgs = token["returnArgs"]
+            
             if funcReturn in insecureMethods and len(returnArgs) > 0: 
                 action_upon_detection(project_name, srcFile, lineno, 'insecure_cipher_used', 'insecure cipher used', token)
         

@@ -28,8 +28,8 @@ def show_total_src_file_count():
     
 
 def analyze_single_code():
-    file_name = './../test-codes/'+'src.py'
-    file_name = './../test-codes/'+'if-test.py'
+    file_name = './test-codes/'+'hard_ip.py'
+    # file_name = './test-codes/'+'if-test.py'
     read_src_code('', '', file_name)
     show_detection_result()
 
@@ -55,7 +55,7 @@ def detect_smells_in_tokens(project_name,src_file):
 
 def analyze_ast_tree(code, src_file):
     try:
-        tree = ast.parse(code, type_comments=True)
+        tree = ast.parse(code, type_comments = True)
         # print(ast.dump(tree, include_attributes = True))
         # print(ast.dump(tree))
         
@@ -65,9 +65,11 @@ def analyze_ast_tree(code, src_file):
         analyzer = Analyzer()
         analyzer.visit(tree)
         analyzer.refine_tokens()
+        
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
-        # analyzer.print_statements('comparison')
+        # analyzer.print_statements()
+        
         analyzer.write_tokens_to_file()
 
     except Exception as error:
@@ -117,8 +119,8 @@ def analyze_code_folder():
 
 def main():
 
-    # clear_log_files()    
-    # analyze_code_folder()
+    clear_log_files()    
+    analyze_code_folder()
     
     # find_correlation()
     # analyze_single_code()
@@ -133,7 +135,7 @@ def main():
     
     # save_total_smell_counts_in_projects()
     # save_unique_smell_counts_in_projects()
-    save_smells_categorized_according_to_project_type()
+    # save_smells_categorized_according_to_project_type()
 
 
 if __name__ == "__main__":

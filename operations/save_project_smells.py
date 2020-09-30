@@ -84,10 +84,11 @@ def save_unique_smell_counts_in_projects():
 
 
 
+
+
 def save_smells_categorized_according_to_project_type():
     descriptions = list_csv_contents('project-descriptions.csv')
     projects = list_csv_contents('logs/projects/different_smells_in_projects.csv')
-    
     categorized_smell_in_projects = []
 
     for project in projects:
@@ -109,11 +110,14 @@ def save_smells_categorized_according_to_project_type():
                 name_found = True
                 break
 
-
         if name_found is False and project_type is not None:
             categorized_smell_in_projects.append([project_type, smell, int(smell_count)])
 
     categorized_smell_in_projects.sort(key = lambda x: x[0])
+    
+    for item in categorized_smell_in_projects:
+        print(item)
+
 
     unique_smell_count = []
     
@@ -174,11 +178,16 @@ def save_smells_categorized_according_to_project_type():
             total_smell_count.append([category[0], int(category[2])])
             
     for smell in total_smell_count:
+        # print(smell)
         # write_to_csv_file('logs/projects/x.csv', [smell[0]])
         # write_to_csv_file('logs/projects/y.csv', [smell[1]])
         write_to_csv_file('logs/projects/project-type-smell-counts.csv', [smell[0], smell[1]])
 
-        print(smell)
+
+
+
+
+
 
 
 def save_detected_different_smells_frequency_in_projects():

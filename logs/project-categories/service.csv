@@ -1,9 +1,0 @@
-ignore_except_block
-assert_used
-hardcoded_secret
-debug_true
-yaml_load_used
-http_without_tls
-empty_password
-xss_spotted
-insecure_data_diserialization

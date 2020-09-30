@@ -14,7 +14,7 @@ def detect(token, project_name, srcFile):
             keywords = token["keywords"]
             
             for keyword in keywords:
-                if keyword[0] == 'verify' and keyword[1] is False: 
+                if keyword[0] == 'verify' and (keyword[1] is False or keyword[1] == 'False'): 
                     action_upon_detection(project_name, srcFile, lineno, 'no_certification_validation', 'TLS is not verified', token)
 
         # if tokenType == "function_call" and name in httpLibs:
