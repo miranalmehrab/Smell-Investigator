@@ -13,11 +13,14 @@ def detect(token, project_name, srcFile):
         
         if tokenType == "variable" and token.__contains__("valueSrc"):
             if token["valueSrc"] in insecureMethods:
-                action_upon_detection(project_name, srcFile, lineno, 'command_injection', 'command injection', token)
-        
+                action_upon_detection(project_name, srcFile, lineno, 'command injection', 'command injection', token)
         
         elif tokenType == "function_call" and name in insecureMethods and len(args) > 0: 
-            action_upon_detection(project_name, srcFile, lineno, 'command_injection', 'command injection', token)
+            action_upon_detection(project_name, srcFile, lineno, 'command injection', 'command injection', token)
     
+        elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs'): 
+            if token['return'] in insecureMethods and len(token['returnArgs']) > 0:
+                action_upon_detection(project_name, srcFile, lineno, 'command injection', 'command injection', token)
+        
     except Exception as error: save_token_detection_exception('command injection detection  '+str(error)+'  '+ str(token), srcFile)
     

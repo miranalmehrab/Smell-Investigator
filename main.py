@@ -28,7 +28,7 @@ def show_total_src_file_count():
     
 
 def analyze_single_code():
-    file_name = './test-codes/'+'no_cert.py'
+    file_name = './test-codes/'+'temp_dir.py'
     # file_name = './test-codes/'+'if-test.py'
     read_src_code('', '', file_name)
     show_detection_result()
@@ -57,7 +57,7 @@ def analyze_ast_tree(code, src_file):
     try:
         tree = ast.parse(code, type_comments = True)
         # print(ast.dump(tree, include_attributes = True))
-        print(ast.dump(tree))
+        # print(ast.dump(tree))
         
         global TOTAL_SRC_FILE_COUNT
         TOTAL_SRC_FILE_COUNT += 1
@@ -65,12 +65,14 @@ def analyze_ast_tree(code, src_file):
         analyzer = Analyzer()
         analyzer.visit(tree)
         analyzer.refine_tokens()
+        analyzer.search_input_in_function_call_and_returned_function_args()
+        analyzer.write_tokens_to_file()
         
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
+        
         analyzer.print_statements()
         
-        analyzer.write_tokens_to_file()
 
     except Exception as error:
         print(str(error)) 

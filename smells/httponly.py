@@ -21,7 +21,7 @@ def detect(token, project_name, srcFile):
                     
                     url = find_url_from_string(args[0])
                     if len(url) > 0 and url[0].split("://")[0] != "https": 
-                        action_upon_detection(project_name, srcFile, lineno, 'http_without_tls', 'use of HTTP without TLS', token)
+                        action_upon_detection(project_name, srcFile, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
         if tokenType == "function_call" and name in httpLibs:
             if len(args) > 0 and args[0] is not None:
@@ -30,7 +30,7 @@ def detect(token, project_name, srcFile):
                 print(url)
                 if len(url) > 0 and url[0].split("://")[0] != "https":
                    
-                    action_upon_detection(project_name, srcFile, lineno, 'http_without_tls', 'use of HTTP without TLS', token)
+                    action_upon_detection(project_name, srcFile, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
     except Exception as error: save_token_detection_exception('http only detection  '+str(error)+'  '+ str(token), srcFile)
 

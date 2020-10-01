@@ -176,9 +176,9 @@ class Analyzer(ast.NodeVisitor):
                     if returns[0] is True: name = returns[1]
 
                     if target.attr: name = name +'.'+ target.attr
-                    
-                    print('name: {name}'.format(name = name))
                     variable["name"] = name
+                    
+                    # print('name: {name}'.format(name = name))
                     
                 if isinstance(node.value, ast.Constant):
                     variable["value"] = node.value.value
@@ -187,9 +187,11 @@ class Analyzer(ast.NodeVisitor):
 
                 if isinstance(node.value, ast.Name):
                     value_from_variable_name = self.value_from_variable_name(node.value.id)
-                    if type(value_from_variable_name) == list: variable["type"] = "list"
-                    
-                    variable["value"] = value_from_variable_name
+                    if type(value_from_variable_name[1]) == list: variable["type"] = "list"
+                    if value_from_variable_name[0] is False:
+                        variable['remove'] = True
+
+                    variable["value"] = value_from_variable_name[1]
                     variable["valueSrc"] = "initialization"
                     variable["isInput"] = False
 
@@ -327,7 +329,10 @@ class Analyzer(ast.NodeVisitor):
                     variable["value"] = self.get_function_attribute(node.value)+'.'+node.value.attr if node.value.attr else self.get_function_attribute(node.value) 
                     
 
-                self.statements.append(variable)
+                if variable.__contains__('remove') and variable['remove'] is True:
+                    pass
+                else:
+                    self.statements.append(variable)
  
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
@@ -518,7 +523,8 @@ class Analyzer(ast.NodeVisitor):
                 
                 # getting args value from name in function call 
                 for i in range(len(expression['args'])): 
-                    expression['args'][i] = self.value_from_variable_name(expression['args'][i])
+                    returns = self.value_from_variable_name(expression['args'][i])
+                    expression['args'][i] = returns[1] 
                 
                 for keyword in node.value.keywords:
                     karg = keyword.arg
@@ -640,51 +646,6 @@ class Analyzer(ast.NodeVisitor):
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
             save_token_parsing_exception(str(error), line_number)
 
-
-    def delete_incomplete_tokens(self):
-        for statement in self.statements:
-            
-            if statement['type'] == 'variable':
-                keys = ['line', 'name', 'value', 'valueSrc', 'isInput']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-
-            if statement['type'] == 'list' or statement['type'] == 'set':
-                keys = ['line', 'name', 'value', 'valueSrc', 'isInput', 'values']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-            
-            elif statement['type'] == 'import':
-                keys = ['line', 'og', 'alias']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-
-            elif statement['type'] == 'function_def':
-                keys = ['line', 'name', 'args', 'defaults', 'return']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-
-            elif statement['type'] == 'function_call':
-                keys = ['line', 'name', 'args', 'keywords', 'hasInputs']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-
-            elif statement['type'] == 'comparison':
-                keys = ['line', 'pairs', 'test']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-
-            elif statement['type'] == 'exception_handle':
-                keys = ['line', 'exceptionHandler']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-
-            elif statement['type'] == 'assert':
-                keys = ['line', 'left', 'comparators']
-                for key in keys:
-                    if key not in statement: self.statements.remove(statement)
-
-
     def refine_tokens(self):
         for statement in self.statements:
             try:
@@ -749,10 +710,13 @@ class Analyzer(ast.NodeVisitor):
 
     def value_from_variable_name(self,name):
         for statement in reversed(self.statements):
-            if statement["type"] == "variable" and statement["name"] == name : return statement["value"] if statement.__contains__("value") else None
-            elif statement["type"] == "list" and statement["name"] == name: return statement["values"] if statement.__contains__("values") else None
+            if statement["type"] == "variable" and statement["name"] == name:
+                return [True, statement["value"]] if statement.__contains__("value") and statement['value'] is not None else [False, name]
             
-        return name
+            elif statement["type"] == "list" and statement["name"] == name: 
+                return [True, statement["values"]] if statement.__contains__("values") and len(statement["values"]) > 0 else [False, name]
+            
+        return [False, name]
 
 
     def get_function_name_from_object(self,name):
@@ -881,6 +845,31 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(value,ast.Call): name = self.get_function_attribute(value)
 
         return str(name)+'.'+str(attr) if attr else str(name)
+
+
+    def search_input_in_function_call_and_returned_function_args(self):
+        for statement in self.statements:
+            if statement['type'] == 'variable':
+                if statement.__contains__('valueSrc') and statement.__contains__('args'):
+                    for arg in statement['args']:
+                        if arg in reversed(self.inputs):
+                            statement['isInput'] = True
+                            break
+                
+            elif statement['type'] == 'function_call':
+                if statement.__contains__('args'):
+                    for arg in statement['args']:
+                        if arg in reversed(self.inputs):
+                            statement['hasInputs'] = True
+                            break
+                
+            elif statement['type'] == 'function_def':
+                if statement.__contains__('returnArgs'):
+                    for arg in statement['returnArgs']:
+                        if arg in reversed(self.inputs):
+                            statement['returnHasInputs'] = True
+                            break
+                              
 
 
     def search_input_in_declaration(self,usedVariables):
