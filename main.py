@@ -121,15 +121,15 @@ def analyze_code_folder():
 
 def main():
 
-    clear_log_files()    
-    analyze_code_folder()
-    # analyze_single_code()
+    # clear_log_files()    
+    # analyze_code_folder()
     
+    # analyze_single_code()
     # find_correlation()
 
-    show_total_src_file_count()
+    # show_total_src_file_count()
     
-    show_detection_result() #must thaka lagbe #clear
+    # show_detection_result() #must thaka lagbe #clear
     # save_smell_frequency() #must thaka lagbe #clear
 
     # save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear
@@ -137,7 +137,7 @@ def main():
     
     # save_total_smell_counts_in_projects()
     # save_unique_smell_counts_in_projects()
-    # save_smells_categorized_according_to_project_type()
+    save_smells_categorized_according_to_project_type()
 
 
 if __name__ == "__main__":

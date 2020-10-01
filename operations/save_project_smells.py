@@ -38,8 +38,8 @@ def save_total_smell_counts_in_projects():
     
     for project_smell in project_smells:
         write_to_csv_file('logs/projects/total_smell_counts_in_projects.csv', project_smell)
-        # write_to_csv_file('logs/projects/x.csv', [project_smell[0]])
-        # write_to_csv_file('logs/projects/y.csv', [project_smell[1]])
+        write_to_csv_file('logs/projects/x.csv', [project_smell[0]])
+        write_to_csv_file('logs/projects/y.csv', [project_smell[1]])
 
 
 def save_unique_smell_counts_in_projects():
@@ -117,6 +117,9 @@ def save_smells_categorized_according_to_project_type():
     
     for item in categorized_smell_in_projects:
         print(item)
+        write_to_csv_file('logs/projects/project-type-total-unique-smells.csv', item)
+
+    
 
 
     unique_smell_count = []
@@ -181,7 +184,7 @@ def save_smells_categorized_according_to_project_type():
         # print(smell)
         # write_to_csv_file('logs/projects/x.csv', [smell[0]])
         # write_to_csv_file('logs/projects/y.csv', [smell[1]])
-        write_to_csv_file('logs/projects/project-type-smell-counts.csv', [smell[0], smell[1]])
+        write_to_csv_file('logs/projects/project-type-total-smell-counts.csv', [smell[0], smell[1]])
 
 
 
