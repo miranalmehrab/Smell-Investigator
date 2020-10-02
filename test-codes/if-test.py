@@ -32,14 +32,24 @@
 # if x == getX():
 #     print(x)
 
-# elif x != 20:
+# if x != 20:
 #     print(x)
 
-# elif x >= 20:
+# if x >= 20:
 #     print(x)
 
-# elif x <= 20:
-#     print(x)
+# if x <= 20:
+#     pass
+
+pwd = 'root'
+pwd1 = input()
+
+if pwd == pwd1:
+    pass
+
+
+if  '' == username:
+    pass
 
 # elif x > 20:
 #     print(x)
@@ -47,28 +57,25 @@
 # elif x < 20:
 #     print(x)
 
-# if username == "root" and password == "root":
-#     logIn()
+if username != None and password == "":
+    pass
 
-# if username == "root" or password == "root":
-#     logIn()
-
-if "root" == username and "root" == password:
+if username == "root" or password == "root":
     logIn()
 
+if username !=  "root" and  password == "root":
+    pass
 
-# if username:
-#     logIn()
 
-# if username and password:
-#     logIn()
+if "root" == username and "root" == password:
+    pass
 
-# if username or password:
-#     logIn()
+pass1 = input()
+password = 'admin'
 
-# if username is not password:
-#     print(password)
+if pass1 == password:
+    pass
 
-# names = ['root', 'root1']
-# if username in names:
-#     print(username)
+names = ['root', 'root1']
+if username in names:
+    print(username)

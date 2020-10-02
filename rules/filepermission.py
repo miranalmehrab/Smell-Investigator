@@ -1,7 +1,7 @@
 from operations.action_upon_detection import action_upon_detection
 from operations.save_token_exceptions import save_token_detection_exception
 
-def detect(token, project_name, srcFile):
+def detect(token, project_name, src_file):
     try:
 
         if token.__contains__("line"): lineno = token["line"]
@@ -13,11 +13,11 @@ def detect(token, project_name, srcFile):
         unwantedParams = ['0x777', '0x757', '0x755','stat.S_IRWXO','stat.S_IROTH','stat.S_IWOTH','stat.S_IXOTH']
 
         if tokenType == "function_call" and name in unwantedMethods: 
-            action_upon_detection(project_name, srcFile, lineno, 'bad file permission', 'bad file permission', token)
+            action_upon_detection(project_name, src_file, lineno, 'bad file permission', 'bad file permission', token)
         
-        elif tokenType == 'function_call' and name == 'subprocess.call':
+        elif tokenType == 'function_call' and name == 'subprocess.call' and len(args) > 0:
             for arg in args:
                 if arg in unwantedMethods: 
-                    action_upon_detection(project_name, srcFile, lineno, 'bad file permission', 'bad file permission', token)
+                    action_upon_detection(project_name, src_file, lineno, 'bad file permission', 'bad file permission', token)
     
-    except Exception as error: save_token_detection_exception('file permission detection  '+str(error)+'  '+ str(token), srcFile)
+    except Exception as error: save_token_detection_exception('file permission detection  '+str(error)+'  '+ str(token), src_file)

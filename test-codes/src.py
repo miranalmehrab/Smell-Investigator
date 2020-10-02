@@ -1,54 +1,26 @@
-# # result = 0
-# nums = [0,1,2,3,4,5]
-# for num in nums:
-#     with suppress(ZeroDivisionError):
-#         result += 1/num
-# print(result)
+# import hashlib
 
-
-# try:
-#     result = nums[0]
-# except:
-#     pass
-
-try:
-   f = open("test.txt",encoding = 'utf-8')
-   # perform file operations
-finally:
-   f.close()
-
-
-# def grant_access(username = 'guest', password = 'guest'):
-#     #redirect somewhere
-#     pass
+# try: result = 'abcedf'
+# except: pass
 
 # username = 'admin'
 # password = 'admin'
-
-# sock.bind((host, 0))
+# tokens = {'user': 'root', 'pwd': '1h23ighwdvssedw23'}
+# def grant_access(username = 'guest', password = 'guest'):
+#    pass
 
 # if username == 'admin' and password == 'admin':
 #     grant_access(username, password)
-# else: grant_access(username = 'admin', password= 'admin')
-# x = 1
-# query = 2
-# ask = y = query + x
-# ask = 'a' + 'b' + 'c' + 'd' + 'e' + x + x + x 
+
+
 # ip = '0.0.0.0'
 # port = '3030'
 
 # s = socket.socket(AF.NET,IO.SOCKET)
 # s.bind(ip,port)
 # s.bind('0.0.0.0','3030')
-# token = "abcdea"
-# header[authorization] = "bearer:"+token
-# header[0] = token
+
 # subprocess.call(['chmod', '0444', 'path'])
-
-# def logIn(username = "sdnsjnd" , password = "whwdgwgdb"):
-#     return 'logged in'
-
-# logIn(password = '12123', username ='asasd')
 
 # passwords = ['abc123', 'xyz321']
 # myDict = {'password' : '12234', 'token' : '12i1gjhwbejsqdguayg2367t276', 'debug': True}
@@ -72,20 +44,24 @@ finally:
 # os.chmod('/etc/hosts',stat.S_IXOTH)
 
 # DEBUG_PROPAGATE_EXCEPTIONS = True
-# app.run(debug = True,start = True)
-# password = "pass"
-# password = ''
-# pwd = ''
-# password = None
-# name = "root"
-# pwd = "root123"
-# query = "delete from foo where id = " + user_input + user_input
-# x = "abc"
+# app.run(debug = True, start = True)
+
 # urllib.urlretrieve("192.168.10.1/example.iso")
 
-# user_input = input()
+# query = "delete from foo where id = " + user_input + user_input
+# x = "abc"
+
+user_input = input()
+process = input()
+pre = 'kil - {}'.format(process)
+
+
+subprocess.Popen('kil - {}'.format(process))
+# subprocess.Popen("A list: %s, %s" % process % pre)
+# subprocess.Popen('In the basket are %s and %s' % (comm,pre))
+
+
 # execution.query(user_input)
-# subprocess.Popen(user_input)
 # result = connection.execute(user_input)
 # sys.argv(f'sudo mkdir {user_input}')
 

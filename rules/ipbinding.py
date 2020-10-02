@@ -1,7 +1,7 @@
 from operations.action_upon_detection import action_upon_detection
 from operations.save_token_exceptions import save_token_detection_exception
 
-def detect(token, project_name, srcFile):
+def detect(token, project_name, src_file):
     try:
 
         if token.__contains__("line"): lineno = token["line"]
@@ -15,19 +15,15 @@ def detect(token, project_name, srcFile):
             args = token['args']
             valueSrc = token['valueSrc']
             
-            # if valueSrc in bindingMethods and len(args) > 0:
-                # action_upon_detection(project_name, srcFile, lineno, 'hard-coded IP address bindings', 'hard-coded IP address bindings', token) 
-
-            if valueSrc in bindingMethods and len(args) > 0 and args[0] is not None and is_valid_ip(args[0]):
-                action_upon_detection(project_name, srcFile, lineno, 'hard-coded IP address bindings', 'hard-coded IP address bindings', token) 
+            if valueSrc in bindingMethods and len(args) > 0 and args[0] is not None and is_valid_ip(args[0]) and isinstance(args[0],str):
+                action_upon_detection(project_name, src_file, lineno, 'hard-coded IP address bindings', 'hard-coded IP address bindings', token) 
 
         elif tokenType == "function_call" and name in bindingMethods:
-            # action_upon_detection(project_name, srcFile, lineno, 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
-
+            
             if len(args) > 1 and (args[0] is not None or args[1] is not None) and (is_valid_ip(args[0]) or is_valid_port(args[1])): 
-                action_upon_detection(project_name, srcFile, lineno, 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
+                action_upon_detection(project_name, src_file, lineno, 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
     
-    except Exception as error: save_token_detection_exception('ip binding detection  '+str(error)+'  '+ str(token), srcFile)
+    except Exception as error: save_token_detection_exception('ip binding detection  '+str(error)+'  '+ str(token), src_file)
 
 def is_valid_ip(ip):
     if ip == '': return True
@@ -41,5 +37,6 @@ def is_valid_ip(ip):
     return True 
 
 def is_valid_port(port):
-    if int(port) > 0 and int(port) < 65536: return True
+    if isinstance(port, str) and port.isdigit() is False: return False
+    elif int(port) > 0 and int(port) < 65536: return True
     else: return False

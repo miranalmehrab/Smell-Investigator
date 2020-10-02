@@ -28,8 +28,8 @@ def show_total_src_file_count():
     
 
 def analyze_single_code():
-    file_name = './test-codes/'+'temp_dir.py'
-    # file_name = './test-codes/'+'if-test.py'
+    # file_name = './test-codes/'+'temp_dir.py'
+    file_name = './test-codes/'+'src.py'
     read_src_code('', '', file_name)
     show_detection_result()
 
@@ -66,12 +66,12 @@ def analyze_ast_tree(code, src_file):
         analyzer.visit(tree)
         analyzer.refine_tokens()
         analyzer.search_input_in_function_call_and_returned_function_args()
-        analyzer.write_tokens_to_file()
         
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
         
         analyzer.print_statements()
+        analyzer.write_tokens_to_file()
         
 
     except Exception as error:
@@ -121,24 +121,23 @@ def analyze_code_folder():
 
 def main():
 
-    # clear_log_files()    
-    # analyze_code_folder()
-    
+    clear_log_files()    
+
+    analyze_code_folder()
     # analyze_single_code()
-    # find_correlation()
 
-    # show_total_src_file_count()
+    show_total_src_file_count()
     
-    # show_detection_result() #must thaka lagbe #clear
-    # save_smell_frequency() #must thaka lagbe #clear
-
-    # save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear
-    # individual_smell_introduction_in_total_number_of_projects() #must thaka lagbe 
+    show_detection_result() #must thaka lagbe #clear
+    save_smell_frequency() #must thaka lagbe #clear
+    save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear
+    individual_smell_introduction_in_total_number_of_projects() #must thaka lagbe 
     
-    # save_total_smell_counts_in_projects()
+    save_total_smell_counts_in_projects()
     # save_unique_smell_counts_in_projects()
-    save_smells_categorized_according_to_project_type()
+    # save_smells_categorized_according_to_project_type()
 
+    # find_correlation()
 
 if __name__ == "__main__":
     main()

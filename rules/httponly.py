@@ -3,7 +3,7 @@ import re
 from operations.action_upon_detection import action_upon_detection
 from operations.save_token_exceptions import save_token_detection_exception
 
-def detect(token, project_name, srcFile):
+def detect(token, project_name, src_file):
     try:
         if token.__contains__("line"): lineno = token["line"]
         if token.__contains__("type"): tokenType = token["type"]
@@ -21,18 +21,28 @@ def detect(token, project_name, srcFile):
                     
                     url = find_url_from_string(args[0])
                     if len(url) > 0 and url[0].split("://")[0] != "https": 
-                        action_upon_detection(project_name, srcFile, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
+                        action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
-        if tokenType == "function_call" and name in httpLibs:
+        elif tokenType == "function_call" and name in httpLibs:
             if len(args) > 0 and args[0] is not None:
                 
                 url = find_url_from_string(args[0])
-                print(url)
                 if len(url) > 0 and url[0].split("://")[0] != "https":
-                   
-                    action_upon_detection(project_name, srcFile, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
+                    action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
-    except Exception as error: save_token_detection_exception('http only detection  '+str(error)+'  '+ str(token), srcFile)
+        elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs'):
+            func_return = token['return']
+            returnArgs = token['returnArgs']
+
+            if func_return in httpLibs and len(returnArgs) > 0 and args[0] is not None:
+                
+                url = find_url_from_string(returnArgs[0])
+                if len(url) > 0 and url[0].split("://")[0] != "https":
+                    action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
+        
+
+
+    except Exception as error: save_token_detection_exception('http only detection  '+str(error)+'  '+ str(token), src_file)
 
 def find_url_from_string(string): 
   

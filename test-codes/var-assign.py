@@ -1,5 +1,31 @@
-def getRoll(name):
-    return 931
+# x = int(input())
+# x = str(input())
+# x = float(input())
+# x = 'input'
+# y = input()
+
+
+process = input()
+pre = 'kil - {}'.format(process)
+# command = pre.format(process = process)
+lists = "A list: %s, %s" % process % pre
+# query = 'kill - '+ pre+pre+pre+pre + comm
+z = 'In the basket are %s and %s' % (comm,pre)
+
+exec("A list: %s, %s" % process % pre)
+eval('sdskadaksjbd'+z)
+
+
+# def getRoll(name):
+#     return 931
+
+# x = getRoll('')
+
+
+
+
+
+
 
 # username = 'ashsjhdk'
 # password = 'sdushdiushd'
@@ -7,7 +33,7 @@ def getRoll(name):
 # x = 2
 # name = "Miran Al " + "Mehrab"
 # age = 20 + 2
-roll = getRoll('Miran')
+# roll = getRoll('Miran')
 # abc = input()
 
 # x = 20
@@ -17,20 +43,31 @@ roll = getRoll('Miran')
 #     x = 15
 # abc = x if x > 10 else x
 
+# self.abc = 'abc'
+# x = self.abc
+
+# x = 'abc'
+# x = 'abc'
+# y = x + x + z
+
 # s = socket.socket.socket(AF.NET, AF.Packet)
 
 
 # x = y = z = "Orange"
 # x, y, z = "Orange", "Banana", "Cherry"
 
-x = ['apple','oneplus','pinephone']
-x = {'apple','oneplus','pinephone'}
+# x = username
+# y = password
 
-header[authorization] = "bearer:"+token
-header[0] = token
+# x = ['apple','oneplus','pinephone']
+# x = {"brand":'apple',"model": "se 2020", "upass": ""}
 
-token = 'saldhiu322uh2i3278siabcxhabxgsua'
-tokens = ['sahzslkdjl3434sdasd','dsdlsahkljah746548','sdlshkqj2232324','2323dsafnsdfjkn']
+
+# header[authorization] = "bearer:"+token
+# header[0] = 'sdfsd'
+
+# token = 'saldhiu322uh2i3278siabcxhabxgsua'
+# tokens = ['sahzslkdjl3434sdasd','dsdlsahkljah746548','sdlshkqj2232324','2323dsafnsdfjkn']
 
 # header = tokens
 # header = []

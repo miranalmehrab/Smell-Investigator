@@ -3,7 +3,7 @@ import re
 from operations.action_upon_detection import action_upon_detection
 from operations.save_token_exceptions import save_token_detection_exception
 
-def detect(token, imports,project_name, srcFile):
+def detect(token, imports,project_name, src_file):
     try:
         # print(len(imports))
         
@@ -16,24 +16,24 @@ def detect(token, imports,project_name, srcFile):
 
         if tokenType == "variable" and token.__contains__('valueSrc') and token.__contains__('args'):    
             if token['valueSrc'] in libs and len(token['args']) > 0:
-                if valid_download_url(args[0]) and 'hashlib' not in imports:
-                    action_upon_detection(project_name, srcFile, lineno, 'no integrity check', 'no integrity check', token)
+                if isinstance(args[0], str) and valid_download_url(args[0]) and 'hashlib' not in imports:
+                    action_upon_detection(project_name, src_file, lineno, 'no integrity check', 'no integrity check', token)
                 
 
         elif tokenType == "function_call" and name in libs and len(args) > 0:
-            if valid_download_url(args[0]) and 'hashlib' not in imports:
-                action_upon_detection(project_name, srcFile, lineno, 'no integrity check', 'no integrity check', token)
+            if isinstance(args[0], str) and valid_download_url(args[0]) and 'hashlib' not in imports:
+                action_upon_detection(project_name, src_file, lineno, 'no integrity check', 'no integrity check', token)
         
 
         elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs'):
             returnArgs = token['returnArgs']
             
             if len(returnArgs) > 0:
-                if token['return'] in libs and valid_download_url(returnArgs[0]) and 'hashlib' not in imports:
-                    action_upon_detection(project_name, srcFile, lineno, 'no integrity check', 'no integrity check', token)
+                if token['return'] in libs and isinstance(returnArgs[0], str) and valid_download_url(returnArgs[0]) and 'hashlib' not in imports:
+                    action_upon_detection(project_name, src_file, lineno, 'no integrity check', 'no integrity check', token)
         
 
-    except Exception as error: save_token_detection_exception('no integrity detection  '+str(error)+'  '+ str(token), srcFile)
+    except Exception as error: save_token_detection_exception('no integrity detection  '+str(error)+'  '+ str(token), src_file)
 
 
 def valid_download_url(string):

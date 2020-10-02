@@ -66,6 +66,7 @@ def detection(tokens, project_name, srcFile):
             xssDetect(token, project_name, srcFile)
             yamlloadDetect(token, project_name, srcFile)
 
-        except Exception as error: save_token_loading_exception(token+'  '+str(error),srcFile)
+        except Exception as error: 
+            save_token_loading_exception(str(token)+'  '+str(error),srcFile)
         
         
