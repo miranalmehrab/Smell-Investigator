@@ -1,0 +1,9 @@
+ignoring except block
+command injection
+use of YAML load
+assert statement
+hard-coded secrets
+deployment with debug flag set to true
+cross site scripting
+insecure deserialization
+use of weak cryptographic algorithm

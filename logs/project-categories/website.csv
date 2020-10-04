@@ -1,0 +1,15 @@
+deployment with debug flag set to true
+cross site scripting
+hard-coded secrets
+ignoring except block
+empty password
+assert statement
+bad file permission
+command injection
+use of weak cryptographic algorithm
+insecure deserialization
+use of YAML load
+use of HTTP without TLS
+hard-coded tmp directories
+hard-coded IP address bindings
+no certificate validation

@@ -235,7 +235,12 @@ class Analyzer(ast.NodeVisitor):
                     variable["args"] = []
                     variable["isInput"] = False
 
-                    if(funcName == "input"):
+                    input_functions = [ 'input', 'request.POST.get', 'request.GET.get', 'request.GET.getlist', 'request.POST.getlist',
+                                        'self.request.POST.get', 'self.request.GET.get', 'self.request.GET.getlist', 'self.request.POST.getlist'
+                                    ]
+
+                    if funcName in input_functions:
+                        variable["value"] = None
                         variable["isInput"] = True
                         self.inputs.append(variable["name"])
                     
@@ -256,12 +261,29 @@ class Analyzer(ast.NodeVisitor):
                         elif isinstance(arg, ast.Call) and isinstance(arg.func, ast.Name):
                             funcName = arg.func.id
                             variable['args'].append(funcName)
-                            if funcName == 'input':
+                            if funcName in input_functions:
 
-                                variable['isInput'] = True
-                                variable["valueSrc"] = 'input'
                                 variable['value'] = None
+                                variable["valueSrc"] = funcName
+                                variable['isInput'] = True
                         
+                        elif isinstance(arg, ast.Call):
+
+                            funcName = self.get_function_name(arg)
+                            variable["isInput"] = False
+
+                            input_functions = [ 'input', 'request.POST.get', 'request.GET.get', 'request.GET.getlist', 'request.POST.getlist',
+                                                'self.request.POST.get', 'self.request.GET.get', 'self.request.GET.getlist', 'self.request.POST.getlist'
+                                            ]
+
+                            if funcName in input_functions:
+                                variable["value"] = None
+                                variable["valueSrc"] = funcName
+                                variable["isInput"] = True
+                                self.inputs.append(variable["name"])
+                            
+
+
                         elif isinstance(arg, ast.Name):
                             name = arg.id
                             value = None
@@ -955,16 +977,33 @@ class Analyzer(ast.NodeVisitor):
             elif statement["type"] in types: print(statement)
 
 
-    def write_tokens_to_file(self):
-        try:
-            fp = open("logs/tokens.txt", "w+")
+    def write_user_inputs(self):
+        fp_input = open("logs/inputs.txt", "a+")
+
+        for statement in self.statements:
+            if statement['type'] == 'variable':
+                try:
+                    json.dump(statement, fp_input)
+                    fp_input.write("\n")
+        
+                except Exception as error:
+                    line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
+                    save_token_parsing_exception(line_number, str(error))
             
-            for statement in self.statements:
+        fp_input.close()
+
+
+    def write_tokens_to_file(self):
+        
+        fp = open("logs/tokens.txt", "w+")
+        
+        for statement in self.statements:
+            try:
                 json.dump(statement, fp)
                 fp.write("\n")
+        
+            except Exception as error:
+                line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
+                save_token_parsing_exception(line_number, str(error))
             
-            fp.close()
-
-        except Exception as error:
-            line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
-            save_token_parsing_exception(line_number, str(error))
+        fp.close()

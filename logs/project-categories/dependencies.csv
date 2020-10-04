@@ -1,0 +1,13 @@
+assert statement
+ignoring except block
+use of weak cryptographic algorithm
+command injection
+empty password
+use of YAML load
+use of HTTP without TLS
+bad file permission
+hard-coded secrets
+insecure deserialization
+deployment with debug flag set to true
+hard-coded tmp directories
+hard-coded IP address bindings

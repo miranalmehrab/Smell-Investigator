@@ -72,6 +72,7 @@ def analyze_ast_tree(code, src_file):
         
         analyzer.print_statements()
         analyzer.write_tokens_to_file()
+        analyzer.write_user_inputs()
         
 
     except Exception as error:
@@ -134,8 +135,8 @@ def main():
     individual_smell_introduction_in_total_number_of_projects() #must thaka lagbe 
     
     save_total_smell_counts_in_projects()
-    # save_unique_smell_counts_in_projects()
-    # save_smells_categorized_according_to_project_type()
+    save_unique_smell_counts_in_projects()
+    save_smells_categorized_according_to_project_type()
 
     # find_correlation()
 

@@ -1,16 +1,16 @@
-ignoring except block,5368
-assert statement,3624
-hard-coded secrets,637
-cross site scripting,382
-command injection,357
-use of weak cryptographic algorithm,305
-deployment with debug flag set to true,270
-insecure deserialization,236
-empty password,194
-bad file permission,165
+ignoring except block,5908
+assert statement,3909
+hard-coded secrets,688
+command injection,389
+cross site scripting,371
+use of weak cryptographic algorithm,338
+deployment with debug flag set to true,278
+insecure deserialization,251
+empty password,222
+bad file permission,186
 use of HTTP without TLS,81
-use of YAML load,48
+use of YAML load,45
 no certificate validation,21
-hard-coded tmp directories,14
+hard-coded tmp directories,15
 hard-coded IP address bindings,12
 no integrity check,2

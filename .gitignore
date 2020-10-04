@@ -1,0 +1,4 @@
+*.pyc
+logs/errors/
+logs/inputs.txt
+logs/tokens.txt
