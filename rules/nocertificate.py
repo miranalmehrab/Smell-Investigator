@@ -22,14 +22,14 @@ def detect(token, project_name, src_file):
             if valueSrc in httpLibs and len(keywords) > 0:
                 
                 for keyword in keywords:
-                    if keyword[0] == 'verify' and keyword[1] is False: 
+                    if keyword[0] == 'verify' and (keyword[1] is False or keyword[1] == 'False'): 
                         action_upon_detection(project_name, src_file, lineno, 'no certificate validation', 'no certificate validation', token)
 
         elif tokenType == "function_call" and name in httpLibs and token.__contains__("keywords"):
             keywords = token["keywords"]
             
             for keyword in keywords:
-                if keyword[0] == 'verify' and keyword[1] is False: 
+                if keyword[0] == 'verify' and (keyword[1] is False or keyword[1] == 'False'): 
                     action_upon_detection(project_name, src_file, lineno, 'no certificate validation', 'no certificate validation', token)
         
         
@@ -40,7 +40,7 @@ def detect(token, project_name, src_file):
             
             if func_return in httpLibs:
                 for keyword in keywords:
-                    if keyword[0] == 'verify' and keyword[1] is False: 
+                    if keyword[0] == 'verify' and (keyword[1] is False or keyword[1] == 'False'): 
                         action_upon_detection(project_name, src_file, lineno, 'no certificate validation', 'no certificate validation', token)
         
         

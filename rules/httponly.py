@@ -1,4 +1,5 @@
 import re
+from urllib.parse import urlparse
 
 from operations.action_upon_detection import action_upon_detection
 from operations.save_token_exceptions import save_token_detection_exception
@@ -16,36 +17,29 @@ def detect(token, project_name, src_file):
             args = token['args']
             valueSrc = token['valueSrc']
 
-            if valueSrc in httpLibs and len(args) > 0:
-                if args[0] is not None:
-                    
-                    url = find_url_from_string(args[0])
-                    if len(url) > 0 and url[0].split("://")[0] != "https": 
-                        action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
-
-        elif tokenType == "function_call" and name in httpLibs:
-            if len(args) > 0 and args[0] is not None:
+            if valueSrc in httpLibs and len(args) > 0 and args[0] is not None and is_valid_http_url(args[0]):
+                action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
                 
-                url = find_url_from_string(args[0])
-                if len(url) > 0 and url[0].split("://")[0] != "https":
-                    action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
+    
+        elif tokenType == "function_call" and name in httpLibs and len(args) > 0 and args[0] is not None and is_valid_http_url(args[0]):                                     
+            action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
         elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs'):
             func_return = token['return']
             returnArgs = token['returnArgs']
 
-            if func_return in httpLibs and len(returnArgs) > 0 and args[0] is not None:
-                
-                url = find_url_from_string(returnArgs[0])
-                if len(url) > 0 and url[0].split("://")[0] != "https":
+            if func_return in httpLibs and len(returnArgs) > 0 and returnArgs[0] is not None and is_valid_http_url(returnArgs[0]):           
                     action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
-        
-
 
     except Exception as error: save_token_detection_exception('http only detection  '+str(error)+'  '+ str(token), src_file)
 
-def find_url_from_string(string): 
-  
-    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    url = re.findall(regex,string)       
-    return [x[0] for x in url] 
+def is_valid_http_url(url): 
+
+    reg_url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(url))
+    url = reg_url[0] if len(reg_url) > 0 else None
+    if url is None: return False
+
+    parsed_url = urlparse(url)
+    if parsed_url.scheme == 'http': return True
+    if parsed_url.scheme == 'https': return False
+    else: return False

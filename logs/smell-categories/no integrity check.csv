@@ -1,2 +1,0 @@
-reconspider-mastersetup.py,"{'type': 'function_call', 'line': 44, 'name': 'wget.download', 'args': ['https://www.ip2location.com/download?token=hg5uYe2Jvri4R7P1j8b71Pk8dnvIU2M6A9jz2tvcVtGx8ZK2UPQgzr6Hk3cV68oH&file=PX8LITEBIN'], 'keywords': [['out', None]], 'hasInputs': False}"
-bioservices-masteruniprot.py,"{'type': 'function_call', 'line': 290, 'name': 'urllib.urlretrieve', 'args': ['ftp://ftp.ebi.ac.uk/pub/databases/uniprot/knowledgebase/uniprot_sprot.dat.gz', 'uniprot_sprot.dat.gz'], 'keywords': [], 'hasInputs': False}"

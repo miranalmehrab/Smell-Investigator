@@ -213,7 +213,7 @@ class Analyzer(ast.NodeVisitor):
                 elif isinstance(node.value, ast.BinOp):
                     usedVars = self.get_variables_used_in_declaration(node.value)
                     # print(usedVars)
-                    hasInputs = self.search_input_in_declaration(usedVars)
+                    hasInputs = self.search_input_in_declaration(usedVars, variable["line"])
                     # print(hasInputs)
 
                     if hasInputs is True:
@@ -267,9 +267,11 @@ class Analyzer(ast.NodeVisitor):
                                 variable["valueSrc"] = funcName
                                 variable['isInput'] = True
                         
-                        elif isinstance(arg, ast.Call):
+                        elif isinstance(arg, ast.Call) and isinstance(arg.func, ast.Attribute):
 
-                            funcName = self.get_function_name(arg)
+                            funcName = self.get_function_attribute(arg.func)
+                            funcName = funcName + arg.func.attr
+
                             variable["isInput"] = False
 
                             input_functions = [ 'input', 'request.POST.get', 'request.GET.get', 'request.GET.getlist', 'request.POST.getlist',
@@ -290,7 +292,7 @@ class Analyzer(ast.NodeVisitor):
                             returns = self.value_from_variable_name(name) 
                             if returns[0] is True: value = returns[1]
 
-                            isInput = self.search_input_in_declaration([name])
+                            isInput = self.search_input_in_declaration([name], variable["line"])
                             if isInput is True:
                                 variable['value'] = None
                                 variable['valueSrc'] = 'input'
@@ -313,7 +315,7 @@ class Analyzer(ast.NodeVisitor):
                             returns = self.value_from_variable_name(kvalue) 
                             if returns[0] is True: kvalue = returns[1]
 
-                            isInput = self.search_input_in_declaration([keyword.value.id])
+                            isInput = self.search_input_in_declaration([keyword.value.id], variable["line"])
                             if isInput is True:
                                 variable['value'] = None
                                 variable['valueSrc'] = 'input'
@@ -579,7 +581,7 @@ class Analyzer(ast.NodeVisitor):
                     expression["args"] = self.separate_variables(arg,expression["args"])
                     
                 # print(expression['args'])
-                hasInputs = self.search_input_in_declaration(expression['args'])
+                hasInputs = self.search_input_in_declaration(expression['args'], expression["line"])
                 if hasInputs is True: expression["hasInputs"] = True
 
                 # getting args value from name in function call
@@ -954,11 +956,13 @@ class Analyzer(ast.NodeVisitor):
                               
 
 
-    def search_input_in_declaration(self,usedVariables):
+    def search_input_in_declaration(self,usedVariables, line_number):
         for variable in usedVariables:
             for statement in reversed(self.statements):
                 if statement["type"] == "variable" and variable == statement["name"]:
-                    if statement["isInput"] is True: return True
+                    if int(line_number) < int(statement['line']):
+                        return True if statement["isInput"] is True else False
+                        
                      
                     
         return False
@@ -985,11 +989,10 @@ class Analyzer(ast.NodeVisitor):
                 try:
                     json.dump(statement, fp_input)
                     fp_input.write("\n")
-        
+                    
                 except Exception as error:
-                    line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
-                    save_token_parsing_exception(line_number, str(error))
-            
+                    pass
+
         fp_input.close()
 
 
@@ -1005,5 +1008,6 @@ class Analyzer(ast.NodeVisitor):
             except Exception as error:
                 line_number = "Error on line {} ".format(sys.exc_info()[-1].tb_lineno)
                 save_token_parsing_exception(line_number, str(error))
-            
+
         fp.close()
+        

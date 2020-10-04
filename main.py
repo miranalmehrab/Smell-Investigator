@@ -102,10 +102,14 @@ def read_src_code(root, project_name, src_file):
 
 def analyze_code_folder():
     
+    folder_name = './../final-unzips/'
+    # folder_name = './gist-src/'
     project_name = None
-    for root, dirs, files in os.walk('./../final-unzips/'):
+
+    for root, dirs, files in os.walk(folder_name):
         copied_root = copy.deepcopy(root)
         project_name = copied_root.split('/')[3]
+        
         should_skip = False
 
         for part in copied_root.split('/'):
@@ -124,19 +128,19 @@ def main():
 
     clear_log_files()    
 
-    analyze_code_folder()
-    # analyze_single_code()
+    # analyze_code_folder()
+    analyze_single_code()
 
     show_total_src_file_count()
     
     show_detection_result() #must thaka lagbe #clear
-    save_smell_frequency() #must thaka lagbe #clear
-    save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear
-    individual_smell_introduction_in_total_number_of_projects() #must thaka lagbe 
+    # save_smell_frequency() #must thaka lagbe #clear
+    # save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear
+    # individual_smell_introduction_in_total_number_of_projects() #must thaka lagbe 
     
-    save_total_smell_counts_in_projects()
-    save_unique_smell_counts_in_projects()
-    save_smells_categorized_according_to_project_type()
+    # save_total_smell_counts_in_projects()
+    # save_unique_smell_counts_in_projects()
+    # save_smells_categorized_according_to_project_type()
 
     # find_correlation()
 

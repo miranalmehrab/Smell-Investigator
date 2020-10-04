@@ -21,7 +21,7 @@ def detect(token, project_name, src_file):
         
         if tokenType == "function_call" and token.__contains__('keywords'):
             for keyword in token['keywords']:
-                if len(keyword) == 2 and isinstance(keyword[0], str) and keyword[0].lower() in unwantedDirNames and keyword[1] is not None and len(keyword[1]) > 0 and is_valid_path(keyword[1]): 
+                if len(keyword) == 2 and isinstance(keyword[0], str) and keyword[0].lower() in unwantedDirNames and keyword[1] is not None and isinstance(keyword[1], str) and len(keyword[1]) > 0 and is_valid_path(keyword[1]): 
                     action_upon_detection(project_name, src_file, lineno, 'hard-coded tmp directories', 'hard-coded tmp directories', token)
     
         elif tokenType == "variable" and name is not None and name.lower() in unwantedDirNames and token['value'] is not None and is_valid_path(token['value']): 
@@ -44,5 +44,6 @@ def is_valid_path(value):
     if './' in value: return True
     elif '/' in value: return True
     elif '\\' in value: return True
+    elif '\\\\' in value: return True
     elif '%' in value: return True
     else: return False
