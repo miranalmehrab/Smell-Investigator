@@ -1,0 +1,16 @@
+assert statement,67116
+hard-coded secrets,7308
+ignoring except block,6625
+command injection,1751
+empty password,584
+use of weak cryptographic algorithm,451
+deployment with debug flag set to true,421
+cross site scripting,372
+insecure deserialization,348
+bad file permission,218
+use of HTTP without TLS,189
+hard-coded tmp directories,146
+use of YAML load,52
+hard-coded IP address bindings,24
+no certificate validation,22
+no integrity check,14

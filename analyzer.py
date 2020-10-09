@@ -175,7 +175,7 @@ class Analyzer(ast.NodeVisitor):
                     returns = self.get_value_src_from_variable_name(name)
                     if returns[0] is True: name = returns[1]
 
-                    if name is not None and target.attr is not None: name = name +'.'+ target.attr
+                    if name is not None and target.attr is not None: variable["name"] = name +'.'+ target.attr
                     elif target.attr is None: variable["name"] = name
                     
                     # print('name: {name}'.format(name = name))
@@ -272,6 +272,7 @@ class Analyzer(ast.NodeVisitor):
                             funcName = self.get_function_attribute(arg.func)
                             funcName = funcName + arg.func.attr
 
+                            variable['valueSrc'] = funcName
                             variable["isInput"] = False
 
                             input_functions = [ 'input', 'request.POST.get', 'request.GET.get', 'request.GET.getlist', 'request.POST.getlist',
@@ -574,7 +575,10 @@ class Analyzer(ast.NodeVisitor):
             if isinstance(node.value, ast.Call):
                 if isinstance(node.value.func, ast.Name): expression["name"] = node.value.func.id
                 elif isinstance(node.value.func,ast.Call): expression["name"] = self.get_function_name(node)
-                elif isinstance(node.value.func,ast.Attribute): expression["name"] = self.get_function_name_from_object(self.get_function_name(node))
+                elif isinstance(node.value.func,ast.Attribute): 
+                    name = self.get_function_name(node)
+                    expression["name"] = self.get_function_name_from_object(name)
+                    print('function name %s' % expression["name"])
     
                 # separating args in function call
                 for arg in node.value.args:
@@ -785,9 +789,17 @@ class Analyzer(ast.NodeVisitor):
     def make_tokens_byte_free(self):
         for statement in self.statements:
             for item in statement:
-                if isinstance(item, bytes): 
-                    try: statement[item] = statement[item].decode('utf-8')
-                    except: pass
+                if isinstance(item, list):
+                    for sub_item in item:
+                        if isinstance(sub_item, ast.Bytes): 
+                            try: 
+                                statement[sub_item] = statement[sub_item].decode('utf-8')
+                            except: 
+                                try:
+                                    del item[sub_item]
+                                except: 
+                                    time.sleep(1)
+                                    print('bytes can not be deleted!')
 
     def value_from_variable_name(self,name):
         for statement in reversed(self.statements):
@@ -808,7 +820,19 @@ class Analyzer(ast.NodeVisitor):
         lName = name.split('.')[-1]
 
         for statement in self.statements:
-            if statement["type"] == "function_obj" and fName == statement["objName"]: return statement["funcName"]+'.'+lName
+            if statement["type"] == "function_obj" and fName == statement["objName"]: 
+                if statement["funcName"] is not None: 
+                    return statement["funcName"]+'.'+lName
+
+            elif statement['type'] == 'variable' and fName == statement['name']:
+                if statement['valueSrc'] is not None: 
+                    return statement['valueSrc']+'.'+lName
+
+            elif statement['type'] == 'import' and fName == statement['alias']:
+                if statement['og'] is not None: 
+                    return statement['og']+'.'+lName
+
+
         return name
 
 
@@ -856,15 +880,15 @@ class Analyzer(ast.NodeVisitor):
                     
                     if statement["type"] == "variable" and statement["name"] == variable and statement.__contains__("isInput"):
                         
-                        if statement["isInput"] == False and value != None:
-                            if value == None: value = statement['value']
-                            elif statement['value'] == None: pass
+                        if statement["isInput"] is False and value is not None:
+                            if value is None: value = statement['value']
+                            elif statement['value'] is None: pass
 
-                            elif type(value) == str or type(statement["value"]) == str: value = str(value) + str(statement["value"])
+                            elif isinstance(value, str) or isinstance(statement["value"], str): value = str(value) + str(statement["value"])
                             else: value = value + statement["value"]
 
-                        elif statement["isInput"] != True: value = statement["value"]
-                        elif statement["isInput"] == True: value = str(value) + "input"
+                        elif statement["isInput"] is not True: value = statement["value"]
+                        elif statement["isInput"] is True: value = str(value) + "input"
 
                         matched = True
                         break
@@ -881,10 +905,12 @@ class Analyzer(ast.NodeVisitor):
                             matched = True
                             break
 
-                if isinstance(value, bytes): 
+                if isinstance(value, ast.Bytes):
+                    # value = '' 
                     value = value.decode('utf-8')
 
-                elif isinstance(variable, bytes):
+                elif isinstance(variable, ast.Bytes):
+                    # value = ''
                     variable = variable.decode('utf-8')
                 
                 if matched == False and value and variable and (type(value) != str and type(variable) != str): value = value + variable
@@ -933,27 +959,21 @@ class Analyzer(ast.NodeVisitor):
 
     def search_input_in_function_call_and_returned_function_args(self):
         for statement in self.statements:
-            if statement['type'] == 'variable':
-                if statement.__contains__('valueSrc') and statement.__contains__('args'):
-                    for arg in statement['args']:
-                        if arg in reversed(self.inputs):
-                            statement['isInput'] = True
-                            break
-                
-            elif statement['type'] == 'function_call':
-                if statement.__contains__('args'):
-                    for arg in statement['args']:
-                        if arg in reversed(self.inputs):
-                            statement['hasInputs'] = True
-                            break
-                
-            elif statement['type'] == 'function_def':
-                if statement.__contains__('returnArgs'):
-                    for arg in statement['returnArgs']:
-                        if arg in reversed(self.inputs):
-                            statement['returnHasInputs'] = True
-                            break
-                              
+            if statement['type'] == 'variable' and statement.__contains__('valueSrc') and statement.__contains__('args'):
+                if self.search_input_in_declaration(statement['args'], statement['line']):
+                    statement['isInput'] = True
+                    break
+            
+            elif statement['type'] == 'function_call' and statement.__contains__('args'):
+                if self.search_input_in_declaration(statement['args'], statement['line']):
+                    statement['hasInputs'] = True
+                    break
+            
+            elif statement['type'] == 'function_def' and statement.__contains__('returnArgs'):
+                if self.search_input_in_declaration(statement['returnArgs'], statement['line']):
+                    statement['returnHasInputs'] = True
+                    break
+                            
 
 
     def search_input_in_declaration(self,usedVariables, line_number):
@@ -961,11 +981,9 @@ class Analyzer(ast.NodeVisitor):
             for statement in reversed(self.statements):
                 if statement["type"] == "variable" and variable == statement["name"]:
                     if int(line_number) < int(statement['line']):
-                        return True if statement["isInput"] is True else False
-                        
-                     
-                    
+                        return True if statement["isInput"] is True else False   
         return False
+
 
     def get_value_src_from_variable_name(self, name):
         for statement in reversed(self.statements):

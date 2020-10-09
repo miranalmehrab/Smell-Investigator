@@ -19,6 +19,9 @@ from operations.individual_smell_introduction import individual_smell_introducti
 from operations.save_project_smells import save_total_smell_counts_in_projects
 from operations.save_project_smells import save_unique_smell_counts_in_projects
 
+from operations.run_bandit_on_folder import run_bandit_on_folder
+from operations.run_bandit_on_folder import summerize_bandit_output
+
 TOTAL_SRC_FILE_COUNT = 0
 
 def show_total_src_file_count():
@@ -27,11 +30,17 @@ def show_total_src_file_count():
     print('total file counted : '+str(TOTAL_SRC_FILE_COUNT))
     
 
-def analyze_single_code():
-    # file_name = './test-codes/'+'temp_dir.py'
-    file_name = './test-codes/'+'src.py'
-    read_src_code('', '', file_name)
-    show_detection_result()
+def show_categories_in_project_descriptions():
+    unique_names = []
+    projects = list_csv_contents('./project-descriptions.csv')
+    projects.pop(0)
+
+    for project in projects:
+        if project[2] not in unique_names:
+            unique_names.append(project[2])
+
+    for name in unique_names:
+        print(name)
 
 
 def clear_log_files():
@@ -70,7 +79,7 @@ def analyze_ast_tree(code, src_file):
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
         
-        analyzer.print_statements()
+        # analyzer.print_statements()
         analyzer.write_tokens_to_file()
         analyzer.write_user_inputs()
         
@@ -109,40 +118,60 @@ def analyze_code_folder():
     for root, dirs, files in os.walk(folder_name):
         copied_root = copy.deepcopy(root)
         project_name = copied_root.split('/')[3]
-        
+        # project_name = ''
         should_skip = False
 
-        for part in copied_root.split('/'):
-            if part.find('test') != -1:
-                should_skip = True
-                break
+        # for part in copied_root.split('/'):
+        #     if part.find('test') != -1:
+        #         should_skip = True
 
         if should_skip is False:
             for src_file in files:
-                if (src_file.lower()).find('test') == -1:
-                    if os.path.splitext(src_file)[-1] == '.py':  
-                        read_src_code(root, project_name, src_file)
+                # if (src_file.lower()).find('test') == -1:
+                if os.path.splitext(src_file)[-1] == '.py':  
+                    read_src_code(root, project_name, src_file)
         
 
-def main():
+def analyze_single_code():
+    # file_name = './test-codes/'+'temp_dir.py'
+    file_name = './test-codes/'+'src.py'
+    read_src_code('', '', file_name)
+    show_detection_result()
 
+
+
+def run_analyze_code_folder():
     clear_log_files()    
 
-    # analyze_code_folder()
-    analyze_single_code()
-
+    analyze_code_folder()
     show_total_src_file_count()
     
     show_detection_result() #must thaka lagbe #clear
-    # save_smell_frequency() #must thaka lagbe #clear
-    # save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear
-    # individual_smell_introduction_in_total_number_of_projects() #must thaka lagbe 
+    save_smell_frequency() #must thaka lagbe #clear
+    save_detected_different_smells_frequency_in_projects() #must thaka lagbe #clear
+    individual_smell_introduction_in_total_number_of_projects() #must thaka lagbe 
     
-    # save_total_smell_counts_in_projects()
-    # save_unique_smell_counts_in_projects()
-    # save_smells_categorized_according_to_project_type()
+    save_total_smell_counts_in_projects()
+    save_unique_smell_counts_in_projects()
+    save_smells_categorized_according_to_project_type()
 
+
+def run_single_code():
+    clear_log_files()
+    analyze_single_code()
+    show_detection_result()
+
+def main():
+
+    # run_single_code()
+    # run_analyze_code_folder()
     # find_correlation()
+    # run_bandit_on_folder()
+    # summerize_bandit_output()
+    # show_categories_in_deproject_scriptions()
+
+
+
 
 if __name__ == "__main__":
     main()

@@ -22,7 +22,7 @@ from rules.yamlload import detect as yamlloadDetect
 from operations.save_token_exceptions import save_token_detection_exception
 from operations.save_token_exceptions import save_token_loading_exception
 
-def getImports(tokens):
+def get_imports_in_code(tokens):
     
     imports = []
     tokens = tokens.splitlines()
@@ -38,14 +38,18 @@ def getImports(tokens):
     
     return imports
 
+def save_buggy_tokens():
+    pass
 
 def detection(tokens, project_name, srcFile):
-    imports = getImports(tokens)
+    imports = get_imports_in_code(tokens)
     tokens = tokens.splitlines()
     
     for token in tokens:
         try:
             token = json.loads(token)
+
+
 
             cipherDetection(token, project_name, srcFile)
             commandinjectionDetecet(token, project_name, srcFile)

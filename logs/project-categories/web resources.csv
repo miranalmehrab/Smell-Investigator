@@ -1,0 +1,9 @@
+assert statement
+command injection
+hard-coded secrets
+deployment with debug flag set to true
+cross site scripting
+ignoring except block
+empty password
+hard-coded tmp directories
+use of weak cryptographic algorithm

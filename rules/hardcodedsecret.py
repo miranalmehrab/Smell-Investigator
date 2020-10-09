@@ -1,3 +1,4 @@
+import re
 from operations.action_upon_detection import action_upon_detection
 from operations.save_token_exceptions import save_token_detection_exception
 
@@ -17,7 +18,7 @@ def detect(token, project_name, src_file):
                         'md5', 'rsa', 'ssl_content', 'ca_content','ssl-content', 'ca-content', 'ssh_key_content', 'ssh-key-content', 'ssh_key_public', 'ssh-key-public', 
                         'ssh_key_private', 'ssh-key-private','ssh_key_public_content', 'ssh_key_private_content', 'ssh-key-public-content', 'ssh-key-private-content',
                         'user_key', 'ukey', 'private_key', 'public_key', 'key_private', 'key_public', 'tls-key', 'tls_key', 'ssl-key', 'ssl-private-key', 'tls-private-key',
-                        'ssl-public-key', 'tls-public-key', 'ssl_private_key',  'tls_private_key']
+                        'ssl-public-key', 'tls-public-key', 'ssl_private_key',  'tls_private_key', 'ssl', 'tls', 'public-key', 'private-key', 'key']
         
         commonPasswords = [ 'password','passwords','pass','pwd','userpassword','userpwd', 'userpass', 'pass_no', 'pass-no', 'user-pass', 'upass', 'user_pass', 
                             'u_pass', 'user_pwd', 'uid', 'usr_pwd', 'usr_pass', 'usr-pass', 'userpasswords', 'user-passwords', 'user-password', 'user_password', 
@@ -25,21 +26,42 @@ def detect(token, project_name, src_file):
                         ]
 
         if tokenType == "variable" and name is not None and value is not None and valueSrc == "initialization":
-            if (name.lower() in commonKeywords or name.lower() in commonPasswords):
-                if isinstance(value, str): 
-                    if len(value) > 0 and is_valid(value):
+            for key in commonKeywords:
+                if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), name.lower().strip()):
+                    if isinstance(value, str) and len(value) > 0 and is_valid(value):
                         action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
-                else: action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
-            
+                        break
+                    
+            for pwd in commonPasswords:
+                if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), name.lower().strip()):
+                    if isinstance(value, str) and len(value) > 0 and is_valid(value):
+                        action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
+                        break
 
         elif (tokenType == "list" or tokenType == "set") and name is not None and token.__contains__("values"):
-            if (name.lower() in commonKeywords or name.lower() in commonPasswords) and len(token['values']) > 0: 
-                action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
+            for key in commonKeywords:
+                if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), name.lower().strip()) and len(token['values']) > 0: 
+                    action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
+                    break
             
+            for pwd in commonPasswords:
+                if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), name.lower().strip()) and len(token['values']) > 0: 
+                    action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
+                    break
+            
+
         elif tokenType == "dict" and name is not None and token.__contains__("keys"):
-            if(name.lower() in commonKeywords or name.lower() in commonPasswords) and len(token['keys']) > 0: 
-                action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token) 
+            for key in commonKeywords:
+                if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), name.lower().strip()) and len(token['keys']) > 0:
+                    action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token) 
+                    break
+
+            for pwd in commonKeywords:
+                if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), name.lower().strip()) and len(token['keys']) > 0:
+                    action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token) 
+                    break
             
+
             if token.__contains__('values'): 
                 for value_pair in zip(token['keys'], token['values']):        
                     if len(value_pair) == 2 and value_pair[0] is not None and isinstance(value_pair[0], str) and (value_pair[0].lower() in commonPasswords or value_pair[0].lower() in commonKeywords) and (value_pair[1] is not None and len(str(value_pair[1])) > 0 and is_valid(value_pair[1])):
