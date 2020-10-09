@@ -1,7 +1,0 @@
-assert statement
-use of weak cryptographic algorithm
-ignoring except block
-hard-coded secrets
-command injection
-hard-coded IP address bindings
-empty password

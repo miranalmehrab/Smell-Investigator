@@ -3,15 +3,17 @@ import copy
 import json
 import subprocess
 
+from .write_to_csv_file import write_to_csv_file 
+
 def run_bandit_on_folder():
-    projects = []
+    projects = ['cassiopeia-master']
 
-    for root, dirs, files in os.walk('./../final-unzips/'):
-        copied_root = copy.deepcopy(root)
-        project_name = copied_root.split('/')[3]
+    # for root, dirs, files in os.walk('./../final-unzips/'):
+    #     copied_root = copy.deepcopy(root)
+    #     project_name = copied_root.split('/')[3]
 
-        if project_name not in projects:
-            projects.append(project_name)
+    #     if project_name not in projects:
+    #         projects.append(project_name)
 
     
     for project_name in projects:
@@ -36,31 +38,39 @@ def run_bandit_on_folder():
         except: 
             print('error while detecting security issues')
 
+
 def summerize_bandit_output():
 
     for root, dirs, files in os.walk('./../../bandits'):
         for file_name in files:
             
-            input_fp = open(os.path.join('./../../bandits',file_name), 'r')
+            input_fp = open(os.path.join(root,file_name), 'r')
             contents = input_fp.read()
             if len(contents) == 0: continue
             
             contents = json.loads(contents)
-            
             outputs = []
+            
             try:
                 for result in contents['results']:
-                    outputs.append([result['filename'], result['line_number'], result['issue_text']]) #result['code']
+                    outputs.append([result['filename'], result['line_number'], result['test_id'], result['test_name']]) #result['code']
                 
-                output_fp = open(os.path.join('./../bandits',file_name), 'w+')
+                output_file = None
+                name_parts = file_name.split('.')[0: -1]
+                
+                for part in name_parts:
+                    output_file = output_file + part if output_file is not None else part
+                    
+                output_file = output_file + '.csv'
+                output_path = './../bandits/' + output_file
+
+                output_fp = open(output_path, 'w+')
                 
                 for output in outputs:
-                    json.dump(output, output_fp)
-                    output_fp.write('\n')
+                    write_to_csv_file(output_path, output)
                 
-
                 output_fp.close()
-            except: 
-                print('error occurred')
-            
+
+            except Exception as error: print(str(error))
+                            
             input_fp.close()

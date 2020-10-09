@@ -10,20 +10,22 @@ def detect(token, project_name, src_file):
 
         queryMethods = ['execution.query', 'connection.cursor.execute', 'sqlite3.connect.execute',
                         'psycopg2.connect.cursor.execute','mysql.connector.connect.cursor.execute', 
-                        'pyodbc.connect.cursor.execute', 'sqlalchemy.sql.text']
+                        'pyodbc.connect.cursor.execute', 'sqlalchemy.sql.text'
+                    ]
         
         if token_type == "variable" and token.__contains__('valueSrc') and token.__contains__('args'):
             
             args = token['args']
             valueSrc = token['valueSrc']
-            if(valueSrc in queryMethods or query_methods_has_patterns(valueSrc)) and token['isInput'] is True:
+            if(valueSrc in queryMethods or query_methods_has_patterns(valueSrc)) and len(args) > 0: # and token['isInput'] is True:
                 action_upon_detection(project_name, src_file, lineno, 'constructing sql statement upon user input', 'constructing sql statement upon user input', token)
                     
-        elif token_type == "function_call" and (name in queryMethods or  query_methods_has_patterns(name)) and token['hasInputs'] is True:
-            action_upon_detection(project_name, src_file, lineno, 'constructing sql statement upon user input', 'constructing sql statement upon user input', token)
+        elif token_type == "function_call" and token.__contains__('name') and token.__contains__('args'):#token['hasInputs'] is True:
+            if (name in queryMethods or query_methods_has_patterns(name)) and len(token['args']) > 0:  
+                action_upon_detection(project_name, src_file, lineno, 'constructing sql statement upon user input', 'constructing sql statement upon user input', token)
         
-        elif token_type == "function_def" and token.__contains__('return') and token.__contains__('returnHasInputs'): 
-            if (token['return'] in queryMethods or query_methods_has_patterns(token['return'])) and token['returnHasInputs'] is True:
+        elif token_type == "function_def" and token.__contains__('return') and token.__contains__('returnArgs'): 
+            if (token['return'] in queryMethods or query_methods_has_patterns(token['return'])) and len(token['returnArgs']) > 0:
                 action_upon_detection(project_name, src_file, lineno, 'constructing sql statement upon user input', 'constructing sql statement upon user input', token)
         
 

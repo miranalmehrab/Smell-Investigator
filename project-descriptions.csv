@@ -167,7 +167,7 @@ wtss.py-master,https://github.com/e-sensing/wtss.py,website,35,6
 PyFlooder-master,https://github.com/D4Vinci/PyFlooder,tool,10,141
 hyde-master,https://github.com/hyde/hyde,tool,600,1600
 Rakathon-master,https://github.com/amitabh27/Rakathon,website,54,2
-weiquntool-master,https://github.com/liuslevis/weiquntool,tool,11,145
+weiquncrawler-master,https://github.com/liuslevis/weiquncrawler,tool,11,145
 pets-master,https://github.com/jllorencetti/pets,website,376,83
 simpleeditions-master,https://github.com/littke/simpleeditions,website,320,4
 Web-Scraping-using-Beautiful-Soup-master,https://github.com/keyur9/Web-Scraping-using-Beautiful-Soup,tool,8,4
@@ -298,7 +298,7 @@ simplenote.py-master,https://github.com/simplenote-vim/simplenote.py,website,168
 flexx-master,https://github.com/flexxui/flexx,tool,1918,2400
 wappalyzer-python-master,https://github.com/scrapinghub/wappalyzer-python,dependencies,6,75
 exchangelib-master,https://github.com/ecederstrand/exchangelib,website,1665,725
-python-media-tool-master,https://github.com/bernii/python-media-tool,tool,2,15
+python-media-crawler-master,https://github.com/bernii/python-media-crawler,tool,2,15
 apodo-master,https://github.com/elliott-maguire/apodo,tool,144,47
 pythoncommerce-master,https://github.com/viclen/pythoncommerce,website,1,2
 zester-master,https://github.com/spulec/zester,dependencies,28,19
@@ -350,7 +350,7 @@ robostrippy-master,https://github.com/bmuller/robostrippy,tool,24,17
 fapws2-master,https://github.com/william-os4y/fapws2,tool,66,10
 video-service-flask-master,https://github.com/mattmakai/video-service-flask,tutorial,19,16
 blogofile-plugins,https://github.com/EnigmaCurry/blogofile,tool,531,335
-Shoptool-master,https://github.com/chronomule/Shoptool,tool,3,3
+ShopCrawler-master,https://github.com/chronomule/ShopCrawler,tool,3,3
 fosswebsite-master,https://github.com/amfoss/fosswebsite,website,727,116
 elimage-master,https://github.com/Vim-cn/elimage,website,100,160
 rest_gae-master,https://github.com/budowski/rest_gae,website,56,88
@@ -414,7 +414,7 @@ falcon-master,https://github.com/falconry/falcon,framework,1666,8000
 pywebdriver-master,https://github.com/akretion/pywebdriver,website,222,52
 awis-master,https://github.com/ashim888/awis,dependencies,102,35
 appengine-flask-skeleton-master,https://github.com/googlearchive/appengine-flask-skeleton,framework,30,417
-Instagram-tool-master,https://github.com/kirilcvetkov92/Instagram-tool,tool,19,14
+Instagram-Crawler-master,https://github.com/kirilcvetkov92/Instagram-Crawler,tool,19,14
 prestapyt-master,https://github.com/prestapyt/prestapyt,dependencies,95,56
 Cactus_Refactored-master,https://github.com/randomknowledge/Cactus_Refactored,tool,150,15
 boto-develop,https://github.com/boto/boto,dependencies,7198,6400

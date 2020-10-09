@@ -12,7 +12,7 @@ BillCipher-master,6
 BizzMe-master,3
 Building-RESTful-Python-Web-Services-master,2
 Building-Serverless-Python-Web-Services-with-Zappa-master,3
-Bus-Reservation-System-master,10
+Bus-Reservation-System-master,11
 CCXTSharp-master,1
 Cactus_Refactored-master,3
 Catsup-master,5
@@ -20,11 +20,11 @@ Comparative-Analysis-Review-System-master,0
 COVID-19-Greece-master,0
 DataSciencePython-master,1
 Deeplack-master,1
-Django-E-Commerce-master,10
+Django-E-Commerce-master,11
 Django-Ecommerce-master,3
 Django-eCommerce-tutorial-manascode-master,1
 Dynatrace-hybris-eCommerce-Fastpack-master,1
-E-Commerce-API-Python-master,10
+E-Commerce-API-Python-master,11
 E-Commerce-Condiments-shop-master,3
 E-Commerce-Website-master,10
 E-Commercial-Sites-Scrappers-master,1
@@ -103,7 +103,7 @@ Webshell-Sniper-master,3
 Wooey-master,6
 Web-Scraping-using-Beautiful-Soup-master,0
 ZeroNet-py3,9
-addons-server-master,12
+addons-server-master,13
 adyen-python-online-payments-master,1
 alexandra-master,2
 amazon-reviews-analysis-master,1
@@ -113,10 +113,10 @@ app-service-web-python-get-started-master,3
 appdaemon-dev,7
 appengine-flask-skeleton-master,7
 appier-master,6
-archweb-master,6
+archweb-master,7
 asyncmicroservices-master,2
 atheme-web-master,1
-augur-master,8
+augur-master,9
 awis-master,1
 aws-serverless-shopping-cart-master,1
 aws_py-master,3
@@ -161,7 +161,7 @@ django-admin-bootstrapped-master,4
 django-auditlog-master,6
 django-avatar-master,3
 django-basic-apps-master,3
-django-calaccess-raw-data-master,2
+django-calaccess-raw-data-master,3
 django-changuito-master,4
 django-chartit-master,5
 django-cors-headers-master,4
@@ -176,7 +176,7 @@ django-jquery-file-upload-master,3
 django-machina-master,6
 django-notifications-master,3
 django-oscar-demo-master,2
-django-oscar-master,6
+django-oscar-master,7
 django-post_office-master,4
 django-react-ecommerce-master,2
 django-recaptcha-develop-master,2
@@ -206,7 +206,7 @@ e-commerce-web-scraper-master,2
 eCommerce-Canada-API-Python-master,1
 eCommerce-Database-main,9
 ebook-viewer-master,4
-ecommerce-master,9
+ecommerce-master,10
 ecommerce_api-master,5
 ecommerce_website_development-master,3
 elimage-master,4
@@ -245,14 +245,14 @@ howtopython.org-master,0
 ibptws-master,1
 idempierewsc-python-master,1
 inscriptis-master,3
-ipython-master,7
+ipython-master,8
 is_wordpress-master,2
 ivy-master,3
 joeahand-master,2
 jquery.pyproxy-master,2
 k8s-tutorial-python-master,2
 key-presser-via-python-server-master,1
-lbry-sdk-master,5
+lbry-sdk-master,6
 ldapcherry-master,3
 lead_manager_react_django-master,2
 learn_python3_spider-master,11
@@ -268,7 +268,7 @@ mollyproject-master,5
 moodle_api.py-master,1
 morvanzhou.github.io-master,2
 movie-center-master,2
-moviegeek-master,6
+moviegeek-master,7
 mtmonkey-master,1
 microblog-master,0
 myvariant.py-master,0
@@ -279,7 +279,7 @@ nsepy-master,1
 nycpython.com-master,1
 netdnarws-master,0
 onlineShop-master,2
-opensale-master,7
+opensale-master,8
 oscar-wagtail-demo-master,3
 openscoring-python-master,0
 pacu-master,6
@@ -290,7 +290,7 @@ pepy-master,5
 personfinder-master,8
 pets-master,2
 picoweb-master,2
-pinax-stripe-master,4
+pinax-stripe-master,5
 practNLPTools-lite-master,1
 prestapyt-master,1
 price-of-chair-new-master,2
@@ -306,7 +306,7 @@ pySphere-master,4
 pyacoustid-master,3
 pyaiot-master,7
 pyanalytics-master,2
-pycsw-master,6
+pycsw-master,7
 pycv-master,1
 pyews-master,2
 pyredminews-master,3
@@ -319,7 +319,7 @@ python-bulk-email-verifier-master,3
 python-cfdiclient-master,1
 python-devicecloud-master,3
 python-for-entrepreneurs-course-demos-master,3
-python-ftr-master,3
+python-ftr-master,4
 python-helpspot-master,1
 python-master,2
 python-media-crawler-master,2
@@ -347,7 +347,7 @@ pastey-master,0
 python-web-scraping-tutorial-master,0
 python-media-tool-master,0
 py-parsehub-master,0
-rasa-site-bot-master,4
+rasa-site-bot-master,5
 reconspider-master,6
 redis-hashring-master,3
 renrenPhotosBackup-master,3
@@ -358,8 +358,8 @@ restfull-web-service-python-tornado-master,1
 robotcar-dataset-sdk-master,1
 rdio-python-master,0
 robostrippy-master,0
-saleor-custom-master,7
-saleor-master,7
+saleor-custom-master,8
+saleor-master,8
 santricity-webapi-pythonsdk-master,3
 sci-wms-master,3
 scrapenhl2-master,5
@@ -367,7 +367,7 @@ security-growler-master,2
 serverless-automated-ui-testing-master,7
 shadowreader-master,4
 shopify_django_app-master,2
-shuup-master,8
+shuup-master,9
 simple_ecommerce-master,2
 simpleauth-master,2
 simplenote.py-master,2
@@ -377,7 +377,7 @@ slickr-master,1
 smoketest-master,4
 social-commerce-project-master,3
 soul-manga-master,3
-speed-camera-master,5
+speed-camera-master,6
 suds-master,2
 swish-python-master,1
 scraping-microservice-java-python-rabbitmq-master,0

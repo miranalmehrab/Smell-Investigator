@@ -46,6 +46,7 @@ Bus-Reservation-System-master,assert statement,254
 Bus-Reservation-System-master,use of weak cryptographic algorithm,9
 Bus-Reservation-System-master,insecure deserialization,7
 Bus-Reservation-System-master,cross site scripting,58
+Bus-Reservation-System-master,constructing sql statement upon user input,1
 CCXTSharp-master,ignoring except block,2
 Cactus_Refactored-master,assert statement,5
 Cactus_Refactored-master,ignoring except block,9
@@ -67,6 +68,7 @@ Django-E-Commerce-master,bad file permission,7
 Django-E-Commerce-master,command injection,26
 Django-E-Commerce-master,use of weak cryptographic algorithm,6
 Django-E-Commerce-master,insecure deserialization,10
+Django-E-Commerce-master,constructing sql statement upon user input,7
 Django-Ecommerce-master,deployment with debug flag set to true,3
 Django-Ecommerce-master,hard-coded secrets,3
 Django-Ecommerce-master,cross site scripting,5
@@ -82,6 +84,7 @@ E-Commerce-API-Python-master,insecure deserialization,24
 E-Commerce-API-Python-master,bad file permission,19
 E-Commerce-API-Python-master,use of weak cryptographic algorithm,7
 E-Commerce-API-Python-master,hard-coded tmp directories,2
+E-Commerce-API-Python-master,constructing sql statement upon user input,16
 E-Commerce-Condiments-shop-master,deployment with debug flag set to true,3
 E-Commerce-Condiments-shop-master,hard-coded secrets,7
 E-Commerce-Condiments-shop-master,cross site scripting,5
@@ -316,6 +319,7 @@ addons-server-master,assert statement,11218
 addons-server-master,cross site scripting,10
 addons-server-master,empty password,44
 addons-server-master,hard-coded tmp directories,3
+addons-server-master,constructing sql statement upon user input,1
 addons-server-master,use of HTTP without TLS,2
 addons-server-master,insecure deserialization,1
 addons-server-master,bad file permission,1
@@ -350,6 +354,7 @@ appier-master,command injection,1
 appier-master,hard-coded tmp directories,1
 archweb-master,hard-coded secrets,36
 archweb-master,ignoring except block,3
+archweb-master,constructing sql statement upon user input,10
 archweb-master,command injection,2
 archweb-master,cross site scripting,4
 archweb-master,assert statement,7
@@ -365,6 +370,7 @@ augur-master,hard-coded tmp directories,9
 augur-master,hard-coded secrets,28
 augur-master,empty password,1
 augur-master,bad file permission,2
+augur-master,constructing sql statement upon user input,10
 awis-master,ignoring except block,1
 aws-serverless-shopping-cart-master,hard-coded secrets,2
 aws_py-master,assert statement,34
@@ -492,6 +498,7 @@ django-basic-apps-master,cross site scripting,2
 django-basic-apps-master,ignoring except block,1
 django-calaccess-raw-data-master,hard-coded secrets,12
 django-calaccess-raw-data-master,ignoring except block,2
+django-calaccess-raw-data-master,constructing sql statement upon user input,1
 django-changuito-master,command injection,3
 django-changuito-master,deployment with debug flag set to true,1
 django-changuito-master,ignoring except block,4
@@ -549,6 +556,7 @@ django-oscar-master,assert statement,333
 django-oscar-master,ignoring except block,32
 django-oscar-master,hard-coded tmp directories,1
 django-oscar-master,cross site scripting,1
+django-oscar-master,constructing sql statement upon user input,1
 django-post_office-master,ignoring except block,5
 django-post_office-master,hard-coded secrets,5
 django-post_office-master,empty password,1
@@ -654,6 +662,7 @@ ecommerce-master,ignoring except block,21
 ecommerce-master,assert statement,235
 ecommerce-master,deployment with debug flag set to true,2
 ecommerce-master,use of YAML load,1
+ecommerce-master,constructing sql statement upon user input,1
 ecommerce-master,cross site scripting,1
 ecommerce-master,use of weak cryptographic algorithm,1
 ecommerce-master,hard-coded tmp directories,1
@@ -795,6 +804,7 @@ ipython-master,hard-coded secrets,13
 ipython-master,bad file permission,2
 ipython-master,hard-coded tmp directories,2
 ipython-master,use of weak cryptographic algorithm,1
+ipython-master,constructing sql statement upon user input,3
 is_wordpress-master,use of HTTP without TLS,1
 is_wordpress-master,command injection,2
 ivy-master,insecure deserialization,1
@@ -812,6 +822,7 @@ lbry-sdk-master,assert statement,93
 lbry-sdk-master,command injection,35
 lbry-sdk-master,hard-coded secrets,31
 lbry-sdk-master,bad file permission,4
+lbry-sdk-master,constructing sql statement upon user input,18
 ldapcherry-master,hard-coded secrets,90
 ldapcherry-master,assert statement,58
 ldapcherry-master,ignoring except block,20
@@ -877,6 +888,7 @@ moviegeek-master,command injection,13
 moviegeek-master,insecure deserialization,5
 moviegeek-master,assert statement,8
 moviegeek-master,deployment with debug flag set to true,1
+moviegeek-master,constructing sql statement upon user input,3
 mtmonkey-master,ignoring except block,2
 news-fetch-master,ignoring except block,1
 nikola-master,ignoring except block,32
@@ -897,6 +909,7 @@ opensale-master,empty password,1
 opensale-master,cross site scripting,3
 opensale-master,ignoring except block,6
 opensale-master,hard-coded tmp directories,2
+opensale-master,constructing sql statement upon user input,3
 opensale-master,use of weak cryptographic algorithm,2
 oscar-wagtail-demo-master,ignoring except block,3
 oscar-wagtail-demo-master,deployment with debug flag set to true,3
@@ -940,6 +953,7 @@ pinax-stripe-master,hard-coded secrets,9
 pinax-stripe-master,empty password,19
 pinax-stripe-master,deployment with debug flag set to true,1
 pinax-stripe-master,ignoring except block,2
+pinax-stripe-master,constructing sql statement upon user input,1
 practNLPTools-lite-master,command injection,8
 prestapyt-master,deployment with debug flag set to true,1
 price-of-chair-new-master,deployment with debug flag set to true,25
@@ -979,6 +993,7 @@ pycsw-master,hard-coded secrets,7
 pycsw-master,ignoring except block,4
 pycsw-master,command injection,3
 pycsw-master,assert statement,25
+pycsw-master,constructing sql statement upon user input,5
 pycv-master,ignoring except block,3
 pyews-master,empty password,1
 pyews-master,hard-coded secrets,3
@@ -1014,6 +1029,7 @@ python-for-entrepreneurs-course-demos-master,hard-coded secrets,14
 python-for-entrepreneurs-course-demos-master,command injection,1
 python-ftr-master,use of weak cryptographic algorithm,1
 python-ftr-master,ignoring except block,3
+python-ftr-master,constructing sql statement upon user input,2
 python-ftr-master,deployment with debug flag set to true,1
 python-helpspot-master,hard-coded secrets,1
 python-master,hard-coded secrets,1
@@ -1054,6 +1070,7 @@ pywps-master,command injection,4
 pywps-master,hard-coded secrets,7
 rasa-site-bot-master,use of HTTP without TLS,1
 rasa-site-bot-master,deployment with debug flag set to true,2
+rasa-site-bot-master,constructing sql statement upon user input,2
 rasa-site-bot-master,hard-coded secrets,4
 rasa-site-bot-master,ignoring except block,1
 reconspider-master,no integrity check,2
@@ -1079,6 +1096,7 @@ robotcar-dataset-sdk-master,command injection,21
 saleor-custom-master,assert statement,1373
 saleor-custom-master,hard-coded secrets,59
 saleor-custom-master,empty password,1
+saleor-custom-master,constructing sql statement upon user input,36
 saleor-custom-master,cross site scripting,3
 saleor-custom-master,ignoring except block,10
 saleor-custom-master,hard-coded tmp directories,5
@@ -1088,6 +1106,7 @@ saleor-master,assert statement,5084
 saleor-master,empty password,2
 saleor-master,ignoring except block,8
 saleor-master,hard-coded tmp directories,2
+saleor-master,constructing sql statement upon user input,3
 saleor-master,use of weak cryptographic algorithm,4
 saleor-master,deployment with debug flag set to true,1
 santricity-webapi-pythonsdk-master,command injection,15
@@ -1119,6 +1138,7 @@ shopify_django_app-master,deployment with debug flag set to true,1
 shuup-master,command injection,17
 shuup-master,hard-coded secrets,276
 shuup-master,deployment with debug flag set to true,2
+shuup-master,constructing sql statement upon user input,2
 shuup-master,assert statement,6281
 shuup-master,empty password,18
 shuup-master,use of weak cryptographic algorithm,16
@@ -1145,6 +1165,7 @@ social-commerce-project-master,ignoring except block,3
 soul-manga-master,deployment with debug flag set to true,1
 soul-manga-master,assert statement,1
 soul-manga-master,command injection,3
+speed-camera-master,constructing sql statement upon user input,7
 speed-camera-master,ignoring except block,1
 speed-camera-master,hard-coded tmp directories,9
 speed-camera-master,command injection,5

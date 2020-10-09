@@ -578,7 +578,7 @@ class Analyzer(ast.NodeVisitor):
                 elif isinstance(node.value.func,ast.Attribute): 
                     name = self.get_function_name(node)
                     expression["name"] = self.get_function_name_from_object(name)
-                    print('function name %s' % expression["name"])
+                    # print('function name %s' % expression["name"])
     
                 # separating args in function call
                 for arg in node.value.args:

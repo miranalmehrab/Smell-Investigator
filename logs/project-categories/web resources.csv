@@ -6,4 +6,5 @@ cross site scripting
 ignoring except block
 empty password
 hard-coded tmp directories
+constructing sql statement upon user input
 use of weak cryptographic algorithm

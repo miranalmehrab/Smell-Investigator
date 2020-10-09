@@ -13,3 +13,4 @@ hard-coded tmp directories
 bad file permission
 hard-coded IP address bindings
 cross site scripting
+constructing sql statement upon user input

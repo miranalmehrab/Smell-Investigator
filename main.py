@@ -22,6 +22,11 @@ from operations.save_project_smells import save_unique_smell_counts_in_projects
 from operations.run_bandit_on_folder import run_bandit_on_folder
 from operations.run_bandit_on_folder import summerize_bandit_output
 
+
+
+from operations.bandit_operations import list_smells_in_projects_sequentially
+from operations.bandit_operations import match_project_categories_from_bandit_results
+
 TOTAL_SRC_FILE_COUNT = 0
 
 def show_total_src_file_count():
@@ -168,8 +173,9 @@ def main():
     # find_correlation()
     # run_bandit_on_folder()
     # summerize_bandit_output()
-    # show_categories_in_deproject_scriptions()
-
+    # show_categories_in_project_descriptions()
+    # list_smells_in_projects_sequentially()
+    match_project_categories_from_bandit_results()
 
 
 

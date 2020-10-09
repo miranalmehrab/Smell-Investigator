@@ -10,6 +10,7 @@ insecure deserialization,348
 bad file permission,218
 use of HTTP without TLS,189
 hard-coded tmp directories,146
+constructing sql statement upon user input,133
 use of YAML load,52
 hard-coded IP address bindings,24
 no certificate validation,22

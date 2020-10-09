@@ -12,3 +12,4 @@ use of HTTP without TLS
 cross site scripting
 use of YAML load
 no integrity check
+constructing sql statement upon user input

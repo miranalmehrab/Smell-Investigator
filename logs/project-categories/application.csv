@@ -11,5 +11,6 @@ no certificate validation
 empty password
 bad file permission
 cross site scripting
+constructing sql statement upon user input
 insecure deserialization
 no integrity check

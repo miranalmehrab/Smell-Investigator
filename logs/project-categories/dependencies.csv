@@ -8,6 +8,7 @@ empty password
 use of YAML load
 use of HTTP without TLS
 bad file permission
+constructing sql statement upon user input
 insecure deserialization
 deployment with debug flag set to true
 no certificate validation
