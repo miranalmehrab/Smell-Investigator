@@ -16,7 +16,7 @@ def detect(token, project_name, src_file):
                             'directory', 'tmp_directory', 'tmp_path', 'dir_path', 'path_dir',
                             'path_directory', 'directory_path', 'temp_path', 'temporary_path',
                             'file_path', 'file_dir', 'folder_path', 'folder_dir', 'file_ditectory',
-                            'folder_directory'
+                            'folder_directory', '_dir', '-dir'
                         ]
                             
         unwantedValues = ['/tmp', '/var/tmp', '/dev/shm']

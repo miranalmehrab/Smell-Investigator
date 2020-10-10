@@ -4,13 +4,14 @@ ignoring except block
 hard-coded secrets
 deployment with debug flag set to true
 use of YAML load
-assert statement
 command injection
 hard-coded tmp directories
+assert statement
 no certificate validation
 empty password
 bad file permission
 cross site scripting
-constructing sql statement upon user input
 insecure deserialization
+dynamic code execution
+constructing sql statement upon user input
 no integrity check

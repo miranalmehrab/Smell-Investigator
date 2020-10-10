@@ -17,6 +17,12 @@ def detect(token, project_name, src_file):
 
         httpLibsNew = ['urllib3.PoolManager.request']
 
+
+        if tokenType == "variable" and token.__contains__('value') and token.__contains__('valueSrc'):
+            if token['value'] is not None and  is_valid_http_url(token['value']) and token['valueSrc'] == 'initialization':
+                action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
+
+
         if tokenType == "variable" and token.__contains__("valueSrc") and token.__contains__("args"):
             args = token['args']
             valueSrc = token['valueSrc']

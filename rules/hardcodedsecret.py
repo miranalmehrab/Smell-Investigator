@@ -11,14 +11,16 @@ def detect(token, project_name, src_file):
         if token.__contains__("value"): value = token["value"]
         if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
         
-        commonKeywords = ['auth_key','user-id', 'cert', 'root','passno','pass-no', 'pass_no', 'auth_token', 'authetication_token','auth-token', 'authentication-token', 
+        commonKeywords = ['auth_key','user-id', 'cert','passno','pass-no', 'pass_no', 'auth_token', 'authetication_token','auth-token', 'authentication-token', 
                         'user', 'uname', 'username', 'user-name', 'user_name', 'owner-name', 'owner_name', 'owner', 'admin', 'login', 'pass', 'pwd', 'password',
                         'passwd', 'secret', 'uuid', 'uid', 'user_id', 'u_id', 'upwd', 'user_pwd', 'crypt', 'certificate', 'userid', 'loginid', 'log_in', 'login_id', 
                         'ssh_key','user_logid', 'ulogin', 'name_id', 'user_token', 'utoken', 'user-token', 'uauth', 'u_auth', 'user_auth', 'user-auth', 'user-key' 
                         'md5', 'rsa', 'ssl_content', 'ca_content','ssl-content', 'ca-content', 'ssh_key_content', 'ssh-key-content', 'ssh_key_public', 'ssh-key-public', 
                         'ssh_key_private', 'ssh-key-private','ssh_key_public_content', 'ssh_key_private_content', 'ssh-key-public-content', 'ssh-key-private-content',
                         'user_key', 'ukey', 'private_key', 'public_key', 'key_private', 'key_public', 'tls-key', 'tls_key', 'ssl-key', 'ssl-private-key', 'tls-private-key',
-                        'ssl-public-key', 'tls-public-key', 'ssl_private_key',  'tls_private_key', 'ssl', 'tls', 'public-key', 'private-key', 'key']
+                        'ssl-public-key', 'tls-public-key', 'ssl_private_key',  'tls_private_key', 'ssl', 'tls', 'public-key', 'private-key', '_key', '-key', '_passwd',
+                        '-passwd', '-token', '_token'
+                    ]
         
         commonPasswords = [ 'password','passwords','pass','pwd','userpassword','userpwd', 'userpass', 'pass_no', 'pass-no', 'user-pass', 'upass', 'user_pass', 
                             'u_pass', 'user_pwd', 'uid', 'usr_pwd', 'usr_pass', 'usr-pass', 'userpasswords', 'user-passwords', 'user-password', 'user_password', 
@@ -99,6 +101,8 @@ def is_valid(value):
         elif value.find('post.') != -1: return False
         elif value.find('tokens.') != -1: return False
         elif value.find('forms.') != -1: return False
+        elif value.find('os.environ') != -1: return False
+
         return True
         
     else: return True

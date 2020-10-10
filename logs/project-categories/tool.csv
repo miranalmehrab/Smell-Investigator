@@ -1,15 +1,16 @@
 command injection
+use of HTTP without TLS
 ignoring except block
 use of weak cryptographic algorithm
 assert statement
 hard-coded secrets
-use of HTTP without TLS
 no integrity check
 use of YAML load
+dynamic code execution
 insecure deserialization
 deployment with debug flag set to true
-empty password
 hard-coded tmp directories
+empty password
 bad file permission
 hard-coded IP address bindings
 cross site scripting

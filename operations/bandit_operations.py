@@ -104,6 +104,34 @@ def match_project_categories_from_bandit_results():
             project_categories.append([project_category_name, smell_name, int(smell_count)])
 
     
+    total_smells_in_categories = []
+    for category in project_categories:
+
+        already_included = False
+        for total_smell in total_smells_in_categories:
+            if category[0] in total_smell:
+                total_smell[1] = int(total_smell[1]) + int(category[2])
+                already_included = True
+                break
+        
+        if already_included is False:
+            total_smells_in_categories.append([category[0], int(category[2])])
+
+    total_smell_count = 0
+    for total_smell in total_smells_in_categories:
+        total_smell_count += int(total_smell[1])
+    
+    print(total_smells_in_categories)
+    print('total smell count in categories %s' %total_smell_count)
+
+    clear_file_contents('./../total_smell_in_categories.csv')
+    for total_smell in total_smells_in_categories:
+        write_to_csv_file('./../total_smell_in_categories.csv', total_smell)
+
+
+    clear_file_contents('./../project_categories.csv')
+    
     project_categories.sort(key = lambda x: x[0])
     for category in project_categories:
         print(category)
+        write_to_csv_file('./../project_categories.csv', [category[0], '%s & - & %s \\\\ \\hline' % (category[1], str(category[2]))])

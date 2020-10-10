@@ -117,7 +117,7 @@ def save_smells_categorized_according_to_project_type():
     
     for item in categorized_smell_in_projects:
         print(item)
-        write_to_csv_file('logs/projects/project-type-total-unique-smells.csv', item)
+        write_to_csv_file('logs/projects/project-type-total-unique-smells.csv', [item[0], '%s &  %s &  \\\\ \\hline' % (item[1], str(item[2]))])
 
     
 

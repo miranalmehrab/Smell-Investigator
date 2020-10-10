@@ -1,100 +1,106 @@
-application,use of weak cryptographic algorithm,29
-application,use of HTTP without TLS,12
-application,ignoring except block,290
-application,hard-coded secrets,736
-application,deployment with debug flag set to true,38
-application,use of YAML load,8
-application,assert statement,17970
-application,command injection,195
-application,hard-coded tmp directories,34
-application,no certificate validation,18
-application,empty password,81
-application,bad file permission,6
-application,cross site scripting,31
-application,constructing sql statement upon user input,9
-application,insecure deserialization,7
-application,no integrity check,3
-dependencies,hard-coded secrets,2866
-dependencies,assert statement,4272
-dependencies,ignoring except block,295
-dependencies,command injection,217
-dependencies,use of weak cryptographic algorithm,20
-dependencies,hard-coded tmp directories,23
-dependencies,empty password,19
-dependencies,use of YAML load,22
-dependencies,use of HTTP without TLS,73
-dependencies,bad file permission,13
-dependencies,constructing sql statement upon user input,28
-dependencies,insecure deserialization,51
-dependencies,deployment with debug flag set to true,13
-dependencies,no certificate validation,1
-dependencies,hard-coded IP address bindings,5
-framework,assert statement,4777
-framework,ignoring except block,282
-framework,deployment with debug flag set to true,35
-framework,hard-coded secrets,272
-framework,insecure deserialization,27
-framework,use of weak cryptographic algorithm,26
-framework,bad file permission,4
-framework,empty password,14
-framework,command injection,295
-framework,hard-coded tmp directories,8
-framework,use of HTTP without TLS,15
-framework,cross site scripting,10
-framework,use of YAML load,3
-framework,no integrity check,2
-framework,constructing sql statement upon user input,36
-tool,command injection,316
-tool,ignoring except block,997
-tool,use of weak cryptographic algorithm,50
-tool,assert statement,2477
-tool,hard-coded secrets,467
-tool,use of HTTP without TLS,16
-tool,no integrity check,2
-tool,use of YAML load,9
-tool,insecure deserialization,53
-tool,deployment with debug flag set to true,33
-tool,empty password,74
-tool,hard-coded tmp directories,21
-tool,bad file permission,56
-tool,hard-coded IP address bindings,13
-tool,cross site scripting,2
-tool,constructing sql statement upon user input,9
-tutorial,hard-coded tmp directories,1
-tutorial,deployment with debug flag set to true,71
-tutorial,ignoring except block,40
-tutorial,hard-coded secrets,161
-tutorial,command injection,9
-tutorial,empty password,3
-tutorial,assert statement,236
-tutorial,use of weak cryptographic algorithm,28
-tutorial,cross site scripting,1
-tutorial,use of YAML load,6
-tutorial,use of HTTP without TLS,3
-web resources,assert statement,2435
-web resources,command injection,8
-web resources,hard-coded secrets,73
-web resources,deployment with debug flag set to true,7
-web resources,cross site scripting,4
-web resources,ignoring except block,12
-web resources,empty password,1
-web resources,hard-coded tmp directories,2
-web resources,constructing sql statement upon user input,3
-web resources,use of weak cryptographic algorithm,2
-website,ignoring except block,4692
-website,hard-coded secrets,2701
-website,deployment with debug flag set to true,216
-website,command injection,709
-website,assert statement,34924
-website,empty password,392
-website,bad file permission,139
-website,use of weak cryptographic algorithm,204
-website,insecure deserialization,178
-website,cross site scripting,324
-website,constructing sql statement upon user input,48
-website,hard-coded tmp directories,56
-website,use of HTTP without TLS,70
-website,use of YAML load,4
-website,hard-coded IP address bindings,6
-website,no integrity check,7
-website,no certificate validation,3
+application,use of weak cryptographic algorithm &  20 &  \\ \hline
+application,use of HTTP without TLS &  57 &  \\ \hline
+application,ignoring except block &  250 &  \\ \hline
+application,hard-coded secrets &  187 &  \\ \hline
+application,deployment with debug flag set to true &  24 &  \\ \hline
+application,use of YAML load &  7 &  \\ \hline
+application,command injection &  118 &  \\ \hline
+application,hard-coded tmp directories &  17 &  \\ \hline
+application,assert statement &  65 &  \\ \hline
+application,no certificate validation &  18 &  \\ \hline
+application,empty password &  23 &  \\ \hline
+application,bad file permission &  6 &  \\ \hline
+application,cross site scripting &  30 &  \\ \hline
+application,insecure deserialization &  7 &  \\ \hline
+application,dynamic code execution &  14 &  \\ \hline
+application,constructing sql statement upon user input &  8 &  \\ \hline
+application,no integrity check &  2 &  \\ \hline
+dependencies,assert statement &  334 &  \\ \hline
+dependencies,ignoring except block &  223 &  \\ \hline
+dependencies,use of weak cryptographic algorithm &  20 &  \\ \hline
+dependencies,use of HTTP without TLS &  152 &  \\ \hline
+dependencies,command injection &  205 &  \\ \hline
+dependencies,dynamic code execution &  15 &  \\ \hline
+dependencies,hard-coded tmp directories &  12 &  \\ \hline
+dependencies,empty password &  16 &  \\ \hline
+dependencies,use of YAML load &  18 &  \\ \hline
+dependencies,hard-coded secrets &  172 &  \\ \hline
+dependencies,bad file permission &  9 &  \\ \hline
+dependencies,constructing sql statement upon user input &  28 &  \\ \hline
+dependencies,insecure deserialization &  40 &  \\ \hline
+dependencies,deployment with debug flag set to true &  9 &  \\ \hline
+dependencies,no certificate validation &  1 &  \\ \hline
+dependencies,hard-coded IP address bindings &  3 &  \\ \hline
+framework,assert statement &  188 &  \\ \hline
+framework,ignoring except block &  241 &  \\ \hline
+framework,dynamic code execution &  20 &  \\ \hline
+framework,hard-coded secrets &  121 &  \\ \hline
+framework,use of weak cryptographic algorithm &  22 &  \\ \hline
+framework,use of HTTP without TLS &  60 &  \\ \hline
+framework,insecure deserialization &  14 &  \\ \hline
+framework,bad file permission &  4 &  \\ \hline
+framework,empty password &  11 &  \\ \hline
+framework,command injection &  267 &  \\ \hline
+framework,hard-coded tmp directories &  6 &  \\ \hline
+framework,deployment with debug flag set to true &  21 &  \\ \hline
+framework,cross site scripting &  10 &  \\ \hline
+framework,use of YAML load &  3 &  \\ \hline
+framework,no integrity check &  2 &  \\ \hline
+framework,constructing sql statement upon user input &  36 &  \\ \hline
+tool,command injection &  226 &  \\ \hline
+tool,use of HTTP without TLS &  161 &  \\ \hline
+tool,ignoring except block &  830 &  \\ \hline
+tool,use of weak cryptographic algorithm &  131 &  \\ \hline
+tool,assert statement &  827 &  \\ \hline
+tool,hard-coded secrets &  169 &  \\ \hline
+tool,no integrity check &  2 &  \\ \hline
+tool,use of YAML load &  7 &  \\ \hline
+tool,dynamic code execution &  110 &  \\ \hline
+tool,insecure deserialization &  64 &  \\ \hline
+tool,deployment with debug flag set to true &  30 &  \\ \hline
+tool,hard-coded tmp directories &  15 &  \\ \hline
+tool,empty password &  59 &  \\ \hline
+tool,bad file permission &  33 &  \\ \hline
+tool,hard-coded IP address bindings &  5 &  \\ \hline
+tool,cross site scripting &  2 &  \\ \hline
+tool,constructing sql statement upon user input &  4 &  \\ \hline
+tutorial,hard-coded tmp directories &  1 &  \\ \hline
+tutorial,deployment with debug flag set to true &  69 &  \\ \hline
+tutorial,ignoring except block &  40 &  \\ \hline
+tutorial,hard-coded secrets &  78 &  \\ \hline
+tutorial,dynamic code execution &  6 &  \\ \hline
+tutorial,command injection &  9 &  \\ \hline
+tutorial,empty password &  3 &  \\ \hline
+tutorial,use of weak cryptographic algorithm &  27 &  \\ \hline
+tutorial,assert statement &  42 &  \\ \hline
+tutorial,cross site scripting &  1 &  \\ \hline
+tutorial,use of YAML load &  6 &  \\ \hline
+tutorial,use of HTTP without TLS &  13 &  \\ \hline
+web resources,command injection &  8 &  \\ \hline
+web resources,assert statement &  10 &  \\ \hline
+web resources,cross site scripting &  4 &  \\ \hline
+web resources,ignoring except block &  11 &  \\ \hline
+web resources,deployment with debug flag set to true &  5 &  \\ \hline
+web resources,hard-coded secrets &  29 &  \\ \hline
+web resources,use of HTTP without TLS &  4 &  \\ \hline
+web resources,hard-coded tmp directories &  2 &  \\ \hline
+web resources,constructing sql statement upon user input &  3 &  \\ \hline
+web resources,use of weak cryptographic algorithm &  2 &  \\ \hline
+website,ignoring except block &  4316 &  \\ \hline
+website,hard-coded secrets &  1134 &  \\ \hline
+website,deployment with debug flag set to true &  186 &  \\ \hline
+website,command injection &  621 &  \\ \hline
+website,assert statement &  2441 &  \\ \hline
+website,dynamic code execution &  321 &  \\ \hline
+website,empty password &  201 &  \\ \hline
+website,bad file permission &  134 &  \\ \hline
+website,use of HTTP without TLS &  1098 &  \\ \hline
+website,use of weak cryptographic algorithm &  116 &  \\ \hline
+website,insecure deserialization &  126 &  \\ \hline
+website,cross site scripting &  324 &  \\ \hline
+website,constructing sql statement upon user input &  46 &  \\ \hline
+website,hard-coded tmp directories &  47 &  \\ \hline
+website,use of YAML load &  4 &  \\ \hline
+website,hard-coded IP address bindings &  4 &  \\ \hline
+website,no integrity check &  3 &  \\ \hline
+website,no certificate validation &  3 &  \\ \hline

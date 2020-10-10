@@ -123,18 +123,17 @@ def analyze_code_folder():
     for root, dirs, files in os.walk(folder_name):
         copied_root = copy.deepcopy(root)
         project_name = copied_root.split('/')[3]
-        # project_name = ''
         should_skip = False
 
-        # for part in copied_root.split('/'):
-        #     if part.find('test') != -1:
-        #         should_skip = True
+        for part in copied_root.split('/'):
+            if part.find('test') != -1:
+                should_skip = True
 
         if should_skip is False:
             for src_file in files:
-                # if (src_file.lower()).find('test') == -1:
-                if os.path.splitext(src_file)[-1] == '.py':  
-                    read_src_code(root, project_name, src_file)
+                if (src_file.lower()).find('test') == -1:
+                    if os.path.splitext(src_file)[-1] == '.py':  
+                        read_src_code(root, project_name, src_file)
         
 
 def analyze_single_code():
@@ -169,13 +168,13 @@ def run_single_code():
 def main():
 
     # run_single_code()
-    # run_analyze_code_folder()
+    run_analyze_code_folder()
     # find_correlation()
     # run_bandit_on_folder()
     # summerize_bandit_output()
     # show_categories_in_project_descriptions()
     # list_smells_in_projects_sequentially()
-    match_project_categories_from_bandit_results()
+    # match_project_categories_from_bandit_results()
 
 
 

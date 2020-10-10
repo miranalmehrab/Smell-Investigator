@@ -1,12 +1,13 @@
-hard-coded secrets
 assert statement
 ignoring except block
-command injection
 use of weak cryptographic algorithm
+use of HTTP without TLS
+command injection
+dynamic code execution
 hard-coded tmp directories
 empty password
 use of YAML load
-use of HTTP without TLS
+hard-coded secrets
 bad file permission
 constructing sql statement upon user input
 insecure deserialization
