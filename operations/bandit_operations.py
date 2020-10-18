@@ -9,7 +9,7 @@ def clear_file_contents(output_file_path):
 
 def list_smells_in_projects_sequentially():
 
-    contents = list_csv_contents('./../bandits_results.csv')   
+    contents = list_csv_contents('./../bandits_results.csv')
     project_smells = []
     
     output_file_path = './../bandits_total_results.csv'
@@ -44,32 +44,6 @@ def list_smells_in_projects_sequentially():
     print('total smell counts %s' %total_smell_count)
 
 
-
-
-def match_project_name_and_description_name(project_smells, project_descriptions):
-    desc_names = []
-    smell_names = []
-
-    for smell in project_smells:
-        smell_names.append([smell[0], 0])
-
-    for description in project_descriptions:
-        desc_names.append(description[0])
- 
-    for smell in smell_names:
-        if smell[0] in desc_names:
-            smell[1] = True
-
-    unmatched_projects_count = 0
-    for smell in smell_names:
-        if smell[1] is False:
-            
-            print(smell[0])
-            unmatched_projects_count += 1
-
-    print('unmatched projects count %s' %unmatched_projects_count)
-    
-
 def match_project_categories_from_bandit_results():
     project_descriptions = list_csv_contents('./project-descriptions.csv')
     project_smells = list_csv_contents('./../bandits_total_results.csv')
@@ -78,7 +52,7 @@ def match_project_categories_from_bandit_results():
     project_categories = []
 
     # match_project_name_and_description_name(project_smells, project_descriptions)
-         
+    
 
     for smell in project_smells:
         project_name = smell[0]
@@ -134,4 +108,88 @@ def match_project_categories_from_bandit_results():
     project_categories.sort(key = lambda x: x[0])
     for category in project_categories:
         print(category)
-        write_to_csv_file('./../project_categories.csv', [category[0], '%s & - & %s \\\\ \\hline' % (category[1], str(category[2]))])
+        write_to_csv_file('./../project_categories.csv', category)
+        # write_to_csv_file('./../project_categories.csv', [category[0], '%s & - & %s \\\\ \\hline' % (category[1], str(category[2]))])
+
+
+
+
+def match_project_name_and_description_name(project_smells, project_descriptions):
+    desc_names = []
+    smell_names = []
+
+    for smell in project_smells:
+        smell_names.append([smell[0], False])
+
+    for description in project_descriptions:
+        desc_names.append(description[0])
+ 
+    for smell in smell_names:
+        if smell[0] in desc_names:
+            smell[1] = True
+    
+    for smell_name in smell_names:
+        print(smell_name)
+
+    unmatched_projects_count = 0
+    for smell in smell_names:
+        if smell[1] is False:
+            
+            print(smell[0])
+            unmatched_projects_count += 1
+
+    print('unmatched projects count %s' %unmatched_projects_count)
+    
+
+
+
+def total_frequency_of_smells():
+
+    total_frequency_of_smells = []
+    smells = list_csv_contents('./../bandits_total_results.csv')  
+
+    for smell in smells:
+        already_included = False
+
+        for smell_frquency in total_frequency_of_smells:
+            if smell[1] in smell_frquency:
+                
+                already_included = True
+                smell_frquency[1] += int(smell[2])
+                break
+
+        if already_included is False: 
+            total_frequency_of_smells.append([smell[1], int(smell[2])])
+
+    print('Total Number of smells:')
+    for smell_frquency in total_frequency_of_smells:
+        print(smell_frquency)
+
+    print('')
+
+
+
+
+def number_of_smelly_projects():
+
+    unique_smells = []
+    smells = list_csv_contents('./../bandits_total_results.csv')  
+    
+    for smell in smells:
+        already_included = False
+
+        for unique_smell in unique_smells:
+            if smell[1] in unique_smell:
+        
+                already_included = True
+                unique_smell[1] += 1
+                break
+
+        if already_included is False: unique_smells.append([smell[1], 1])
+        
+
+    print('Number of projects:')
+    for smell in unique_smells:
+        print(smell)    
+
+    print('')

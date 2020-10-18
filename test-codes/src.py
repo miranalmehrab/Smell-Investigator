@@ -1,3 +1,29 @@
+SECRET_KEY = 'e^h9#%6uqkyy8ef8&6mzc@&v9n!25(h#%d59ossolktzt_om4@'
+self.user = User.objects.create_user('foo', password='pass')
+twitter_social_app = SocialApp.objects.create( provider='twitter', name='Twitter', client_id='11223344', secret='55667788')
+
+EMAIL_HOST_USER = "18500611672@sina.cn"
+EMAIL_HOST_PASSWORD = "zz1123581321"
+SECRET_KEY = 'qzk7a803m2d6_ngccq$jh&8#90m!19qfr^s39#ay6#_*ri5ap+'
+MAIL_PASSWORD = 'password'
+admin = 'admin'
+# pylint_token = "R0902"
+password='pbkdf2_sha256$36000$HizLkJV9vzk4$++1pBxJlH/uqIn5Qx0jugTH1b3U5SyZTaqnm+kSk7pQ='
+
+
+# from sqlalchemy import text
+
+# t = text("SELECT * FROM users")
+# result = connection.execute(t)
+
+# db = records.Database('postgres://...')
+# rows = db.query('select * from active_users')
+
+
+# admin = 'root'
+# username = 'root'
+# pwd = forms.root
+
 # net.latents_var = T.TensorType('float32', [False] * len(net.example_latents.shape))('latents_var')
 
 # parser = argparse.ArgumentParser(prog='myprogram')
@@ -10,7 +36,7 @@
 # app.debug = True
 # app.run(debug = True)
 
-app.config['PROPAGATE_EXCEPTIONS'] = True
+# app.config['PROPAGATE_EXCEPTIONS'] = True
 
 # debug = True
 
@@ -37,6 +63,9 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 # username = 'admin'
 # password = 'admin'
+# pass1 = ahc.gsdf.sjagdshj()
+# pass1 = password
+
 # tokens = {'user': 'root', 'pwd': '1h23ighwdvssedw23'}
 # def grant_access(username = 'guest', password = 'guest'):
 #    pass
@@ -77,6 +106,10 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 # app.run(debug = True, start = True)
+
+# session = requests.Session()
+# session.verify = False
+# session.get('https://wrong.host.badssl.com/', verify = False)
 
 # m = urllib.urlretrieve("192.168.10.1/example.iso")
 

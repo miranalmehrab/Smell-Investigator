@@ -8,16 +8,13 @@ def detect(token, project_name, src_file):
         
         insecureMethods = ['exec', 'eval', 'compile']
 
-        if tokenType == "variable":
-            if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
-            if token.__contains__("args"): args = token["args"]
-            if valueSrc in insecureMethods and len(args) > 0: 
+        if tokenType == "variable" and token.__contains__('valueSrc'):
+            
+            if token["valueSrc"] in insecureMethods: 
                 action_upon_detection(project_name, src_file, lineno, 'dynamic code execution', 'dynamic code execution', token)
 
         elif tokenType == "function_call":
-            isInput = False
-            hasInputs = False
-
+            
             if token.__contains__("name"): name = token["name"]
             if token.__contains__("args"): args = token["args"]
             

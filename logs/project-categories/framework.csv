@@ -8,9 +8,9 @@ insecure deserialization
 bad file permission
 empty password
 command injection
-hard-coded tmp directories
 deployment with debug flag set to true
 cross site scripting
+hard-coded tmp directories
 use of YAML load
 no integrity check
 constructing sql statement upon user input

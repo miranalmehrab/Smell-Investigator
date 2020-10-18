@@ -49,8 +49,6 @@ def detection(tokens, project_name, srcFile):
         try:
             token = json.loads(token)
 
-
-
             cipherDetection(token, project_name, srcFile)
             commandinjectionDetecet(token, project_name, srcFile)
             debugflagDetect(token, project_name, srcFile)

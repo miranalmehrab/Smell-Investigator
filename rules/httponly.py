@@ -23,6 +23,13 @@ def detect(token, project_name, src_file):
                 action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
 
+        if tokenType == "variable" and token.__contains__('funcKeywords'):
+            for keyword in token['funcKeywords']:
+                if keyword[1] is not None and is_valid_http_url(keyword[1]):
+                    action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
+                    break
+
+
         if tokenType == "variable" and token.__contains__("valueSrc") and token.__contains__("args"):
             args = token['args']
             valueSrc = token['valueSrc']
@@ -57,11 +64,13 @@ def detect(token, project_name, src_file):
 
 def is_valid_http_url(url): 
 
-    reg_url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(url))
+    reg_url = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(url))
     url = reg_url[0] if len(reg_url) > 0 else None
     if url is None: return False
 
     parsed_url = urlparse(url)
     if parsed_url.scheme == 'http': return True
-    if parsed_url.scheme == 'https': return False
-    else: return False
+    elif parsed_url.scheme == 'https': return False
+    # elif parsed_url.scheme == '': return True
+    
+    else: return True

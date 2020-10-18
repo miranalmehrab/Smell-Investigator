@@ -35,6 +35,19 @@ def detect(token, imports,project_name, src_file):
     except Exception as error: save_token_detection_exception('no integrity detection  '+str(error)+'  '+ str(token), src_file)
 
 
+
+def is_ip(ip):
+    for part in ip.split('.'):
+        if part.isdigit() is False: 
+            return False
+
+    for part in ip.split('.'):
+        if int(part) > 255: return False
+        elif int(part) < 0: return False
+    
+    return True
+
+
 def is_valid_download_url(url):
     
     file_extensions = ['iso', 'tar', 'bzip2', 'zip', 'rar', 'gzip', 'gzip2', 'gz','snap', 'flatpak',
@@ -50,24 +63,35 @@ def is_valid_download_url(url):
                 'odf','wmv','vob','swf','rm','mpeg','mpg','mp4','mp3','mov','mkv','m4v','h264','flv','avi','3gp','3g2'
             ]
 
-    reg_url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(url))
-    url = reg_url[0] if len(reg_url) > 0 else None
-    if url is None: return False
 
-    parsed_url = urlparse(url)
+
+
+    if is_ip(url.split('/')[0]):
+
+        file_ext = url.split('/')[-1]
+        if file_ext.split('.')[-1] in file_extensions:
+             return True
+
+    else:
+        reg_url = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(url))
     
-    file_path = parsed_url.path
-    path_extension = file_path.split('/')[-1]
-    path_extension = path_extension.split('.')[-1]
-    if path_extension in file_extensions: return True
-    
-    file_query = parsed_url.query
-    query_extension = file_query.split('=')[-1] if len(file_query.split('=')) > 0 else query_extension
-    query_extension = query_extension.split('.')[-1]  if len(file_query.split('.')) > 0 else query_extension
-    if query_extension in file_extensions: return True
+        url = reg_url[0] if len(reg_url) > 0 else None
+        if url is None: return False
 
-    elif 'file' in file_query: return True
-    elif 'File' in file_query: return True
-    elif 'FILE' in file_query: return True
+        parsed_url = urlparse(url)
+        
+        file_path = parsed_url.path
+        path_extension = file_path.split('/')[-1]
+        path_extension = path_extension.split('.')[-1]
+        if path_extension in file_extensions: return True
+        
+        file_query = parsed_url.query
+        query_extension = file_query.split('=')[-1] if len(file_query.split('=')) > 0 else query_extension
+        query_extension = query_extension.split('.')[-1]  if len(file_query.split('.')) > 0 else query_extension
+        
+        if query_extension in file_extensions: return True
+        elif 'file' in file_query: return True
+        elif 'File' in file_query: return True
+        elif 'FILE' in file_query: return True
 
-    else: return False
+        return False

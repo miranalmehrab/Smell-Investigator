@@ -9,7 +9,7 @@ def detect(token, project_name, src_file):
         if token.__contains__("name"): name = token["name"]
         
         contextVars = ['requests.Session.verify']
-        httpLibs = ['requests.get','requests.Session.get', 'requests.post']
+        httpLibs = ['requests.get','requests.Session.get', 'requests.post', 'requests.Session.get']
         
         if tokenType == "variable" and name in contextVars and token['value'] is False: 
                 action_upon_detection(project_name, src_file, lineno, 'no certificate validation', 'no certificate validation', token)

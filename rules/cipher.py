@@ -7,13 +7,11 @@ def detect(token, project_name, src_file):
         if token.__contains__("line"): lineno = token["line"]
         if token.__contains__("type"): tokenType = token["type"]
         
-        insecureMethods = ['hashlib.md5','cryptography.hazmat.primitives.hashes.MD5',
-                        'Crypto.Hash.MD2.new','Crypto.Hash.MD4.new','Crypto.Hash.MD5.new',
-                        'Crypto.Cipher.ARC2.new','Crypto.Cipher.ARC4.new','Crypto.Cipher.Blowfish.new',
-                        'Crypto.Cipher.DES.new,Crypto.Cipher.XOR.new','cryptography.hazmat.primitives.ciphers.algorithms.ARC4',
-                        'cryptography.hazmat.primitives.ciphers.algorithms.Blowfish','cryptography.hazmat.primitives.ciphers.algorithms.IDEA',
-                        'cryptography.hazmat.primitives.ciphers.modes.ECB','random.random','random.randrange','random.randint','random.choice',
-                        'random.uniform','random.triangular'
+        insecureMethods = ['hashlib.md5','cryptography.hazmat.primitives.hashes.MD5','Crypto.Hash.MD2.new','Crypto.Hash.MD4.new','Crypto.Hash.MD5.new',
+                        'Crypto.Cipher.ARC2.new','Crypto.Cipher.ARC4.new','Crypto.Cipher.Blowfish.new', 'Crypto.Cipher.DES.new,Crypto.Cipher.XOR.new',
+                        'cryptography.hazmat.primitives.ciphers.algorithms.ARC4', 'cryptography.hazmat.primitives.ciphers.algorithms.Blowfish',
+                        'cryptography.hazmat.primitives.ciphers.algorithms.IDEA','cryptography.hazmat.primitives.ciphers.modes.ECB','random.random',
+                        'random.randrange','random.randint','random.choice','random.uniform','random.triangular'
                     ]
 
         if tokenType == "variable":

@@ -21,11 +21,13 @@ from operations.save_project_smells import save_unique_smell_counts_in_projects
 
 from operations.run_bandit_on_folder import run_bandit_on_folder
 from operations.run_bandit_on_folder import summerize_bandit_output
-
-
+from operations.run_bandit_on_folder import show_specific_smells
 
 from operations.bandit_operations import list_smells_in_projects_sequentially
 from operations.bandit_operations import match_project_categories_from_bandit_results
+
+from operations.bandit_operations import total_frequency_of_smells
+from operations.bandit_operations import number_of_smelly_projects
 
 TOTAL_SRC_FILE_COUNT = 0
 
@@ -83,10 +85,10 @@ def analyze_ast_tree(code, src_file):
         
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
+        # analyzer.write_user_inputs()
         
         # analyzer.print_statements()
         analyzer.write_tokens_to_file()
-        analyzer.write_user_inputs()
         
 
     except Exception as error:
@@ -168,15 +170,23 @@ def run_single_code():
 def main():
 
     # run_single_code()
-    run_analyze_code_folder()
+    # run_analyze_code_folder()
+    # show_categories_in_project_descriptions()
     # find_correlation()
+    
+    
+    # <---------------------------------------- bandit operations starts from here ----------------------------------------> 
     # run_bandit_on_folder()
     # summerize_bandit_output()
-    # show_categories_in_project_descriptions()
     # list_smells_in_projects_sequentially()
+    
     # match_project_categories_from_bandit_results()
+    
+    # show_specific_smells()
+    
+    total_frequency_of_smells()
+    # number_of_smelly_projects()
 
-
-
+    
 if __name__ == "__main__":
     main()

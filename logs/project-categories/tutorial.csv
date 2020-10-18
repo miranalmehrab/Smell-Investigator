@@ -1,7 +1,7 @@
+hard-coded secrets
 hard-coded tmp directories
 deployment with debug flag set to true
 ignoring except block
-hard-coded secrets
 dynamic code execution
 command injection
 empty password

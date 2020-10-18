@@ -15,7 +15,7 @@ def detect(token, project_name, src_file):
         commonPasswords = ['password','passwords','pass','pwd','userpassword','userpwd', 'userpass', 'pass_no', 
                             'pass-no','user-pass', 'upass', 'user_pass', 'u_pass', 'user_pwd', 'uid', 'usr_pwd',
                             'usr_pass', 'usr-pass','userpasswords', 'user-passwords', 'user-password', 'user_password', 
-                            'use_pass'
+                            'use_pass', 'auth', 'authentication'
                         ]
         
         if tokenType == "variable" and name is not None and name.lower() in commonPasswords and (value is None or len(value) == 0) and valueSrc == "initialization":  

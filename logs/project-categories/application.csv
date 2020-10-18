@@ -1,11 +1,11 @@
 use of weak cryptographic algorithm
-use of HTTP without TLS
 ignoring except block
+use of HTTP without TLS
 hard-coded secrets
 deployment with debug flag set to true
 use of YAML load
-command injection
 hard-coded tmp directories
+command injection
 assert statement
 no certificate validation
 empty password

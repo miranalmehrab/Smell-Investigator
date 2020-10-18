@@ -1,106 +1,106 @@
 application,use of weak cryptographic algorithm &  20 &  \\ \hline
-application,use of HTTP without TLS &  57 &  \\ \hline
 application,ignoring except block &  250 &  \\ \hline
-application,hard-coded secrets &  187 &  \\ \hline
+application,use of HTTP without TLS &  38 &  \\ \hline
+application,hard-coded secrets &  126 &  \\ \hline
 application,deployment with debug flag set to true &  24 &  \\ \hline
-application,use of YAML load &  7 &  \\ \hline
+application,use of YAML load &  10 &  \\ \hline
+application,hard-coded tmp directories &  20 &  \\ \hline
 application,command injection &  118 &  \\ \hline
-application,hard-coded tmp directories &  17 &  \\ \hline
-application,assert statement &  65 &  \\ \hline
-application,no certificate validation &  18 &  \\ \hline
-application,empty password &  23 &  \\ \hline
+application,assert statement &  103 &  \\ \hline
+application,no certificate validation &  26 &  \\ \hline
+application,empty password &  25 &  \\ \hline
 application,bad file permission &  6 &  \\ \hline
 application,cross site scripting &  30 &  \\ \hline
 application,insecure deserialization &  7 &  \\ \hline
 application,dynamic code execution &  14 &  \\ \hline
 application,constructing sql statement upon user input &  8 &  \\ \hline
 application,no integrity check &  2 &  \\ \hline
-dependencies,assert statement &  334 &  \\ \hline
-dependencies,ignoring except block &  223 &  \\ \hline
+dependencies,assert statement &  446 &  \\ \hline
+dependencies,ignoring except block &  222 &  \\ \hline
 dependencies,use of weak cryptographic algorithm &  20 &  \\ \hline
-dependencies,use of HTTP without TLS &  152 &  \\ \hline
 dependencies,command injection &  205 &  \\ \hline
 dependencies,dynamic code execution &  15 &  \\ \hline
-dependencies,hard-coded tmp directories &  12 &  \\ \hline
-dependencies,empty password &  16 &  \\ \hline
-dependencies,use of YAML load &  18 &  \\ \hline
-dependencies,hard-coded secrets &  172 &  \\ \hline
+dependencies,use of HTTP without TLS &  96 &  \\ \hline
+dependencies,empty password &  30 &  \\ \hline
+dependencies,use of YAML load &  20 &  \\ \hline
+dependencies,hard-coded secrets &  97 &  \\ \hline
 dependencies,bad file permission &  9 &  \\ \hline
-dependencies,constructing sql statement upon user input &  28 &  \\ \hline
+dependencies,constructing sql statement upon user input &  35 &  \\ \hline
 dependencies,insecure deserialization &  40 &  \\ \hline
+dependencies,hard-coded tmp directories &  7 &  \\ \hline
 dependencies,deployment with debug flag set to true &  9 &  \\ \hline
 dependencies,no certificate validation &  1 &  \\ \hline
 dependencies,hard-coded IP address bindings &  3 &  \\ \hline
-framework,assert statement &  188 &  \\ \hline
+framework,assert statement &  280 &  \\ \hline
 framework,ignoring except block &  241 &  \\ \hline
-framework,dynamic code execution &  20 &  \\ \hline
-framework,hard-coded secrets &  121 &  \\ \hline
+framework,dynamic code execution &  22 &  \\ \hline
+framework,hard-coded secrets &  75 &  \\ \hline
 framework,use of weak cryptographic algorithm &  22 &  \\ \hline
-framework,use of HTTP without TLS &  60 &  \\ \hline
+framework,use of HTTP without TLS &  34 &  \\ \hline
 framework,insecure deserialization &  14 &  \\ \hline
 framework,bad file permission &  4 &  \\ \hline
 framework,empty password &  11 &  \\ \hline
-framework,command injection &  267 &  \\ \hline
-framework,hard-coded tmp directories &  6 &  \\ \hline
+framework,command injection &  268 &  \\ \hline
 framework,deployment with debug flag set to true &  21 &  \\ \hline
 framework,cross site scripting &  10 &  \\ \hline
+framework,hard-coded tmp directories &  7 &  \\ \hline
 framework,use of YAML load &  3 &  \\ \hline
 framework,no integrity check &  2 &  \\ \hline
 framework,constructing sql statement upon user input &  36 &  \\ \hline
-tool,command injection &  226 &  \\ \hline
-tool,use of HTTP without TLS &  161 &  \\ \hline
+tool,command injection &  227 &  \\ \hline
+tool,use of HTTP without TLS &  127 &  \\ \hline
 tool,ignoring except block &  830 &  \\ \hline
 tool,use of weak cryptographic algorithm &  131 &  \\ \hline
-tool,assert statement &  827 &  \\ \hline
-tool,hard-coded secrets &  169 &  \\ \hline
-tool,no integrity check &  2 &  \\ \hline
-tool,use of YAML load &  7 &  \\ \hline
+tool,assert statement &  1288 &  \\ \hline
+tool,use of YAML load &  10 &  \\ \hline
 tool,dynamic code execution &  110 &  \\ \hline
 tool,insecure deserialization &  64 &  \\ \hline
+tool,hard-coded secrets &  93 &  \\ \hline
 tool,deployment with debug flag set to true &  30 &  \\ \hline
-tool,hard-coded tmp directories &  15 &  \\ \hline
-tool,empty password &  59 &  \\ \hline
+tool,hard-coded tmp directories &  17 &  \\ \hline
+tool,empty password &  69 &  \\ \hline
 tool,bad file permission &  33 &  \\ \hline
 tool,hard-coded IP address bindings &  5 &  \\ \hline
+tool,no integrity check &  3 &  \\ \hline
 tool,cross site scripting &  2 &  \\ \hline
-tool,constructing sql statement upon user input &  4 &  \\ \hline
-tutorial,hard-coded tmp directories &  1 &  \\ \hline
+tool,constructing sql statement upon user input &  16 &  \\ \hline
+tutorial,hard-coded secrets &  64 &  \\ \hline
+tutorial,hard-coded tmp directories &  7 &  \\ \hline
 tutorial,deployment with debug flag set to true &  69 &  \\ \hline
 tutorial,ignoring except block &  40 &  \\ \hline
-tutorial,hard-coded secrets &  78 &  \\ \hline
 tutorial,dynamic code execution &  6 &  \\ \hline
 tutorial,command injection &  9 &  \\ \hline
-tutorial,empty password &  3 &  \\ \hline
+tutorial,empty password &  4 &  \\ \hline
 tutorial,use of weak cryptographic algorithm &  27 &  \\ \hline
-tutorial,assert statement &  42 &  \\ \hline
+tutorial,assert statement &  44 &  \\ \hline
 tutorial,cross site scripting &  1 &  \\ \hline
 tutorial,use of YAML load &  6 &  \\ \hline
-tutorial,use of HTTP without TLS &  13 &  \\ \hline
+tutorial,use of HTTP without TLS &  9 &  \\ \hline
+web resources,hard-coded secrets &  19 &  \\ \hline
 web resources,command injection &  8 &  \\ \hline
-web resources,assert statement &  10 &  \\ \hline
+web resources,assert statement &  11 &  \\ \hline
 web resources,cross site scripting &  4 &  \\ \hline
 web resources,ignoring except block &  11 &  \\ \hline
 web resources,deployment with debug flag set to true &  5 &  \\ \hline
-web resources,hard-coded secrets &  29 &  \\ \hline
 web resources,use of HTTP without TLS &  4 &  \\ \hline
-web resources,hard-coded tmp directories &  2 &  \\ \hline
+web resources,hard-coded tmp directories &  1 &  \\ \hline
 web resources,constructing sql statement upon user input &  3 &  \\ \hline
 web resources,use of weak cryptographic algorithm &  2 &  \\ \hline
 website,ignoring except block &  4316 &  \\ \hline
-website,hard-coded secrets &  1134 &  \\ \hline
+website,hard-coded secrets &  896 &  \\ \hline
 website,deployment with debug flag set to true &  186 &  \\ \hline
 website,command injection &  621 &  \\ \hline
-website,assert statement &  2441 &  \\ \hline
-website,dynamic code execution &  321 &  \\ \hline
-website,empty password &  201 &  \\ \hline
+website,assert statement &  3396 &  \\ \hline
+website,dynamic code execution &  323 &  \\ \hline
+website,empty password &  310 &  \\ \hline
 website,bad file permission &  134 &  \\ \hline
-website,use of HTTP without TLS &  1098 &  \\ \hline
+website,hard-coded tmp directories &  101 &  \\ \hline
+website,use of HTTP without TLS &  872 &  \\ \hline
 website,use of weak cryptographic algorithm &  116 &  \\ \hline
+website,constructing sql statement upon user input &  209 &  \\ \hline
 website,insecure deserialization &  126 &  \\ \hline
-website,cross site scripting &  324 &  \\ \hline
-website,constructing sql statement upon user input &  46 &  \\ \hline
-website,hard-coded tmp directories &  47 &  \\ \hline
-website,use of YAML load &  4 &  \\ \hline
+website,cross site scripting &  329 &  \\ \hline
+website,use of YAML load &  11 &  \\ \hline
 website,hard-coded IP address bindings &  4 &  \\ \hline
 website,no integrity check &  3 &  \\ \hline
-website,no certificate validation &  3 &  \\ \hline
+website,no certificate validation &  4 &  \\ \hline

@@ -11,7 +11,9 @@ def detect(token, project_name, src_file):
         if token.__contains__("args"): args = token["args"]
         if token.__contains__("hasInputs"): containsUserInput =  token["hasInputs"]
 
-        shellMethods = ['sys.argv', 'subprocess.Popen', 'os.system', 'os.popen','subprocess.run', 'argparse.ArgumentParser', 'getopt.getopt']
+        shellMethods = ['sys.argv', 'subprocess.Popen', 'os.system', 'os.popen','subprocess.run', 'argparse.ArgumentParser', 'getopt.getopt', 'os.execle',
+                        'os.execl', 'popen2.Popen3', 'popen2.Popen4'
+                    ]
         
         if tokenType == "variable" and token.__contains__("valueSrc") and token["valueSrc"] is not None:
             if token["valueSrc"] in shellMethods or is_extended_shell_command_names(token["valueSrc"].strip()):

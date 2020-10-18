@@ -3,7 +3,7 @@ cfn-pyplates-master,https://github.com/seandst/cfn-pyplates,web resources,105,47
 swish-python-master,https://github.com/MadSpindel/swish-python,dependencies,93,15
 django-calaccess-raw-data-master,https://github.com/california-civic-data-coalition/django-calaccess-raw-data,website,2553,58
 django-cron-master,https://github.com/Tivix/django-cron,dependencies,251,721
-python3-connect-rest-sample-master,https://github.com/microsoftgraph/python3-connect-rest-sample,application,62,107
+python3-connect-rest-sample-master,https://github.com/microsoftgraph/python3-connect-rest-sample,website,62,107
 reconspider-master,https://github.com/bhavsec/reconspider,framework,119,380
 DataSciencePython-master,https://github.com/ujjwalkarn/DataSciencePython,tutorial,112,4000
 cookiecutter-aws-sam-python-master,https://github.com/aws-samples/cookiecutter-aws-sam-python,web resources,75,141
@@ -45,7 +45,7 @@ pyredminews-master,https://github.com/ianepperson/pyredminews,dependencies,68,47
 project-dream-team-three-master,https://github.com/mbithenzomo/project-dream-team-three,tutorial,18,52
 Wooey-master,https://github.com/wooey/Wooey,application,887,1500
 OWSLib-master,https://github.com/geopython/OWSLib,dependencies,2046,210
-django-auditlog-master,https://github.com/jjkester/django-auditlog,application,284,337
+django-auditlog-master,https://github.com/jjkester/django-auditlog,website,284,337
 python-sitemap-master,https://github.com/c4software/python-sitemap,tool,130,231
 serverless-automated-ui-testing-master,https://github.com/awslabs/serverless-automated-ui-testing,tool,14,82
 city-scrapers-main,https://github.com/City-Bureau/city-scrapers,website,2229,188
@@ -98,7 +98,7 @@ webservice-py-master,https://github.com/HeraldStudio/webservice-py,website,257,1
 webkiller-master,https://github.com/ultrasecurity/webkiller,tool,36,257
 Bus-Reservation-System-master,https://github.com/AniruddhaShelar/Bus-Reservation-System,website,9,21
 cassiopeia-master,https://github.com/meraki-analytics/cassiopeia,framework,949,303
-django-form-designer-master,https://github.com/samluescher/django-form-designer,application,181,297
+django-form-designer-master,https://github.com/samluescher/django-form-designer,website,181,297
 ipython-master,https://github.com/ipython/ipython,website,25,614,14400
 requests-racer-master,https://github.com/nccgroup/requests-racer,dependencies,38,93
 wigle-master,https://github.com/viraptor/wigle,dependencies,16,14
@@ -113,7 +113,7 @@ suds-master,https://github.com/arnaudsj/suds,website,647,50
 augur-master,https://github.com/chaoss/augur,dependencies,4092,246
 ibptws-master,https://github.com/base4sistemas/ibptws,website,10,10
 soul-manga-master,https://github.com/fyxtc/soul-manga,website,101,118
-django-chartit-master,https://github.com/chartit/django-chartit,application,201,481
+django-chartit-master,https://github.com/chartit/django-chartit,website,201,481
 python-for-entrepreneurs-course-demos-master,https://github.com/mikeckennedy/python-for-entrepreneurs-course-demos,tutorial,162,242
 python-awis-master,https://github.com/muhuk/python-awis,website,36,50
 Web-Scraping-master,https://github.com/VincentTatan/Web-Scraping,tool,13,59
@@ -138,7 +138,7 @@ create-aio-app-master,https://github.com/aio-libs/create-aio-app,web resources,2
 eyeD3-master,https://github.com/nicfit/eyeD3,dependencies,1340,248
 skill-sample-python-petmatch-master,https://github.com/alexa/skill-sample-python-petmatch,tutorial,16,14
 django-schedule-master,https://github.com/thauber/django-schedule,application,326,780
-EcommDB-master,https://github.com/NoblesseCoder/EcommDB,application,12,4
+EcommDB-master,https://github.com/NoblesseCoder/EcommDB,website,12,4
 Big-Basket-Delivery-Slots-master,https://github.com/LeninGangwal/Big-Basket-Delivery-Slots,tool,22,42
 m.css-master,https://github.com/mosra/m.css,framework,1254,264
 django-ecommerce-wagtail-master,https://github.com/snipcart/django-ecommerce-wagtail,tutorial,4,31
@@ -181,7 +181,7 @@ Amazon-Flipkart-Price-Comparison-Engine-master,https://github.com/sushantPatrika
 lead_manager_react_django-master,https://github.com/bradtraversy/lead_manager_react_django,website,27,350
 twitter-for-bigquery-master,https://github.com/twitterdev/twitter-for-bigquery,website,339,134
 merchant-master,https://github.com/agiliq/merchant,website,684,953
-amazon-reviews-analysis-master,https://github.com/fayimora/amazon-reviews-analysis,application,26,1
+amazon-reviews-analysis-master,https://github.com/fayimora/amazon-reviews-analysis,website,26,1
 bballfast-master,https://github.com/huyle333/bballfast,website,14,18
 requests-aws4auth-master,https://github.com/tedder/requests-aws4auth,website,87,89
 wishlists-master,https://github.com/devops-golf-s17/wishlists,website,260,5
@@ -197,14 +197,14 @@ Phishing-Email-Address-Generator-master,https://github.com/jamesm0rr1s/Phishing-
 E-commerce-Website-CS50--master,https://github.com/may98ank/E-commerce-Website-CS50-,website,1,2
 E-Commercial-Sites-Scrappers-master,https://github.com/varunnayal15112/E-Commercial-Sites-Scrappers,tool,2,17
 vidscraper-develop,https://github.com/pculture/vidscraper,dependencies,519,57
-django-dtg-store-manager-master,https://github.com/559Labs/django-dtg-store-manager,application,163,3
-us-sales-tax-rates-master,https://github.com/mikesparr/us-sales-tax-rates,application,2,4
+django-dtg-store-manager-master,https://github.com/559Labs/django-dtg-store-manager,website,163,3
+us-sales-tax-rates-master,https://github.com/mikesparr/us-sales-tax-rates,website,2,4
 pywps-master,https://github.com/geopython/pywps,website,2034,122
 whitenoise-master,https://github.com/evansd/whitenoise,dependencies,513,1500
 pycsw-master,https://github.com/geopython/pycsw,tool,2716,130
 dark-fantasy-hack-tool-master,https://github.com/ritvikb99/dark-fantasy-hack-tool,tool,40,79
 jquery.pyproxy-master,https://github.com/zestsoftware/jquery.pyproxy,dependencies,93,13
-django-notifications-master,https://github.com/django-notifications/django-notifications,application,345,1100
+django-notifications-master,https://github.com/django-notifications/django-notifications,website,345,1100
 python-master,https://github.com/nnja/python,tutorial,14,292
 archweb-master,https://github.com/archlinux/archweb,website,2813,144
 prices-master,https://github.com/mirumee/prices,website,91,246
@@ -213,8 +213,8 @@ pySphere-master,https://github.com/dannvix/pySphere,website,102,40
 GarminPlotter-master,https://github.com/papics/GarminPlotter,tool,6,16
 BizzMe-master,https://github.com/61911/BizzMe,application,8,2
 hendrix-master,https://github.com/hendrix/hendrix,tool,601,436
-django-rq-master,https://github.com/rq/django-rq,application,523,1300
-ldapcherry-master,https://github.com/kakwa/ldapcherry,application,708,169
+django-rq-master,https://github.com/rq/django-rq,website,523,1300
+ldapcherry-master,https://github.com/kakwa/ldapcherry,website,708,169
 phish-ai-api-master,https://github.com/phishai/phish-ai-api,website,13,162
 py-gsxws-master,https://github.com/filipp/py-gsxws,dependencies,366,39
 django-hvad-master,https://github.com/KristianOellegaard/django-hvad,framework,621,521
@@ -231,7 +231,7 @@ PyExPool-master,https://github.com/eXascaleInfolab/PyExPool,tool,252,144
 gae-secure-scaffold-python3-master,https://github.com/google/gae-secure-scaffold-python3,web resources,92,17
 pytrth-master,https://github.com/brotchie/pytrth,dependencies,16,5
 datastore-ndb-python-master,https://github.com/GoogleCloudPlatform/datastore-ndb-python,website,1414,103
-pinax-stripe-master,https://github.com/pinax/pinax-stripe,application,1447,639
+pinax-stripe-master,https://github.com/pinax/pinax-stripe,website,1447,639
 social-commerce-project-master,https://github.com/hbussell/social-commerce-project,web resources,29,42
 Web-Scrapping-E-commerce-websites-master,https://github.com/vishnu-sagar/Web-Scrapping-E-commerce-websites,tool,4,3
 mtmonkey-master,https://github.com/ufal/mtmonkey,website,456,31
@@ -258,7 +258,7 @@ santricity-webapi-pythonsdk-master,https://github.com/NetApp/santricity-webapi-p
 scrapy-spiders-master,https://github.com/dcondrey/scrapy-spiders,tool,10,86
 AsyncAWS-master,https://github.com/MA3STR0/AsyncAWS,dependencies,77,12
 oscar-wagtail-demo-master,https://github.com/pgovers/oscar-wagtail-demo,tutorial,98,20
-waterbutler-develop,https://github.com/CenterForOpenScience/waterbutler,application,3509,57
+waterbutler-develop,https://github.com/CenterForOpenScience/waterbutler,website,3509,57
 TCIA-Python3-Downloader-Menu-3.1,https://github.com/hilfikerp/TCIA-Python3-Downloader,website,7,9
 django-salesman-master,https://github.com/dinoperovic/django-salesman,framework,62,77
 Rest-Shop-master,https://github.com/StasDeep/Rest-Shop,website,187,32
@@ -268,7 +268,7 @@ shuup-master,https://github.com/shuup/shuup,website,6188,1400
 wagtail-snipcart-master,https://github.com/snipcart/wagtail-snipcart,website,8,13
 pastey-master,https://github.com/paxosglobal/pastey,application,26,98
 ezpadova-master,https://github.com/mfouesneau/ezpadova,dependencies,62,20
-Python-CleanArchitecture-Example-master,https://github.com/t-tiger/Python-CleanArchitecture-Example,application,3,21
+Python-CleanArchitecture-Example-master,https://github.com/t-tiger/Python-CleanArchitecture-Example,website,3,21
 Deeplack-master,https://github.com/Lerhan/Deeplack,tutorial,9,16
 calllog211-master,https://github.com/modesty/calllog211,website,11,14
 netdnarws-master,https://github.com/netdna/netdnarws,website,41,5
@@ -288,7 +288,7 @@ ArchiveBot-master,https://github.com/ArchiveTeam/ArchiveBot,tool,1999,198
 shoppingcart-master,https://github.com/dharmeshpatel/shoppingcart,website,13,18
 tcp-streaming-multicast-server.client-webcam-master,https://github.com/JagerCox/tcp-streaming-multicast-server.client-webcam,tutorial,3,10
 InAppPy-master,https://github.com/dotpot/InAppPy,website,116,99
-django-post_office-master,https://github.com/ui/django-post_office,application,704,554
+django-post_office-master,https://github.com/ui/django-post_office,website,704,554
 websauna-master,https://github.com/websauna/websauna,framework,1236,259
 book_scraper_python-master,https://github.com/backslash112/book_scraper_python,tool,7,12
 eCommerce-Database-main,https://github.com/gurpreeth956/eCommerce-Database,website,115,5
@@ -316,7 +316,7 @@ pseudo-channel-master,https://github.com/justinemter/pseudo-channel,application,
 KeenClient-Python-master,https://github.com/keenlabs/KeenClient-Python,dependencies,423,132
 HanTTS-master,https://github.com/junzew/HanTTS,website,41,204
 aws-serverless-shopping-cart-master,https://github.com/aws-samples/aws-serverless-shopping-cart,website,42,41
-django-cors-headers-master,https://github.com/adamchainz/django-cors-headers,application,445,3800
+django-cors-headers-master,https://github.com/adamchainz/django-cors-headers,website,445,3800
 django-registration-master,https://github.com/ubernostrum/django-registration,application,955,673
 pdf-miner-master,https://github.com/abhishekjiitr/pdf-miner,tool,36,13
 ccxt-master,https://github.com/ccxt/ccxt,website,32902,14600
@@ -324,7 +324,7 @@ pyspread-master,https://github.com/manns/pyspread,application,2358,332
 pacu-master,https://github.com/RhinoSecurityLabs/pacu,framework,953,1600
 Catsup-master,https://github.com/whtsky/Catsup,tool,468,134
 pepy-master,https://github.com/psincraian/pepy,website,236,270
-Juxtaposition-Generator-master,https://github.com/tonydelanuez/Juxtaposition-Generator,application,47,12
+Juxtaposition-Generator-master,https://github.com/tonydelanuez/Juxtaposition-Generator,website,47,12
 python-atws-master,https://github.com/MattParr/python-atws,website,267,29
 flask-file-uploader-master,https://github.com/ngoduykhanh/flask-file-uploader,dependencies,13,123
 appdailysales-master,https://github.com/kirbyt/appdailysales,website,53,106
@@ -358,7 +358,7 @@ key-presser-via-python-server-master,https://github.com/MrCasco/key-presser-via-
 2019_Python_Web_Dev-master,https://github.com/yzyly1992/2019_Python_Web_Dev,tutorial,14,45
 shopify_django_app-master,https://github.com/Shopify/shopify_django_app,application,63,238
 MyAwesomeCart-master,https://github.com/haris989/MyAwesomeCart,website,34,27
-django-scheduler-develop,https://github.com/llazzaro/django-scheduler,application,1171,892
+django-scheduler-develop,https://github.com/llazzaro/django-scheduler,website,1171,892
 d6tflow-master,https://github.com/d6t/d6tflow,dependencies,72,872
 CCXTSharp-master,https://github.com/Stock84-dev/CCXTSharp,dependencies,12,11
 site-master,https://github.com/python-discord/site,website,1817,565
@@ -374,21 +374,21 @@ COVID-19-Greece-master,https://github.com/Trinityyi/COVID-19-Greece,website,244,
 buyandsell-master,https://github.com/binel01/buyandsell,website,3,7
 pycv-master,https://github.com/techfort/pycv,website,57,530
 KindleEar-master,https://github.com/cdhigh/KindleEar,website,363,2400
-Flask-Scaffold-master,https://github.com/Leo-G/Flask-Scaffold,application,338,840
+Flask-Scaffold-master,https://github.com/Leo-G/Flask-Scaffold,website,338,840
 esky-master,https://github.com/cloudmatrix/esky,framework,549,349
 fedoralovespython.org-master,https://github.com/fedora-python/fedoralovespython.org,website,12,82
 export-archive-reddit-saved-master,https://github.com/freeezer98/export-archive-reddit-saved,tool,24,99
 EWSWrapper_py-master,https://github.com/maiiku/EWSWrapper_py,website,21,23
 django-tutorial-v2-master,https://github.com/mpirnat/django-tutorial-v2,tutorial,153,5
 BillCipher-master,https://github.com/GitHackTools/BillCipher,tool,28,218
-mep-django-master,https://github.com/Princeton-CDH/mep-django,application,2255,1
+mep-django-master,https://github.com/Princeton-CDH/mep-django,website,2255,1
 SFECommerce-master,https://github.com/BrOrlandi/SFECommerce,website,64,15
 tornado-aws-master,https://github.com/gmr/tornado-aws,website,135,13
 python-amazon-mws-develop,https://github.com/python-amazon-mws/python-amazon-mws,website,441,274
 PyFlask_2k18-master,https://github.com/ACM-VIT/PyFlask_2k18,tutorial,54,102
 moviegeek-master,https://github.com/practical-recommender-systems/moviegeek,website,287,542
 AmazonDjangoShop-master,https://github.com/evrial/AmazonDjangoShop,website,36,18
-cp-barebone-movie-app-final-master,https://github.com/CleverProgrammer/cp-barebone-movie-app-final,application,3,24
+cp-barebone-movie-app-final-master,https://github.com/CleverProgrammer/cp-barebone-movie-app-final,website,3,24
 robotcar-dataset-sdk-master,https://github.com/ori-mrg/robotcar-dataset-sdk,dependencies,33,137
 pyanalytics-master,https://github.com/ksun0/pyanalytics,dependencies,40,15
 thefuck-master,https://github.com/nvbn/thefuck,application,1567,55500
@@ -399,7 +399,7 @@ django-crispy-forms-master,https://github.com/django-crispy-forms/django-crispy-
 Django-E-Commerce-master,https://github.com/celikyuksell/Django-E-Commerce,website,36,29
 py-parsehub-master,https://github.com/hronecviktor/py-parsehub,tool,24,25
 Flask-MonitoringDashboard-master,https://github.com/flask-dashboard/Flask-MonitoringDashboard,website,1246,411
-app-service-web-python-get-started-master,https://github.com/Azure-Samples/app-service-web-python-get-started,application,9,30
+app-service-web-python-get-started-master,https://github.com/Azure-Samples/app-service-web-python-get-started,website,9,30
 face_merge_master-master,https://github.com/tonyiweb/face_merge_master,tool,10,67
 braspag-master,https://github.com/TracyWebTech/braspag,dependencies,132,7
 learn_python3_spider-master,https://github.com/wistbean/learn_python3_spider,tool,45,4600

@@ -1,9 +1,9 @@
+hard-coded secrets
 command injection
 assert statement
 cross site scripting
 ignoring except block
 deployment with debug flag set to true
-hard-coded secrets
 use of HTTP without TLS
 hard-coded tmp directories
 constructing sql statement upon user input

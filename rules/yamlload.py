@@ -6,7 +6,7 @@ def detect(token, project_name, src_file):
         if token.__contains__("line"): lineno = token["line"]
         if token.__contains__("type"): tokenType = token["type"]
         
-        insecureMethods = ['yaml.load', 'yaml.load_all']
+        insecureMethods = ['yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'full_load_all']
 
         if tokenType == "variable":
             if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]

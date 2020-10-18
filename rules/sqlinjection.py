@@ -10,7 +10,8 @@ def detect(token, project_name, src_file):
 
         queryMethods = ['execution.query', 'connection.cursor.execute', 'sqlite3.connect.execute',
                         'psycopg2.connect.cursor.execute','mysql.connector.connect.cursor.execute', 
-                        'pyodbc.connect.cursor.execute', 'sqlalchemy.sql.text'
+                        'pyodbc.connect.cursor.execute', 'sqlalchemy.sql.text', 'sqlalchemy.text',
+                        'text', 'records.Database.query'
                     ]
         
         if token_type == "variable" and token.__contains__('valueSrc') and token.__contains__('args'):
@@ -32,7 +33,9 @@ def detect(token, project_name, src_file):
     except Exception as error: save_token_detection_exception('constructing sql statement upon user input detection  '+str(error)+'  '+ str(token), src_file)
 
 def query_methods_has_patterns(name):
-    methods = ['objects.extra', 'objects.raw']
+    methods = ['execution.query', 'connection.cursor.execute', 'sqlite3.connect.execute','psycopg2.connect.cursor.execute', 'objects.raw',
+                'mysql.connector.connect.cursor.execute', 'pyodbc.connect.cursor.execute', 'sqlalchemy.sql.text', 'objects.extra'
+            ]
 
     if name is None: return False
 

@@ -1369,7 +1369,6 @@
 ./../final-unzips/lbry-sdk-master/lbry/wallet/server/db/writer.py,"{'type': 'exception_handle', 'line': 349, 'exceptionHandler': 'continue'}"
 ./../final-unzips/lbry-sdk-master/lbry/wallet/server/db/writer.py,"{'type': 'exception_handle', 'line': 490, 'exceptionHandler': 'continue'}"
 ./../final-unzips/lbry-sdk-master/lbry/wallet/server/db/writer.py,"{'type': 'exception_handle', 'line': 514, 'exceptionHandler': 'continue'}"
-./../final-unzips/lbry-sdk-master/lbry/blob_exchange/serialization.py,"{'type': 'exception_handle', 'line': 158, 'exceptionHandler': 'continue'}"
 ./../final-unzips/lbry-sdk-master/lbry/extras/cli.py,"{'type': 'exception_handle', 'line': 273, 'exceptionHandler': 'pass'}"
 ./../final-unzips/lbry-sdk-master/lbry/extras/cli.py,"{'type': 'exception_handle', 'line': 279, 'exceptionHandler': 'pass'}"
 ./../final-unzips/lbry-sdk-master/lbry/extras/daemon/comment_client.py,"{'type': 'exception_handle', 'line': 40, 'exceptionHandler': 'pass'}"
