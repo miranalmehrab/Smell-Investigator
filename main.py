@@ -30,6 +30,8 @@ from operations.bandit_operations import total_frequency_of_smells
 from operations.bandit_operations import number_of_smelly_projects
 
 TOTAL_SRC_FILE_COUNT = 0
+PRINT_STATEMENTS = False
+SHOW_AST = False
 
 def show_total_src_file_count():
     print('')
@@ -74,6 +76,10 @@ def analyze_ast_tree(code, src_file):
         tree = ast.parse(code, type_comments = True)
         # print(ast.dump(tree, include_attributes = True))
         # print(ast.dump(tree))
+        if SHOW_AST: 
+            for node in tree.body:
+                print(ast.dump(node))
+            
         
         global TOTAL_SRC_FILE_COUNT
         TOTAL_SRC_FILE_COUNT += 1
@@ -87,7 +93,12 @@ def analyze_ast_tree(code, src_file):
         # analyzer.make_tokens_byte_free()
         # analyzer.write_user_inputs()
         
-        # analyzer.print_statements()
+        if PRINT_STATEMENTS: 
+            print('')
+            print('')
+            print('')
+            analyzer.print_statements()
+        
         analyzer.write_tokens_to_file()
         
 
@@ -139,8 +150,9 @@ def analyze_code_folder():
         
 
 def analyze_single_code():
-    # file_name = './test-codes/'+'temp_dir.py'
     file_name = './test-codes/'+'src.py'
+    # file_name = './test-codes/'+'expression.py'
+    # file_name = './test-codes/'+'assign.py'
     read_src_code('', '', file_name)
     show_detection_result()
 
@@ -168,23 +180,60 @@ def run_single_code():
     show_detection_result()
 
 def main():
+    global SHOW_AST
+    global PRINT_STATEMENTS
 
+    # SHOW_AST = True
+    # PRINT_STATEMENTS = True
     # run_single_code()
-    # run_analyze_code_folder()
+
+    run_analyze_code_folder()
     # show_categories_in_project_descriptions()
     # find_correlation()
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     # <---------------------------------------- bandit operations starts from here ----------------------------------------> 
     # run_bandit_on_folder()
     # summerize_bandit_output()
     # list_smells_in_projects_sequentially()
-    
+
     # match_project_categories_from_bandit_results()
-    
     # show_specific_smells()
-    
-    total_frequency_of_smells()
+    # total_frequency_of_smells()
     # number_of_smelly_projects()
 
     

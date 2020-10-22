@@ -5,15 +5,15 @@
 # y = input()
 
 
-process = input()
-pre = 'kil - {}'.format(process)
+# process = input()
+# pre = 'kil - {}'.format(process)
 # command = pre.format(process = process)
-lists = "A list: %s, %s" % process % pre
+# lists = "A list: %s, %s" % process % pre
 # query = 'kill - '+ pre+pre+pre+pre + comm
-z = 'In the basket are %s and %s' % (comm,pre)
+# z = 'In the basket are %s and %s' % (comm,pre)
 
-exec("A list: %s, %s" % process % pre)
-eval('sdskadaksjbd'+z)
+# exec("A list: %s, %s" % process % pre)
+# eval('sdskadaksjbd'+z)
 
 
 # def getRoll(name):
@@ -31,10 +31,11 @@ eval('sdskadaksjbd'+z)
 # password = 'sdushdiushd'
 
 # x = 2
+# abc = input()
 # name = "Miran Al " + "Mehrab"
 # age = 20 + 2
+
 # roll = getRoll('Miran')
-# abc = input()
 
 # x = 20
 # x = x
@@ -60,23 +61,27 @@ eval('sdskadaksjbd'+z)
 # y = password
 
 # x = ['apple','oneplus','pinephone']
-# x = {"brand":'apple',"model": "se 2020", "upass": ""}
+
+# x = {"brand":'apple',"model": "se 2020", "upass": "", name: 'jkahhjdv'}
+# tokens = ['sahzslkdjl3434sdasd','dsdlsahkljah746548','sdlshkqj2232324','2323dsafnsdfjkn']
+
+self.admin = 'admin'
+
+# x = ('root', 'name', 'password', abhsd)
+# y = {'root', 'name', 'password', itwqughdf}
+
 
 
 # header[authorization] = "bearer:"+token
 # header[0] = 'sdfsd'
 
 # token = 'saldhiu322uh2i3278siabcxhabxgsua'
-# tokens = ['sahzslkdjl3434sdasd','dsdlsahkljah746548','sdlshkqj2232324','2323dsafnsdfjkn']
 
 # header = tokens
 # header = []
 # header[3] = token
-# header[0 : 3] = tokens[0: 3]
-# header[i : ] = tokens
 
 # idx = [0,1,2,3,4,5]
-# x =  slices[idx[1]]
 
 
 

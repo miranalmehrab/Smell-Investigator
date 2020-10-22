@@ -1,27 +1,28 @@
-def getX():
-    x = 20
-    return x
+# def getX():
+#     x = 20
+#     return x
 
 def getNothing():
-    pass
+    return {'name': 'admin', 'password': 'pass'}
+    # return ['admin', 'kagdfv', 'asdggadf']
 
-def getFullName(firstName, lastName):
-    return firstName+lastName
+# def getFullName(firstName, lastName):
+#     return firstName+lastName
 
-def getUserName(name = "user",id = "xyz123"):
-    return name+id
+# def getUserName(id, name = "user",pwd = "xyz123"):
+#     return name+id
 
 # def my_function(*kids):
 #     pass
 
-def my_function(**kid):
-    pass
+# def my_function(**kid):
+#     pass
 
-getX()
-getNothing()
-getFullName('Miran', 'Al Mehrab')
-getUserName('user root', '1x2y4s5t')
+# getX()
+# getNothing()
+# getFullName('Miran', 'Al Mehrab')
+# getUserName(pwd = '', name = 'user root', id =  '1x2y4s5t')
 
-socket.socket(AF.NET, IO.STREAM)
+# socket.socket(AF.NET, IO.STREAM)
 
-my_function(['apple','mango'])
+# my_function(['apple','mango'])

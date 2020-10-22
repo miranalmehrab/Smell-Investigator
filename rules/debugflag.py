@@ -21,10 +21,8 @@ def detect(token, project_name, src_file):
 
 
         elif tokenType == "dict" and token.__contains__("keys") and token.__contains__("values"): 
-            pairs = [list(item) for item in zip(token["keys"], token["values"])]
-            
-            for pair in pairs:
-                if len(pair) == 2 and pair[0] in restrictedNames and pair[1] is True: 
+            for pair in token['pairs']:
+                if pair[0] in restrictedNames and pair[1] is True: 
                     action_upon_detection(project_name, src_file, lineno, 'deployment with debug flag set to true', 'deployment with debug flag set to true', token)
     
     except Exception as error: save_token_detection_exception('debug detection  '+str(error)+'  '+ str(token), src_file)

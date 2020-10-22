@@ -3,15 +3,15 @@ ignoring except block
 use of HTTP without TLS
 hard-coded secrets
 deployment with debug flag set to true
-use of YAML load
-hard-coded tmp directories
-command injection
-assert statement
 no certificate validation
+command injection
 empty password
 bad file permission
-cross site scripting
-insecure deserialization
-dynamic code execution
+assert statement
 constructing sql statement upon user input
+insecure deserialization
+cross site scripting
+use of YAML load
+dynamic code execution
+hard-coded tmp directories
 no integrity check
