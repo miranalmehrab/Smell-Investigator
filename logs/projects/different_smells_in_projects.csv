@@ -1,121 +1,114 @@
 15-minute-apps-master,use of weak cryptographic algorithm,1
 15-minute-apps-master,ignoring except block,2
 15-minute-apps-master,use of HTTP without TLS,1
-2019_Python_Web_Dev-master,hard-coded secrets,2
 2019_Python_Web_Dev-master,hard-coded tmp directories,1
-2019_Python_Web_Dev-master,deployment with debug flag set to true,1
 2019_Python_Web_Dev-master,ignoring except block,2
 Amazon-Flipkart-Price-Comparison-Engine-master,ignoring except block,2
 AmazonDjangoShop-master,hard-coded secrets,1
 AmazonDjangoShop-master,deployment with debug flag set to true,1
 AndroidGCMTutorial-master,deployment with debug flag set to true,1
 AndroidGCMTutorial-master,ignoring except block,15
-AndroidGCMTutorial-master,dynamic code execution,6
-AndroidGCMTutorial-master,command injection,2
+AndroidGCMTutorial-master,command injection,4
+AndroidGCMTutorial-master,dynamic code execution,2
 AndroidGCMTutorial-master,hard-coded tmp directories,4
-AndroidGCMTutorial-master,empty password,2
-AndroidGCMTutorial-master,hard-coded secrets,1
 ArchiveBot-master,command injection,12
 ArchiveBot-master,use of HTTP without TLS,1
 ArchiveBot-master,ignoring except block,16
+ArchiveBot-master,assert statement,21
 ArchiveBot-master,use of weak cryptographic algorithm,2
-ArchiveBot-master,assert statement,19
-AsyncAWS-master,assert statement,7
+AsyncAWS-master,assert statement,9
 Automatic_tagging_of_clothing_in_E-Commerce-master,command injection,4
 Big-Basket-Delivery-Slots-master,command injection,3
 BillCipher-master,command injection,17
 BillCipher-master,ignoring except block,29
 BillCipher-master,use of HTTP without TLS,1
-BillCipher-master,use of weak cryptographic algorithm,1
-BizzMe-master,hard-coded secrets,3
+BillCipher-master,use of weak cryptographic algorithm,2
+BizzMe-master,hard-coded secrets,2
 BizzMe-master,deployment with debug flag set to true,1
 BizzMe-master,ignoring except block,4
 Building-RESTful-Python-Web-Services-master,deployment with debug flag set to true,23
-Building-RESTful-Python-Web-Services-master,hard-coded secrets,18
+Building-RESTful-Python-Web-Services-master,hard-coded secrets,13
 Building-Serverless-Python-Web-Services-with-Zappa-master,hard-coded secrets,2
 Building-Serverless-Python-Web-Services-with-Zappa-master,deployment with debug flag set to true,4
 Building-Serverless-Python-Web-Services-with-Zappa-master,assert statement,2
-Bus-Reservation-System-master,ignoring except block,480
-Bus-Reservation-System-master,dynamic code execution,33
-Bus-Reservation-System-master,command injection,38
-Bus-Reservation-System-master,hard-coded secrets,60
-Bus-Reservation-System-master,deployment with debug flag set to true,5
-Bus-Reservation-System-master,empty password,26
+Bus-Reservation-System-master,ignoring except block,482
+Bus-Reservation-System-master,dynamic code execution,32
+Bus-Reservation-System-master,command injection,40
+Bus-Reservation-System-master,hard-coded secrets,15
+Bus-Reservation-System-master,deployment with debug flag set to true,4
+Bus-Reservation-System-master,assert statement,302
+Bus-Reservation-System-master,empty password,17
 Bus-Reservation-System-master,bad file permission,19
-Bus-Reservation-System-master,assert statement,258
-Bus-Reservation-System-master,hard-coded tmp directories,9
-Bus-Reservation-System-master,use of HTTP without TLS,13
-Bus-Reservation-System-master,use of weak cryptographic algorithm,9
+Bus-Reservation-System-master,hard-coded tmp directories,8
+Bus-Reservation-System-master,use of HTTP without TLS,10
 Bus-Reservation-System-master,constructing sql statement upon user input,24
-Bus-Reservation-System-master,insecure deserialization,7
-Bus-Reservation-System-master,cross site scripting,60
+Bus-Reservation-System-master,insecure deserialization,5
+Bus-Reservation-System-master,cross site scripting,21
+Bus-Reservation-System-master,use of weak cryptographic algorithm,8
 Bus-Reservation-System-master,use of YAML load,1
 CCXTSharp-master,ignoring except block,2
 Cactus_Refactored-master,ignoring except block,9
 Cactus_Refactored-master,command injection,4
 Catsup-master,assert statement,1
 Catsup-master,ignoring except block,2
-Catsup-master,use of YAML load,1
+Catsup-master,use of YAML load,2
 Catsup-master,command injection,1
 Catsup-master,dynamic code execution,2
 Deeplack-master,command injection,5
-Django-E-Commerce-master,hard-coded secrets,33
-Django-E-Commerce-master,deployment with debug flag set to true,3
+Django-E-Commerce-master,hard-coded secrets,41
+Django-E-Commerce-master,deployment with debug flag set to true,2
 Django-E-Commerce-master,hard-coded tmp directories,8
-Django-E-Commerce-master,cross site scripting,51
 Django-E-Commerce-master,ignoring except block,308
 Django-E-Commerce-master,dynamic code execution,7
-Django-E-Commerce-master,use of HTTP without TLS,18
-Django-E-Commerce-master,assert statement,132
+Django-E-Commerce-master,use of HTTP without TLS,14
+Django-E-Commerce-master,assert statement,171
 Django-E-Commerce-master,empty password,25
 Django-E-Commerce-master,bad file permission,7
 Django-E-Commerce-master,command injection,26
-Django-E-Commerce-master,use of weak cryptographic algorithm,6
+Django-E-Commerce-master,use of weak cryptographic algorithm,8
 Django-E-Commerce-master,constructing sql statement upon user input,10
-Django-E-Commerce-master,insecure deserialization,4
+Django-E-Commerce-master,cross site scripting,19
+Django-E-Commerce-master,insecure deserialization,2
 Django-Ecommerce-master,deployment with debug flag set to true,3
 Django-Ecommerce-master,hard-coded secrets,3
-Django-Ecommerce-master,cross site scripting,5
 Django-eCommerce-tutorial-manascode-master,deployment with debug flag set to true,1
+E-Commerce-API-Python-master,hard-coded secrets,6
 E-Commerce-API-Python-master,deployment with debug flag set to true,5
-E-Commerce-API-Python-master,hard-coded secrets,41
-E-Commerce-API-Python-master,ignoring except block,393
-E-Commerce-API-Python-master,dynamic code execution,79
-E-Commerce-API-Python-master,command injection,48
-E-Commerce-API-Python-master,assert statement,391
+E-Commerce-API-Python-master,ignoring except block,394
+E-Commerce-API-Python-master,dynamic code execution,76
+E-Commerce-API-Python-master,command injection,46
+E-Commerce-API-Python-master,assert statement,457
 E-Commerce-API-Python-master,bad file permission,19
-E-Commerce-API-Python-master,use of weak cryptographic algorithm,6
-E-Commerce-API-Python-master,insecure deserialization,21
 E-Commerce-API-Python-master,constructing sql statement upon user input,44
-E-Commerce-API-Python-master,empty password,18
+E-Commerce-API-Python-master,empty password,9
 E-Commerce-API-Python-master,use of HTTP without TLS,6
 E-Commerce-API-Python-master,hard-coded tmp directories,5
+E-Commerce-API-Python-master,insecure deserialization,18
+E-Commerce-API-Python-master,use of weak cryptographic algorithm,4
 E-Commerce-Condiments-shop-master,deployment with debug flag set to true,3
 E-Commerce-Condiments-shop-master,hard-coded secrets,3
-E-Commerce-Condiments-shop-master,cross site scripting,5
-E-Commerce-Website-master,cross site scripting,43
-E-Commerce-Website-master,ignoring except block,523
-E-Commerce-Website-master,assert statement,455
-E-Commerce-Website-master,hard-coded secrets,35
-E-Commerce-Website-master,empty password,39
-E-Commerce-Website-master,use of weak cryptographic algorithm,6
+E-Commerce-Website-master,ignoring except block,525
+E-Commerce-Website-master,assert statement,533
+E-Commerce-Website-master,use of weak cryptographic algorithm,4
 E-Commerce-Website-master,constructing sql statement upon user input,23
-E-Commerce-Website-master,dynamic code execution,33
-E-Commerce-Website-master,use of HTTP without TLS,11
+E-Commerce-Website-master,hard-coded secrets,81
+E-Commerce-Website-master,empty password,28
+E-Commerce-Website-master,dynamic code execution,34
+E-Commerce-Website-master,use of HTTP without TLS,8
 E-Commerce-Website-master,bad file permission,27
-E-Commerce-Website-master,command injection,48
-E-Commerce-Website-master,deployment with debug flag set to true,6
+E-Commerce-Website-master,command injection,50
+E-Commerce-Website-master,cross site scripting,11
 E-Commerce-Website-master,use of YAML load,1
-E-Commerce-Website-master,insecure deserialization,8
+E-Commerce-Website-master,insecure deserialization,6
 E-Commerce-Website-master,hard-coded tmp directories,10
-E-commerce-Site-Created-Using-Django-1.11.1-master,hard-coded secrets,4
+E-Commerce-Website-master,deployment with debug flag set to true,5
+E-Commercial-Sites-Scrappers-master,hard-coded secrets,4
+E-commerce-Site-Created-Using-Django-1.11.1-master,hard-coded secrets,2
 E-commerce-Site-Created-Using-Django-1.11.1-master,deployment with debug flag set to true,1
 E-commerce-Site-Created-Using-Django-1.11.1-master,ignoring except block,1
 E-commerce-Website-CS50--master,ignoring except block,1
 EWSWrapper_py-master,use of HTTP without TLS,2
-EcommDB-master,deployment with debug flag set to true,2
 Ecommerce-Product-price-monitoring-tool-using-Data-Analytics-Web-scraping-master,dynamic code execution,2
-Eel-master,use of weak cryptographic algorithm,3
 Eel-master,command injection,5
 Eel-master,ignoring except block,1
 Eel-master,assert statement,2
@@ -124,24 +117,24 @@ Emotion-Analysis-master,insecure deserialization,1
 Emotion-Analysis-master,hard-coded secrets,1
 Emotion-Analysis-master,deployment with debug flag set to true,1
 Flask-Building-Python-Web-Services-master,deployment with debug flag set to true,46
-Flask-Building-Python-Web-Services-master,hard-coded secrets,49
+Flask-Building-Python-Web-Services-master,hard-coded secrets,46
+Flask-Building-Python-Web-Services-master,use of weak cryptographic algorithm,4
 Flask-Building-Python-Web-Services-master,use of HTTP without TLS,3
-Flask-MonitoringDashboard-master,empty password,3
+Flask-MonitoringDashboard-master,empty password,1
 Flask-MonitoringDashboard-master,ignoring except block,1
+Flask-MonitoringDashboard-master,hard-coded secrets,1
 Flask-Scaffold-master,use of YAML load,1
-Flask-Scaffold-master,hard-coded secrets,4
 Flask-Scaffold-master,deployment with debug flag set to true,1
+Flask-Scaffold-master,hard-coded secrets,1
 Flask-Scaffold-master,use of HTTP without TLS,3
 Flask-Scaffold-master,hard-coded tmp directories,1
 Flask-Scaffold-master,command injection,9
 Flask-Scaffold-master,assert statement,7
 Flask-Scaffold-master,ignoring except block,3
 FlaskApiEcommerce-master,deployment with debug flag set to true,1
-FlaskApiEcommerce-master,hard-coded secrets,6
 FlaskApiEcommerce-master,use of weak cryptographic algorithm,6
 FlaskApiEcommerce-master,empty password,1
 FreeDiscovery-master,use of HTTP without TLS,8
-FreeDiscovery-master,hard-coded secrets,2
 FreeDiscovery-master,insecure deserialization,5
 FreeDiscovery-master,ignoring except block,4
 FreeDiscovery-master,use of weak cryptographic algorithm,1
@@ -153,26 +146,25 @@ GeoHealthCheck-master,use of HTTP without TLS,6
 GeoHealthCheck-master,ignoring except block,6
 GeoHealthCheck-master,deployment with debug flag set to true,1
 GeoHealthCheck-master,empty password,1
-GeoHealthCheck-master,hard-coded secrets,2
 GithubSpeedUp-master,use of HTTP without TLS,1
-HanTTS-master,hard-coded secrets,1
 HanTTS-master,use of HTTP without TLS,2
 HanTTS-master,ignoring except block,2
 HanTTS-master,command injection,1
-Hands-On-RESTful-Python-Web-Services-Second-Edition-master,hard-coded secrets,17
+Hands-On-RESTful-Python-Web-Services-Second-Edition-master,hard-coded secrets,9
 Hands-On-RESTful-Python-Web-Services-Second-Edition-master,deployment with debug flag set to true,11
 HawkScan-master,no certificate validation,25
 HawkScan-master,command injection,42
 HawkScan-master,ignoring except block,26
 HawkScan-master,use of HTTP without TLS,1
-HawkScan-master,use of weak cryptographic algorithm,2
-ImitationTmall_Django-master,hard-coded secrets,13
+HawkScan-master,use of weak cryptographic algorithm,4
+ImitationTmall_Django-master,hard-coded secrets,7
 ImitationTmall_Django-master,deployment with debug flag set to true,1
-ImitationTmall_Django-master,cross site scripting,25
 ImitationTmall_Django-master,ignoring except block,16
+ImitationTmall_Django-master,cross site scripting,14
 ImitationTmall_Django-master,assert statement,1
+ImitationTmall_Django-master,empty password,1
 Instagram-Crawler-master,ignoring except block,1
-Instagram-Crawler-master,hard-coded secrets,8
+Instagram-Crawler-master,hard-coded secrets,3
 Instagram-Crawler-master,hard-coded tmp directories,2
 Instagram-Crawler-master,use of HTTP without TLS,1
 Instagram-Crawler-master,deployment with debug flag set to true,1
@@ -181,47 +173,47 @@ J-Kart-master,hard-coded secrets,1
 J-Kart-master,deployment with debug flag set to true,1
 J-Kart-master,ignoring except block,1
 Kart-master,use of weak cryptographic algorithm,3
-Kart-master,cross site scripting,2
+Kart-master,cross site scripting,4
+Kart-master,empty password,3
 Kart-master,ignoring except block,3
-Kart-master,hard-coded secrets,10
+Kart-master,hard-coded secrets,4
 Kart-master,deployment with debug flag set to true,2
 KeenClient-Python-master,ignoring except block,1
 KeenClient-Python-master,assert statement,8
 KindleEar-master,ignoring except block,154
-KindleEar-master,use of HTTP without TLS,54
-KindleEar-master,hard-coded secrets,9
+KindleEar-master,use of HTTP without TLS,51
 KindleEar-master,dynamic code execution,3
-KindleEar-master,empty password,4
-KindleEar-master,assert statement,22
+KindleEar-master,assert statement,24
+KindleEar-master,insecure deserialization,18
 KindleEar-master,command injection,6
 KindleEar-master,use of YAML load,1
-KindleEar-master,insecure deserialization,9
-KindleEar-master,use of weak cryptographic algorithm,14
+KindleEar-master,use of weak cryptographic algorithm,15
+KindleEar-master,empty password,2
+KindleEar-master,hard-coded secrets,2
 Lexos-master,use of HTTP without TLS,3
-Lexos-master,assert statement,16
-Lexos-master,insecure deserialization,4
+Lexos-master,assert statement,28
 Lexos-master,ignoring except block,8
 Lexos-master,dynamic code execution,1
 Lexos-master,hard-coded tmp directories,3
+Lexos-master,insecure deserialization,3
 LinkedRW-master,command injection,18
 LinkedRW-master,empty password,1
 LinkedRW-master,ignoring except block,8
 Look4Face-master,assert statement,1
-Look4Face-master,hard-coded secrets,3
 Look4Face-master,command injection,6
-Look4Face-master,use of weak cryptographic algorithm,1
 Look4Face-master,insecure deserialization,1
+Look4Face-master,hard-coded secrets,1
 Look4Face-master,deployment with debug flag set to true,1
-MachineLearning-DeepLearning-NLP-LeetCode-StatisticalLearningMethod-TensorFlow-master,use of weak cryptographic algorithm,1
-MachineLearning-DeepLearning-NLP-LeetCode-StatisticalLearningMethod-TensorFlow-master,assert statement,10
+MachineLearning-DeepLearning-NLP-LeetCode-StatisticalLearningMethod-TensorFlow-master,use of weak cryptographic algorithm,4
+MachineLearning-DeepLearning-NLP-LeetCode-StatisticalLearningMethod-TensorFlow-master,assert statement,12
 MechanicalSoup-master,dynamic code execution,1
 MechanicalSoup-master,command injection,5
 MechanicalSoup-master,assert statement,4
 MechanicalSoup-master,ignoring except block,3
 MicroSite-master,use of YAML load,3
 MicroSite-master,ignoring except block,5
-MicroSite-master,hard-coded secrets,3
 MicroSite-master,use of HTTP without TLS,4
+MicroSite-master,hard-coded secrets,1
 MicroSite-master,deployment with debug flag set to true,1
 MicroSite-master,hard-coded tmp directories,1
 Mini-E-commerce-webapp-dummy--master,hard-coded secrets,1
@@ -229,181 +221,162 @@ Mini-E-commerce-webapp-dummy--master,deployment with debug flag set to true,1
 MyAwesomeCart-master,hard-coded secrets,1
 MyAwesomeCart-master,deployment with debug flag set to true,1
 Nuitka-develop,ignoring except block,250
-Nuitka-develop,assert statement,703
+Nuitka-develop,assert statement,779
 Nuitka-develop,bad file permission,16
-Nuitka-develop,dynamic code execution,30
+Nuitka-develop,dynamic code execution,31
 Nuitka-develop,command injection,39
-Nuitka-develop,use of HTTP without TLS,8
+Nuitka-develop,use of HTTP without TLS,6
 Nuitka-develop,insecure deserialization,15
 Nuitka-develop,use of weak cryptographic algorithm,3
-Nuitka-develop,empty password,8
-Nuitka-develop,deployment with debug flag set to true,2
 Nuitka-develop,hard-coded secrets,1
+Nuitka-develop,deployment with debug flag set to true,2
 Nuitka-develop,hard-coded tmp directories,1
-OWSLib-master,use of HTTP without TLS,20
+OWSLib-master,empty password,35
+OWSLib-master,use of HTTP without TLS,19
 OWSLib-master,ignoring except block,9
-OWSLib-master,empty password,19
-OWSLib-master,assert statement,19
+OWSLib-master,assert statement,23
 OWSLib-master,use of YAML load,1
 Product-Info-Crawler-master,deployment with debug flag set to true,1
-Product-Info-Crawler-master,hard-coded secrets,1
 PyDSWS-master,use of HTTP without TLS,2
 PyExPool-master,ignoring except block,3
-PyExPool-master,assert statement,21
+PyExPool-master,assert statement,41
 PyExPool-master,command injection,1
+PyFlask_2k18-master,hard-coded secrets,1
 PyFlask_2k18-master,deployment with debug flag set to true,1
-PyFlask_2k18-master,use of weak cryptographic algorithm,6
-Python-Django-Complete-Real-Estate-Website-master,ignoring except block,551
-Python-Django-Complete-Real-Estate-Website-master,dynamic code execution,34
-Python-Django-Complete-Real-Estate-Website-master,assert statement,310
-Python-Django-Complete-Real-Estate-Website-master,hard-coded secrets,36
+PyFlask_2k18-master,use of weak cryptographic algorithm,12
+Python-Django-Complete-Real-Estate-Website-master,ignoring except block,552
+Python-Django-Complete-Real-Estate-Website-master,dynamic code execution,35
+Python-Django-Complete-Real-Estate-Website-master,assert statement,361
+Python-Django-Complete-Real-Estate-Website-master,hard-coded secrets,44
 Python-Django-Complete-Real-Estate-Website-master,bad file permission,18
-Python-Django-Complete-Real-Estate-Website-master,deployment with debug flag set to true,5
+Python-Django-Complete-Real-Estate-Website-master,deployment with debug flag set to true,4
 Python-Django-Complete-Real-Estate-Website-master,command injection,78
-Python-Django-Complete-Real-Estate-Website-master,empty password,26
-Python-Django-Complete-Real-Estate-Website-master,use of HTTP without TLS,10
-Python-Django-Complete-Real-Estate-Website-master,use of weak cryptographic algorithm,8
+Python-Django-Complete-Real-Estate-Website-master,empty password,21
+Python-Django-Complete-Real-Estate-Website-master,use of HTTP without TLS,7
 Python-Django-Complete-Real-Estate-Website-master,hard-coded tmp directories,7
 Python-Django-Complete-Real-Estate-Website-master,constructing sql statement upon user input,13
-Python-Django-Complete-Real-Estate-Website-master,insecure deserialization,8
-Python-Django-Complete-Real-Estate-Website-master,cross site scripting,42
+Python-Django-Complete-Real-Estate-Website-master,insecure deserialization,5
+Python-Django-Complete-Real-Estate-Website-master,use of weak cryptographic algorithm,7
+Python-Django-Complete-Real-Estate-Website-master,cross site scripting,11
 Python-Django-Complete-Real-Estate-Website-master,use of YAML load,1
 Rakathon-master,insecure deserialization,5
 Rakathon-master,deployment with debug flag set to true,1
 Redfin-master,ignoring except block,1
 Rest-Shop-master,hard-coded tmp directories,1
-Rest-Shop-master,hard-coded secrets,1
+Rest-Shop-master,hard-coded secrets,2
 Rest-Shop-master,deployment with debug flag set to true,1
 RoboBull-master,ignoring except block,1
 RoboBull-master,deployment with debug flag set to true,1
 SFECommerce-master,deployment with debug flag set to true,1
 SFECommerce-master,use of HTTP without TLS,1
-Scraping-Jumia-Ecommerce-master,hard-coded secrets,1
 ShopCrawler-master,dynamic code execution,3
 ShopCrawler-master,ignoring except block,3
 ShopCrawler-master,use of weak cryptographic algorithm,92
-ShopCrawler-master,use of HTTP without TLS,52
 Spider-master,use of HTTP without TLS,1
-TCIA-Python3-Downloader-Menu-3.1,empty password,4
 TankGame-master,deployment with debug flag set to true,2
 TankGame-master,use of HTTP without TLS,2
 TankGame-master,ignoring except block,25
 TankGame-master,empty password,1
 Tor2web-master,ignoring except block,24
 Tor2web-master,bad file permission,3
-Tor2web-master,deployment with debug flag set to true,2
 Tor2web-master,assert statement,1
 Tor_Spider-master,command injection,2
-Try-Django-1.11-master,hard-coded secrets,3
+Try-Django-1.11-master,hard-coded secrets,2
 Try-Django-1.11-master,deployment with debug flag set to true,2
 Try-Django-1.11-master,ignoring except block,1
 UdemyCourseGrabber-master,command injection,4
 UdemyCourseGrabber-master,ignoring except block,1
-UdemyCourseGrabber-master,hard-coded secrets,1
 Variable-Delivery-Cost-Finder-master,insecure deserialization,4
-Web-Scraping-master,hard-coded secrets,2
 Web-Scraping-master,deployment with debug flag set to true,1
 Web-Scrapping-E-commerce-websites-master,hard-coded tmp directories,1
 Web2Executable-master,ignoring except block,5
 Web2Executable-master,bad file permission,5
 Web2Executable-master,command injection,5
-Web2Executable-master,assert statement,12
-Web2Executable-master,hard-coded secrets,2
+Web2Executable-master,assert statement,14
 Webshell-Sniper-master,hard-coded IP address bindings,2
-Webshell-Sniper-master,use of HTTP without TLS,4
+Webshell-Sniper-master,use of HTTP without TLS,3
 Webshell-Sniper-master,no integrity check,2
 Wooey-master,ignoring except block,8
 Wooey-master,command injection,1
-Wooey-master,cross site scripting,2
-Wooey-master,hard-coded secrets,1
 Wooey-master,assert statement,6
 ZeroNet-py3,command injection,86
-ZeroNet-py3,hard-coded secrets,17
-ZeroNet-py3,assert statement,46
+ZeroNet-py3,hard-coded secrets,2
+ZeroNet-py3,assert statement,48
 ZeroNet-py3,ignoring except block,29
 ZeroNet-py3,bad file permission,2
 ZeroNet-py3,use of weak cryptographic algorithm,4
-ZeroNet-py3,dynamic code execution,2
+ZeroNet-py3,dynamic code execution,3
 ZeroNet-py3,use of HTTP without TLS,2
 ZeroNet-py3,hard-coded IP address bindings,2
 addons-server-master,deployment with debug flag set to true,1
 addons-server-master,use of HTTP without TLS,13
-addons-server-master,hard-coded secrets,38
 addons-server-master,command injection,6
 addons-server-master,ignoring except block,40
-addons-server-master,cross site scripting,10
-addons-server-master,use of weak cryptographic algorithm,7
-addons-server-master,assert statement,23
-addons-server-master,empty password,14
+addons-server-master,hard-coded secrets,39
+addons-server-master,use of weak cryptographic algorithm,10
+addons-server-master,assert statement,29
+addons-server-master,empty password,4
+addons-server-master,constructing sql statement upon user input,2
 addons-server-master,insecure deserialization,1
+addons-server-master,cross site scripting,1
 addons-server-master,bad file permission,1
-adyen-python-online-payments-master,use of HTTP without TLS,1
-adyen-python-online-payments-master,hard-coded secrets,1
-alexandra-master,hard-coded secrets,1
 amazon-reviews-analysis-master,insecure deserialization,3
-app-service-web-python-get-started-master,deployment with debug flag set to true,2
+app-service-web-python-get-started-master,deployment with debug flag set to true,1
 app-service-web-python-get-started-master,hard-coded secrets,1
 app-service-web-python-get-started-master,assert statement,3
 appdaemon-dev,ignoring except block,7
-appdaemon-dev,use of weak cryptographic algorithm,2
+appdaemon-dev,use of weak cryptographic algorithm,1
 appdaemon-dev,assert statement,3
-appdaemon-dev,hard-coded secrets,5
 appdaemon-dev,use of YAML load,6
 appdaemon-dev,command injection,12
-appdaemon-dev,empty password,1
 appdaemon-dev,use of HTTP without TLS,2
-appengine-flask-skeleton-master,assert statement,31
+appengine-flask-skeleton-master,assert statement,33
 appengine-flask-skeleton-master,ignoring except block,72
-appengine-flask-skeleton-master,dynamic code execution,15
-appengine-flask-skeleton-master,hard-coded secrets,2
+appengine-flask-skeleton-master,dynamic code execution,14
+appengine-flask-skeleton-master,empty password,1
 appengine-flask-skeleton-master,use of weak cryptographic algorithm,1
 appengine-flask-skeleton-master,use of HTTP without TLS,2
-appengine-flask-skeleton-master,insecure deserialization,5
+appengine-flask-skeleton-master,hard-coded secrets,1
+appengine-flask-skeleton-master,insecure deserialization,4
 appengine-flask-skeleton-master,bad file permission,3
-appier-master,empty password,3
+appier-master,empty password,5
 appier-master,use of weak cryptographic algorithm,2
 appier-master,ignoring except block,20
-appier-master,hard-coded secrets,4
+appier-master,hard-coded secrets,1
 appier-master,dynamic code execution,3
 appier-master,command injection,2
-archweb-master,hard-coded secrets,4
+archweb-master,hard-coded secrets,1
 archweb-master,ignoring except block,3
 archweb-master,constructing sql statement upon user input,10
 archweb-master,command injection,2
-archweb-master,cross site scripting,4
 asyncmicroservices-master,hard-coded secrets,1
 asyncmicroservices-master,deployment with debug flag set to true,3
 atheme-web-master,dynamic code execution,1
+atheme-web-master,assert statement,1
 atheme-web-master,ignoring except block,1
 augur-master,dynamic code execution,2
 augur-master,ignoring except block,25
-augur-master,hard-coded secrets,10
 augur-master,empty password,1
 augur-master,bad file permission,2
 augur-master,command injection,11
 augur-master,constructing sql statement upon user input,10
 awis-master,ignoring except block,1
-aws-serverless-shopping-cart-master,hard-coded secrets,5
-aws_py-master,assert statement,34
-bb-slotter-master,empty password,1
-bballfast-master,hard-coded secrets,3
+aws_py-master,assert statement,40
 bballfast-master,use of HTTP without TLS,8
 bballfast-master,no integrity check,1
-beg-django-e-commerce-master,deployment with debug flag set to true,2
-beg-django-e-commerce-master,hard-coded secrets,8
+beg-django-e-commerce-master,deployment with debug flag set to true,1
+beg-django-e-commerce-master,hard-coded secrets,4
 beg-django-e-commerce-master,ignoring except block,9
-beg-django-e-commerce-master,cross site scripting,1
 bioservices-master,use of HTTP without TLS,36
-bioservices-master,hard-coded secrets,2
 bioservices-master,dynamic code execution,1
-bioservices-master,assert statement,46
+bioservices-master,assert statement,47
 bioservices-master,ignoring except block,32
 bioservices-master,insecure deserialization,1
 bitcurator-access-webtools-master,ignoring except block,1
-bitcurator-access-webtools-master,hard-coded secrets,4
-bitcurator-access-webtools-master,dynamic code execution,1
+bitcurator-access-webtools-master,dynamic code execution,2
 bitcurator-access-webtools-master,hard-coded tmp directories,2
 bitcurator-access-webtools-master,deployment with debug flag set to true,1
+blogofile-plugins,insecure deserialization,2
 blogofile-plugins,assert statement,12
 blogofile-plugins,ignoring except block,10
 blogofile-plugins,command injection,19
@@ -411,17 +384,16 @@ blogofile-plugins,dynamic code execution,5
 blogofile-plugins,use of HTTP without TLS,1
 book_scraper_python-master,use of HTTP without TLS,2
 boto-develop,ignoring except block,31
+boto-develop,empty password,37
 boto-develop,insecure deserialization,37
-boto-develop,hard-coded secrets,15
 boto-develop,command injection,5
-boto-develop,empty password,5
-boto-develop,assert statement,30
+boto-develop,assert statement,32
 boto-develop,use of HTTP without TLS,10
 boto-develop,bad file permission,3
+boto-develop,hard-coded secrets,7
 boto-develop,hard-coded tmp directories,1
+boto-develop,use of weak cryptographic algorithm,2
 boto-develop,dynamic code execution,1
-boto-develop,use of YAML load,1
-braspag-master,hard-coded secrets,6
 braspag-master,assert statement,5
 brother_ql_web-master,command injection,10
 brother_ql_web-master,deployment with debug flag set to true,1
@@ -431,50 +403,44 @@ buyandsell-master,hard-coded secrets,1
 buyandsell-master,deployment with debug flag set to true,1
 calllog211-master,ignoring except block,52
 calllog211-master,dynamic code execution,8
-calllog211-master,assert statement,27
-calllog211-master,insecure deserialization,2
-calllog211-master,hard-coded secrets,2
+calllog211-master,assert statement,29
 calllog211-master,use of HTTP without TLS,2
+calllog211-master,empty password,1
+calllog211-master,insecure deserialization,1
 calllog211-master,bad file permission,2
-calllog211-master,deployment with debug flag set to true,1
 cartoonify-master,use of HTTP without TLS,2
 cartoonify-master,deployment with debug flag set to true,1
 cartoonify-master,assert statement,7
 cartoonify-master,ignoring except block,1
-cartoonify-master,hard-coded secrets,5
+cartoonify-master,use of weak cryptographic algorithm,2
 cassiopeia-master,use of weak cryptographic algorithm,2
 cassiopeia-master,command injection,1
 cassiopeia-master,ignoring except block,41
 cassiopeia-master,use of HTTP without TLS,2
-cassiopeia-master,assert statement,8
-cassiopeia-master,hard-coded secrets,3
-cassiopeia-master,empty password,2
+cassiopeia-master,assert statement,9
+cassiopeia-master,hard-coded secrets,1
+ccxt-master,hard-coded secrets,17
 ccxt-master,ignoring except block,8
 ccxt-master,command injection,9
-ccxt-master,hard-coded secrets,2
-ccxt-master,empty password,10
-ccxt-master,assert statement,48
+ccxt-master,assert statement,49
+ccxt-master,empty password,1
+certidude-master,assert statement,32
 certidude-master,command injection,27
 certidude-master,ignoring except block,12
-certidude-master,assert statement,21
 certidude-master,hard-coded tmp directories,4
 certidude-master,bad file permission,1
-certidude-master,use of weak cryptographic algorithm,1
-cfn-pyplates-master,hard-coded secrets,3
-chapullmarket-master,deployment with debug flag set to true,2
+chapullmarket-master,deployment with debug flag set to true,1
 chapullmarket-master,hard-coded secrets,1
 chinese-ecommerce-monitoring-master,command injection,1
-chipy.org-master,hard-coded secrets,5
 chipy.org-master,use of HTTP without TLS,3
 chipy.org-master,ignoring except block,1
-city-scrapers-main,hard-coded secrets,3
 city-scrapers-main,ignoring except block,6
 city-scrapers-main,use of HTTP without TLS,2
-cntk-python-web-service-on-azure-master,assert statement,33
-cntk-python-web-service-on-azure-master,use of YAML load,6
+cntk-python-web-service-on-azure-master,use of YAML load,8
+cntk-python-web-service-on-azure-master,assert statement,34
 comcast-bw-master,command injection,12
 cookiecutter-django-shop-master,command injection,1
-cookiecutter-django-shop-master,assert statement,6
+cookiecutter-django-shop-master,assert statement,7
 cp-barebone-movie-app-final-master,hard-coded secrets,1
 cp-barebone-movie-app-final-master,deployment with debug flag set to true,1
 create-aio-app-master,command injection,6
@@ -483,26 +449,18 @@ crypto-whale-watching-app-master,ignoring except block,2
 d6tflow-master,insecure deserialization,1
 dark-fantasy-hack-tool-master,hard-coded IP address bindings,2
 dark-fantasy-hack-tool-master,ignoring except block,3
-datastore-ndb-python-master,assert statement,19
+datastore-ndb-python-master,assert statement,22
 datastore-ndb-python-master,ignoring except block,6
-datastore-ndb-python-master,insecure deserialization,1
 datastore-ndb-python-master,deployment with debug flag set to true,1
-datastore-ndb-python-master,hard-coded secrets,2
-dev-dash-dev-dash,hard-coded secrets,3
+dev-dash-dev-dash,hard-coded secrets,1
 dev-dash-dev-dash,deployment with debug flag set to true,1
 django-admin-bootstrapped-master,cross site scripting,1
 django-admin-bootstrapped-master,ignoring except block,2
 django-auditlog-master,assert statement,1
-django-auditlog-master,empty password,5
 django-auditlog-master,ignoring except block,5
-django-auditlog-master,cross site scripting,1
-django-avatar-master,hard-coded secrets,1
-django-avatar-master,cross site scripting,1
-django-basic-apps-master,hard-coded secrets,2
 django-basic-apps-master,use of HTTP without TLS,1
-django-basic-apps-master,cross site scripting,2
 django-basic-apps-master,ignoring except block,1
-django-calaccess-raw-data-master,hard-coded secrets,10
+django-calaccess-raw-data-master,hard-coded secrets,1
 django-calaccess-raw-data-master,ignoring except block,2
 django-calaccess-raw-data-master,use of HTTP without TLS,1
 django-calaccess-raw-data-master,constructing sql statement upon user input,2
@@ -511,11 +469,9 @@ django-chartit-master,assert statement,1
 django-chartit-master,hard-coded secrets,1
 django-chartit-master,deployment with debug flag set to true,1
 django-chartit-master,hard-coded tmp directories,1
-django-chartit-master,cross site scripting,1
 django-cors-headers-master,ignoring except block,1
 django-cors-headers-master,command injection,13
 django-crispy-forms-master,command injection,2
-django-crispy-forms-master,cross site scripting,2
 django-crispy-forms-master,ignoring except block,3
 django-cron-master,hard-coded secrets,2
 django-cron-master,deployment with debug flag set to true,1
@@ -523,7 +479,6 @@ django-cron-master,ignoring except block,3
 django-cron-master,hard-coded tmp directories,1
 django-dtg-store-manager-master,ignoring except block,3
 django-dtg-store-manager-master,deployment with debug flag set to true,2
-django-dtg-store-manager-master,hard-coded secrets,3
 django-ecommerce-wagtail-master,ignoring except block,2
 django-ecommerce-wagtail-master,use of HTTP without TLS,1
 django-ecommerce-wagtail-master,deployment with debug flag set to true,1
@@ -531,84 +486,69 @@ django-ecommerce-wagtail-master,hard-coded secrets,1
 django-form-designer-master,ignoring except block,3
 django-friendship-master,hard-coded secrets,1
 django-friendship-master,deployment with debug flag set to true,1
+django-hvad-master,assert statement,6
 django-hvad-master,ignoring except block,12
-django-hvad-master,assert statement,4
-django-jquery-file-upload-master,cross site scripting,1
 django-jquery-file-upload-master,hard-coded secrets,1
 django-jquery-file-upload-master,deployment with debug flag set to true,1
-django-machina-master,hard-coded secrets,4
+django-machina-master,hard-coded secrets,1
 django-machina-master,deployment with debug flag set to true,1
 django-machina-master,assert statement,4
-django-machina-master,cross site scripting,1
 django-machina-master,ignoring except block,5
 django-oscar-demo-master,hard-coded secrets,4
 django-oscar-demo-master,deployment with debug flag set to true,4
 django-oscar-master,ignoring except block,29
-django-oscar-master,hard-coded secrets,7
 django-oscar-master,assert statement,4
-django-oscar-master,cross site scripting,1
+django-oscar-master,hard-coded secrets,2
+django-oscar-master,empty password,2
 django-oscar-master,constructing sql statement upon user input,1
 django-post_office-master,ignoring except block,4
 django-post_office-master,assert statement,2
 django-react-ecommerce-master,hard-coded secrets,1
 django-react-ecommerce-master,deployment with debug flag set to true,2
-django-recaptcha-develop-master,cross site scripting,1
-django-registration-master,hard-coded secrets,1
 django-rest-auth-master,ignoring except block,2
 django-rest-auth-master,assert statement,1
 django-rest-auth-master,hard-coded secrets,1
 django-rest-auth-master,deployment with debug flag set to true,1
 django-rq-master,hard-coded secrets,1
 django-rq-master,ignoring except block,6
-django-rq-master,use of YAML load,1
-django-salesman-master,hard-coded secrets,2
+django-rq-master,use of YAML load,2
+django-salesman-master,hard-coded secrets,1
 django-salesman-master,deployment with debug flag set to true,1
 django-salesman-master,use of weak cryptographic algorithm,1
 django-salesman-master,ignoring except block,1
-django-salesman-master,empty password,1
 django-schedule-master,ignoring except block,1
 django-schedule-master,use of HTTP without TLS,1
-django-schedule-master,deployment with debug flag set to true,2
+django-schedule-master,deployment with debug flag set to true,1
 django-schedule-master,hard-coded secrets,2
 django-scheduler-develop,ignoring except block,2
-django-scheduler-develop,cross site scripting,2
 django-simple-shop-master,ignoring except block,5
-django-simple-shop-master,cross site scripting,1
-django-stockroom-master,cross site scripting,1
 django-tables2-master,command injection,8
 django-tables2-master,deployment with debug flag set to true,1
 django-tables2-master,hard-coded secrets,2
 django-tables2-master,ignoring except block,3
-django-tables2-master,cross site scripting,3
 django-tastypie-master,ignoring except block,10
-django-tastypie-master,hard-coded secrets,3
+django-tastypie-master,hard-coded secrets,1
 django-tastypie-master,deployment with debug flag set to true,2
-django-tastypie-master,use of YAML load,2
 django-tastypie-master,use of HTTP without TLS,1
 django-tutorial-master,hard-coded secrets,1
 django-tutorial-v2-master,assert statement,1
 django-tutorial-v2-master,hard-coded secrets,1
 django-tutorial-v2-master,deployment with debug flag set to true,2
-django_quiz-master,hard-coded secrets,1
 djangocon_2015_talk-master,hard-coded secrets,1
 djangocon_2015_talk-master,deployment with debug flag set to true,2
-djangocon_2015_talk-master,use of weak cryptographic algorithm,1
-djangogirls-master,hard-coded secrets,5
+djangogirls-master,hard-coded secrets,2
 djangogirls-master,hard-coded tmp directories,1
 djangogirls-master,use of HTTP without TLS,9
 djangogirls-master,no integrity check,1
+djangogirls-master,assert statement,12
 djangogirls-master,ignoring except block,2
-djangogirls-master,empty password,4
-djangogirls-master,cross site scripting,1
-djangogirls-master,assert statement,11
+djangogirls-master,empty password,2
 djangogirls-master,command injection,2
-djangogirls-master,use of weak cryptographic algorithm,2
 djangopackages-master,ignoring except block,6
-djangopackages-master,hard-coded secrets,2
 djangopackages-master,hard-coded tmp directories,2
-djangopackages-master,deployment with debug flag set to true,2
+djangopackages-master,deployment with debug flag set to true,1
 djangopackages-master,use of HTTP without TLS,2
-doorstep-master,hard-coded secrets,9
+doorstep-master,hard-coded secrets,2
 doorstep-master,deployment with debug flag set to true,5
 doorstep-master,ignoring except block,4
 doorstep-master,command injection,2
@@ -621,20 +561,19 @@ e-commerce-2_django-master,use of weak cryptographic algorithm,3
 e-commerce-2_django-master,hard-coded secrets,3
 e-commerce-2_django-master,deployment with debug flag set to true,3
 e-commerce-2_django-master,ignoring except block,2
-e-commerce-2_django-master,cross site scripting,1
+e-commerce-2_django-master,cross site scripting,2
+e-commerce-2_django-master,empty password,1
 e-commerce-web-scraper-master,command injection,8
-e-commerce-web-scraper-master,hard-coded secrets,2
 e-commerce-web-scraper-master,ignoring except block,1
-eCommerce-Database-main,hard-coded secrets,5
 eCommerce-Database-main,deployment with debug flag set to true,2
-eCommerce-Database-main,ignoring except block,104
-eCommerce-Database-main,assert statement,173
-eCommerce-Database-main,empty password,17
+eCommerce-Database-main,ignoring except block,105
+eCommerce-Database-main,assert statement,202
+eCommerce-Database-main,empty password,10
 eCommerce-Database-main,bad file permission,9
-eCommerce-Database-main,command injection,17
-eCommerce-Database-main,use of weak cryptographic algorithm,1
+eCommerce-Database-main,command injection,18
 eCommerce-Database-main,dynamic code execution,8
 eCommerce-Database-main,use of HTTP without TLS,2
+eCommerce-Database-main,hard-coded secrets,36
 eCommerce-Database-main,hard-coded tmp directories,3
 eCommerce-Database-main,constructing sql statement upon user input,10
 eCommerce-Database-main,insecure deserialization,1
@@ -642,24 +581,22 @@ ebook-viewer-master,command injection,2
 ebook-viewer-master,insecure deserialization,2
 ebook-viewer-master,use of weak cryptographic algorithm,1
 ebook-viewer-master,ignoring except block,2
-ecommerce-master,hard-coded secrets,29
 ecommerce-master,ignoring except block,19
 ecommerce-master,hard-coded tmp directories,4
 ecommerce-master,deployment with debug flag set to true,2
 ecommerce-master,use of HTTP without TLS,10
 ecommerce-master,use of YAML load,1
 ecommerce-master,constructing sql statement upon user input,1
-ecommerce-master,empty password,7
-ecommerce-master,cross site scripting,1
+ecommerce-master,cross site scripting,2
 ecommerce-master,use of weak cryptographic algorithm,1
-ecommerce-master,assert statement,4
+ecommerce-master,assert statement,5
 ecommerce_api-master,use of HTTP without TLS,5
 ecommerce_api-master,ignoring except block,3
 ecommerce_api-master,deployment with debug flag set to true,3
-ecommerce_api-master,hard-coded secrets,9
+ecommerce_api-master,hard-coded secrets,4
+ecommerce_api-master,empty password,1
 ecommerce_api-master,hard-coded IP address bindings,1
 ecommerce_website_development-master,deployment with debug flag set to true,2
-ecommerce_website_development-master,hard-coded secrets,1
 ecommerce_website_development-master,use of HTTP without TLS,3
 ecommerce_website_development-master,ignoring except block,1
 elimage-master,ignoring except block,1
@@ -667,74 +604,68 @@ elimage-master,deployment with debug flag set to true,1
 elimage-master,hard-coded tmp directories,1
 ella-master,ignoring except block,4
 ella-master,assert statement,1
-ella-master,hard-coded secrets,1
-ella-master,cross site scripting,6
 ella-master,use of HTTP without TLS,2
-email_extractor-master,hard-coded secrets,1
 enlighten-master,assert statement,2
 enlighten-master,ignoring except block,2
 enlighten-master,dynamic code execution,1
-enlighten-master,use of weak cryptographic algorithm,12
-enlighten-master,hard-coded secrets,1
+enlighten-master,use of weak cryptographic algorithm,20
 enlighten-master,hard-coded tmp directories,1
 esky-master,ignoring except block,15
 esky-master,dynamic code execution,1
 esky-master,use of HTTP without TLS,1
 esky-master,assert statement,3
-esky-master,insecure deserialization,7
-eventbrite-master,hard-coded secrets,100
-eventbrite-master,deployment with debug flag set to true,4
-eventbrite-master,use of weak cryptographic algorithm,28
-eventbrite-master,ignoring except block,1094
-eventbrite-master,dynamic code execution,70
-eventbrite-master,assert statement,867
-eventbrite-master,use of HTTP without TLS,104
-eventbrite-master,command injection,101
-eventbrite-master,empty password,74
-eventbrite-master,insecure deserialization,18
-eventbrite-master,cross site scripting,57
+esky-master,insecure deserialization,6
+eventbrite-master,hard-coded secrets,117
+eventbrite-master,deployment with debug flag set to true,3
+eventbrite-master,ignoring except block,1096
+eventbrite-master,dynamic code execution,69
+eventbrite-master,assert statement,1029
+eventbrite-master,use of HTTP without TLS,89
+eventbrite-master,command injection,108
+eventbrite-master,empty password,65
 eventbrite-master,bad file permission,25
-eventbrite-master,hard-coded tmp directories,26
+eventbrite-master,hard-coded tmp directories,24
 eventbrite-master,constructing sql statement upon user input,23
+eventbrite-master,insecure deserialization,13
+eventbrite-master,cross site scripting,12
 eventbrite-master,hard-coded IP address bindings,1
+eventbrite-master,use of weak cryptographic algorithm,7
 eventbrite-master,use of YAML load,2
 eventbrite-master,no certificate validation,1
-evohome-client-master,hard-coded secrets,4
 exchangelib-master,ignoring except block,28
-exchangelib-master,hard-coded secrets,2
 exchangelib-master,use of HTTP without TLS,7
-exchangelib-master,insecure deserialization,2
+exchangelib-master,insecure deserialization,1
 exchangelib-master,no integrity check,1
-eyeD3-master,assert statement,61
+export-archive-reddit-saved-master,insecure deserialization,1
+eyeD3-master,assert statement,79
 eyeD3-master,command injection,2
 eyeD3-master,hard-coded tmp directories,1
-eyeD3-master,use of HTTP without TLS,8
+eyeD3-master,use of HTTP without TLS,6
 eyeD3-master,ignoring except block,7
-eyeD3-master,hard-coded secrets,2
 eyeD3-master,use of weak cryptographic algorithm,2
-ezpadova-master,dynamic code execution,1
-ezpadova-master,assert statement,2
+eyeD3-master,hard-coded secrets,1
+ezpadova-master,assert statement,3
 ezpadova-master,use of HTTP without TLS,2
 ezpadova-master,ignoring except block,1
+face_merge_master-master,hard-coded secrets,3
 face_merge_master-master,use of weak cryptographic algorithm,1
 face_merge_master-master,use of HTTP without TLS,1
-face_merge_master-master,hard-coded secrets,3
 face_recognition-master,insecure deserialization,2
 face_recognition-master,deployment with debug flag set to true,2
 face_recognition-master,use of HTTP without TLS,1
-falcon-master,ignoring except block,16
+falcon-master,ignoring except block,15
 falcon-master,use of HTTP without TLS,1
 falcon-master,command injection,16
-falcon-master,assert statement,7
+falcon-master,assert statement,8
 falcon-master,dynamic code execution,2
 falcon-master,deployment with debug flag set to true,1
-fapws2-master,deployment with debug flag set to true,2
+fapws2-master,deployment with debug flag set to true,1
 fapws2-master,hard-coded secrets,2
 fapws2-master,command injection,1
 featureserver-master,command injection,7
 featureserver-master,constructing sql statement upon user input,34
 featureserver-master,ignoring except block,17
-featureserver-master,insecure deserialization,6
+featureserver-master,insecure deserialization,2
 featureserver-master,assert statement,4
 featureserver-master,use of HTTP without TLS,4
 flask-app-blueprint-master,deployment with debug flag set to true,2
@@ -742,12 +673,11 @@ flask-website-master,deployment with debug flag set to true,1
 flask-website-master,ignoring except block,1
 flexx-master,ignoring except block,9
 flexx-master,dynamic code execution,12
-flexx-master,use of HTTP without TLS,4
-flexx-master,use of weak cryptographic algorithm,2
-flexx-master,hard-coded secrets,2
+flexx-master,use of weak cryptographic algorithm,6
+flexx-master,use of HTTP without TLS,3
 flexx-master,command injection,2
-flexx-master,assert statement,37
-fosswebsite-master,hard-coded secrets,7
+flexx-master,assert statement,47
+fosswebsite-master,hard-coded secrets,3
 fosswebsite-master,deployment with debug flag set to true,1
 fosswebsite-master,ignoring except block,2
 fosswebsite-master,use of weak cryptographic algorithm,1
@@ -762,39 +692,34 @@ hendrix-master,command injection,3
 hendrix-master,insecure deserialization,1
 hendrix-master,ignoring except block,3
 hendrix-master,use of YAML load,1
-howtopython.org-master,use of HTTP without TLS,2
+howtopython.org-master,use of HTTP without TLS,1
 httplib2-master,hard-coded tmp directories,1
 httplib2-master,ignoring except block,3
-httplib2-master,empty password,2
+httplib2-master,empty password,4
 hyde-master,ignoring except block,19
-hyde-master,use of YAML load,5
+hyde-master,use of YAML load,9
 hyde-master,dynamic code execution,2
-hydroshare-develop,hard-coded secrets,31
-hydroshare-develop,cross site scripting,1
-hydroshare-develop,assert statement,286
+hydroshare-develop,assert statement,343
 hydroshare-develop,ignoring except block,37
-hydroshare-develop,command injection,7
-hydroshare-develop,empty password,5
+hydroshare-develop,command injection,8
+hydroshare-develop,empty password,2
 hydroshare-develop,use of HTTP without TLS,8
 hydroshare-develop,no certificate validation,3
 hydroshare-develop,insecure deserialization,3
 hydroshare-develop,hard-coded tmp directories,4
 ibptws-master,use of HTTP without TLS,2
-idempierewsc-python-master,hard-coded secrets,1
 idempierewsc-python-master,insecure deserialization,2
 idempierewsc-python-master,use of HTTP without TLS,5
 inscriptis-master,command injection,12
 inscriptis-master,ignoring except block,1
-ipython-master,dynamic code execution,38
-ipython-master,assert statement,36
+ipython-master,dynamic code execution,42
+ipython-master,assert statement,38
 ipython-master,command injection,28
 ipython-master,ignoring except block,116
-ipython-master,use of HTTP without TLS,2
-ipython-master,hard-coded secrets,7
+ipython-master,use of HTTP without TLS,1
 ipython-master,bad file permission,1
-ipython-master,constructing sql statement upon user input,6
+ipython-master,constructing sql statement upon user input,9
 is_wordpress-master,command injection,2
-ivy-master,insecure deserialization,1
 ivy-master,ignoring except block,5
 ivy-master,dynamic code execution,1
 ivy-master,command injection,1
@@ -807,144 +732,136 @@ k8s-tutorial-python-master,hard-coded secrets,1
 k8s-tutorial-python-master,deployment with debug flag set to true,1
 key-presser-via-python-server-master,ignoring except block,1
 lbry-sdk-master,ignoring except block,47
-lbry-sdk-master,assert statement,117
+lbry-sdk-master,assert statement,163
 lbry-sdk-master,command injection,32
+lbry-sdk-master,empty password,2
 lbry-sdk-master,constructing sql statement upon user input,25
 lbry-sdk-master,bad file permission,4
-lbry-sdk-master,hard-coded secrets,5
-ldapcherry-master,hard-coded secrets,24
-ldapcherry-master,use of YAML load,2
+lbry-sdk-master,use of weak cryptographic algorithm,3
+ldapcherry-master,hard-coded secrets,10
 lead_manager_react_django-master,hard-coded secrets,1
 lead_manager_react_django-master,deployment with debug flag set to true,1
-learn_python3_spider-master,ignoring except block,380
-learn_python3_spider-master,dynamic code execution,45
+learn_python3_spider-master,ignoring except block,381
+learn_python3_spider-master,dynamic code execution,47
 learn_python3_spider-master,use of HTTP without TLS,18
-learn_python3_spider-master,assert statement,420
-learn_python3_spider-master,hard-coded secrets,37
-learn_python3_spider-master,command injection,35
-learn_python3_spider-master,use of weak cryptographic algorithm,27
-learn_python3_spider-master,empty password,59
-learn_python3_spider-master,bad file permission,14
-learn_python3_spider-master,deployment with debug flag set to true,9
+learn_python3_spider-master,assert statement,517
+learn_python3_spider-master,command injection,36
+learn_python3_spider-master,empty password,45
+learn_python3_spider-master,use of weak cryptographic algorithm,8
+learn_python3_spider-master,bad file permission,15
+learn_python3_spider-master,deployment with debug flag set to true,8
+learn_python3_spider-master,hard-coded secrets,43
 learn_python3_spider-master,hard-coded tmp directories,8
 learn_python3_spider-master,constructing sql statement upon user input,11
-learn_python3_spider-master,insecure deserialization,13
+learn_python3_spider-master,insecure deserialization,12
 learn_python3_spider-master,hard-coded IP address bindings,1
 librato-python-web-master,command injection,20
 librato-python-web-master,assert statement,1
-librato-python-web-master,hard-coded secrets,1
 librato-python-web-master,use of weak cryptographic algorithm,1
 librato-python-web-master,ignoring except block,1
 loggers-master,use of HTTP without TLS,7
 loggers-master,ignoring except block,4
 m.css-master,hard-coded tmp directories,4
-m.css-master,hard-coded secrets,2
 m.css-master,use of HTTP without TLS,1
 m.css-master,command injection,29
 m.css-master,insecure deserialization,1
-m.css-master,assert statement,135
+m.css-master,assert statement,183
 m.css-master,ignoring except block,2
-major-scrapy-spiders-master,hard-coded secrets,1
 major-scrapy-spiders-master,empty password,1
 mep-django-master,dynamic code execution,1
 mep-django-master,ignoring except block,10
 mep-django-master,use of HTTP without TLS,3
-mep-django-master,cross site scripting,5
+mep-django-master,cross site scripting,4
 mep-django-master,hard-coded secrets,1
 mep-django-master,command injection,1
 mep-django-master,assert statement,2
 merchant-master,command injection,1
-merchant-master,deployment with debug flag set to true,2
-merchant-master,hard-coded secrets,12
+merchant-master,deployment with debug flag set to true,1
+merchant-master,hard-coded secrets,3
 merchant-master,ignoring except block,6
 merchant-master,insecure deserialization,3
 merchant-master,assert statement,8
 merchant-master,use of HTTP without TLS,4
-microblog-master,empty password,1
-microblog-master,hard-coded secrets,1
-mindboggle-master,use of HTTP without TLS,4
+merchant-master,empty password,1
+mindboggle-master,use of HTTP without TLS,3
 mindboggle-master,dynamic code execution,2
 mindboggle-master,command injection,19
 mindboggle-master,assert statement,7
 mindboggle-master,ignoring except block,4
 minimal-django-file-upload-example-master,hard-coded secrets,6
-minimal-django-file-upload-example-master,deployment with debug flag set to true,8
+minimal-django-file-upload-example-master,deployment with debug flag set to true,7
 mollyproject-master,ignoring except block,31
-mollyproject-master,insecure deserialization,1
 mollyproject-master,use of HTTP without TLS,16
-mollyproject-master,hard-coded secrets,4
-mollyproject-master,deployment with debug flag set to true,3
-mollyproject-master,use of YAML load,3
+mollyproject-master,deployment with debug flag set to true,1
+mollyproject-master,use of YAML load,4
+mollyproject-master,empty password,1
+mollyproject-master,assert statement,1
+mollyproject-master,hard-coded secrets,1
 morvanzhou.github.io-master,ignoring except block,2
-movie-center-master,hard-coded secrets,6
+movie-center-master,hard-coded secrets,3
 movie-center-master,ignoring except block,1
-moviegeek-master,use of weak cryptographic algorithm,7
-moviegeek-master,hard-coded secrets,23
+movie-center-master,empty password,1
+moviegeek-master,use of weak cryptographic algorithm,6
 moviegeek-master,hard-coded tmp directories,4
 moviegeek-master,command injection,13
 moviegeek-master,insecure deserialization,4
+moviegeek-master,hard-coded secrets,1
 moviegeek-master,deployment with debug flag set to true,1
 moviegeek-master,constructing sql statement upon user input,3
 mtmonkey-master,ignoring except block,1
 news-fetch-master,ignoring except block,1
 nikola-master,ignoring except block,30
-nikola-master,use of HTTP without TLS,6
 nikola-master,use of YAML load,2
 nikola-master,use of weak cryptographic algorithm,1
 nikola-master,command injection,5
 nikola-master,dynamic code execution,3
 nikola-master,insecure deserialization,2
-nikola-master,hard-coded secrets,1
+nikola-master,use of HTTP without TLS,2
 nsepy-master,use of HTTP without TLS,11
 nsepy-master,ignoring except block,2
 onlineShop-master,hard-coded secrets,1
 onlineShop-master,deployment with debug flag set to true,1
-opensale-master,hard-coded secrets,15
-opensale-master,cross site scripting,3
+opensale-master,cross site scripting,2
 opensale-master,ignoring except block,6
-opensale-master,use of HTTP without TLS,4
+opensale-master,use of HTTP without TLS,2
 opensale-master,hard-coded tmp directories,1
 opensale-master,constructing sql statement upon user input,3
-opensale-master,use of weak cryptographic algorithm,2
-opensale-master,assert statement,4
+opensale-master,hard-coded secrets,2
+opensale-master,use of weak cryptographic algorithm,3
+opensale-master,assert statement,6
 openscoring-python-master,dynamic code execution,1
-openscoring-python-master,hard-coded secrets,2
 oscar-wagtail-demo-master,ignoring except block,3
 oscar-wagtail-demo-master,deployment with debug flag set to true,3
 oscar-wagtail-demo-master,hard-coded secrets,1
 oscar-wagtail-demo-master,use of HTTP without TLS,2
 pacu-master,command injection,217
-pacu-master,hard-coded secrets,29
-pacu-master,use of weak cryptographic algorithm,1
+pacu-master,use of weak cryptographic algorithm,3
 pacu-master,ignoring except block,8
 pacu-master,assert statement,1
-pacu-master,empty password,2
 panel-master,ignoring except block,22
 panel-master,use of HTTP without TLS,1
-panel-master,hard-coded secrets,7
+panel-master,hard-coded secrets,5
 panel-master,assert statement,2
 panel-master,command injection,3
 panel-master,deployment with debug flag set to true,2
 pbtk-master,ignoring except block,5
 pbtk-master,assert statement,8
-pbtk-master,hard-coded secrets,2
 pdf-miner-master,ignoring except block,1
 pdf-miner-master,command injection,2
-pdf-miner-master,hard-coded secrets,2
+pdf-miner-master,hard-coded secrets,1
 pepy-master,hard-coded secrets,2
 pepy-master,empty password,1
-personfinder-master,assert statement,15
-personfinder-master,insecure deserialization,2
-personfinder-master,hard-coded secrets,20
+personfinder-master,assert statement,18
+personfinder-master,insecure deserialization,3
 personfinder-master,ignoring except block,5
 personfinder-master,empty password,1
 personfinder-master,deployment with debug flag set to true,3
+personfinder-master,hard-coded secrets,2
 personfinder-master,use of HTTP without TLS,4
-picoweb-master,assert statement,2
+picoweb-master,assert statement,4
 picoweb-master,deployment with debug flag set to true,14
 pinax-stripe-master,use of HTTP without TLS,1
 pinax-stripe-master,ignoring except block,2
-pinax-stripe-master,hard-coded secrets,1
 pinax-stripe-master,constructing sql statement upon user input,1
 practNLPTools-lite-master,use of YAML load,1
 practNLPTools-lite-master,command injection,8
@@ -955,54 +872,47 @@ price-of-chair-new-master,deployment with debug flag set to true,25
 price-of-chair-new-master,ignoring except block,1
 project-dream-team-three-master,deployment with debug flag set to true,1
 project-dream-team-two-master,deployment with debug flag set to true,1
-prosopopee-master,hard-coded secrets,1
 pseudo-channel-master,use of HTTP without TLS,3
-pulumi-aws-master,empty password,28
+pulumi-aws-master,hard-coded secrets,14
+pulumi-aws-master,empty password,46
 py-gsxws-master,ignoring except block,5
 py-gsxws-master,use of weak cryptographic algorithm,1
 py-gsxws-master,command injection,7
 pyFCC-master,command injection,3
 pyFCC-master,no integrity check,1
-pyFCC-master,hard-coded secrets,1
 pySphere-master,ignoring except block,22
-pySphere-master,use of HTTP without TLS,368
-pySphere-master,dynamic code execution,1
-pySphere-master,hard-coded secrets,4
+pySphere-master,use of HTTP without TLS,352
 pySphere-master,use of weak cryptographic algorithm,1
 pySphere-master,assert statement,10
 pyacoustid-master,command injection,5
 pyacoustid-master,use of HTTP without TLS,1
 pyacoustid-master,ignoring except block,1
-pyaiot-master,empty password,2
-pyaiot-master,hard-coded secrets,1
-pyaiot-master,assert statement,7
-pyaiot-master,deployment with debug flag set to true,3
+pyaiot-master,empty password,1
+pyaiot-master,assert statement,9
 pyaiot-master,ignoring except block,1
-pyanalytics-master,hard-coded secrets,2
+pyanalytics-master,hard-coded secrets,1
 pyanalytics-master,deployment with debug flag set to true,1
 pycsw-master,hard-coded tmp directories,1
 pycsw-master,bad file permission,3
-pycsw-master,use of HTTP without TLS,20
+pycsw-master,use of HTTP without TLS,17
 pycsw-master,ignoring except block,4
 pycsw-master,dynamic code execution,2
 pycsw-master,command injection,3
 pycv-master,ignoring except block,3
+pycv-master,assert statement,5
 pyews-master,use of HTTP without TLS,4
 pyews-master,empty password,1
-pyredminews-master,hard-coded secrets,3
 pyredminews-master,ignoring except block,2
 pyspider-master,command injection,10
 pyspider-master,constructing sql statement upon user input,1
 pyspider-master,hard-coded tmp directories,2
-pyspider-master,hard-coded secrets,4
 pyspider-master,ignoring except block,11
-pyspider-master,assert statement,35
-pyspider-master,dynamic code execution,2
+pyspider-master,assert statement,37
+pyspider-master,empty password,4
 pyspider-master,insecure deserialization,1
 pyspread-master,ignoring except block,33
-pyspread-master,hard-coded secrets,6
-pyspread-master,dynamic code execution,4
-pyspread-master,assert statement,4
+pyspread-master,dynamic code execution,6
+pyspread-master,assert statement,5
 python-allrecipes-master,ignoring except block,2
 python-amazon-mws-develop,use of HTTP without TLS,5
 python-amazon-mws-develop,assert statement,6
@@ -1013,68 +923,62 @@ python-atws-master,use of HTTP without TLS,2
 python-atws-master,ignoring except block,12
 python-awis-master,hard-coded tmp directories,1
 python-bulk-email-verifier-master,deployment with debug flag set to true,3
-python-cfdiclient-master,hard-coded secrets,5
 python-cfdiclient-master,hard-coded tmp directories,1
+python-cfdiclient-master,hard-coded secrets,1
 python-cfdiclient-master,use of HTTP without TLS,5
-python-devicecloud-master,hard-coded secrets,1
 python-devicecloud-master,ignoring except block,1
-python-devicecloud-master,use of weak cryptographic algorithm,1
-python-for-entrepreneurs-course-demos-master,hard-coded secrets,9
-python-for-entrepreneurs-course-demos-master,use of weak cryptographic algorithm,19
+python-devicecloud-master,use of weak cryptographic algorithm,5
+python-for-entrepreneurs-course-demos-master,use of weak cryptographic algorithm,20
+python-for-entrepreneurs-course-demos-master,hard-coded secrets,3
 python-for-entrepreneurs-course-demos-master,command injection,1
 python-ftr-master,ignoring except block,3
 python-ftr-master,constructing sql statement upon user input,2
 python-ftr-master,deployment with debug flag set to true,1
 python-master,use of HTTP without TLS,2
-python-media-crawler-master,hard-coded secrets,1
 python-media-crawler-master,use of HTTP without TLS,1
 python-media-crawler-master,ignoring except block,2
 python-media-crawler-master,assert statement,25
 python-plantuml-master,ignoring except block,1
 python-sitemap-master,command injection,12
 python-sitemap-master,use of HTTP without TLS,1
-python-sitemap-master,hard-coded secrets,2
+python-sitemap-master,hard-coded secrets,1
+python-tbk-master,empty password,6
 python-tbk-master,use of HTTP without TLS,3
 python-tbk-master,ignoring except block,1
 python-verisure-master,command injection,5
 python-zhmcclient-master,dynamic code execution,2
 python-zhmcclient-master,command injection,1
 python-zhmcclient-master,ignoring except block,12
-python-zhmcclient-master,empty password,1
+python-zhmcclient-master,empty password,4
 python-zhmcclient-master,use of YAML load,16
-python-zhmcclient-master,hard-coded secrets,9
-python-zhmcclient-master,assert statement,133
+python-zhmcclient-master,assert statement,140
 python-zhmcclient-master,hard-coded tmp directories,1
 python3-connect-rest-sample-master,deployment with debug flag set to true,1
-python3-connect-rest-sample-master,hard-coded secrets,1
 python3-connect-rest-sample-master,no certificate validation,1
 python_webservices_library-master,use of HTTP without TLS,3
-python_webservices_library-master,hard-coded secrets,6
+python_webservices_library-master,hard-coded secrets,5
 pythoncommerce-master,deployment with debug flag set to true,2
 pythoncommerce-master,hard-coded secrets,1
 pythonnepal.github.io-source,use of HTTP without TLS,1
-pytrth-master,assert statement,2
+pytrth-master,assert statement,4
 pywebcopy-master,ignoring except block,2
 pywebcopy-master,command injection,8
 pywebcopy-master,assert statement,39
-pywebcopy-master,hard-coded secrets,1
 pywebdriver-master,assert statement,1
 pywebdriver-master,ignoring except block,3
 pywebsitechanges-master,use of HTTP without TLS,1
 pywebsitechanges-master,command injection,2
-pywebsitechanges-master,empty password,1
 pywps-master,ignoring except block,5
 pywps-master,assert statement,1
 pywps-master,command injection,3
 rasa-site-bot-master,use of HTTP without TLS,2
-rasa-site-bot-master,deployment with debug flag set to true,2
 rasa-site-bot-master,constructing sql statement upon user input,2
-rasa-site-bot-master,hard-coded secrets,3
+rasa-site-bot-master,hard-coded secrets,2
+rasa-site-bot-master,deployment with debug flag set to true,1
 rasa-site-bot-master,ignoring except block,1
 reconspider-master,no integrity check,2
 reconspider-master,use of HTTP without TLS,3
 reconspider-master,ignoring except block,1
-reconspider-master,empty password,2
 reconspider-master,command injection,2
 redis-hashring-master,command injection,2
 redis-hashring-master,ignoring except block,1
@@ -1088,27 +992,25 @@ requests-racer-master,command injection,4
 requests-racer-master,use of HTTP without TLS,1
 rest_gae-master,deployment with debug flag set to true,1
 rest_gae-master,hard-coded tmp directories,1
-robostrippy-master,hard-coded secrets,1
 robotcar-dataset-sdk-master,command injection,21
-saleor-custom-master,hard-coded secrets,12
 saleor-custom-master,constructing sql statement upon user input,36
-saleor-custom-master,cross site scripting,3
-saleor-custom-master,use of HTTP without TLS,5
+saleor-custom-master,cross site scripting,2
+saleor-custom-master,use of HTTP without TLS,3
 saleor-custom-master,ignoring except block,10
 saleor-custom-master,hard-coded tmp directories,3
+saleor-custom-master,hard-coded secrets,2
 saleor-custom-master,use of weak cryptographic algorithm,14
 saleor-custom-master,assert statement,1
-saleor-master,hard-coded secrets,53
+saleor-master,hard-coded secrets,12
 saleor-master,ignoring except block,8
-saleor-master,assert statement,9
+saleor-master,assert statement,11
 saleor-master,hard-coded tmp directories,2
 saleor-master,constructing sql statement upon user input,3
-saleor-master,use of weak cryptographic algorithm,4
+saleor-master,use of weak cryptographic algorithm,5
 santricity-webapi-pythonsdk-master,command injection,15
 santricity-webapi-pythonsdk-master,assert statement,1
 santricity-webapi-pythonsdk-master,dynamic code execution,2
 santricity-webapi-pythonsdk-master,use of HTTP without TLS,1
-santricity-webapi-pythonsdk-master,hard-coded secrets,25
 sci-wms-master,ignoring except block,18
 sci-wms-master,assert statement,2
 sci-wms-master,use of HTTP without TLS,1
@@ -1117,39 +1019,36 @@ scrapenhl2-master,assert statement,7
 scrapenhl2-master,ignoring except block,11
 scrapenhl2-master,deployment with debug flag set to true,2
 scrapenhl2-master,command injection,2
-security-growler-master,dynamic code execution,6
+security-growler-master,dynamic code execution,9
 security-growler-master,ignoring except block,6
-sephora_scrapy-master,hard-coded secrets,1
-shadowreader-master,hard-coded secrets,1
 shadowreader-master,use of weak cryptographic algorithm,2
-shadowreader-master,assert statement,5
+shadowreader-master,assert statement,6
 shadowreader-master,ignoring except block,1
 shopify_django_app-master,deployment with debug flag set to true,1
 shuup-master,use of HTTP without TLS,2
 shuup-master,command injection,17
-shuup-master,dynamic code execution,1
+shuup-master,dynamic code execution,2
 shuup-master,deployment with debug flag set to true,1
-shuup-master,cross site scripting,28
-shuup-master,assert statement,81
+shuup-master,assert statement,92
 shuup-master,ignoring except block,58
-shuup-master,hard-coded secrets,116
+shuup-master,hard-coded secrets,45
+shuup-master,cross site scripting,6
 shuup-master,constructing sql statement upon user input,2
-simple_ecommerce-master,hard-coded secrets,3
+simple_ecommerce-master,hard-coded secrets,1
 simple_ecommerce-master,deployment with debug flag set to true,1
 simpleauth-master,use of HTTP without TLS,2
-simpleauth-master,empty password,1
-simpleauth-master,hard-coded secrets,1
+simpleauth-master,empty password,2
 simpleeditions-master,assert statement,1
 simplenote.py-master,command injection,1
-simplenote.py-master,hard-coded secrets,1
 simplenote.py-master,ignoring except block,1
+site-master,hard-coded secrets,1
 site-master,ignoring except block,1
-site-master,cross site scripting,1
 skill-sample-python-petmatch-master,command injection,1
 slickr-master,ignoring except block,1
-social-commerce-project-master,deployment with debug flag set to true,3
+social-commerce-project-master,deployment with debug flag set to true,1
 social-commerce-project-master,hard-coded secrets,1
 social-commerce-project-master,ignoring except block,3
+soul-manga-master,hard-coded secrets,1
 soul-manga-master,deployment with debug flag set to true,1
 soul-manga-master,assert statement,5
 soul-manga-master,command injection,3
@@ -1161,6 +1060,7 @@ speed-camera-master,ignoring except block,1
 speed-camera-master,command injection,5
 speed-camera-master,no integrity check,2
 suds-master,ignoring except block,13
+suds-master,empty password,1
 suds-master,use of HTTP without TLS,2
 swish-python-master,ignoring except block,1
 terminal-leetcode-master,command injection,11
@@ -1172,43 +1072,35 @@ toopher-python-master,use of HTTP without TLS,4
 tornado-aws-master,ignoring except block,1
 tornado-aws-master,hard-coded tmp directories,1
 tornado-aws-master,use of HTTP without TLS,1
-twitter-for-bigquery-master,insecure deserialization,4
-twitter-for-bigquery-master,hard-coded secrets,5
 twitter-for-bigquery-master,ignoring except block,23
 twitter-for-bigquery-master,command injection,2
-twitter-for-bigquery-master,empty password,8
+twitter-for-bigquery-master,empty password,2
 twitter-for-bigquery-master,hard-coded tmp directories,2
 twitter-for-bigquery-master,assert statement,2
 twitter-for-bigquery-master,dynamic code execution,1
 us-sales-tax-rates-master,deployment with debug flag set to true,1
 video-service-flask-master,deployment with debug flag set to true,1
 video-service-flask-master,use of HTTP without TLS,2
-video-service-flask-master,hard-coded secrets,9
+video-service-flask-master,empty password,1
 video-service-flask-master,ignoring except block,1
-video-service-flask-master,empty password,2
 vidscraper-develop,ignoring except block,9
 vidscraper-develop,use of HTTP without TLS,23
-vidscraper-develop,hard-coded secrets,1
 vision-web-service-master,assert statement,5
 wagtail-snipcart-master,ignoring except block,2
 wagtail-snipcart-master,use of HTTP without TLS,1
 wagtail-snipcart-master,deployment with debug flag set to true,1
 wagtail-snipcart-master,hard-coded secrets,1
 wagtail-torchbox-master,hard-coded tmp directories,1
-wagtail-torchbox-master,hard-coded secrets,2
 wagtail-torchbox-master,ignoring except block,9
 wagtail-torchbox-master,deployment with debug flag set to true,1
-wagtail-torchbox-master,use of HTTP without TLS,4
-wappalyzer-python-master,hard-coded secrets,1
+wagtail-torchbox-master,hard-coded secrets,1
+wagtail-torchbox-master,use of HTTP without TLS,3
+waterbutler-develop,assert statement,29
 waterbutler-develop,dynamic code execution,1
-waterbutler-develop,assert statement,27
 waterbutler-develop,ignoring except block,9
-waterbutler-develop,hard-coded secrets,9
-waterbutler-develop,use of weak cryptographic algorithm,7
+waterbutler-develop,use of weak cryptographic algorithm,15
 waterbutler-develop,hard-coded tmp directories,1
-waterbutler-develop,empty password,1
 waterbutler-develop,insecure deserialization,1
-watson-framework-master,hard-coded secrets,1
 watson-framework-master,bad file permission,1
 watson-framework-master,use of HTTP without TLS,1
 weatherlink-python-master,command injection,2
@@ -1216,39 +1108,37 @@ weatherlink-python-master,ignoring except block,2
 weatherlink-python-master,use of HTTP without TLS,2
 webkiller-master,command injection,5
 webkiller-master,ignoring except block,1
-websauna-master,assert statement,83
-websauna-master,hard-coded secrets,8
+websauna-master,assert statement,92
 websauna-master,use of weak cryptographic algorithm,1
 websauna-master,ignoring except block,2
+websauna-master,empty password,2
 websauna-master,command injection,1
 websauna-master,dynamic code execution,1
-websauna-master,empty password,1
-webservice-py-master,hard-coded secrets,11
 webservice-py-master,use of HTTP without TLS,94
+webservice-py-master,hard-coded secrets,6
 webservice-py-master,ignoring except block,2
 websockify-master,ignoring except block,3
 websockify-master,empty password,1
 websockify-master,hard-coded IP address bindings,1
 websockify-master,command injection,1
+websockify-master,hard-coded secrets,1
 websockify-master,assert statement,3
 websockify-master,hard-coded tmp directories,1
 weiquncrawler-master,insecure deserialization,30
 weiquncrawler-master,deployment with debug flag set to true,6
 weiquncrawler-master,ignoring except block,14
-weiquncrawler-master,hard-coded secrets,4
-weshop-master,hard-coded secrets,3
+weshop-master,hard-coded secrets,2
 weshop-master,deployment with debug flag set to true,1
 weshop-master,ignoring except block,1
-weshop-master,empty password,1
-white-master,hard-coded secrets,1
-white-master,empty password,1
-white-master,deployment with debug flag set to true,3
+white-master,deployment with debug flag set to true,2
+white-master,constructing sql statement upon user input,26
+white-master,hard-coded secrets,2
 whitenoise-master,ignoring except block,6
 whitenoise-master,command injection,6
 wigle-master,command injection,6
 wishlists-master,ignoring except block,2
 wishlists-master,insecure deserialization,1
-wishlists-master,assert statement,17
+wishlists-master,assert statement,20
 wsgiservice-master,ignoring except block,1
 wtfpython-web-master,hard-coded secrets,1
 wtfpython-web-master,deployment with debug flag set to true,1

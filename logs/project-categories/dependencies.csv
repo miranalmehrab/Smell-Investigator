@@ -1,16 +1,16 @@
 assert statement
 ignoring except block
-use of weak cryptographic algorithm
 command injection
 dynamic code execution
-use of HTTP without TLS
 empty password
+use of HTTP without TLS
 use of YAML load
-hard-coded secrets
 bad file permission
 constructing sql statement upon user input
 insecure deserialization
+hard-coded secrets
 hard-coded tmp directories
+use of weak cryptographic algorithm
 deployment with debug flag set to true
 no certificate validation
 hard-coded IP address bindings

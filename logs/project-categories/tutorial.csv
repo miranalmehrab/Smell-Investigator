@@ -1,12 +1,11 @@
-hard-coded secrets
 hard-coded tmp directories
-deployment with debug flag set to true
 ignoring except block
-dynamic code execution
+deployment with debug flag set to true
 command injection
-empty password
+dynamic code execution
+hard-coded secrets
 use of weak cryptographic algorithm
 assert statement
-cross site scripting
 use of YAML load
 use of HTTP without TLS
+empty password

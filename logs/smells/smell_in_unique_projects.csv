@@ -1,18 +1,18 @@
-use of weak cryptographic algorithm,56
+use of weak cryptographic algorithm,54
 ignoring except block,213
-use of HTTP without TLS,121
-hard-coded secrets,190
+use of HTTP without TLS,119
 hard-coded tmp directories,49
-deployment with debug flag set to true,126
-dynamic code execution,53
+hard-coded secrets,116
+deployment with debug flag set to true,121
 command injection,111
-empty password,53
-assert statement,111
+dynamic code execution,50
+assert statement,114
+empty password,51
 bad file permission,23
-constructing sql statement upon user input,26
-insecure deserialization,44
-cross site scripting,37
-use of YAML load,23
+constructing sql statement upon user input,28
+insecure deserialization,42
+cross site scripting,15
+use of YAML load,20
 no certificate validation,5
 hard-coded IP address bindings,8
 no integrity check,7

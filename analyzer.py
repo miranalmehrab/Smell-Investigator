@@ -68,7 +68,7 @@ class Analyzer(ast.NodeVisitor):
             func_def["defaults"] = []
             func_def["return"] = None
 
-            for arg in node.args.args: 
+            for arg in node.args.args:
                 if isinstance(arg, ast.arg): func_def["args"].append(arg.arg)
             
             if isinstance(node.args.vararg, ast.arg): 
@@ -78,15 +78,23 @@ class Analyzer(ast.NodeVisitor):
                 func_def["args"].append(node.args.kwarg.arg)
             
             for default in node.args.defaults:
-                self.separate_variables(default,func_def["defaults"])
+                if isinstance(default, ast.Constant):
+                    default_value = self.separate_variables(default,[])
+                    if len(default_value) > 0: 
+                        func_def["defaults"].append([default_value[0], True])
+                else:
+                    default_value = self.separate_variables(default,[])
+                    if len(default_value) > 0: 
+                        func_def["defaults"].append([default_value[0], False])
+                
 
             for item in node.body:
                 
-                if isinstance(item,ast.Return):
+                if isinstance(item, ast.Return):
                     func_def["return"] = self.separate_variables(item.value,[])
-                    func_def["return"] = func_def["return"][0] if len(func_def["return"]) > 0 else None
+                    func_def["return"] = func_def["return"] if len(func_def["return"]) > 0 else None
 
-                    if isinstance(item.value,ast.Call):
+                    if isinstance(item.value, ast.Call):
                         func_def["returnArgs"] = []
                         for arg in item.value.args:
                             func_def["returnArgs"] = self.separate_variables(arg, func_def["returnArgs"])
@@ -128,163 +136,130 @@ class Analyzer(ast.NodeVisitor):
                 variable['funcKeywords'] = []
                 variable['isInput'] = False
             
-                if isinstance(target, ast.Name):
+                if isinstance(target, ast.Name) and isinstance(node.value, ast.Constant):
                     variable["name"] = target.id
-
-                elif isinstance(target, ast.Subscript):
-                    var = self.separate_variables(target.value, [])
-                    variable["name"] = var[0] if len(var) > 0 else None
-                    
-                    varSlice = None
-                    if isinstance(target.slice, ast.Index): 
-                        varSlice = self.separate_variables(target.slice.value, [])
-                        varSlice = varSlice[0] if len(varSlice) > 0 else None
-
-                    elif isinstance(target.slice, ast.ExtSlice):
-                        varSlice = self.separate_variables(target.slice.dims, [])
-                        varSlice = varSlice[0] if len(varSlice) > 0 else None
-
-                    elif isinstance(target.slice, ast.Slice):
-                        lowerSlice = self.separate_variables(target.slice.lower, []) if target.slice.lower!= None else 'min'
-                        upperSlice = self.separate_variables(target.slice.upper, []) if target.slice.upper!= None else 'max'
-                        
-                        if lowerSlice != 'min' and len(lowerSlice)>0: lowerSlice = lowerSlice[0]
-                        if upperSlice != 'max' and len(upperSlice)>0: upperSlice = upperSlice[0]
-
-                        varSlice = str(lowerSlice)+':'+str(upperSlice)
-                        
-                    if varSlice is not None and variable["name"] is not None:
-                        variable["name"] = variable["name"]+'['+str(varSlice)+']'
-                    
-                    elif varSlice is None and variable["name"] is not None:
-                        pass 
-                    
-                    elif varSlice is not None and variable["name"] is None: 
-                        variable["name"] = '['+str(varSlice)+']'
-                
-                elif isinstance(target, ast.Tuple):
-                    variable["type"] = "tuple"
-                    variable["names"] = []
-
-                    for element in target.elts:
-                        names = self.separate_variables(element, [])
-                        if len(names) > 0: variable["names"].append(names[0])
-                
-                elif isinstance(target, ast.Attribute):
-    
-                    name = self.get_function_attribute(target)
-                    returns = self.get_value_src_from_variable_name(name)
-                    if returns[0] is True: name = returns[1]
-
-                    if name is not None and target.attr is not None: variable["name"] = name +'.'+ target.attr
-                    elif target.attr is None: variable["name"] = name
-                    
-                    # print('name: {name}'.format(name = name))
-                    
-
-                if isinstance(node.value, ast.Constant):
                     variable["value"] = node.value.value
-                    variable["valueSrc"] = "initialization"
-                    variable["isInput"] = False
-
-                if isinstance(node.value, ast.Name):
-                    value_from_variable_name = self.value_from_variable_name(node.value.id)
                     
-                    if value_from_variable_name[0] is False:
-                        variable['remove'] = True
-
-                    else:
-                        if isinstance(value_from_variable_name[1], set): variable["type"] = "set"
-                        elif isinstance(value_from_variable_name[1], list): variable["type"] = "list"
-                        elif isinstance(value_from_variable_name[1], dict): variable["type"] = "dict"
-                        elif isinstance(value_from_variable_name[1], tuple): variable["type"] = "tuple"
-                        
-                        variable["value"] = value_from_variable_name[1]
-                        variable["valueSrc"] = "initialization"
-                        variable["isInput"] = False
-
-                
-                elif isinstance(node.value, ast.BinOp):
+                elif isinstance(target, ast.Name) and isinstance(node.value, ast.BinOp):
+                    variable["name"] = target.id
                     usedVars = self.get_variables_used_in_declaration(node.value)
-                    hasInputs = self.search_input_in_declaration(usedVars, variable["line"])
                     
-                    if hasInputs is True:
-                        self.inputs.append(variable["name"])
-                        variable["value"] = None
-                        variable["valueSrc"] = "input"
-                        variable["isInput"] = True
+                    returns = self.build_value_from_used_variables(usedVars, variable['line'])
+                    if returns[0] is True: variable["value"] = returns[1]
+                    else: 
+                        variable['value'] = None
+                        variable['remove'] = True
                     
-                    else:
-                        returns = self.build_value_from_used_variables(usedVars, variable['line'])
-                        if returns[0] is True: variable["value"] = returns[1]
-                        else: 
-                            variable['value'] = None
-                            variable['remove'] = True
-                        
-                        variable["valueSrc"] = "initialization"
-                        variable["isInput"] = False
+                elif isinstance(target, ast.Name) and isinstance(node.value, ast.List):
+                    variable["name"] = target.id
+                    variable["type"] = "list"
+                    variable["values"] = []
+                    
+                    for element in node.value.elts:
+                        if isinstance(element, ast.Constant):
+                            variable["values"].append(element.value)
 
-                elif isinstance(node.value, ast.Call):
+                elif isinstance(target, ast.Name) and isinstance(node.value, ast.Dict):
+                    variable["name"] = target.id
+                    variable["type"] = "dict"
+                    variable["pairs"] = []
                     
-                    funcName = self.get_function_name(node)
-                    variable["value"] =  self.get_function_return_value(funcName) 
-                    variable["valueSrc"] = funcName
+                    pairs = zip(node.value.keys, node.value.values)
+                    for pair in pairs:
+                        
+                        if isinstance(pair[0], ast.Constant) and isinstance(pair[1], ast.Constant):
+                            variable["pairs"].append([pair[0].value, pair[1].value])
+                        
+                        elif isinstance(pair[0], ast.Name) and isinstance(pair[1], ast.Constant):
+                            variable["pairs"].append([pair[0].id, pair[1].value])
+                
+                elif isinstance(target, ast.Name) and isinstance(node.value, ast.Tuple):
+                    variable["name"] = target.id
+                    variable["type"] = "tuple"
+                    variable["values"] = []
+
+                    for element in node.value.elts:
+                        if isinstance(element, ast.Constant):
+                            variable["values"].append(element.value)
+                    
+                elif isinstance(target, ast.Name) and isinstance(node.value, ast.Set):
+                    variable["name"] = target.id
+                    variable["type"] = "set"
+                    variable["values"] = []
+                    
+                    for element in node.value.elts:
+                        if isinstance(element, ast.Constant):
+                            variable["values"].append(element.value)
+                    
+
+                elif (isinstance(target, ast.Name) or isinstance(target, ast.Attribute)) and isinstance(node.value, ast.Call):
+                    if isinstance(target, ast.Name): variable["name"] = target.id
+                    elif isinstance(target, ast.Attribute): 
+                        variable["name"] = self.get_name_from_attribute_node(target)
+                        if target.attr: variable["name"] = variable["name"]+ '.' +target.attr
+
+                    function_name = self.get_function_name(node.value)
+                    variable["value"] = None #self.get_function_return_value(function_name) 
+                    variable["valueSrc"] = function_name
                     variable["args"] = []
                     variable["isInput"] = False
-
-                    input_functions = [ 'input', 'request.POST.get', 'request.GET.get', 'request.GET.getlist', 'request.POST.getlist',
-                                        'self.request.POST.get', 'self.request.GET.get', 'self.request.GET.getlist', 'self.request.POST.getlist'
-                                    ]
-
-                    if funcName in input_functions:
-                        variable["value"] = None
-                        variable["isInput"] = True
-                        self.inputs.append(variable["name"])
+                    
+                    input_functions = [ 'input','request.POST.get','request.GET.get','request.GET.getlist','request.POST.getlist','POST.get','GET.get','POST.getlist', 'GET.getlist']
+                    for name in input_functions:
+                        if name in function_name:
+                            variable["value"] = None
+                            variable["isInput"] = True
+                            self.inputs.append(variable["name"])
+                            break
                     
                     for arg in node.value.args:
                         if isinstance(arg, ast.Attribute): 
                             
-                            variable["args"].append(self.get_function_attribute(arg)+'.'+arg.attr)
+                            variable["args"].append(self.get_name_from_attribute_node(arg)+'.'+arg.attr)
 
-                            funcObj = {}
-                            funcObj["type"] = "function_obj"
-                            funcObj["line"] = node.lineno
-                            funcObj["objName"] = variable["name"]
-                            funcObj["funcName"] = variable["valueSrc"]
-                            funcObj["args"] = variable["args"]
+                            function_object = {}
+                            function_object["type"] = "function_obj"
+                            function_object["line"] = node.lineno
+                            function_object["objName"] = variable["name"]
+                            function_object["function_name"] = variable["valueSrc"]
+                            function_object["args"] = variable["args"]
 
-                            if(funcObj not in self.statements):self.statements.append(funcObj)
+                            if(function_object not in self.statements):
+                                self.statements.append(function_object)
                         
                         elif isinstance(arg, ast.Call) and isinstance(arg.func, ast.Name):
-                            funcName = arg.func.id
-                            funcName = self.get_function_name_from_object(funcName)
-                            variable['args'].append(funcName)
-                            if funcName in input_functions:
+                            function_name = arg.func.id
+                            function_name = self.get_function_name_from_object(function_name)
+                            variable['args'].append(function_name)
+                            
+                            if function_name in input_functions:
 
                                 variable['value'] = None
-                                variable["valueSrc"] = funcName
+                                variable["valueSrc"] = function_name
                                 variable['isInput'] = True
                         
+                            self.extract_function_call_from_argument_passing(arg)
+
                         elif isinstance(arg, ast.Call) and isinstance(arg.func, ast.Attribute):
 
-                            funcName = self.get_function_attribute(arg.func)
-                            funcName = funcName + arg.func.attr
+                            function_name = self.get_name_from_attribute_node(arg.func)
+                            function_name = function_name + arg.func.attr
 
-                            variable['valueSrc'] = funcName
+                            variable['valueSrc'] = function_name
                             variable["isInput"] = False
 
                             input_functions = [ 'input', 'request.POST.get', 'request.GET.get', 'request.GET.getlist', 'request.POST.getlist',
                                                 'self.request.POST.get', 'self.request.GET.get', 'self.request.GET.getlist', 'self.request.POST.getlist'
                                             ]
 
-                            if funcName in input_functions:
+                            if function_name in input_functions:
                                 variable["value"] = None
-                                variable["valueSrc"] = funcName
+                                variable["valueSrc"] = function_name
                                 variable["isInput"] = True
                                 self.inputs.append(variable["name"])
                             
-
-
+                            self.extract_function_call_from_argument_passing(arg)
+                            
                         elif isinstance(arg, ast.Name):
                             name = arg.id
                             value = None
@@ -301,7 +276,7 @@ class Analyzer(ast.NodeVisitor):
                                 if value is not None: variable["args"].append(value)
                                 else:  variable["args"].append(name)
 
-                        else: variable["args"] = (self.separate_variables(arg,variable["args"]))
+                        else: variable["args"] = (self.separate_variables(arg, variable["args"]))
 
                     for keyword in node.value.keywords:
                         # variable['funcKeywords'] = []
@@ -325,101 +300,20 @@ class Analyzer(ast.NodeVisitor):
                         if karg is not None and should_take:
                             variable["funcKeywords"].append([karg, kvalue])
                             # print(variable["funcKeywords"])
-                            
 
-                elif isinstance(node.value, ast.List):
-                    variable["type"] = "list"
-                    variable["values"] = []
-                    
-                    variable["valueSrc"] = 'initialization'
-                    variable["isInput"] = False
-                    
-                    for value in node.value.elts:
-                        variable["values"] = self.separate_variables(value,variable["values"])
-
-                elif isinstance(node.value, ast.Dict):
-                    variable["type"] = "dict"
-                    variable["keys"] = []
-                    variable["values"] = []
-
-                    for key in node.value.keys:
-                        keyList = self.separate_variables(key,[])
-                        if len(keyList) > 0: variable["keys"].append(keyList[0]) 
-                    
-                    for value in node.value.values:
-                        valueList = self.separate_variables(value, [])
-                        if len(valueList) > 0: variable["values"].append(valueList[0])
                 
-                elif isinstance(node.value,ast.Tuple):
-                    variable["type"] = "tuple"
-                    variable["values"] = []
+                elif isinstance(target, ast.Attribute) and isinstance(node.value, ast.Constant):    
+                    name = self.get_name_from_attribute_node(target)
+                    returns = self.get_value_src_from_variable_name(name)
+                    if returns[0] is True: name = returns[1]
 
-                    for element in node.value.elts:
-                        values = self.separate_variables(element, [])
-                        if len(values)>0: variable["values"].append(values[0])
+                    if name is not None and target.attr is not None: variable["name"] = name +'.'+ target.attr
+                    elif target.attr is None: variable["name"] = name
                     
+                    variable['value'] = node.value.value
 
-                elif isinstance(node.value,ast.Set):
-                    variable["type"] = "set"
-                    variable["values"] = []
-                    
-                    for element in node.value.elts:    
-                        values = self.separate_variables(element, [])
-                        if len(values)>0: variable["values"].append(values[0])
-                    
-                elif isinstance(node.value, ast.IfExp):
-                    # variable["type"] = "variable" overriding previous type (var , tuple , set etc)
-                    variable["values"] = []
-
-                    bodyList = self.separate_variables(node.value.body,[])
-                    if len(bodyList) > 0: variable["values"].append(bodyList[0])
-
-                    comparatorList = self.separate_variables(node.value.orelse, [])
-                    if len(comparatorList) > 0: variable["values"].append(comparatorList[0])
-
-                elif isinstance(node.value, ast.BoolOp):
-                    variable["values"] = []
-                    for value in node.value.values:
-                        valueList = self.separate_variables(value,[])
-                        if len(valueList) > 0: variable["values"].append(valueList[0])
-                
-                elif isinstance(node.value, ast.Subscript):
-                    value = self.separate_variables(node.value.value, [])
-                    variable["value"] = value[0] if len(value) > 0 else None
-                    variable["value"] = self.value_from_variable_name(variable['value'])[1]
-
-                    if isinstance(node.value.slice, ast.Slice):
-                        lowerSlice = self.separate_variables(node.value.slice.lower, []) if node.value.slice.lower!= None else 'min'
-                        upperSlice = self.separate_variables(node.value.slice.upper, []) if node.value.slice.upper!= None else 'max'
-                        
-                        if lowerSlice != 'min' and len(lowerSlice) > 0: lowerSlice = lowerSlice[0]
-                        if upperSlice != 'max' and len(upperSlice) > 0: upperSlice = upperSlice[0]
-
-                        varSlice = str(lowerSlice)+':'+str(upperSlice)
-                        
-                        if type(value) == list and type(lowerSlice) == int and type(upperSlice) == int:
-                            variable["value"] = variable["value"][lowerSlice:upperSlice]
-                        
-                        elif type(value) == list and type(lowerSlice) == int and type(upperSlice) == str:
-                            variable["value"] = variable["value"][lowerSlice:]
-                        elif variable['value'] != None and type(value) == list and type(lowerSlice) == str and type(upperSlice) == int:
-                            variable["value"] = variable["value"][:upperSlice]
-                        elif type(value) == list and type(lowerSlice) == str and type(upperSlice) == str:
-                            variable["value"] = variable["value"]
-                        elif varSlice != None and variable["value"]!= None:
-                            variable["value"] = variable["value"]+'['+str(varSlice)+']'
-                        else: variable["value"] = '['+str(varSlice)+']'
-
-                elif isinstance(node.value, ast.Attribute):
-                    attr = self.get_function_attribute(node.value)+'.'+node.value.attr if node.value.attr else self.get_function_attribute(node.value) 
-                    returns = self.value_from_variable_name(attr)
-                    variable["value"] = returns[1] if returns[0] is True else attr
-                    if returns[0] is False:
-                        variable['remove'] = True
-
-
-                if variable.__contains__('remove') is False:
-                    self.statements.append(variable)
+                if variable['name'] is None and variable['value'] is None and variable['valueSrc'] == 'initialization': pass
+                elif variable.__contains__('remove') is False: self.statements.append(variable)
  
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
@@ -574,15 +468,15 @@ class Analyzer(ast.NodeVisitor):
                 
             if isinstance(node.value, ast.Call):
                 if isinstance(node.value.func, ast.Name): expression["name"] = node.value.func.id
-                elif isinstance(node.value.func,ast.Call): expression["name"] = self.get_function_name(node)
+                elif isinstance(node.value.func,ast.Call): expression["name"] = self.get_function_name(node.value)
                 elif isinstance(node.value.func,ast.Attribute): 
-                    name = self.get_function_name(node)
+                    name = self.get_function_name(node.value)
                     expression["name"] = self.get_function_name_from_object(name)
-                    # print('function name %s' % expression["name"])
     
                 # separating args in function call
                 for arg in node.value.args:
-                    expression["args"] = self.separate_variables(arg,expression["args"])
+                    expression["args"] = self.separate_variables(arg, expression["args"])
+                    if isinstance(arg, ast.Call): self.extract_function_call_from_argument_passing(arg)
                     
                 # print(expression['args'])
                 hasInputs = self.search_input_in_declaration(expression['args'], expression["line"])
@@ -595,10 +489,10 @@ class Analyzer(ast.NodeVisitor):
                 
                 for keyword in node.value.keywords:
                     karg = keyword.arg
-                    kvalue = None
-
-                    if isinstance(keyword.value, ast.Constant): kvalue = keyword.value.value
-                    if karg: expression["keywords"].append([karg,kvalue])
+                    kvalue = self.separate_variables(keyword.value, [])[0] if len(self.separate_variables(keyword.value, [])) > 0 else None 
+                    
+                    if karg and isinstance(keyword.value, ast.Constant): expression["keywords"].append([karg,kvalue,True])
+                    elif karg and isinstance(keyword.value, ast.Constant) is False: expression["keywords"].append([karg,kvalue,False])
 
                 self.statements.append(expression)
 
@@ -609,6 +503,53 @@ class Analyzer(ast.NodeVisitor):
         self.generic_visit(node)
     
 
+    def extract_function_call_from_argument_passing(self, node):
+        
+        try:
+            expression = {}
+            expression["type"] = "function_call"
+            expression["line"] = node.lineno
+            expression["name"] = None
+            expression["args"] = []
+            expression["keywords"] = []
+            expression["hasInputs"] = False
+                
+            if isinstance(node, ast.Call):
+                if isinstance(node.func, ast.Name): expression["name"] = node.func.id
+                elif isinstance(node.func,ast.Call): expression["name"] = self.get_function_name(node)
+                elif isinstance(node.func, ast.Attribute): 
+                    name = self.get_function_name(node)
+                    expression["name"] = self.get_function_name_from_object(name)
+                    # print('function name %s' % expression["name"])
+    
+                # separating args in function call
+                for arg in node.args:
+                    expression["args"] = self.separate_variables(arg,expression["args"])
+                    if isinstance(arg, ast.Call): self.extract_function_call_from_argument_passing(arg)
+                    
+                # print(expression['args'])
+                hasInputs = self.search_input_in_declaration(expression['args'], expression["line"])
+                if hasInputs is True: expression["hasInputs"] = True
+
+                # getting args value from name in function call
+                for i in range(len(expression['args'])): 
+                    returns = self.value_from_variable_name(expression['args'][i])
+                    expression['args'][i] = returns[1] 
+                
+                for keyword in node.keywords:
+                    karg = keyword.arg
+                    kvalue = self.separate_variables(keyword.value, [])[0] if len(self.separate_variables(keyword.value, [])) > 0 else None
+                    
+                    if karg and isinstance(keyword.value, ast.Constant): expression["keywords"].append([karg,kvalue,True])
+                    elif karg and isinstance(keyword.value, ast.Constant) is False: expression["keywords"].append([karg,kvalue,False])
+
+                self.statements.append(expression)
+
+        except Exception as error:
+            line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
+            save_token_parsing_exception(str(error), line_number)
+
+
     ######################### Assert Here #########################
 
     def visit_Assert(self, node):
@@ -617,56 +558,56 @@ class Analyzer(ast.NodeVisitor):
             assertStatement["type"] = "assert"
             assertStatement["line"] = node.lineno
             
-            for fieldname, value in ast.iter_fields(node):
-                # print(fieldname)
-                # print(ast.dump(value))
+            # for fieldname, value in ast.iter_fields(node):
+            #     # print(fieldname)
+            #     # print(ast.dump(value))
 
-                if fieldname == 'test':
-                    if isinstance(value, ast.Compare):
-                        for test_fieldname, test_value in ast.iter_fields(value):
+            #     if fieldname == 'test':
+            #         if isinstance(value, ast.Compare):
+            #             for test_fieldname, test_value in ast.iter_fields(value):
                             
-                            if test_fieldname == 'left':
+            #                 if test_fieldname == 'left':
                         
-                                left = self.separate_variables(test_value, [])
-                                if len(left) > 0: assertStatement['left'] = left[0]
+            #                     left = self.separate_variables(test_value, [])
+            #                     if len(left) > 0: assertStatement['left'] = left[0]
                     
-                            elif test_fieldname == 'comparators':
-                                comparators = []
+            #                 elif test_fieldname == 'comparators':
+            #                     comparators = []
 
-                                for comparator in test_value:
-                                    name = self.separate_variables(comparator, [])
-                                    name = name[0] if len(name) > 0 else None
+            #                     for comparator in test_value:
+            #                         name = self.separate_variables(comparator, [])
+            #                         name = name[0] if len(name) > 0 else None
                                 
-                                    if name is not None: comparators.append(name)
+            #                         if name is not None: comparators.append(name)
                             
-                                if len(comparators) > 0: assertStatement['comparators'] = comparators
+            #                     if len(comparators) > 0: assertStatement['comparators'] = comparators
 
-                    elif isinstance(value, ast.Call):
-                        for test_fieldname, test_value in ast.iter_fields(value):
-                            if test_fieldname == 'func':
-                                func_name = self.separate_variables(test_value, [])
-                                if len(func_name) > 0: assertStatement['func'] = func_name[0]
+            #         elif isinstance(value, ast.Call):
+            #             for test_fieldname, test_value in ast.iter_fields(value):
+            #                 if test_fieldname == 'func':
+            #                     func_name = self.separate_variables(test_value, [])
+            #                     if len(func_name) > 0: assertStatement['func'] = func_name[0]
 
-                            elif test_fieldname == 'args':
-                                func_args = []
-                                for arg in test_value:
-                                    func_args = self.separate_variables(arg, func_args)
+            #                 elif test_fieldname == 'args':
+            #                     func_args = []
+            #                     for arg in test_value:
+            #                         func_args = self.separate_variables(arg, func_args)
                                 
-                                if len(func_args) > 0: assertStatement['args'] = func_args
+            #                     if len(func_args) > 0: assertStatement['args'] = func_args
                         
-                    else:
-                        left = self.separate_variables(node.test, [])
-                        if len(left) > 0: assertStatement['left'] = left[0]
+            #         else:
+            #             left = self.separate_variables(node.test, [])
+            #             if len(left) > 0: assertStatement['left'] = left[0]
                         
-                elif fieldname == 'msg':
-                    msg = self.separate_variables(value, [])
-                    if len(msg) > 0:  assertStatement['msg'] = msg[0]
+            #     elif fieldname == 'msg':
+            #         msg = self.separate_variables(value, [])
+            #         if len(msg) > 0:  assertStatement['msg'] = msg[0]
                     
 
             self.statements.append(assertStatement)
 
         except Exception as error:
-            print(str(error))
+            # print(str(error))
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
             save_token_parsing_exception(str(error), line_number)
 
@@ -678,7 +619,7 @@ class Analyzer(ast.NodeVisitor):
         try:
             if isinstance(node,ast.Name): itemList.append(node.id) 
             elif isinstance(node,ast.Constant): itemList.append(node.value)
-            elif isinstance(node,ast.Attribute): itemList.append(self.get_function_attribute(node)+'.'+node.attr)
+            elif isinstance(node,ast.Attribute): itemList.append(self.get_name_from_attribute_node(node)+'.'+node.attr)
             elif isinstance(node,ast.FormattedValue): itemList = self.separate_variables(node.value, itemList)
             
             elif isinstance(node,ast.BinOp):    
@@ -690,18 +631,13 @@ class Analyzer(ast.NodeVisitor):
             elif isinstance(node, ast.Call):
                 if isinstance(node.func, ast.Name): itemList.append(node.func.id)
                 elif isinstance(node.func, ast.Attribute):
-                    func = self.get_function_attribute(node.func)
+                    func = self.get_name_from_attribute_node(node.func)
                     if node.func.attr and func: func = func +'.'+ node.func.attr
                     itemList.append(func)
 
                     for arg in node.args:
                         itemList = self.separate_variables(arg, itemList)
             
-            elif isinstance(node, ast.List):
-                if len(node.elts) == 0: itemList.append(None)
-                for element in node.elts:
-                    itemList = self.separate_variables(element,itemList)
-
             
             elif isinstance(node, ast.JoinedStr):
                 for value in node.values:
@@ -731,11 +667,47 @@ class Analyzer(ast.NodeVisitor):
                 for elt in node.elts:
                     itemList = self.separate_variables(elt, itemList)
 
+            elif isinstance(node, ast.List):
+                variable = {}
+                variable["type"] = "list"
+                variable["line"] = node.lineno
+                variable["name"] = None
+                variable["values"] = []
+
+                for element in node.elts:
+                    if isinstance(element, ast.Constant):
+                        variable["values"].append(element.value)
+                
+                itemList.append(variable['values'])
+                self.statements.append(variable)
+
+            elif isinstance(node, ast.Dict):
+                
+                variable = {}
+                variable["type"] = "dict"
+                variable["line"] = node.lineno
+                variable["name"] = None
+                variable["pairs"] = []
+                
+                for pair in zip(node.keys, node.values):
+                    
+                    if isinstance(pair[0], ast.Constant) and isinstance(pair[1], ast.Constant):
+                        variable["pairs"].append([pair[0].value, pair[1].value])
+                    
+                    elif isinstance(pair[0], ast.Name) and isinstance(pair[1], ast.Constant):
+                        variable["pairs"].append([pair[0].id, pair[1].value])
+
+                itemList.append(variable['pairs'])
+                self.statements.append(variable)
+
             return itemList
 
         except Exception as error:
             line_number = "Error on line {}".format(sys.exc_info()[-1].tb_lineno)
             save_token_parsing_exception(str(error), line_number)
+
+
+
 
     def refine_tokens(self):
         for statement in self.statements:
@@ -841,8 +813,8 @@ class Analyzer(ast.NodeVisitor):
 
         for statement in self.statements:
             if statement["type"] == "function_obj" and fName == statement["objName"]: 
-                if statement["funcName"] is not None: 
-                    return statement["funcName"]+'.'+lName
+                if statement["function_name"] is not None: 
+                    return statement["function_name"]+'.'+lName
 
             elif statement['type'] == 'variable' and fName == statement['name']:
                 if statement['valueSrc'] is not None: 
@@ -862,10 +834,10 @@ class Analyzer(ast.NodeVisitor):
         return name
 
 
-    def get_function_return_value(self,funcName):
+    def get_function_return_value(self,function_name):
 
         for statement in self.statements:
-            if statement["type"] == "function_def" and statement["name"] == funcName:
+            if statement["type"] == "function_def" and statement["name"] == function_name:
                 return statement["return"] if statement.__contains__("return") and statement["return"] is not None else None 
                 
         return None
@@ -977,35 +949,36 @@ class Analyzer(ast.NodeVisitor):
 
 
     def get_function_name(self, node):
-        for fieldname, value in ast.iter_fields(node.value):
+        for fieldname, value in ast.iter_fields(node):
             
-            if(fieldname == "func" and isinstance(value, ast.Name)): return value.id
+            if(fieldname == "func" and isinstance(value, ast.Name)): 
+                return value.id
             
             elif(fieldname == "func" and isinstance(value, ast.Attribute)):    
-                functionName = self.get_function_attribute(value)
+                function_name = self.get_name_from_attribute_node(value)
 
-                if functionName != None and value.attr != None : return str(functionName) +'.'+ str(value.attr) 
-                elif functionName != None and value.attr == None : return str(functionName)
-                elif functionName == None and value.attr == None : return None
+                if function_name != None and value.attr != None : return str(function_name) +'.'+ str(value.attr) 
+                elif function_name != None and value.attr == None : return str(function_name)
+                elif function_name == None and value.attr == None : return None
 
         return None
         
 
-    def get_function_attribute(self, node):
+    def get_name_from_attribute_node(self, node):
         name = None
         attr = None
-        
         for field, value in ast.iter_fields(node):
+            
             if isinstance(value, ast.Attribute):
+                name = self.get_name_from_attribute_node(value)
                 attr = value.attr
-                name = self.get_function_attribute(value)
 
             elif isinstance(value, ast.Constant): name = value.value
             elif isinstance(value, ast.Name): name = value.id #self.get_actual_valueSrc_from_later_valueSrc(value.id)
-            elif isinstance(value, ast.Subscript): name = self.get_function_attribute(value)
-            elif isinstance(value,ast.Call): name = self.get_function_attribute(value)
+            elif isinstance(value, ast.Subscript): name = self.get_name_from_attribute_node(value)
+            elif isinstance(value, ast.Call): name = self.get_name_from_attribute_node(value)
 
-        return str(name)+'.'+str(attr) if attr else str(name)
+        return str(name)+'.'+str(attr) if attr != None else str(name)
 
 
     def search_input_in_function_call_and_returned_function_args(self):

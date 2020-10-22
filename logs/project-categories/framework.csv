@@ -1,16 +1,16 @@
 assert statement
 ignoring except block
 dynamic code execution
-hard-coded secrets
+empty password
 use of weak cryptographic algorithm
 use of HTTP without TLS
+hard-coded secrets
 insecure deserialization
 bad file permission
-empty password
 command injection
 deployment with debug flag set to true
-cross site scripting
 hard-coded tmp directories
 use of YAML load
 no integrity check
 constructing sql statement upon user input
+cross site scripting

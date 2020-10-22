@@ -20,8 +20,8 @@ def detect(token, project_name, src_file):
             if valueSrc in insecureMethods:
                 action_upon_detection(project_name, src_file, lineno, 'use of weak cryptographic algorithm', 'use of weak cryptographic algorithm', token)
 
-        if tokenType == "dict" and token.__contains__('keys') and token.__contains__('values'):
-            for value_pair in zip(token['keys'], token['values']):  
+        if tokenType == "dict" and token.__contains__('pairs'):
+            for value_pair in token['pairs']:
                 if len(value_pair) == 2 and ((value_pair[0] is not None and value_pair[0]in insecureMethods) or (value_pair[1] is not None and value_pair[1] in insecureMethods)):
                     action_upon_detection(project_name, src_file, lineno, 'use of weak cryptographic algorithm', 'use of weak cryptographic algorithm', token)
             
@@ -42,7 +42,7 @@ def detect(token, project_name, src_file):
             
             if token.__contains__('keywords') and len(token['keywords']) > 0:
                 for keyword in token['keywords']:
-                    if keyword[1] is not None and keyword[1] in insecureMethods:
+                    if keyword[1] is not None and keyword[1] in insecureMethods and keyword[2] is False:
                         action_upon_detection(project_name, src_file, lineno, 'use of weak cryptographic algorithm', 'use of weak cryptographic algorithm', token)
 
         elif tokenType == "function_def":

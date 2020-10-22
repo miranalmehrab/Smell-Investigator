@@ -12,18 +12,17 @@ def detect(token, project_name, src_file):
         if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
         
 
-        commonKeywords = [  '_key','_id','-key', 'cert', '_root','-root','passno','pass-no', 'pass_no', 'auth_token', 'authetication_token','auth-token', 'authentication-token', 
-                            'user', 'uname','username', 'user-name','user_name', 'owner-name', 'owner_name', 'owner', 'admin', 'pass', 'pwd', 'password', 
-                            'passwd', 'secret', 'uuid','crypt', 'certificate', 'userid','ssh_key', 'md5', 'rsa', 'ssl_content', 'ca_content',
-                            'ssl-content', 'ca-content', 'ssh_key_content','ssh-key-content', 'ssh_key_public', 'ssh-key-public', 'ssh_key_private','ssh-key-private',
-                            'ssh_key_public_content', 'ssh_key_private_content','ssh-key-public-content', 'ssh-key-private-content','admin', 'username',
-                            'guest', 'root_password', 'usr', 'userpass', 'usrpwd', 'userpassword', 'usrtoken', 'nopassword'
-                        ]
-
+        commonKeywords = [ 'user_name', 'usr', 'uid', 'userid', 'usrid', 'uname', 'usrname', 'admin_name', 'guest', 'admin', 'root_name', 'root_id', 'owner_name','owner_id','super_user', 'sup_usr',
+                            'userpassword', 'usr_pass', 'usr_pwd', 'user_pass', 'password', 'usr_password', 'admin_pwd', 'pwd', 'admin_pass', 'guest_pass', 'default_pwd', 'default_pass',
+                            'guest_pwd', 'admin_password', 'guest_password', 'root_password', 'root_pwd', 'root_pass', 'owner_pass', 'owner_pwd', 'owner_password', 'default_password',
+                            'user_key', 'usr_key', 'secret_key', 'recaptcha_key', 'site_key', 'ssh_key', 'ssl_key', 'private_key', 'public_key', 'cryptographic_key', 'tls_key', 'tls', 'ssl',
+                            'ssh_key', 'ssh_password', 'ssh_pwd', 'ssh_pass', 'site_ssh', 'crypt', 'certificate', 'user_token', 'usr_token', 'u_token', 'utoken' 
+        ]
+            
         if tokenType == "variable" and name is not None and value is not None and valueSrc == "initialization":
             for key in commonKeywords:
-                if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), name.lower().strip()) or re.match(r'\b{key}[_A-Za-z0-9-]*'.format(key = key), name.lower().strip()):
-                    if  is_value_valid(value):
+                if re.match(r'[_A-Za-z0-9-\.]*{key}\b'.format(key = key), name.lower().strip()) or re.match(r'\b{key}[_A-Za-z0-9-\.]*'.format(key = key), name.lower().strip()):
+                    if is_value_valid(value):
                         action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                         break
 
@@ -50,19 +49,13 @@ def detect(token, project_name, src_file):
                             action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                             break
             
-        elif tokenType == "dict" and name is not None and token.__contains__("keys") and token.__contains__('values'): 
-            for key in commonKeywords:
-                if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), name.lower().strip()): 
-                    
-                    value_pairs = zip(token['keys'], token['values'])
-                    for value_pair in value_pairs:        
-                
-                        if len(value_pair) == 2 and value_pair[0] is not None and isinstance(value_pair[0], str) and value_pair[1] is not None:
-                            for key in commonKeywords:
-
-                                if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), value_pair[0].lower().strip()) and is_value_valid(value_pair[1]): 
-                                    action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
-                                    break
+        elif tokenType == "dict" and token.__contains__("pairs"): 
+            for value_pair in token['pairs']:
+                if len(value_pair) == 2 and value_pair[0] is not None and isinstance(value_pair[0], str) and value_pair[1] is not None:
+                    for key in commonKeywords:    
+                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), value_pair[0].lower().strip()) and is_value_valid(value_pair[1]): 
+                            action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
+                            break
 
 
         
@@ -80,7 +73,7 @@ def detect(token, project_name, src_file):
         elif tokenType == "function_call" and token.__contains__('keywords'):
             for keyword in token['keywords']:
                 
-                if len(keyword) == 2 and isinstance(keyword[0], str) and keyword[0].lower() is not None and keyword[1] is not None:    
+                if len(keyword) == 3 and isinstance(keyword[0], str) and keyword[0].lower() is not None and keyword[1] is not None and keyword[2] is True:    
                     for key in commonKeywords:
 
                         if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), keyword[0].lower().strip()) and is_value_valid(keyword[1]): 
@@ -88,24 +81,25 @@ def detect(token, project_name, src_file):
                             break
                     
 
-        elif tokenType == "function_def" and token.__contains__("args") and token.__contains__("defaults"):
-            if len(token["args"]) == len(token["defaults"]):
+        elif tokenType == "function_def" and token.__contains__("args") and token.__contains__("defaults"):    
+            defaults_size = len(token['defaults'])
+            args = token['args'][-defaults_size:]
+
+            for pair in zip(args, token['defaults']):    
+                for key in commonKeywords:
+                    
+                    if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), pair[0].lower().strip()) and pair[1][1] is True and is_value_valid(pair[1][0]): 
+                        action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
+                        break
                 
-                pairs = zip(token['args'], token['defaults'])
-                for pair in pairs:    
-                    
-                    for key in commonKeywords:
-                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), pair[0].lower().strip()) and is_value_valid(pair[1]): 
-                            action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
-                            break
-                    
              
     except Exception as error: save_token_detection_exception('hard-coded secret detection  '+str(error)+'  '+ str(token), src_file)
 
 
 def contains_suspicious_strings(value):
-    prohibitedStrings = ['admin', 'root', 'user', 'username', 'pwd', 'pass', 'guest', 'root_password', 'usr', 'userpass', 'usrpwd', 'userpassword', 'usrtoken', 'token',
-                        'default', 'nopassword', 'defaultpass', 'password', 'guest', 'root1'
+    prohibitedStrings = ['admin', 'root', 'user', 'username', 'pwd', 'pass', 'guest', 'root_password', 'usr',
+                        'userpass', 'usrpwd', 'userpassword', 'usrtoken', 'token','default', 'nopassword',
+                        'defaultpass', 'password', 'guest', 'root1', 'user root'
                         ]
     
     if value in prohibitedStrings: return True

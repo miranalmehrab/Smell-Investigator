@@ -8,10 +8,10 @@ empty password
 bad file permission
 hard-coded tmp directories
 use of HTTP without TLS
-use of weak cryptographic algorithm
 constructing sql statement upon user input
 insecure deserialization
 cross site scripting
+use of weak cryptographic algorithm
 use of YAML load
 hard-coded IP address bindings
 no integrity check
