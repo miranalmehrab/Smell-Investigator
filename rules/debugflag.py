@@ -20,7 +20,7 @@ def detect(token, project_name, src_file):
                     action_upon_detection(project_name, src_file, lineno, 'deployment with debug flag set to true', 'deployment with debug flag set to true', token)
 
 
-        elif tokenType == "dict" and token.__contains__("keys") and token.__contains__("values"): 
+        elif tokenType == "dict" and token.__contains__("pairs"): 
             for pair in token['pairs']:
                 if pair[0] in restrictedNames and pair[1] is True: 
                     action_upon_detection(project_name, src_file, lineno, 'deployment with debug flag set to true', 'deployment with debug flag set to true', token)

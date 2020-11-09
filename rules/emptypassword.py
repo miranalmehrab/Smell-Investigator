@@ -24,22 +24,12 @@ def detect(token, project_name, src_file):
                         action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
                         break
 
-                
-        elif (tokenType == "list" or tokenType == "set") and name is not None and token.__contains__("values"):
-            for pwd in commonPasswords:
-                if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), name.lower().strip()) and len(token['values']) == 0:
-                    action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
-                    break
-
         elif tokenType == "dict" and name is not None and token.__contains__("pairs"):
-            for pwd in commonPasswords:
-                if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), name.lower().strip()) and len(token['pairs']) == 0:
-                    action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
-                    break
-
+            
             for value_pair in token['pairs']:
-                if len(value_pair) == 2 and value_pair[0] is not None and isinstance(value_pair[0], str) and value_pair[0].lower() in commonPasswords and (value_pair[1] is None or len(value_pair[1]) == 0):
-                    action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
+                for pwd in commonPasswords:
+                    if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), value_pair[0].lower().strip()) and (value_pair[1] is None or len(value_pair[1]) == 0:
+                        action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
         
 
         elif tokenType == "comparison" and token.__contains__("pairs"):

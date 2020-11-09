@@ -88,7 +88,6 @@ self.admin = 'admin'
 
 # s.bind(ip,port)
 
-# subprocess.call(['chmod', '0444', 'path'])
 
 # passwords = ['abc123', 'xyz321']
 # myDict = {'password' : '12234', 'token' : '12i1gjhwbejsqdguayg2367t276', 'debug': True}

@@ -22,22 +22,16 @@ def detect(token, project_name, src_file):
         if tokenType == "variable" and name is not None and value is not None and valueSrc == "initialization":
             for key in commonKeywords:
                 if re.match(r'[_A-Za-z0-9-\.]*{key}\b'.format(key = key), name.lower().strip()) or re.match(r'\b{key}[_A-Za-z0-9-\.]*'.format(key = key), name.lower().strip()):
-                    if is_value_valid(value):
+                    if is_valid_hardcoded_value(value):
                         action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                         break
 
-        if tokenType == "variable" and name is not None and value is None and token.__contains__('funcKeywords'):
-            found_something = False
+        if tokenType == "variable" and name is not None and token.__contains__('funcKeywords'):
             for keyword in token['funcKeywords']:
                 for key in commonKeywords:
-                    if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), keyword[0].lower().strip()) and is_value_valid(keyword[1]):
-                        print(keyword)
+                    if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), keyword[0].lower().strip()) and is_valid_hardcoded_value(keyword[1]):
                         action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
-                        found_something = True
                         break
-
-                if found_something: break
-        
             
         elif (tokenType == "list" or tokenType == "set") and name is not None and token.__contains__("values"):
             for key in commonKeywords:
@@ -45,7 +39,7 @@ def detect(token, project_name, src_file):
                 if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), name.lower().strip()):
                     for value in token['values']:
 
-                        if is_value_valid(value): 
+                        if is_valid_hardcoded_value(value): 
                             action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                             break
             
@@ -53,7 +47,7 @@ def detect(token, project_name, src_file):
             for value_pair in token['pairs']:
                 if len(value_pair) == 2 and value_pair[0] is not None and isinstance(value_pair[0], str) and value_pair[1] is not None:
                     for key in commonKeywords:    
-                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), value_pair[0].lower().strip()) and is_value_valid(value_pair[1]): 
+                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), value_pair[0].lower().strip()) and is_valid_hardcoded_value(value_pair[1]): 
                             action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                             break
 
@@ -65,7 +59,7 @@ def detect(token, project_name, src_file):
                 if len(pair) == 2 and pair[0] is not None and isinstance(pair[0], str) and pair[0] != 'key' and pair[0] != 'token' and pair[1] is not None:  
                     for key in commonKeywords:
 
-                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), pair[0].lower().strip()) and is_value_valid(pair[1]): 
+                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), pair[0].lower().strip()) and is_valid_hardcoded_value(pair[1]): 
                             action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                             break
                      
@@ -76,7 +70,7 @@ def detect(token, project_name, src_file):
                 if len(keyword) == 3 and isinstance(keyword[0], str) and keyword[0].lower() is not None and keyword[1] is not None and keyword[2] is True:    
                     for key in commonKeywords:
 
-                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), keyword[0].lower().strip()) and is_value_valid(keyword[1]): 
+                        if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), keyword[0].lower().strip()) and is_valid_hardcoded_value(keyword[1]): 
                             action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                             break
                     
@@ -88,7 +82,7 @@ def detect(token, project_name, src_file):
             for pair in zip(args, token['defaults']):    
                 for key in commonKeywords:
                     
-                    if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), pair[0].lower().strip()) and pair[1][1] is True and is_value_valid(pair[1][0]): 
+                    if re.match(r'[_A-Za-z0-9-]*{key}\b'.format(key = key), pair[0].lower().strip()) and pair[1][1] is True and is_valid_hardcoded_value(pair[1][0]): 
                         action_upon_detection(project_name, src_file, lineno, 'hard-coded secrets', 'hard-coded secrets', token)
                         break
                 
@@ -102,29 +96,21 @@ def contains_suspicious_strings(value):
                         'defaultpass', 'password', 'guest', 'root1', 'user root'
                         ]
     
-    if value in prohibitedStrings: return True
+    for prohibitedString in prohibitedStrings:
+        if prohibitedString in value: return True
     return False
 
-def is_value_valid(value):
+def is_valid_hardcoded_value(value):
     new_reg = r'([A-Za-z]*([0-9]+|[!\?@#\$%\^&\*\(\)\{\}\[\]_=?<>:\.\'\"-\+\/]+))+([A-Za-z]*([0-9]*|[!\?@#\$%\^&\*\(\)\{\}\[\]_=?<>:\.\'\"-\+\/]*))*'
 
-    if value is None: return False
-    elif isinstance(value, bool): return False
-    elif isinstance(value, str):
+    if isinstance(value, str):
         if len(value) == 0: return False
-        elif re.search(r'([!\?@#\$%\^&\*\(\)\{\}\[\]_=?<>:\'\"-\+\/]+)', value) and len(value) > 1: return True
-        elif re.search(r'\.+', value): return False
-        elif re.search(r'\\+', value): return False
-        elif re.search(r'/+', value): return False
-        elif re.search(r'\[+', value): return False
-        elif re.search(r'\]+', value): return False
-        elif re.search(r'[0-9]+', value): return True
         elif re.fullmatch(new_reg, value): return True
+        elif re.search(r'\\+', value): return False
+        elif re.search(r'([!\?@#\$%\^&\*\(\)\{\}\[\]_=?<>:\'\"-\+\/]+)', value) and len(value) > 1: return True
         # elif re.fullmatch(r'([A-Za-z]*[0-9!\?@#\$%\^&\*\(\)\{\}\[\]_=?<>:\.\'\"-\+\/]+)+[A-Za-z]*[0-9!\?@#\$%\^&\*\(\)\{\}\[\]_=?<>:\.\'\"\+-\/]*', value): return True
         elif contains_suspicious_strings(value): return True
+        else return False
     
-    elif isinstance(value, int):
-        if len(str(value)) > 1: return True
-
     else: return False
         

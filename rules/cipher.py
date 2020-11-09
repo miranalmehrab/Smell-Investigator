@@ -37,9 +37,6 @@ def detect(token, project_name, src_file):
                 if arg in insecureMethods:
                     action_upon_detection(project_name, src_file, lineno, 'use of weak cryptographic algorithm', 'use of weak cryptographic algorithm', token)
 
-            if name in insecureMethods and token.__contains__('keywords') and len(token['keywords']) > 0:
-                action_upon_detection(project_name, src_file, lineno, 'use of weak cryptographic algorithm', 'use of weak cryptographic algorithm', token)
-            
             if token.__contains__('keywords') and len(token['keywords']) > 0:
                 for keyword in token['keywords']:
                     if keyword[1] is not None and keyword[1] in insecureMethods and keyword[2] is False:

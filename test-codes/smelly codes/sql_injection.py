@@ -1,5 +1,10 @@
-query = input('')
-query = 'select * from table = '+query
+from sqlalchemy import text
+
+t = text("SELECT * FROM users")
+result = connection.execute(t)
+
+db = records.Database('postgres://...')
+rows = db.query('select * from active_users')
 
 sqlite3.connect.execute(query)
 

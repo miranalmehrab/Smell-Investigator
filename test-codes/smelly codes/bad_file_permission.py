@@ -1,0 +1,6 @@
+os.chmod('/etc/hosts', 0x777)
+os.chmod('/etc/hosts',stat.S_IRWXO)
+os.chmod('/etc/hosts',stat.S_IROTH)
+os.chmod('/etc/hosts',stat.S_IWOTH)
+os.chmod('/etc/hosts',stat.S_IXOTH)
+subprocess.call(['chmod', 0x777, 'path'])

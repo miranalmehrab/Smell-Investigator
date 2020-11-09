@@ -20,7 +20,7 @@ def detect(token, project_name, src_file):
 
         elif tokenType == "function_call" and name in bindingMethods:
             
-            if len(args) > 1 and (args[0] is not None or args[1] is not None) and (is_valid_ip(args[0]) or is_valid_port(args[1])): 
+            if len(args) > 0 and args[0] is not None and is_valid_ip(args[0]): 
                 action_upon_detection(project_name, src_file, lineno, 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
     
     except Exception as error: save_token_detection_exception('ip binding detection  '+str(error)+'  '+ str(token), src_file)

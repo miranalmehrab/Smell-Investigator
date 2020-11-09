@@ -38,5 +38,5 @@ def is_insecure_method(name):
     insecureMethods = ['django.utils.safestring.mark_safe', 'mark_safe']
     for method in insecureMethods:
         if method in name: return True
-
+ 
     return False

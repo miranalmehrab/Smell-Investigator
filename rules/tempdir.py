@@ -10,16 +10,6 @@ def detect(token, project_name, src_file):
         if token.__contains__("name"): name = token["name"]
         if token.__contains__("values"): values = token["values"]
         
-        # unwantedDirNames = ['hardcoded_tmp_directory', 'hardcoded_temp_directory', 'tmp_dir'
-        #                     'hardcoded_directory', 'save_dir', 'temp_dir', 'hardcoded_dir',
-        #                     'temporary_directory', 'temporary_dir', 'temp_directory', 'dir',
-        #                     'directory', 'tmp_directory', 'tmp_path', 'dir_path', 'path_dir',
-        #                     'path_directory', 'directory_path', 'temp_path', 'temporary_path',
-        #                     'file_path', 'file_dir', 'folder_path', 'folder_dir', 'file_ditectory',
-        #                     'folder_directory', '_dir', '-dir'
-        #                 ]
-
-
         unwantedDirNames = ['folder', 'directory', 'dir', 'path', 'root', 'tmp', 'temp', 'temporary', 'site', 'log', 'save']                   
         
         if tokenType == "function_call" and name is not None and token.__contains__('keywords'):
@@ -35,20 +25,20 @@ def detect(token, project_name, src_file):
                     action_upon_detection(project_name, src_file, lineno, 'hard-coded tmp directories', 'hard-coded tmp directories', token)
                     break
 
-        elif (tokenType == "list" or tokenType == "set") and name is not None:
+        elif (tokenType == "list" or tokenType == "set"):
             for dir_name in unwantedDirNames:
                 if re.match(r'[_A-Za-z0-9-]*{dir}\b'.format(dir = dir_name), name.lower().strip()): 
                     for value in values: 
                         if is_valid_path(value):
                             action_upon_detection(project_name, src_file, lineno, 'hard-coded tmp directories', 'hard-coded tmp directories', token)
 
-        elif tokenType == "dict" and name is not None and name.lower() in unwantedDirNames and token.__contains__('values'):
-            for dir_name in unwantedDirNames:
-                if re.match(r'[_A-Za-z0-9-]*{dir}\b'.format(dir = dir_name), name.lower().strip()):
-                    for value in token['values']: 
-                        if is_valid_path(value):
+        elif tokenType == "dict" and name is not None and token.__contains__('pairs'):
+            for pair in token['pairs']:
+                for dir_name in unwantedDirNames:
+                    if re.match(r'[_A-Za-z0-9-]*{dir}\b'.format(dir = dir_name), pair[0].lower().strip()):
+                        if is_valid_path(pair[1]):
                             action_upon_detection(project_name, src_file, lineno, 'hard-coded tmp directories', 'hard-coded tmp directories', token)
-            
+                
 
     except Exception as error: save_token_detection_exception('hard-coded tmp directory detection  '+str(error)+'  '+ str(token), src_file)
 
@@ -63,12 +53,3 @@ def is_valid_path(value):
     if re.fullmatch(unix_path_reg, value): return True
     elif re.fullmatch(windows_path_reg, value): return True
     else: return False
-    
-    # if '%' in value: return False
-    # elif './' in value: return True
-    # elif '../' in value: return True
-    # elif '/' in value: return True
-    # elif '\\' in value: return True
-    # elif '\\\\' in value: return True
-    # elif ':' in value: return True
-    # elif '::' in value: return True

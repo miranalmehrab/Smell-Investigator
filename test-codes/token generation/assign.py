@@ -65,7 +65,7 @@
 # x = {"brand":'apple',"model": "se 2020", "upass": "", name: 'jkahhjdv'}
 # tokens = ['sahzslkdjl3434sdasd','dsdlsahkljah746548','sdlshkqj2232324','2323dsafnsdfjkn']
 
-self.admin = 'admin'
+admin = 'admin'
 
 # x = ('root', 'name', 'password', abhsd)
 # y = {'root', 'name', 'password', itwqughdf}

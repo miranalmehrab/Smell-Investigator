@@ -70,7 +70,8 @@ def is_valid_download_url(url):
 
         file_ext = url.split('/')[-1]
         if file_ext.split('.')[-1] in file_extensions:
-             return True
+            return True
+        return False
 
     else:
         reg_url = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', str(url))
