@@ -150,7 +150,7 @@ def analyze_code_folder():
         
 
 def analyze_single_code():
-    file_name = './test-codes/'+'src.py'
+    file_name = './test-codes/token generation/'+'src.py'
     # file_name = './test-codes/'+'expression.py'
     # file_name = './test-codes/'+'assign.py'
     read_src_code('', '', file_name)
@@ -185,9 +185,9 @@ def main():
 
     # SHOW_AST = True
     # PRINT_STATEMENTS = True
-    # run_single_code()
+    run_single_code()
 
-    run_analyze_code_folder()
+    # run_analyze_code_folder()
     # show_categories_in_project_descriptions()
     # find_correlation()
     

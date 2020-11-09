@@ -28,7 +28,7 @@ def detect(token, project_name, src_file):
             
             for value_pair in token['pairs']:
                 for pwd in commonPasswords:
-                    if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), value_pair[0].lower().strip()) and (value_pair[1] is None or len(value_pair[1]) == 0:
+                    if re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), value_pair[0].lower().strip()) and (value_pair[1] is None or len(value_pair[1]) == 0):
                         action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
         
 
