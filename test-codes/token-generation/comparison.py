@@ -47,7 +47,6 @@ pwd1 = input()
 if pwd == pwd1:
     pass
 
-
 if  '' == username:
     pass
 

@@ -8,7 +8,7 @@ def getNothing():
 def getFullName(firstName, lastName):
     return firstName+lastName
 
-def getUserName(name = "user",id = "xyz123"):
+def getUserName(name = "user",id = "xyz123", pwd = ''):
     return name+id
 
 def my_function(*kids):

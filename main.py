@@ -29,6 +29,9 @@ from operations.bandit_operations import match_project_categories_from_bandit_re
 from operations.bandit_operations import total_frequency_of_smells
 from operations.bandit_operations import number_of_smelly_projects
 
+from operations.open_smell_loc_in_code import open_smell_location 
+
+
 TOTAL_SRC_FILE_COUNT = 0
 PRINT_STATEMENTS = False
 SHOW_AST = False
@@ -87,7 +90,7 @@ def analyze_ast_tree(code, src_file):
         analyzer = Analyzer()
         analyzer.visit(tree)
         analyzer.refine_tokens()
-        analyzer.search_input_in_function_call_and_returned_function_args()
+        # analyzer.search_input_in_function_call_and_returned_function_args()
         
         # analyzer.delete_incomplete_tokens()
         # analyzer.make_tokens_byte_free()
@@ -144,15 +147,24 @@ def analyze_code_folder():
 
         if should_skip is False:
             for src_file in files:
-                if (src_file.lower()).find('test') == -1:
+                if src_file.lower().find('test') == -1:
                     if os.path.splitext(src_file)[-1] == '.py':  
                         read_src_code(root, project_name, src_file)
         
 
 def analyze_single_code():
-    file_name = './test-codes/token generation/'+'src.py'
-    # file_name = './test-codes/'+'expression.py'
-    # file_name = './test-codes/'+'assign.py'
+    token_folder_name = './test-codes/token-generation/'
+    smell_folder_name = './test-codes/smelly-codes/'
+    
+    token_test_files = ['assign.py', 'comparison.py', 'expression.py', 'function_def.py', 'imports.py', 'src.py']
+
+    smell_test_files = [ 'assert_used.py','bad_file_permission.py','command_injection.py','debug_true.py','deserialization.py','dynamic_evaluation.py',
+                         'empty_password.py','hardcoded_secret.py','http_only.py','ignore_exception.py', 'ip_binding.py','no_certificate_validation.py',
+                          'no_integrity.py', 'sql_injection.py','temp_dir.py', 'weak_cryptography.py', 'xss.py','yaml_used.py'   
+                        ]
+    file_name = token_folder_name + token_test_files[2]
+    # file_name = smell_folder_name + smell_test_files[len(smell_test_files) - 4]  
+    
     read_src_code('', '', file_name)
     show_detection_result()
 
@@ -180,52 +192,20 @@ def run_single_code():
     show_detection_result()
 
 def main():
-    global SHOW_AST
-    global PRINT_STATEMENTS
-
+    # global SHOW_AST
     # SHOW_AST = True
-    # PRINT_STATEMENTS = True
-    run_single_code()
 
+    # global PRINT_STATEMENTS
+    # PRINT_STATEMENTS = True
+    
+    # run_single_code()
     # run_analyze_code_folder()
+
     # show_categories_in_project_descriptions()
     # find_correlation()
     
+    open_smell_location()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     # <---------------------------------------- bandit operations starts from here ----------------------------------------> 
     # run_bandit_on_folder()
     # summerize_bandit_output()
@@ -233,6 +213,7 @@ def main():
 
     # match_project_categories_from_bandit_results()
     # show_specific_smells()
+    
     # total_frequency_of_smells()
     # number_of_smelly_projects()
 

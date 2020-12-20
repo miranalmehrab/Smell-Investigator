@@ -24,13 +24,14 @@ def detect(token, imports,project_name, src_file):
                 action_upon_detection(project_name, src_file, lineno, 'no integrity check', 'no integrity check', token)
         
 
-        elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs'):
+        elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs') and token["return"] is not None:
             returnArgs = token['returnArgs']
             
             if len(returnArgs) > 0:
-                if token['return'] in libs and isinstance(returnArgs[0], str) and is_valid_download_url(returnArgs[0]) and 'hashlib' not in imports:
-                    action_upon_detection(project_name, src_file, lineno, 'no integrity check', 'no integrity check', token)
-        
+                for func_return in token['return']:
+                    if func_return in libs and isinstance(returnArgs[0], str) and is_valid_download_url(returnArgs[0]) and 'hashlib' not in imports:
+                        action_upon_detection(project_name, src_file, lineno, 'no integrity check', 'no integrity check', token)
+            
 
     except Exception as error: save_token_detection_exception('no integrity detection  '+str(error)+'  '+ str(token), src_file)
 

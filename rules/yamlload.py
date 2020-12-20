@@ -6,29 +6,26 @@ def detect(token, project_name, src_file):
         if token.__contains__("line"): lineno = token["line"]
         if token.__contains__("type"): tokenType = token["type"]
         
-        insecureMethods = ['yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'full_load_all']
+        insecure_methods = ['yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'yaml.full_load_all']
 
-        if tokenType == "variable":
-            if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
-            if token.__contains__("args"): args = token["args"]
-            if valueSrc in insecureMethods and len(args) > 0: 
+        if tokenType == "variable" and token.__contains__("valueSrc"):
+            if token["valueSrc"] in insecure_methods: 
                 action_upon_detection(project_name, src_file, lineno, 'use of YAML load', 'use of YAML load', token)
 
-        elif tokenType == "function_call":
-            if token.__contains__("name"): name = token["name"]
-            if token.__contains__("args"): args = token["args"]
+        elif tokenType == "function_call" and token.__contains__("name"):
             
-            if name in insecureMethods and len(args) > 0: 
+            if token["name"] in insecure_methods:
                 action_upon_detection(project_name, src_file, lineno, 'use of YAML load', 'use of YAML load', token)
             
-            for arg in args:
-                if arg in insecureMethods:
+            if token.__contains__("args"):
+                for arg in token["args"]:
+                    if arg in insecure_methods:
+                        action_upon_detection(project_name, src_file, lineno, 'use of YAML load', 'use of YAML load', token)
+
+
+        elif tokenType == "function_def" and token.__contains__("return") and token['return'] is not None:
+            for func_return in token["return"]:
+                if func_return in insecure_methods: 
                     action_upon_detection(project_name, src_file, lineno, 'use of YAML load', 'use of YAML load', token)
-
-        elif tokenType == "function_def":
-            if token.__contains__("return"): funcReturn  = token["return"]
-            if token.__contains__("returnArgs"): returnArgs = token["returnArgs"]
-            if funcReturn in insecureMethods and len(returnArgs) > 0: 
-                action_upon_detection(project_name, src_file, lineno, 'use of YAML load', 'use of YAML load', token)
 
     except Exception as error: save_token_detection_exception('yaml load detection  '+str(error)+'  '+ str(token), src_file)    

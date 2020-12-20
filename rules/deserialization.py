@@ -5,9 +5,9 @@ def detect(token, project_name, src_file):
     try:
 
         if token.__contains__("line"): lineno = token["line"]
-        if token.__contains__("type"): tokenType = token["type"]
+        if token.__contains__("type"): token_type = token["type"]
 
-        insecureMethods = ['pickle.loads', 'pickle.load', 'pickle.Unpickler', 'cPickle.loads', 'cPickle.load', 'cPickle.Unpickler', 'marshal.loads', 'marshal.load', 
+        insecure_methods = ['pickle.loads', 'pickle.load', 'pickle.Unpickler', 'cPickle.loads', 'cPickle.load', 'cPickle.Unpickler', 'marshal.loads', 'marshal.load', 
                             'xml.etree.cElementTree.parse', 'xml.etree.cElementTree.iterparse','xml.etree.cElementTree.fromstring','xml.etree.cElementTree.XMLParser',
                             'xml.etree.ElementTree.parse', 'xml.etree.ElementTree.iterparse', 'xml.etree.ElementTree.fromstring', 'xml.etree.ElementTree.XMLParser',
                             'xml.sax.expatreader.create parser', 'xml.dom.expatbuilder.parse', 'xml.dom.expatbuilder.parseString', 'xml.sax.parse', 'xml.sax.parseString', 
@@ -15,23 +15,16 @@ def detect(token, project_name, src_file):
                             'lxml.etree.fromstring','lxml.etree.RestrictedElement','xml.etree.GlobalParserTLS, lxml.etree.getDefaultParser, lxml.etree.check docinfo'
                         ]
 
-        if tokenType == "variable":
-            if token.__contains__("valueSrc"): valueSrc = token["valueSrc"]
-            if token.__contains__("args"): args = token["args"]
-            if valueSrc in insecureMethods and args is not None and len(args) > 0:
-                action_upon_detection(project_name, src_file, lineno, 'insecure deserialization', 'insecure deserialization', token)
+        if token_type == "variable" and token.__contains__("valueSrc") and token["valueSrc"] in insecure_methods:
+            action_upon_detection(project_name, src_file, lineno, 'insecure deserialization', 'insecure deserialization', token)
 
-        elif tokenType == "function_call":
-            if token.__contains__("name"): name = token["name"]
-            if token.__contains__("args"): args = token["args"]
-            if name in insecureMethods and args is not None and len(args) > 0: 
-                action_upon_detection(project_name, src_file, lineno, 'insecure deserialization', 'insecure deserialization', token)
+        elif token_type == "function_call" and token.__contains__("name") and token["name"] in insecure_methods: 
+            action_upon_detection(project_name, src_file, lineno, 'insecure deserialization', 'insecure deserialization', token)
         
-        elif tokenType == "function_def":
-            if token.__contains__("return"): funcReturn  = token["return"]
-            if token.__contains__("returnArgs"): returnArgs = token["returnArgs"]
-            if funcReturn in insecureMethods and returnArgs is not None and len(returnArgs) > 0: 
-                action_upon_detection(project_name, src_file, lineno, 'insecure deserialization', 'insecure deserialization', token)
+        elif token_type == "function_def" and token.__contains__("return") and token["return"] is not None:
+            for func_return in token["return"]:
+                if func_return in insecure_methods:
+                    action_upon_detection(project_name, src_file, lineno, 'insecure deserialization', 'insecure deserialization', token)
     
     except Exception as error: save_token_detection_exception('deserialization detection  '+str(error)+'  '+ str(token), src_file)
     

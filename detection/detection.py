@@ -5,7 +5,7 @@ from rules.commandinjection import detect as commandinjectionDetecet
 from rules.dynamicode import detect as dynamicodeDetect
 from rules.debugflag import detect as debugflagDetect
 from rules.emptypassword import detect as emptypasswordDetect
-from rules.hardcodedsecret import detect as hardcodedsecretDetect
+from rules.hardcodedsecret import detect as hardcoded_secret_detect
 from rules.filepermission import detect as filepermissionDetect
 from rules.ipbinding import detect as ipbindingDetect
 from rules.httponly import detect as httponlyDetect
@@ -25,8 +25,6 @@ from operations.save_token_exceptions import save_token_loading_exception
 def get_imports_in_code(tokens):
     
     imports = []
-    tokens = tokens.splitlines()
-
     for token in tokens:
         try: 
             token = json.loads(token)
@@ -42,31 +40,34 @@ def save_buggy_tokens():
     pass
 
 def detection(tokens, project_name, srcFile):
-    imports = get_imports_in_code(tokens)
     tokens = tokens.splitlines()
+    imports = get_imports_in_code(tokens)
     
     for token in tokens:
         try:
             token = json.loads(token)
 
             cipherDetection(token, project_name, srcFile)
-            commandinjectionDetecet(token, project_name, srcFile)
-            debugflagDetect(token, project_name, srcFile)
-            dynamicodeDetect(token, project_name, srcFile)
-            emptypasswordDetect(token, project_name, srcFile)
-            hardcodedsecretDetect(token, project_name, srcFile)
-            filepermissionDetect(token, project_name, srcFile)
-            ipbindingDetect(token, project_name, srcFile)
-            httponlyDetect(token, project_name, srcFile)
-            sqlinjectionDetect(token, project_name, srcFile)
-            tempdirDetect(token, project_name, srcFile)
-            ignexceptDetect(token, project_name, srcFile)
-            assertDetect(token, project_name, srcFile)
-            deserializationDetect(token, project_name, srcFile)
-            nocertificateDetect(token, project_name, srcFile)
-            nointegritycheckDetect(token, imports, project_name, srcFile)
-            xssDetect(token, project_name, srcFile)
-            yamlloadDetect(token, project_name, srcFile)
+            # debugflagDetect(token, project_name, srcFile)
+            # dynamicodeDetect(token, project_name, srcFile)
+            # httponlyDetect(token, project_name, srcFile)
+            
+            # assertDetect(token, project_name, srcFile)
+            # commandinjectionDetecet(token, project_name, srcFile)
+            # deserializationDetect(token, project_name, srcFile)
+            # emptypasswordDetect(token, project_name, srcFile)
+            # filepermissionDetect(token, project_name, srcFile)
+            
+            # hardcoded_secret_detect(token, project_name, srcFile)
+            
+            # ignexceptDetect(token, project_name, srcFile)
+            # ipbindingDetect(token, project_name, srcFile)
+            # nocertificateDetect(token, project_name, srcFile)
+            # nointegritycheckDetect(token, imports, project_name, srcFile)
+            # sqlinjectionDetect(token, project_name, srcFile)
+            # tempdirDetect(token, project_name, srcFile)
+            # xssDetect(token, project_name, srcFile)
+            # yamlloadDetect(token, project_name, srcFile)
 
         except Exception as error: 
             save_token_loading_exception(str(token)+'  '+str(error),srcFile)

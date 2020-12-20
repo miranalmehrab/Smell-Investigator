@@ -11,12 +11,11 @@ def detect(token, project_name, src_file):
         if token.__contains__("name"): name = token["name"]
         if token.__contains__("args"): args = token["args"]
 
-        httpLibs = ['httplib.urlretrieve', 'urllib.request.urlopen','urllib.urlopen', 'urllib2.urlopen', 'requests.get', 'requests.post',
-                    'urllib.request.Request', 'httplib.HTTPConnection', 'httplib2.Http.request'
+        http_libs = ['httplib.urlretrieve','urllib.request.urlopen','urllib.urlopen','urllib2.urlopen','requests.get', 
+                    'requests.post','urllib.request.Request','httplib.HTTPConnection','httplib2.Http.request'
                 ]
 
-        httpLibsNew = ['urllib3.PoolManager.request']
-
+        new_http_libs = ['urllib3.PoolManager.request']
 
         if tokenType == "variable" and token.__contains__('value') and token.__contains__('valueSrc'):
             if token['value'] is not None and  is_valid_http_url(token['value']) and token['valueSrc'] == 'initialization':
@@ -34,29 +33,29 @@ def detect(token, project_name, src_file):
             args = token['args']
             valueSrc = token['valueSrc']
 
-            if valueSrc in httpLibs and len(args) > 0 and args[0] is not None and is_valid_http_url(args[0]):
+            if valueSrc in http_libs and len(args) > 0 and args[0] is not None and is_valid_http_url(args[0]):
                 action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
             
-            elif valueSrc in httpLibsNew and len(args) > 1 and args[1] is not None and is_valid_http_url(args[1]):
+            elif valueSrc in new_http_libs and len(args) > 1 and args[1] is not None and is_valid_http_url(args[1]):
                 action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
             
 
     
         elif tokenType == "function_call" and name is not None: 
-            if name in httpLibs and len(args) > 0 and args[0] is not None and is_valid_http_url(args[0]):                                     
+            if name in http_libs and len(args) > 0 and args[0] is not None and is_valid_http_url(args[0]):                                     
                 action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
-            elif name in httpLibsNew and len(args) > 1 and args[1] is not None and is_valid_http_url(args[1]):
+            elif name in new_http_libs and len(args) > 1 and args[1] is not None and is_valid_http_url(args[1]):
                 action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
-        elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs'):
-            func_return = token['return']
+        elif tokenType == "function_def" and token.__contains__('return') and token.__contains__('returnArgs') and token["return"] is not None:
             returnArgs = token['returnArgs']
 
-            if func_return in httpLibs and len(returnArgs) > 0 and returnArgs[0] is not None and is_valid_http_url(returnArgs[0]):           
+            for func_return in token["return"]:
+                if func_return in http_libs and len(returnArgs) > 0 and returnArgs[0] is not None and is_valid_http_url(returnArgs[0]):           
                     action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
-            elif func_return in httpLibsNew and len(returnArgs) > 1 and returnArgs[1] is not None and is_valid_http_url(returnArgs[1]):           
+                elif func_return in new_http_libs and len(returnArgs) > 1 and returnArgs[1] is not None and is_valid_http_url(returnArgs[1]):           
                     action_upon_detection(project_name, src_file, lineno, 'use of HTTP without TLS', 'use of HTTP without TLS', token)
 
 

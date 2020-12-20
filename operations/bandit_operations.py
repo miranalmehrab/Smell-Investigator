@@ -163,7 +163,7 @@ def total_frequency_of_smells():
 
     print('Total Number of smells:')
     for smell_frquency in total_frequency_of_smells:
-        print(smell_frquency)
+        write_to_csv_file('./../bandits-smell-wise-frequency.csv', smell_frquency)
 
     print('')
 

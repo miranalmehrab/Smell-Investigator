@@ -33,15 +33,15 @@ def detect(token, project_name, src_file):
                     action_upon_detection(project_name, src_file, lineno, 'no certificate validation', 'no certificate validation', token)
         
         
-        elif tokenType == "function_def" and token.__contains__("return") and token.__contains__("returnKeywords"):
+        elif tokenType == "function_def" and token.__contains__("return") and token.__contains__("returnKeywords") and token["return"] is not None:
             
-            func_return = token['return']
             keywords = token['returnKeywords']
             
-            if func_return in httpLibs:
-                for keyword in keywords:
-                    if keyword[0] == 'verify' and (keyword[1] is False or keyword[1] == 'False'): 
-                        action_upon_detection(project_name, src_file, lineno, 'no certificate validation', 'no certificate validation', token)
-        
+            for func_return in token['return']:
+                if func_return in httpLibs:
+                    for keyword in keywords:
+                        if keyword[0] == 'verify' and (keyword[1] is False or keyword[1] == 'False'): 
+                            action_upon_detection(project_name, src_file, lineno, 'no certificate validation', 'no certificate validation', token)
+            
         
     except Exception as error: save_token_detection_exception('no certificate detection  '+str(error)+'  '+ str(token), src_file)

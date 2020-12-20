@@ -1,10 +1,26 @@
+# import socket
+
+# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# s.bind(('0.0.0.0', 31137))
+# s.bind(('192.168.0.1', 8080))
+
+# r = s.bind(('192.168.0.1', 8080))
+
+
+def getSocket():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    return s.bind(('0.0.0.0', 31137))
+     
+
+# get_db(s.bind(('192.168.0.1', 8080)))
+
 # def getX():
 #     x = 20
 #     return x
 
-def getNothing():
-    return {'name': 'admin', 'password': 'pass'}
-    # return ['admin', 'kagdfv', 'asdggadf']
+# def getNothing():
+#     return {'name': 'admin', 'password': 'pass'}
+#     return ['admin', 'kagdfv', 'asdggadf']
 
 # def getFullName(firstName, lastName):
 #     return firstName+lastName

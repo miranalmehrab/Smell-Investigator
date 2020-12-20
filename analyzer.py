@@ -12,7 +12,6 @@ class Analyzer(ast.NodeVisitor):
         self.inputs = []
         self.statements = []
         
-
     ######################### Import Modules Block Here #########################
     def visit_Import(self, node):
         try: 
@@ -58,8 +57,6 @@ class Analyzer(ast.NodeVisitor):
     ######################### Function Definitions Here #########################
     def visit_FunctionDef(self, node):
         try:
-            # print(ast.dump(node))
-
             func_def = {}
             func_def["type"] = "function_def"
             func_def["line"] = node.lineno
@@ -91,6 +88,7 @@ class Analyzer(ast.NodeVisitor):
             for item in node.body:
                 
                 if isinstance(item, ast.Return):
+                    func_def['returnLine'] = item.lineno
                     func_def["return"] = self.separate_variables(item.value,[])
                     func_def["return"] = func_def["return"] if len(func_def["return"]) > 0 else None
 
@@ -204,13 +202,17 @@ class Analyzer(ast.NodeVisitor):
                     variable["args"] = []
                     variable["isInput"] = False
                     
-                    input_functions = [ 'input','request.POST.get','request.GET.get','request.GET.getlist','request.POST.getlist','POST.get','GET.get','POST.getlist', 'GET.getlist']
-                    for name in input_functions:
-                        if name in function_name:
-                            variable["value"] = None
-                            variable["isInput"] = True
-                            self.inputs.append(variable["name"])
-                            break
+                    input_functions = [ 'input', 'request.POST.get', 'request.GET.get', 'request.GET.getlist', 'request.POST.getlist',
+                                        'self.request.POST.get', 'self.request.GET.get', 'self.request.GET.getlist', 'self.request.POST.getlist'
+                                    ]
+                    
+                    if function_name is not None:
+                        for name in input_functions:
+                            if name in function_name:
+                                variable["value"] = None
+                                variable["isInput"] = True
+                                self.inputs.append(variable["name"])
+                                break
                     
                     for arg in node.value.args:
                         if isinstance(arg, ast.Attribute): 
@@ -957,6 +959,11 @@ class Analyzer(ast.NodeVisitor):
             elif(fieldname == "func" and isinstance(value, ast.Attribute)):    
                 function_name = self.get_name_from_attribute_node(value)
 
+                for statement in self.statements:
+                    if statement['type'] == 'function_obj' and statement['objName'] == function_name:
+                        function_name = statement['function_name']
+                        break
+
                 if function_name != None and value.attr != None : return str(function_name) +'.'+ str(value.attr) 
                 elif function_name != None and value.attr == None : return str(function_name)
                 elif function_name == None and value.attr == None : return None
@@ -1010,10 +1017,13 @@ class Analyzer(ast.NodeVisitor):
 
 
     def get_value_src_from_variable_name(self, name):
+        
         for statement in reversed(self.statements):
             if statement['type'] == 'variable' and statement['name'] == name:
-                return [True, statement['valueSrc']]
-                
+        
+                if statement.__contains__('valueSrc'): return [True, statement['valueSrc']]
+                else: [False, name] 
+
         return [False, name]
 
 
@@ -1052,4 +1062,3 @@ class Analyzer(ast.NodeVisitor):
                 save_token_parsing_exception(line_number, str(error))
 
         fp.close()
-        

