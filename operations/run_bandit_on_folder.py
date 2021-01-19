@@ -46,11 +46,17 @@ def summerize_bandit_output():
 
     total_outputs_of_bandit_tool = []
     for root, dirs, files in os.walk('./../../bandits'):
+        for part in root.split('/'):
+            if 'test' in part.lower(): continue
+            if 'tests' in part.lower(): continue
+
         for file_name in files:
             
             input_fp = open(os.path.join(root,file_name), 'r')
             contents = input_fp.read()
+
             if len(contents) == 0: continue
+            if file_name.lower().find('test') != -1: continue
             
             contents = json.loads(contents)
             outputs = []
@@ -89,9 +95,6 @@ def summerize_bandit_output():
                 output_file = None
                 output_file = file_name.replace('.txt', '')
                 
-                if output_file == 'eventbrite-master': print(output_file * 50)
-                print(output_file)
-
                 output_file = output_file + '.csv'
                 output_path = './../bandits/' + output_file
 
@@ -123,7 +126,8 @@ def show_specific_smells():
     counter = 0
     # smell_codes = ['B108']
     # smell_codes = ['B611', 'B610', 'B608']
-    smell_codes = ['B303', 'B304', 'B305', 'B306', 'B311', 'B505', 'B324']
+    # smell_codes = ['B303', 'B304', 'B305', 'B306', 'B311', 'B505', 'B324']
+    smell_codes = ['B703']
     smells = list_csv_contents('./../bandits_results.csv')
     
     selected_smells = []

@@ -1,7 +1,7 @@
-application,use of weak cryptographic algorithm &  18 &  \\ \hline
-dependencies,use of weak cryptographic algorithm &  26 &  \\ \hline
-framework,use of weak cryptographic algorithm &  25 &  \\ \hline
-tool,use of weak cryptographic algorithm &  116 &  \\ \hline
-tutorial,use of weak cryptographic algorithm &  28 &  \\ \hline
-web resources,use of weak cryptographic algorithm &  3 &  \\ \hline
-website,use of weak cryptographic algorithm &  105 &  \\ \hline
+application,hard-coded secrets &  24 &  \\ \hline
+dependencies,hard-coded secrets &  22 &  \\ \hline
+framework,hard-coded secrets &  14 &  \\ \hline
+tool,hard-coded secrets &  43 &  \\ \hline
+tutorial,hard-coded secrets &  43 &  \\ \hline
+web resources,hard-coded secrets &  5 &  \\ \hline
+website,hard-coded secrets &  332 &  \\ \hline

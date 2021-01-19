@@ -153,17 +153,18 @@ def analyze_code_folder():
         
 
 def analyze_single_code():
-    token_folder_name = './test-codes/token-generation/'
-    smell_folder_name = './test-codes/smelly-codes/'
     
+    token_folder_name = './test-codes/token-generation/'
     token_test_files = ['assign.py', 'comparison.py', 'expression.py', 'function_def.py', 'imports.py', 'src.py']
 
-    smell_test_files = [ 'assert_used.py','bad_file_permission.py','command_injection.py','debug_true.py','deserialization.py','dynamic_evaluation.py',
-                         'empty_password.py','hardcoded_secret.py','http_only.py','ignore_exception.py', 'ip_binding.py','no_certificate_validation.py',
-                          'no_integrity.py', 'sql_injection.py','temp_dir.py', 'weak_cryptography.py', 'xss.py','yaml_used.py'   
-                        ]
-    file_name = token_folder_name + token_test_files[2]
-    # file_name = smell_folder_name + smell_test_files[len(smell_test_files) - 4]  
+    smell_folder_name = './test-codes/smelly-codes/'
+    smell_test_files = ['assert_used.py','bad_file_permission.py','command_injection.py','debug_true.py','deserialization.py','dynamic_evaluation.py',
+                        'empty_password.py','hardcoded_secret.py','http_only.py','ignore_exception.py', 'ip_binding.py','no_certificate_validation.py',
+                        'no_integrity.py', 'sql_injection.py','temp_dir.py', 'weak_cryptography.py', 'xss.py','yaml_used.py'   
+                    ]
+
+    file_name = token_folder_name + token_test_files[0]
+    # file_name = smell_folder_name + smell_test_files[7]  
     
     read_src_code('', '', file_name)
     show_detection_result()
@@ -199,12 +200,12 @@ def main():
     # PRINT_STATEMENTS = True
     
     # run_single_code()
+    open_smell_location()
     # run_analyze_code_folder()
-
+    
     # show_categories_in_project_descriptions()
     # find_correlation()
     
-    open_smell_location()
 
     # <---------------------------------------- bandit operations starts from here ----------------------------------------> 
     # run_bandit_on_folder()

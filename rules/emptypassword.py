@@ -33,7 +33,8 @@ def detect(token, project_name, src_file):
             for pair in token['pairs']:
                 for pwd in common_passwords:
                     if(
-                        (re.match(r'[_A-Za-z0-9-\.]*{pwd}\b'.format(pwd = pwd), pair[0].lower().strip()) or re.match(r'\b{pwd}[_A-Za-z0-9-\.]*'.format(pwd = pwd), pair[0].lower().strip())) 
+                        isinstance(pair[0], str) 
+                        and (re.match(r'[_A-Za-z0-9-\.]*{pwd}\b'.format(pwd = pwd), pair[0].lower().strip()) or re.match(r'\b{pwd}[_A-Za-z0-9-\.]*'.format(pwd = pwd), pair[0].lower().strip())) 
                         and (pair[1] is None or len(pair[1]) == 0)
                     ):   
                         action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
@@ -44,8 +45,9 @@ def detect(token, project_name, src_file):
             for pair in token["pairs"]:
                 for pwd in common_passwords:
                     if(
-                        (re.match(r'[_A-Za-z0-9-\.]*{pwd}\b'.format(pwd = pwd), pair[0].lower().strip()) or re.match(r'\b{pwd}[_A-Za-z0-9-\.]*'.format(pwd = pwd), pair[0].lower().strip())) 
-                        and (pair[1] is None or len(pair[1]) == 0)
+                        isinstance(pair[0], str)
+                        and (re.match(r'[_A-Za-z0-9-\.]*{pwd}\b'.format(pwd = pwd), pair[0].lower().strip()) or re.match(r'\b{pwd}[_A-Za-z0-9-\.]*'.format(pwd = pwd), pair[0].lower().strip())) 
+                        and (pair[1] is None or (isinstance(pair[1], str) and len(pair[1]) == 0))
                     ):    
                         action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
                         break
@@ -54,9 +56,14 @@ def detect(token, project_name, src_file):
             for keyword in token['keywords']:
                 for pwd in common_passwords:
             
-                    if len(keyword) == 3 and re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), keyword[0].lower().strip()) and (keyword[1] is None or len(str(keyword[1])) == 0) and keyword[2] is True: 
-                        action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
-                        break
+                    if (
+                        len(keyword) == 3
+                        and isinstance(keyword[0], str) 
+                        and re.match(r'[_A-Za-z0-9-]*{pwd}\b'.format(pwd = pwd), keyword[0].lower().strip()) 
+                        and (keyword[1] is None or len(str(keyword[1])) == 0) and keyword[2] is True
+                    ): 
+                            action_upon_detection(project_name, src_file, lineno, 'empty password', 'empty password', token)
+                            break
 
         elif token_type == "function_def" and token.__contains__("args") and token.__contains__("defaults"):
             defaults_size = len(token['defaults'])

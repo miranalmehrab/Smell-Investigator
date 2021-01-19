@@ -15,7 +15,12 @@ def list_smells_in_projects_sequentially():
     output_file_path = './../bandits_total_results.csv'
     clear_file_contents(output_file_path)
     
+    counter = 0
     for content in contents:
+        if content[2] == 'B103':
+            counter += 1
+            print(content[:-1])
+    
         should_skip = False
         for name_part in content[0].split('/'):
             if name_part.find('test') != -1:

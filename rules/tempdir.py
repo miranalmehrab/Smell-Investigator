@@ -10,7 +10,7 @@ def detect(token, project_name, src_file):
         if token.__contains__("name"): name = token["name"]
         if token.__contains__("values"): values = token["values"]
         
-        unwantedDirNames = ['folder', 'directory', 'dir', 'path', 'root', 'tmp', 'temp', 'temporary', 'site', 'log', 'save', 'upload']                   
+        unwantedDirNames = ['folder', 'directory', 'dir', 'path', 'root', 'tmp', 'temp', 'temporary', 'site', 'log_', 'save', 'upload']                   
         
         if tokenType == "variable" and name is not None and token['value'] is not None:
             for dir_name in unwantedDirNames:
@@ -68,7 +68,10 @@ def is_valid_path(value):
     if value is None: return False
     if isinstance(value, str) is False: return False
     if len(value) == 0: return False
-    
+    if value == '/': return False
+    if value == '//': return False
+    if value == '\\': return False
+
     unix_path_reg = r'^(~?((\.{1,2}|\/?)*[a-zA-Z0-9]*\/)+)[a-zA-Z0-9]*\/?'
     windows_path_reg = r'^([A-Za-z]?\:?)?\\{1,2}([A-Za-z0-9]*\\)*[A-Za-z0-9]*\\?'
 

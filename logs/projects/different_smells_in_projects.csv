@@ -1,58 +1,122 @@
-15-minute-apps-master,use of weak cryptographic algorithm,1
-ArchiveBot-master,use of weak cryptographic algorithm,2
-BillCipher-master,use of weak cryptographic algorithm,1
-Bus-Reservation-System-master,use of weak cryptographic algorithm,9
-Django-E-Commerce-master,use of weak cryptographic algorithm,7
-E-Commerce-API-Python-master,use of weak cryptographic algorithm,6
-E-Commerce-Website-master,use of weak cryptographic algorithm,6
-Eel-master,use of weak cryptographic algorithm,3
-Flask-Building-Python-Web-Services-master,use of weak cryptographic algorithm,4
-FlaskApiEcommerce-master,use of weak cryptographic algorithm,6
-FreeDiscovery-master,use of weak cryptographic algorithm,1
-HawkScan-master,use of weak cryptographic algorithm,2
-J-Kart-master,use of weak cryptographic algorithm,1
-Kart-master,use of weak cryptographic algorithm,3
-KindleEar-master,use of weak cryptographic algorithm,14
-Look4Face-master,use of weak cryptographic algorithm,1
-MachineLearning-DeepLearning-NLP-LeetCode-StatisticalLearningMethod-TensorFlow-master,use of weak cryptographic algorithm,2
-Nuitka-develop,use of weak cryptographic algorithm,3
-PyFlask_2k18-master,use of weak cryptographic algorithm,6
-Python-Django-Complete-Real-Estate-Website-master,use of weak cryptographic algorithm,8
-ShopCrawler-master,use of weak cryptographic algorithm,92
-ZeroNet-py3,use of weak cryptographic algorithm,4
-addons-server-master,use of weak cryptographic algorithm,10
-appdaemon-dev,use of weak cryptographic algorithm,2
-appengine-flask-skeleton-master,use of weak cryptographic algorithm,1
-appier-master,use of weak cryptographic algorithm,2
-boto-develop,use of weak cryptographic algorithm,2
-brother_ql_web-master,use of weak cryptographic algorithm,2
-cartoonify-master,use of weak cryptographic algorithm,2
-cassiopeia-master,use of weak cryptographic algorithm,2
-django-salesman-master,use of weak cryptographic algorithm,1
-djangocon_2015_talk-master,use of weak cryptographic algorithm,1
-djangogirls-master,use of weak cryptographic algorithm,2
-e-commerce-2_django-master,use of weak cryptographic algorithm,3
-eCommerce-Database-main,use of weak cryptographic algorithm,1
-ebook-viewer-master,use of weak cryptographic algorithm,1
-ecommerce-master,use of weak cryptographic algorithm,1
-enlighten-master,use of weak cryptographic algorithm,12
-eventbrite-master,use of weak cryptographic algorithm,13
-eyeD3-master,use of weak cryptographic algorithm,2
-face_merge_master-master,use of weak cryptographic algorithm,1
-flexx-master,use of weak cryptographic algorithm,3
-fosswebsite-master,use of weak cryptographic algorithm,1
-lbry-sdk-master,use of weak cryptographic algorithm,2
-learn_python3_spider-master,use of weak cryptographic algorithm,11
-librato-python-web-master,use of weak cryptographic algorithm,1
-moviegeek-master,use of weak cryptographic algorithm,6
-nikola-master,use of weak cryptographic algorithm,1
-opensale-master,use of weak cryptographic algorithm,3
-pacu-master,use of weak cryptographic algorithm,3
-py-gsxws-master,use of weak cryptographic algorithm,1
-pySphere-master,use of weak cryptographic algorithm,1
-python-devicecloud-master,use of weak cryptographic algorithm,3
-python-for-entrepreneurs-course-demos-master,use of weak cryptographic algorithm,19
-saleor-custom-master,use of weak cryptographic algorithm,15
-saleor-master,use of weak cryptographic algorithm,5
-shadowreader-master,use of weak cryptographic algorithm,2
-websauna-master,use of weak cryptographic algorithm,1
+2019_Python_Web_Dev-master,hard-coded secrets,4
+AmazonDjangoShop-master,hard-coded secrets,1
+BizzMe-master,hard-coded secrets,2
+Building-Serverless-Python-Web-Services-with-Zappa-master,hard-coded secrets,2
+Bus-Reservation-System-master,hard-coded secrets,4
+Django-E-Commerce-master,hard-coded secrets,7
+Django-Ecommerce-master,hard-coded secrets,2
+E-Commerce-API-Python-master,hard-coded secrets,23
+E-Commerce-Condiments-shop-master,hard-coded secrets,2
+E-Commerce-Website-master,hard-coded secrets,7
+E-Commercial-Sites-Scrappers-master,hard-coded secrets,4
+E-commerce-Site-Created-Using-Django-1.11.1-master,hard-coded secrets,3
+Emotion-Analysis-master,hard-coded secrets,1
+Flask-Building-Python-Web-Services-master,hard-coded secrets,57
+Flask-MonitoringDashboard-master,hard-coded secrets,4
+Flask-Scaffold-master,hard-coded secrets,3
+Frobshop-master,hard-coded secrets,1
+Hands-On-RESTful-Python-Web-Services-Second-Edition-master,hard-coded secrets,9
+ImitationTmall_Django-master,hard-coded secrets,3
+Instagram-Crawler-master,hard-coded secrets,5
+J-Kart-master,hard-coded secrets,1
+Kart-master,hard-coded secrets,4
+KindleEar-master,hard-coded secrets,2
+Lexos-master,hard-coded secrets,1
+Look4Face-master,hard-coded secrets,1
+MicroSite-master,hard-coded secrets,1
+Mini-E-commerce-webapp-dummy--master,hard-coded secrets,1
+MyAwesomeCart-master,hard-coded secrets,1
+Nuitka-develop,hard-coded secrets,15
+PyFlask_2k18-master,hard-coded secrets,1
+Python-Django-Complete-Real-Estate-Website-master,hard-coded secrets,9
+Rest-Shop-master,hard-coded secrets,2
+SFECommerce-master,hard-coded secrets,2
+Try-Django-1.11-master,hard-coded secrets,3
+Wooey-master,hard-coded secrets,2
+addons-server-master,hard-coded secrets,6
+app-service-web-python-get-started-master,hard-coded secrets,1
+appengine-flask-skeleton-master,hard-coded secrets,2
+appier-master,hard-coded secrets,3
+archweb-master,hard-coded secrets,1
+asyncmicroservices-master,hard-coded secrets,1
+beg-django-e-commerce-master,hard-coded secrets,5
+boto-develop,hard-coded secrets,7
+buyandsell-master,hard-coded secrets,1
+ccxt-master,hard-coded secrets,15
+chapullmarket-master,hard-coded secrets,1
+cp-barebone-movie-app-final-master,hard-coded secrets,1
+dev-dash-dev-dash,hard-coded secrets,1
+django-calaccess-raw-data-master,hard-coded secrets,1
+django-chartit-master,hard-coded secrets,1
+django-crispy-forms-master,hard-coded secrets,1
+django-cron-master,hard-coded secrets,2
+django-ecommerce-wagtail-master,hard-coded secrets,1
+django-jquery-file-upload-master,hard-coded secrets,1
+django-machina-master,hard-coded secrets,2
+django-oscar-demo-master,hard-coded secrets,4
+django-oscar-master,hard-coded secrets,2
+django-rest-auth-master,hard-coded secrets,1
+django-salesman-master,hard-coded secrets,1
+django-schedule-master,hard-coded secrets,2
+django-tables2-master,hard-coded secrets,2
+django-tastypie-master,hard-coded secrets,1
+django-tutorial-master,hard-coded secrets,1
+django-tutorial-v2-master,hard-coded secrets,1
+djangocon_2015_talk-master,hard-coded secrets,1
+djangogirls-master,hard-coded secrets,1
+djangopackages-master,hard-coded secrets,1
+doorstep-master,hard-coded secrets,4
+e-commerce-2_django-master,hard-coded secrets,3
+ecommerce-master,hard-coded secrets,5
+ecommerce_api-master,hard-coded secrets,4
+ecommerce_website_development-master,hard-coded secrets,1
+enlighten-master,hard-coded secrets,1
+eventbrite-master,hard-coded secrets,22
+exchangelib-master,hard-coded secrets,1
+export-archive-reddit-saved-master,hard-coded secrets,2
+face_merge_master-master,hard-coded secrets,3
+fapws2-master,hard-coded secrets,2
+flask-website-master,hard-coded secrets,1
+fosswebsite-master,hard-coded secrets,3
+gae-secure-scaffold-python3-master,hard-coded secrets,1
+hydroshare-develop,hard-coded secrets,3
+k8s-tutorial-python-master,hard-coded secrets,1
+lbry-sdk-master,hard-coded secrets,4
+lead_manager_react_django-master,hard-coded secrets,1
+learn_python3_spider-master,hard-coded secrets,4
+mep-django-master,hard-coded secrets,3
+merchant-master,hard-coded secrets,4
+minimal-django-file-upload-example-master,hard-coded secrets,4
+mollyproject-master,hard-coded secrets,1
+movie-center-master,hard-coded secrets,3
+moviegeek-master,hard-coded secrets,1
+onlineShop-master,hard-coded secrets,1
+opensale-master,hard-coded secrets,3
+oscar-wagtail-demo-master,hard-coded secrets,1
+panel-master,hard-coded secrets,5
+pdf-miner-master,hard-coded secrets,2
+pepy-master,hard-coded secrets,2
+personfinder-master,hard-coded secrets,2
+pseudo-channel-master,hard-coded secrets,3
+pulumi-aws-master,hard-coded secrets,44
+pySphere-master,hard-coded secrets,4
+pyanalytics-master,hard-coded secrets,1
+python-for-entrepreneurs-course-demos-master,hard-coded secrets,9
+python-sitemap-master,hard-coded secrets,2
+python_webservices_library-master,hard-coded secrets,6
+rasa-site-bot-master,hard-coded secrets,2
+saleor-custom-master,hard-coded secrets,3
+saleor-master,hard-coded secrets,22
+shuup-master,hard-coded secrets,4
+simple_ecommerce-master,hard-coded secrets,1
+site-master,hard-coded secrets,3
+social-commerce-project-master,hard-coded secrets,1
+soul-manga-master,hard-coded secrets,1
+twitter-for-bigquery-master,hard-coded secrets,2
+wagtail-snipcart-master,hard-coded secrets,1
+wagtail-torchbox-master,hard-coded secrets,1
+websauna-master,hard-coded secrets,1
+webservice-py-master,hard-coded secrets,4
+weshop-master,hard-coded secrets,2
+white-master,hard-coded secrets,5
+wtfpython-web-master,hard-coded secrets,1
