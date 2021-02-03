@@ -193,6 +193,7 @@ class Analyzer(ast.NodeVisitor):
                     
 
                 elif (isinstance(target, ast.Name) or isinstance(target, ast.Attribute) or isinstance(target, ast.Subscript)) and isinstance(node.value, ast.Call):
+                    
                     if isinstance(target, ast.Name): variable["name"] = target.id
                     elif isinstance(target, ast.Attribute): 
                         variable["name"] = self.get_name_from_attribute_node(target)
@@ -287,7 +288,10 @@ class Analyzer(ast.NodeVisitor):
 
                         else: variable["args"] = (self.separate_variables(arg, variable["args"]))
 
+
+
                     for keyword in node.value.keywords:
+                        
                         # variable['funcKeywords'] = []
                         karg = keyword.arg
                         kvalue = None
@@ -310,7 +314,19 @@ class Analyzer(ast.NodeVisitor):
                             variable["funcKeywords"].append([karg, kvalue])
                             # print(variable["funcKeywords"])
 
-                
+                    try:
+                        # print(ast.dump(node.value))
+                        # print()
+
+                        keywords_from_all_functions = self.get_function_keywords(node.value, [])
+
+                        for keyword in keywords_from_all_functions:
+                            if keyword not in variable['funcKeywords']:
+                                variable['funcKeywords'].append(keyword)
+                    except Exception as error:
+                        print(error)
+                        # print(ast.dump(node.value))
+
                 elif isinstance(target, ast.Attribute) and isinstance(node.value, ast.Constant):    
                     name = self.get_name_from_attribute_node(target)
                     returns = self.get_value_src_from_variable_name(name)
@@ -890,6 +906,42 @@ class Analyzer(ast.NodeVisitor):
         return usedVariables
 
 
+
+    def get_function_keywords(self, node, keywords):
+
+        # print(ast.dump(node))
+        # print()
+        
+        if isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Call):
+                # print('recursion')
+                self.get_function_keywords(node.func.value, keywords)
+            
+            elif isinstance(node.func, ast.Attribute):
+                # print('recursion')
+                self.get_function_keywords(node.func.value, keywords)
+            
+            
+            for keyword in node.keywords:
+                karg = keyword.arg
+                kvalue = None
+                should_take = True
+                
+                if isinstance(keyword.value, ast.Constant): kvalue = keyword.value.value
+                elif isinstance(keyword.value, ast.Name): 
+                    kvalue = keyword.value.id
+                    returns = self.value_from_variable_name(kvalue) 
+                    
+                    if returns[0] is True: kvalue = returns[1]
+                    else: should_take = False
+
+                if karg is not None and should_take:
+                    keywords.append([karg, kvalue])
+
+        return keywords
+
+
+       
     def all_has_value(self, usedVariables, line_number):
         no_of_founds = 0
 

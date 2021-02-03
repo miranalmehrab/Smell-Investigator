@@ -79,7 +79,7 @@ def analyze_ast_tree(code, src_file):
         tree = ast.parse(code, type_comments = True)
         # print(ast.dump(tree, include_attributes = True))
         # print(ast.dump(tree))
-        if SHOW_AST: 
+        if SHOW_AST:
             for node in tree.body:
                 print(ast.dump(node))
             
@@ -163,8 +163,8 @@ def analyze_single_code():
                         'no_integrity.py', 'sql_injection.py','temp_dir.py', 'weak_cryptography.py', 'xss.py','yaml_used.py'   
                     ]
 
-    file_name = token_folder_name + token_test_files[0]
-    # file_name = smell_folder_name + smell_test_files[7]  
+    # file_name = token_folder_name + token_test_files[0]
+    file_name = smell_folder_name + smell_test_files[-2]  
     
     read_src_code('', '', file_name)
     show_detection_result()
@@ -199,8 +199,8 @@ def main():
     # global PRINT_STATEMENTS
     # PRINT_STATEMENTS = True
     
-    # run_single_code()
-    open_smell_location()
+    run_single_code()
+    # open_smell_location()
     # run_analyze_code_folder()
     
     # show_categories_in_project_descriptions()

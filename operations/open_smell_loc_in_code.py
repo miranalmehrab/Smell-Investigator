@@ -32,7 +32,7 @@ def open_smell_location():
 
     command_counter = 1
     for vscode_open_command in vscode_open_commands:
-        if command_counter > 400 and command_counter < 601:
+        if command_counter > 0 and command_counter < 101:
             print('file no. - '+str(command_counter) + ' ' + vscode_open_command)
         command_counter += 1
         

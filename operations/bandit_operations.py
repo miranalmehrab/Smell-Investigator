@@ -15,19 +15,18 @@ def list_smells_in_projects_sequentially():
     output_file_path = './../bandits_total_results.csv'
     clear_file_contents(output_file_path)
     
-    counter = 0
     for content in contents:
-        if content[2] == 'B103':
-            counter += 1
-            print(content[:-1])
-    
+        
         should_skip = False
+        # print(content[0].split('/'))
+        
         for name_part in content[0].split('/'):
-            if name_part.find('test') != -1:
+            if name_part.find('test') != -1 or name_part.find('tests') != -1:
                 should_skip = True
                 break
 
         if should_skip is False:        
+            
             name = content[0].split('/')[3]
             already_included = False
 
@@ -39,14 +38,14 @@ def list_smells_in_projects_sequentially():
 
             if already_included is False:
                 project_smells.append([name, content[3], 1])
-    
+
     total_smell_count = 0
     for smell in project_smells:
-        print(smell)
         total_smell_count += int(smell[2])
         write_to_csv_file(output_file_path, smell)
 
     print('total smell counts %s' %total_smell_count)
+
 
 
 def match_project_categories_from_bandit_results():
@@ -149,28 +148,51 @@ def match_project_name_and_description_name(project_smells, project_descriptions
 
 
 def total_frequency_of_smells():
+    unqiue_smells_info = []
+    selected_smells = []
+    bandit_smell_results = list_csv_contents('./../bandits_results.csv')
 
-    total_frequency_of_smells = []
-    smells = list_csv_contents('./../bandits_total_results.csv')  
+    hard_secrets_smell_counter = 0
+    
+    for smell in bandit_smell_results:
+        has_test_in_file_path = False
+        smell_already_included = False
+        
+        for path in smell[0].split('/'):
+            if path.find('test') != -1 or path.find('tests') != -1:
+                has_test_in_file_path = True
+                break 
 
-    for smell in smells:
-        already_included = False
+        if has_test_in_file_path: continue
 
-        for smell_frquency in total_frequency_of_smells:
-            if smell[1] in smell_frquency:
-                
-                already_included = True
-                smell_frquency[1] += int(smell[2])
+        smell_name = smell[3]
+        
+        if smell[2] in ["B703"]:
+            
+            command = smell[0]+':'+ str(smell[1])
+            selected_smells.append(command)
+
+        for included_smell in unqiue_smells_info:
+            if smell_name == included_smell[0]:
+                smell_already_included = True
+                included_smell[1] = int(included_smell[1]) + 1
                 break
+        
+        if smell_already_included is False:
+            unqiue_smells_info.append([smell_name, 1])
 
-        if already_included is False: 
-            total_frequency_of_smells.append([smell[1], int(smell[2])])
+    # for included_smell in unqiue_smells_info:
+    #     print(included_smell)
 
-    print('Total Number of smells:')
-    for smell_frquency in total_frequency_of_smells:
-        write_to_csv_file('./../bandits-smell-wise-frequency.csv', smell_frquency)
+    for i in range(0,len(selected_smells)):
+        print(str(i) +' code -g '+ (selected_smells[i].replace(' ', '\\ ')).replace('SPL3', './../'))
 
-    print('')
+    # print(len(selected_smells))
+
+    # print('Total Number of smells:')
+    # for smell_frquency in total_frequency_of_smells:
+    #     print(smell_frquency)
+    #     write_to_csv_file('./../bandits-smell-wise-frequency.csv', smell_frquency)
 
 
 
