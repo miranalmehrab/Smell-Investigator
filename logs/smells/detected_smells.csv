@@ -1,0 +1,6 @@
+,./test-codes/smelly-codes/bad_file_permission.py,bad file permission,bad file permission,1,"{'type': 'function_call', 'line': 1, 'name': 'os.chmod', 'args': ['/etc/hosts', 1911], 'keywords': [], 'hasInputs': False}"
+,./test-codes/smelly-codes/bad_file_permission.py,bad file permission,bad file permission,2,"{'type': 'function_call', 'line': 2, 'name': 'os.chmod', 'args': ['/etc/hosts', 'stat.S_IRWXO'], 'keywords': [], 'hasInputs': False}"
+,./test-codes/smelly-codes/bad_file_permission.py,bad file permission,bad file permission,3,"{'type': 'function_call', 'line': 3, 'name': 'os.chmod', 'args': ['/etc/hosts', 'stat.S_IROTH'], 'keywords': [], 'hasInputs': False}"
+,./test-codes/smelly-codes/bad_file_permission.py,bad file permission,bad file permission,4,"{'type': 'function_call', 'line': 4, 'name': 'os.chmod', 'args': ['/etc/hosts', 'stat.S_IWOTH'], 'keywords': [], 'hasInputs': False}"
+,./test-codes/smelly-codes/bad_file_permission.py,bad file permission,bad file permission,5,"{'type': 'function_call', 'line': 5, 'name': 'os.chmod', 'args': ['/etc/hosts', 'stat.S_IXOTH'], 'keywords': [], 'hasInputs': False}"
+,./test-codes/smelly-codes/bad_file_permission.py,bad file permission,bad file permission,6,"{'type': 'function_call', 'line': 6, 'name': 'subprocess.call', 'args': [['chmod', 1911, 'path']], 'keywords': [], 'hasInputs': False}"

@@ -164,7 +164,7 @@ def analyze_single_code():
                     ]
 
     # file_name = token_folder_name + token_test_files[0]
-    file_name = smell_folder_name + smell_test_files[-2]  
+    file_name = smell_folder_name + smell_test_files[1]  
     
     read_src_code('', '', file_name)
     show_detection_result()
