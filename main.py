@@ -1,10 +1,3 @@
-import os
-import ast
-import copy 
-import glob
-
-from analyzer import Analyzer
-from detection.detection import detection
 from operations.save_project_smells import save_detected_different_smells_frequency_in_projects
 from operations.save_project_smells import save_smells_categorized_according_to_project_type
 # from operations.find_correlation import find_correlation
@@ -48,14 +41,13 @@ def main():
                     ]
 
     # src_file_name = token_folder_name + token_test_files[0]
-    # src_file_name = smell_folder_name + smell_test_files[3] 
-        
-    # single_code = RunOnSingleSourceCode(src_file_name, False, False)
-    # single_code.analyze_single_code()
+    src_file_name = smell_folder_name + smell_test_files[3]         
+    single_code = RunOnSingleSourceCode(src_file_name, False, True)
+    single_code.analyze_single_code()
 
-    code_folder_name = './../final-unzips/'
-    code_folder = RunDetectionOnSourceCodeFolder(code_folder_name, False, False)
-    code_folder.run_analyze_code_folder()
+    # code_folder_name = './../final-unzips/'
+    # code_folder = RunDetectionOnSourceCodeFolder(code_folder_name, False, False)
+    # code_folder.run_analyze_code_folder()
 
     # open_smell_location()
     

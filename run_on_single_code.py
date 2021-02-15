@@ -6,8 +6,9 @@ from detection.detection import detection
 
 class RunOnSingleSourceCode():
 
-    def __init__(self, file_name, print_ast_tree = False, print_tokens = False):
+    def __init__(self, file_name = None, print_ast_tree = False, print_tokens = False, code_snippet = None):
         self.src_file_name = file_name
+        self.code_snippet = code_snippet
         self.should_print_tokens = print_tokens
         self.should_print_ast_tree = print_ast_tree
         
@@ -21,17 +22,16 @@ class RunOnSingleSourceCode():
 
     def detect_smells_in_tokens(self, project_name,src_file):
         try:
-            fp = open("logs/tokens.txt", "r")
-            tokens = fp.read()
+            file_pointer = open("logs/tokens.txt", "r")
+            tokens = file_pointer.read()
             
-            fp.close()
+            file_pointer.close()
             detection(tokens, project_name, src_file)
-        
         except Exception as error:
             print(str(error))
 
 
-    def analyze_ast_tree(self, code, src_file):
+    def analyze_ast_tree(self, code):
         try:
             tree = ast.parse(code, type_comments = True)
             
@@ -59,18 +59,32 @@ class RunOnSingleSourceCode():
                 try: 
                     src_file = open(src_file.name, 'r')
                     code = src_file.read()
-                    
-                except Exception as error:  
+                    src_file.close()
+
+                except Exception as error: 
                     print(str(error))
                     
                 if code is not None: 
-                    self.analyze_ast_tree(code, src_file)
+                    self.analyze_ast_tree(code)
                     self.detect_smells_in_tokens(project_name, src_file)
         
-        except Exception as error: 
+        except Exception as error:
             print(str(error))
             
 
+    def run_analyzer_on_code_snippet(self):
+        try:
+            self.analyze_ast_tree(self.code_snippet)
+            self.detect_smells_in_tokens('', '')
+        
+        except Exception as error: 
+            print(str(error))
+        
+
     def analyze_single_code(self):
         self.clear_log_files()
-        self.read_src_code('', '', self.src_file_name)
+
+        if self.src_file_name is not None: 
+            self.read_src_code('', '', self.src_file_name)
+        
+        else: self.run_analyzer_on_code_snippet()
