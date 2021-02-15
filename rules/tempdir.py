@@ -7,7 +7,7 @@ class TmpDirectory:
     '''This is the class for detecting hard-coded tmp directories in code'''
 
     def __init__(self):
-        self.detetcion_message = 'hard-coded tmp directories'
+        self.warning_message = 'hard-coded tmp directories'
         self.unwanted_dir_names = ['folder', 'directory', 'dir', 'path', 'root', 'tmp', 'temp', 'temporary', 'site', 'log_', 'save', 'upload']                   
 
     def detect_smell(self, token, project_name, src_file):
@@ -86,4 +86,4 @@ class TmpDirectory:
         else: return False
     
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

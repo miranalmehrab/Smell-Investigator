@@ -6,7 +6,7 @@ class FilePermission:
 
     def __init__(self):
         self.insecure_methods = ['os.chmod', 'chmod'] 
-        self.detetcion_message = 'bad file permission'
+        self.warning_message = 'bad file permission'
         self.unwanted_params = ['stat.S_IRWXG','stat.S_IRGRP', 'stat.S_IWGRP','stat.S_IXGRP','stat.S_IRWXO','stat.S_IROTH','stat.S_IWOTH','stat.S_IXOTH']
 
 
@@ -55,4 +55,4 @@ class FilePermission:
     
 
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

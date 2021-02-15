@@ -5,18 +5,21 @@ class IgnoreException:
     '''This is the class for detecting ignoring exception blocks in code'''
 
     def __init__(self):
-        self.insecure_methods = [ 'yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'yaml.full_load_all']
-        self.detetcion_message = 'use of insecure YAML operations'
- 
-    def detect(token, project_name, src_file):
+        self.unwanted_handlers = ['continue','pass']
+        self.warning_message = 'ignoring except block'
+
+
+    def detect_smell(self, token, project_name, src_file):
         try:
             if token.__contains__("line"): lineno = token["line"]
-            if token.__contains__("type"): tokenType = token["type"] 
-            if token.__contains__("exceptionHandler"): exceptionHandler = token["exceptionHandler"]
+            if token.__contains__("type"): token_type = token["type"] 
+            if token.__contains__("exceptionHandler"): exception_handler = token["exceptionHandler"]
             
-            unwantedHandlers = ['continue','pass']
-            
-            if tokenType == "exception_handle" and exceptionHandler in unwantedHandlers: 
-                action_upon_detection(project_name, src_file, lineno, 'ignoring except block', 'ignoring except block', token)
+            if token_type == "exception_handle" and exception_handler in self.unwanted_handlers: 
+                self.trigger_alarm(project_name, src_file, lineno, token)
         
         except Exception as error: save_token_detection_exception('ignore except detection  '+str(error)+'  '+ str(token), src_file)
+    
+
+    def trigger_alarm(self, project_name, src_file, lineno, token):
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

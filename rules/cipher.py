@@ -17,14 +17,11 @@ class Cipher:
                             'Cryptodome.Hash.MD2.new','Cryptodome.Hash.MD4.new','Cryptodome.Hash.MD5.new','Cryptodome.Hash.SHA.new',
                             'cryptography.hazmat.primitives.hashes.SHA1'
                         ]
-
-        self.detetcion_message = 'use of insecure YAML operations'
+        self.warning_message = 'use of insecure YAML operations'
                         
-
 
     def detect_smell(self, token, project_name, src_file):
         try:
-
             if token.__contains__("line"): lineno = token["line"]
             if token.__contains__("type"): tokenType = token["type"]
             
@@ -37,16 +34,11 @@ class Cipher:
                 if token["name"] is not None and token["name"].lower().strip() in self.insecure_methods: 
                     self.trigger_alarm(project_name, src_file, lineno, token)
                 
-                elif token["name"].lower().strip() == 'hashlib.new':
+                elif token["name"] is not None and token["name"].lower().strip() == 'hashlib.new':
                     black_listed_args = ['md4', 'md5', 'sha', 'sha1']
                     for arg in token["args"]:
                         if arg in black_listed_args:
                             self.trigger_alarm(project_name, src_file, lineno, token)
-
-                # elif token["name"] in ['dsa.generate', 'rsa.generate'] and len(token['args'] > 0):
-                    
-
-
 
                 if token.__contains__('keywords') and len(token['keywords']) > 0:
                     for keyword in token['keywords']:
@@ -72,4 +64,4 @@ class Cipher:
 
 
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

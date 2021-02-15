@@ -1,0 +1,13 @@
+hard-coded tmp directories
+deployment with debug flag set to true
+ignoring except block
+hard-coded secrets
+hard-coded IP address bindings
+insecure deserialization
+dynamic code execution
+command injection
+use of insecure YAML operations
+use of assert statement
+empty password
+cross site scripting
+use of HTTP without TLS

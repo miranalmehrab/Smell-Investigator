@@ -7,47 +7,51 @@ class CommandInjection:
     '''This is the class for detecting command injection in code'''
 
     def __init__(self):
-        self.insecure_methods = [ 'yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'yaml.full_load_all']
-        self.detetcion_message = 'use of insecure YAML operations'
+        self.shell_methods = [
+                        'sys.argv', 'subprocess.Popen', 'os.system', 'os.popen','subprocess.run','popen2.Popen4',
+                        'argparse.ArgumentParser','getopt.getopt', 'os.execle', 'os.execl','popen2.Popen3'
+            ]
+            
+        self.warning_message = 'command injection'
 
-    def detect(token, project_name, src_file):
+    def detect_smell(self, token, project_name, src_file):
         try:
             if token.__contains__("line"): lineno = token["line"] 
             if token.__contains__("type"): tokenType = token["type"]
             if token.__contains__("name"): name = token["name"]
             if token.__contains__("args"): args = token["args"]
             if token.__contains__("hasInputs"): containsUserInput =  token["hasInputs"]
-
-            shell_methods = ['sys.argv', 'subprocess.Popen', 'os.system', 'os.popen','subprocess.run', 'argparse.ArgumentParser',
-                            'getopt.getopt', 'os.execle', 'os.execl', 'popen2.Popen3', 'popen2.Popen4'
-                        ]
             
             if tokenType == "variable" and token.__contains__("valueSrc") and token["valueSrc"] is not None and token["valueSrc"] != 'initialization':
-                if token["valueSrc"].strip() in shell_methods or is_extended_shell_command_names(token["valueSrc"].strip()):
-                    action_upon_detection(project_name, src_file, lineno, 'command injection', 'command injection', token)
+                if token["valueSrc"].strip() in self.shell_methods or self.is_extended_shell_command_names(token["valueSrc"].strip()):
+                    self.trigger_alarm(project_name, src_file, lineno, token)
             
-            elif tokenType == "function_call" and name is not None and (name.strip() in shell_methods or is_extended_shell_command_names(name.strip())): 
-                action_upon_detection(project_name, src_file, lineno, 'command injection', 'command injection', token)
+            elif tokenType == "function_call" and name is not None and (name.strip() in self.shell_methods or self.is_extended_shell_command_names(name.strip())): 
+                self.trigger_alarm(project_name, src_file, lineno, token)
         
             elif tokenType == "function_def" and token.__contains__('return') and token["return"] is not None: 
                 for func_return in token['return']:
-                    if isinstance(func_return, str) and (func_return in shell_methods or is_extended_shell_command_names(func_return)):
-                        action_upon_detection(project_name, src_file, lineno, 'command injection', 'command injection', token)
+                    if isinstance(func_return, str) and (func_return in self.shell_methods or self.is_extended_shell_command_names(func_return)):
+                        self.trigger_alarm(project_name, src_file, lineno, token)
             
         except Exception as error: 
             print(str(error))
             save_token_detection_exception('command injection detection  '+str(error)+'  '+ str(token), src_file)
         
         
-    def is_extended_shell_command_names(method_name):
+    def is_extended_shell_command_names(self, method_name):
         
         if isinstance(method_name, str) is False: return False
         elif len(method_name) == 0: return False
 
-        shell_methods = ['sys.argv', 'subprocess.Popen', 'os.system', 'os.popen','subprocess.run', 'argparse.ArgumentParser', 'getopt.getopt']
+        self.shell_methods = ['sys.argv', 'subprocess.Popen', 'os.system', 'os.popen','subprocess.run', 'argparse.ArgumentParser', 'getopt.getopt']
         
-        for name in shell_methods:
+        for name in self.shell_methods:
             if name in method_name: 
                 return True
 
         return False
+
+    
+    def trigger_alarm(self, project_name, src_file, lineno, token):
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

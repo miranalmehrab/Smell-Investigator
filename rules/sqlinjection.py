@@ -13,7 +13,7 @@ class SqlInjection:
                             'records.Database.query', 'RawSQL', 'self.execute', 'sql.SQL', 'cursor.execute',
                             'self.cursor.execute'
                         ]
-        self.detetcion_message = 'constructing sql statement upon user input'
+        self.warning_message = 'constructing sql statement upon user input'
 
 
     def detect_smell(self, token, project_name, src_file):
@@ -102,4 +102,4 @@ class SqlInjection:
         return False
     
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

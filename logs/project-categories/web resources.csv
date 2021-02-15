@@ -1,0 +1,11 @@
+command injection
+use of assert statement
+cross site scripting
+ignoring except block
+deployment with debug flag set to true
+hard-coded secrets
+hard-coded IP address bindings
+use of HTTP without TLS
+hard-coded tmp directories
+use of insecure YAML operations
+empty password

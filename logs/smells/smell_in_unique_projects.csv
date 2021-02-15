@@ -1,0 +1,17 @@
+use of insecure YAML operations,72
+ignoring except block,213
+use of HTTP without TLS,119
+hard-coded tmp directories,45
+deployment with debug flag set to true,124
+hard-coded secrets,122
+hard-coded IP address bindings,62
+insecure deserialization,89
+dynamic code execution,54
+command injection,111
+use of assert statement,114
+constructing sql statement upon user input,45
+bad file permission,14
+empty password,63
+cross site scripting,37
+no certificate validation,5
+no integrity check,6

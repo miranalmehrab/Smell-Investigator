@@ -6,7 +6,7 @@ class DebugFlag:
 
     def __init__(self):
         self.restricted_names = ['debug','debug_propagate_exceptions','propagate_exceptions']
-        self.detetcion_message = 'deployment with debug flag set to true'
+        self.warning_message = 'deployment with debug flag set to true'
 
     def detect_smell(self, token, project_name, src_file):
         try:
@@ -45,4 +45,4 @@ class DebugFlag:
 
 
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

@@ -9,7 +9,7 @@ class NoIntegrity:
 
     def __init__(self):
         self.http_libs = ['urllib.request.urlretrieve','urllib.urlretrieve','urllib2.urlopen','requests.get','wget.download']
-        self.detetcion_message = 'no integrity check'
+        self.warning_message = 'no integrity check'
 
     def detect_smell(self, token, imports,project_name, src_file):
 
@@ -103,4 +103,4 @@ class NoIntegrity:
             return False
 
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

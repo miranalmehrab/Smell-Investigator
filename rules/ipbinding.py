@@ -6,62 +6,61 @@ class IpBinding:
     '''This is the class for detecting hard-coded IP address bindings in code'''
 
     def __init__(self):
-        self.insecure_methods = [ 'yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'yaml.full_load_all']
-        self.detetcion_message = 'use of insecure YAML operations'
+        self.ip_related_names = ['ip', 'host', 'db', 'database', 'server']
+        self.ip_binding_methods = ['socket.socket.bind', 'socket.socket.connect']
+        self.ip_binding_methods_relaxed = ['.bind', '.connect']
 
-    def detect(token, project_name, src_file):
+        self.warning_message = 'hard-coded IP address bindings'
+
+
+    def detect_smell(self, token, project_name, src_file):
         try:
+            lineno = token['line']
 
-            ip_related_names = ['ip', 'host', 'db', 'database', 'server']
-            ip_binding_methods = ['socket.socket.bind', 'socket.socket.connect']
-            ip_binding_methods_relaxed = ['.bind', '.connect']
-
-            
             if token['type'] == 'variable' and token['value'] is not None and token['valueSrc'] == 'initialization':
-                if is_valid_ip(token['value']):
-                    action_upon_detection(project_name, src_file, token['line'], 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
+                if self.is_valid_ip(token['value']):
+                    self.trigger_alarm(project_name, src_file, lineno, token)
 
                 if token.__contains__('args'):
                     args = token['args']
 
                     for arg in args:
-                        if is_valid_ip(arg):
-                            action_upon_detection(project_name, src_file, token['line'], 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
+                        if self.is_valid_ip(arg):
+                            self.trigger_alarm(project_name, src_file, lineno, token)
             
             
             if token["type"] == "function_call":
                 if token.__contains__('keywords') and len(token['keywords']) > 0:
                     for keyword in token['keywords']:        
                         if len(keyword) == 3 and isinstance(keyword[0], str) and keyword[0].lower() is not None and keyword[1] is not None and keyword[2] is True:    
-                            if is_valid_ip(keyword[1]):
-                                action_upon_detection(project_name, src_file, token['line'], 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
+                            if self.is_valid_ip(keyword[1]):
+                                self.trigger_alarm(project_name, src_file, lineno, token)
                 
             
                 if token.__contains__('args'):
                     for arg in token['args']:
-                        if is_valid_ip(arg):
-                            action_upon_detection(project_name, src_file, token['line'], 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
+                        if self.is_valid_ip(arg):
+                            self.trigger_alarm(project_name, src_file, lineno, token)
                             break
 
             if token['type'] == 'function_def' and token.__contains__('return') and token['return'] is not None and isinstance(token['return'], list) and len(token['return']) > 1:
-                for method in ip_binding_methods_relaxed:
-                    if isinstance(token['return'][0], str) and method in token['return'][0] and is_valid_ip(token['return'][1]):
-                        action_upon_detection(project_name, src_file, token['line'], 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
+                for method in self.ip_binding_methods_relaxed:
+                    if isinstance(token['return'][0], str) and method in token['return'][0] and self.is_valid_ip(token['return'][1]):
+                        self.trigger_alarm(project_name, src_file, lineno, token)
         
 
             if token['type'] == 'comparison' and token.__contains__('pairs'):
                 for pair in token['pairs']:
                     if len(pair) == 2 and pair[0] is not None and pair[1] is not None:
-                        if is_valid_ip(pair[1]):
-                            action_upon_detection(project_name, src_file, token['line'], 'hard-coded IP address bindings', 'hard-coded IP address bindings', token)
+                        if self.is_valid_ip(pair[1]):
+                            self.trigger_alarm(project_name, src_file, lineno, token)
                             break       
                     
 
         except Exception as error: save_token_detection_exception('ip binding detection  '+str(error)+'  '+ str(token), src_file)
 
-    def is_valid_ip(ip):
+    def is_valid_ip(self, ip):
         if isinstance(ip,str) is False: return False
-        elif ip is None: return False
         elif ip == '0.0.0.0': return True
         elif ip == '8.8.8.8': return True
         elif ':' in ip: ip = ip.split(':')[0]
@@ -78,7 +77,11 @@ class IpBinding:
             return True
         
 
-    def is_valid_port(port):
+    def is_valid_port(self, port):
         if isinstance(port, str) and port.isdigit() is False: return False
         elif int(port) > 0 and int(port) < 65536: return True
         else: return False
+
+
+    def trigger_alarm(self, project_name, src_file, lineno, token):
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

@@ -6,7 +6,7 @@ class Xss:
 
     def __init__(self):
         self.insecure_methods = ['django.utils.safestring.mark_safe', 'mark_safe']
-        self.detetcion_message = 'cross site scripting'
+        self.warning_message = 'cross site scripting'
         
 
     def detect_smell(self, token, project_name, src_file):
@@ -57,4 +57,4 @@ class Xss:
         return False
     
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

@@ -5,7 +5,7 @@ class NoCertificate:
     '''This is the class for detecting no certificate validations in code'''
 
     def __init__(self):
-        self.detetcion_message = 'no certificate validation'
+        self.warning_message = 'no certificate validation'
         self.http_libs = ['requests.get','requests.Session.get', 'requests.post', 'requests.Session.get', 'requests.head']
         self.context_variables = ['requests.Session.verify']
     
@@ -68,4 +68,4 @@ class NoCertificate:
 
 
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)

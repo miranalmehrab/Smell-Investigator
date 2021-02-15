@@ -1121,9 +1121,8 @@ class Analyzer(ast.NodeVisitor):
 
 
     def write_tokens_to_file(self):
-        
         fp = open("logs/tokens.txt", "w+")
-        
+
         for statement in self.statements:
             try:
                 json.dump(statement, fp)

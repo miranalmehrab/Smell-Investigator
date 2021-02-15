@@ -6,7 +6,7 @@ class YamlOperations:
 
     def __init__(self):
         self.insecure_methods = [ 'yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'yaml.full_load_all']
-        self.detetcion_message = 'use of insecure YAML operations'
+        self.warning_message = 'use of insecure YAML operations'
 
 
     def detect_smell(self, token, project_name, src_file):
@@ -38,5 +38,5 @@ class YamlOperations:
 
 
     def trigger_alarm(self, project_name, src_file, lineno, token):
-        action_upon_detection(project_name, src_file, lineno, self.detetcion_message, self.detetcion_message, token)
+        action_upon_detection(project_name, src_file, lineno, self.warning_message, self.warning_message, token)
 
