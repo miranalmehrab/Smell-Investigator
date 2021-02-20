@@ -1,1 +1,1 @@
-,,bad file permission,bad file permission,1,"{'type': 'function_call', 'line': 1, 'name': 'subprocess.call', 'args': [['chmod', 1911, 'path']], 'keywords': [], 'hasInputs': False}"
+,,use of insecure YAML operations,use of insecure YAML operations,1,"{'type': 'variable', 'line': 1, 'name': 'contents', 'value': None, 'valueSrc': 'yaml.load', 'funcKeywords': [], 'isInput': False, 'args': ['stream']}"
