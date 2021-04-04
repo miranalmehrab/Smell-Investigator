@@ -42,7 +42,7 @@ def main():
 
     # src_file_name = token_folder_name + token_test_files[0]
     src_file_name = smell_folder_name + smell_test_files[3]         
-    single_code = RunOnSingleSourceCode(src_file_name, False, True)
+    single_code = RunOnSingleSourceCode('./test-codes/token-generation/src.py', False, True)
     single_code.analyze_single_code()
 
     # code_folder_name = './../final-unzips/'

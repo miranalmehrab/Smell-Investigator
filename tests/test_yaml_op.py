@@ -2,10 +2,7 @@ import unittest
 from run_on_single_code import RunOnSingleSourceCode
 from operations.list_csv_contents import list_csv_contents
 
-
 class TestBadYamlOps(unittest.TestCase):
-
-    unwated_ops = ['yaml.load', 'yaml.load_all', 'yaml.full_load', 'yaml.dump', 'yaml.dump_all', 'yaml.full_load_all']
 
     def test_yaml_load_call(self):
         code_snippet = '''yaml.load(stream)'''
@@ -14,6 +11,7 @@ class TestBadYamlOps(unittest.TestCase):
 
         detected_smells = list_csv_contents('logs/smells/detected_smells.csv')
         self.assertEqual(detected_smells[0][2], 'use of insecure YAML operations')
+
 
 
     def test_yaml_load_return(self):
